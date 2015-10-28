@@ -13,8 +13,12 @@ namespace OpenMassSenderCore.Senders
         private static int MAX_THREADS = 200;
         public static void send(SenderAccount senderAccount,Message message, List<Receivers.Receiver> receivers, Action<SendStatusChanged> statusCallback)
         {
-            int sendsPerThread = receivers.Count;
-            for (int c = 0; c < MAX_THREADS; c++)
+            int threads = Math.Min(receivers.Count, MAX_THREADS);
+
+            int sendsPerThread = receivers.Count / threads;
+            if (receivers.Count < threads) sendsPerThread = 1;
+
+            for (int c = 0; c < threads; c++)
             {
                 Sender sender=null;
 
@@ -24,6 +28,7 @@ namespace OpenMassSenderCore.Senders
                 int count = sendsPerThread;
                 if (sendsPerThread * c + count > receivers.Count) count = receivers.Count - sendsPerThread * c;
                 List<Receivers.Receiver> subsetReceivers = receivers.GetRange(sendsPerThread * c, count);
+
                 SenderThread senderThread = new SenderThread(sender, message, subsetReceivers, (status) => statusCallback(status));
                 Thread workerThread = new Thread(senderThread.send);
 
