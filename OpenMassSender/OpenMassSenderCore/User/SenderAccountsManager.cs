@@ -6,19 +6,23 @@ using OpenMassSenderCore.SenderAccounts;
 
 namespace OpenMassSenderCore.User
 {
+    //<summary>A singleton containing all the sender accounts(sms provider login details or emails)</summary>
     class SenderAccountsManager
     {
+        //<summary>a list with all the sender accounts</summary>
         private List<SenderAccount> senders = new List<SenderAccount>();
-        //the logic for loading all the receivers that the user has added(from a db local/online)
+        //<summary>loads all the sender accounts from the db</summary>
         public void load(User user)
         {
 
         }
-        //the logic for adding a new receiver
+        //<summary>add a new sender account</summary>
+        //<param name="senderAccount">the sender account to add</param>
         public void add(SenderAccount senderAccount)
         {
 
         }
+        //<summary>returns all the senders</summary>
         public List<SenderAccount> getAllSenders()
         {
             return senders;

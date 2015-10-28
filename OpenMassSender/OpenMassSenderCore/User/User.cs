@@ -9,7 +9,10 @@ namespace OpenMassSenderCore.User
     public enum LOGIN_STATUS{SUCCESS,FAILURE};
     class User
     {
-        //asynchronus method for getting all the user's lists(receivers,jobs,senders),using lamda to notify when ready
+        //<summary>asynchronus method for getting all the user's lists(receivers,jobs,senders),using lamda to notify when ready</summary>
+        //<param name="username">the username</param>
+        //<param name="password">the password</param>
+        //<param name="onLogib">lamda for retung the status of the login once it finsihes
         public void login(string username,string password,Action<LOGIN_STATUS> onLogin)
         {
             (new Thread(() =>
@@ -22,6 +25,9 @@ namespace OpenMassSenderCore.User
 
                 SenderAccountsManager sendersManager = SenderAccountsManager.getInstance();
                 sendersManager.load(this);
+
+                JobsManager jobsManager = JobsManager.getInstance();
+                jobsManager.load(this);
 
                 onLogin(LOGIN_STATUS.SUCCESS);
 

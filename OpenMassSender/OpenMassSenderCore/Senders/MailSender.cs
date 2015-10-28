@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Net.Mail;
+using OpenMassSenderCore.Messages;
 
 namespace OpenMassSenderCore.Senders 
 {
@@ -21,7 +22,7 @@ namespace OpenMassSenderCore.Senders
         }
         public override MessageStatus send(Message message, Receivers.Receiver receiver)
         {
-            MailMessage mailMessage = (MailMessage)message;
+            OpenMassSenderCore.Messages.MailMessage mailMessage = (OpenMassSenderCore.Messages.MailMessage)message;
             System.Net.Mail.MailMessage mail = new System.Net.Mail.MailMessage(sender.email, receiver.getMail().mail);
             mail.Subject = mailMessage.subject;
             mail.Body = mailMessage.message;

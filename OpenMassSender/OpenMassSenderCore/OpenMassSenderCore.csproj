@@ -47,6 +47,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Jobs\Job.cs" />
+    <Compile Include="Jobs\JobShedule.cs" />
+    <Compile Include="Messages\MessageVariable.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Receivers\ContactInfo.cs" />
     <Compile Include="Receivers\Receiver.cs" />
@@ -56,6 +59,7 @@
     <Compile Include="Senders\MassSender.cs" />
     <Compile Include="Senders\Sender.cs" />
     <Compile Include="Senders\SMSSender.cs" />
+    <Compile Include="User\JobsManager.cs" />
     <Compile Include="User\ReceiversManager.cs" />
     <Compile Include="User\SenderAccountsManager.cs" />
     <Compile Include="User\User.cs" />
