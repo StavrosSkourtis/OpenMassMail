@@ -1,9 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 10.00
 # Visual Studio 2008
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenMassSenderGUI", "OpenMassSenderGUI\OpenMassSenderGUI.csproj", "{110CFCF2-AF89-4DD2-8606-4F367CA7B80D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OMSDesktop", "OpenMassSenderGUI\OMSDesktop.csproj", "{110CFCF2-AF89-4DD2-8606-4F367CA7B80D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenMassSenderCore", "OpenMassSenderCore\OpenMassSenderCore.csproj", "{3F47D15A-EB0A-4253-9B00-0735221FF535}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OMSCore", "OpenMassSenderCore\OMSCore.csproj", "{3F47D15A-EB0A-4253-9B00-0735221FF535}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OMSExecutionerService", "OMSExecutionerService\OMSExecutionerService.csproj", "{962DF8C0-42AE-45C7-B0ED-F58219F09211}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -19,6 +21,10 @@ Global
 		{3F47D15A-EB0A-4253-9B00-0735221FF535}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3F47D15A-EB0A-4253-9B00-0735221FF535}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3F47D15A-EB0A-4253-9B00-0735221FF535}.Release|Any CPU.Build.0 = Release|Any CPU
+		{962DF8C0-42AE-45C7-B0ED-F58219F09211}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{962DF8C0-42AE-45C7-B0ED-F58219F09211}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{962DF8C0-42AE-45C7-B0ED-F58219F09211}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{962DF8C0-42AE-45C7-B0ED-F58219F09211}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

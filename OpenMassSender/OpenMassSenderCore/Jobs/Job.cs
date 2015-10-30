@@ -17,15 +17,13 @@ namespace OpenMassSenderCore.Jobs
         public SenderAccount sender;
         public JobShedule shedule;
         public JobStatus status;
-        /*returns true if the specific task is ready to be executed */
+        //<summary>returns true if the job is ready for execution,makes sense if the job has a shedule</summary>
         public bool isReadForExecution()
         {
-            if (shedule == null) return true;
-            else
-            {
-                return shedule.ready();
-            }
+             return shedule.ready();         
         }
+        //<summary>sets the status of the job between PENDING,SHEDULED,FINISHED</summary>
+        //<param name="status">the status of the job</param>
         public void setStatus(JobStatus status)
         {
             this.status = status;

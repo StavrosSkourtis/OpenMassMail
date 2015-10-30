@@ -1,0 +1,9 @@
+C:\Users\Stefanos\Programming\GitHub\OpenMassMail\OpenMassSender\OpenMassSenderGUI\bin\Debug\OpenMassSenderGUI.exe
+C:\Users\Stefanos\Programming\GitHub\OpenMassMail\OpenMassSender\OpenMassSenderGUI\bin\Debug\OpenMassSenderGUI.pdb
+C:\Users\Stefanos\Programming\GitHub\OpenMassMail\OpenMassSender\OpenMassSenderGUI\bin\Debug\OpenMassSenderCore.dll
+C:\Users\Stefanos\Programming\GitHub\OpenMassMail\OpenMassSender\OpenMassSenderGUI\bin\Debug\OpenMassSenderCore.pdb
+C:\Users\Stefanos\Programming\GitHub\OpenMassMail\OpenMassSender\OpenMassSenderGUI\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\Stefanos\Programming\GitHub\OpenMassMail\OpenMassSender\OpenMassSenderGUI\obj\Debug\OpenMassSenderGUI.Properties.Resources.resources
+C:\Users\Stefanos\Programming\GitHub\OpenMassMail\OpenMassSender\OpenMassSenderGUI\obj\Debug\OMSDesktop.csproj.GenerateResource.Cache
+C:\Users\Stefanos\Programming\GitHub\OpenMassMail\OpenMassSender\OpenMassSenderGUI\obj\Debug\OpenMassSenderGUI.exe
+C:\Users\Stefanos\Programming\GitHub\OpenMassMail\OpenMassSender\OpenMassSenderGUI\obj\Debug\OpenMassSenderGUI.pdb
