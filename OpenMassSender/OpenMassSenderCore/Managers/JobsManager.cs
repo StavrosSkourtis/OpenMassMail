@@ -4,8 +4,9 @@ using System.Linq;
 using System.Text;
 using OpenMassSenderCore.Receivers;
 using OpenMassSenderCore.Jobs;
+using OpenMassSenderCore.Users;
 
-namespace OpenMassSenderCore.User
+namespace OpenMassSenderCore.Managers
 {
     //<summary>A job is a sheduled/pending or already executed action of whatever type(mail,sms)</summary>
     public class JobsManager

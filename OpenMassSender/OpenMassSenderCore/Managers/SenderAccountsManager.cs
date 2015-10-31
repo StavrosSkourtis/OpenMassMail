@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using OpenMassSenderCore.SenderAccounts;
+using OpenMassSenderCore.Users;
 
-namespace OpenMassSenderCore.User
+namespace OpenMassSenderCore.Managers
 {
     //<summary>A singleton containing all the sender accounts(sms provider login details or emails)</summary>
     class SenderAccountsManager

@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using OpenMassSenderCore.Jobs;
-using OpenMassSenderCore.User;
+using OpenMassSenderCore.Managers;
+using OpenMassSenderCore.Users;
+
 
 namespace OMSExecutionerService
 {

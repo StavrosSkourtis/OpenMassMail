@@ -64,10 +64,10 @@
     <Compile Include="Senders\MassSender.cs" />
     <Compile Include="Senders\Sender.cs" />
     <Compile Include="Senders\SMSSender.cs" />
-    <Compile Include="User\JobsManager.cs" />
-    <Compile Include="User\ReceiversManager.cs" />
-    <Compile Include="User\SenderAccountsManager.cs" />
-    <Compile Include="User\User.cs" />
+    <Compile Include="Managers\JobsManager.cs" />
+    <Compile Include="Managers\ReceiversManager.cs" />
+    <Compile Include="Managers\SenderAccountsManager.cs" />
+    <Compile Include="Users\User.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

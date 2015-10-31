@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using OpenMassSenderCore.Receivers;
+using OpenMassSenderCore.Users;
 
-namespace OpenMassSenderCore.User
+namespace OpenMassSenderCore.Managers
 {
     //<summary>Singleton that contains all the receivers</summary>
     class ReceiversManager
