@@ -13,6 +13,6 @@ namespace OpenMassSenderCore.Jobs
         //<summary>method for notifing the executioner service that a new job has been added</summary>
         [OperationContract]
         void jobHasBeenAdded();
-        void setUser(User user);
+        void setUser(string user);
     }
 }

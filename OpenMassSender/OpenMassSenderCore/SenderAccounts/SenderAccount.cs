@@ -16,6 +16,8 @@ namespace OpenMassSenderCore.SenderAccounts
     }
     public class SMSSenderAccount : SenderAccount
     {
-
+        //<summary>the sms service http url, the $to and $content variables are replaced upon sending
+        //for example http://smssender.com/send.php?id=1212132&to=$to&message=$content
+        public string url;
     }
 }

@@ -16,7 +16,7 @@ namespace OpenMassSenderCore.Managers
         //<sumarry>the logic for loading all the receivers that the user has added(from a db local/online)</sumarry>
         //<param name="user">The user to add</param>
         //<returns>returns true if new jobs has been added to the jobs list</returns>
-        public bool load(User user)
+        public bool load(string user)
         {
 
             return false;

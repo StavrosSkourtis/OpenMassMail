@@ -2,9 +2,18 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using OpenMassSenderCore.Receivers;
 
 namespace OpenMassSenderCore.Messages
 {
+    public class Wildcards
+    {
+        public static string RECEIVER_FIRST_NAME = "$receiver_fname";
+        public static string RECEIVER_LAST_NAME = "$receiver_lname";
+
+    }
+
+
     public enum MessageStatus { ERROR, SUCCEED };
     public abstract class Message
     {
@@ -12,9 +21,31 @@ namespace OpenMassSenderCore.Messages
         public MessageStatus status;
         //<summary>A message can contain variables that are replaced upon send,for example $receiverName 
         //will be replaced with the receiver's name</summary>
-        public List<MessageVariable> replacableVariables = new List<MessageVariable>();
+        public Dictionary<string, string> replacableVariables = new Dictionary<string, string>();
         //<summary>The message the message(no shit sherlock)</summary>
-        public string message;
+        private string message;
+        public void setMessage(string message)
+        {
+            this.message = message;
+            if (message.Contains(Wildcards.RECEIVER_FIRST_NAME)) 
+                replacableVariables.Add(Wildcards.RECEIVER_FIRST_NAME, null);
+            if (message.Contains(Wildcards.RECEIVER_LAST_NAME))
+                replacableVariables.Add(Wildcards.RECEIVER_LAST_NAME, null);
+        }
+        public string replaceWildCards(Receiver receiver)
+        {
+            string ret = message;
+            if(replacableVariables.ContainsKey(Wildcards.RECEIVER_FIRST_NAME))
+                replacableVariables.Add(Wildcards.RECEIVER_FIRST_NAME, receiver.firstname);
+            if (replacableVariables.ContainsKey(Wildcards.RECEIVER_LAST_NAME))
+                replacableVariables.Add(Wildcards.RECEIVER_FIRST_NAME, receiver.lastname);
+
+            foreach (KeyValuePair<string, string> entry in replacableVariables)
+            {
+                ret = ret.Replace(entry.Key, entry.Value);
+            }
+            return ret;
+        }
     }
     class MailMessage : Message 
     { 

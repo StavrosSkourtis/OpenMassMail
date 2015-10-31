@@ -39,7 +39,7 @@ namespace OpenMassSenderCore.Senders
             {
                 Sender sender=null;
 
-                if (message is SMSMessage) sender = new SMSSender();
+                if (message is SMSMessage) sender = new SMSSender((SenderAccounts.SMSSenderAccount)senderAccount);
                 else if (message is MailMessage) sender = new MailSender((SenderAccounts.MailSenderAccount)senderAccount);
 
                 int count = sendsPerThread;

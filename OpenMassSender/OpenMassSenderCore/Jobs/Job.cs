@@ -6,6 +6,7 @@ using OpenMassSenderCore.Receivers;
 using OpenMassSenderCore.Messages;
 using OpenMassSenderCore.SenderAccounts;
 using OpenMassSenderCore.Senders;
+using OpenMassSenderCore.Managers;
 
 namespace OpenMassSenderCore.Jobs
 {
@@ -13,7 +14,8 @@ namespace OpenMassSenderCore.Jobs
     public class Job
     {
         public string title;
-        public List<Receiver> receivers = new List<Receiver>();
+
+        public ReceiversListDescriptor receiversDescriptor;
         public Message message;
         public SenderAccount sender;
         public JobShedule shedule;
@@ -46,7 +48,11 @@ namespace OpenMassSenderCore.Jobs
         public PendingJobStatus execute()
         {
             massSender=new MassSender();
-            massSender.send(this.sender, message, receivers, (SendStatusChanged status) =>
+
+            massSender.send(this.sender,
+                message,
+                ReceiversManager.getInstance().searchReceivers(receiversDescriptor.group, receiversDescriptor.query)
+                , (SendStatusChanged status) =>
             {
                 Console.WriteLine("send to "+status.receiver.lastname+" "+(status.status==MessageStatus.SUCCEED?"success":"failure"));
             });

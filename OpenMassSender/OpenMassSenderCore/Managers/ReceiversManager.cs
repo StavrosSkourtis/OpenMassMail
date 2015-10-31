@@ -8,47 +8,55 @@ using OpenMassSenderCore.Users;
 namespace OpenMassSenderCore.Managers
 {
     //<summary>Singleton that contains all the receivers</summary>
-    class ReceiversManager
+    public class ReceiversManager
     {
         //<summary>A list with all the receivers</summary>
-        private List<Receiver> receivers = new List<Receiver>();
+        private Dictionary<string, List<Receiver>> receivers = new Dictionary<string, List<Receiver>>();
         //<sumarry>Loads the receivers list from the database</sumarry>
         //<param name="user">The loggedin user</param>
-        public void load(User user)
+        public void load(string user)
         {
 
         }
         //<sumarry>Adds a new receiver</summary>
         //<param name="job">The receiver to add</param>
-        public void add(Receiver receiver)
+        public void add(string group,Receiver receiver)
         {
 
         }
         //<sumarry>Returns a list with all the receivers</summary>
-        public List<Receiver> getAllReceivers()
+        public List<Receiver> getAllReceiversOfGroup(string group)
         {
-            return receivers;
+            List<Receiver> receiversList;
+            receivers.TryGetValue(group,out receiversList);
+            return receiversList;
         }
 
         //<sumarry>Searches all the receivers that match specific critirias</summary>
         //<param name="query">the critirias of the search, for example "location=Thessaloniki;age>18" returns
         //the receivers location in thessaloniki and are of age 19 or higher
         //<returns>a subset of all the receivers</returns>
-        public List<Receiver> searchReceivers(string query)
+        public List<Receiver> searchReceivers(string group,string query)
         {
-            if (query.Equals("")) return this.receivers;
-            List<Receiver> receivers = new List<Receiver>();
+            List<Receiver> receiversInGroup;
+            List<Receiver> receiversMaching=new List<Receiver>();
+            this.receivers.TryGetValue(group,out receiversInGroup);
+            if (query.Equals("")){
+                
+                return receiversInGroup;
+            }
+            
             string[] queries = query.Split(';');
-            foreach (Receiver receiver in this.receivers)
+            foreach (Receiver receiver in receiversInGroup)
             {
                 Boolean containsAll = true;
                 foreach (string q in queries)
                 {
                     if (receiver.metadata.Contains(q) == false) containsAll = false;
                 }
-                if (containsAll) receivers.Add(receiver);
+                if (containsAll) receiversMaching.Add(receiver);
             }
-            return receivers;
+            return receiversMaching;
         }
 
         private static ReceiversManager instance;

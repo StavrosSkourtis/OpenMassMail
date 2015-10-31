@@ -25,7 +25,7 @@ namespace OpenMassSenderCore.Senders
             OpenMassSenderCore.Messages.MailMessage mailMessage = (OpenMassSenderCore.Messages.MailMessage)message;
             System.Net.Mail.MailMessage mail = new System.Net.Mail.MailMessage(sender.email, receiver.getMail().mail);
             mail.Subject = mailMessage.subject;
-            mail.Body = mailMessage.message;
+            mail.Body = mailMessage.replaceWildCards(receiver);
             try
             {
                 smtpClient.Send(mail);

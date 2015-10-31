@@ -36,6 +36,9 @@
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Net">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
     <Reference Include="System.ServiceModel">
       <RequiredTargetFramework>3.0</RequiredTargetFramework>
     </Reference>
@@ -58,6 +61,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Receivers\ContactInfo.cs" />
     <Compile Include="Receivers\Receiver.cs" />
+    <Compile Include="Receivers\ReceiversListDescriptor.cs" />
     <Compile Include="SenderAccounts\SenderAccount.cs" />
     <Compile Include="Senders\MailSender.cs" />
     <Compile Include="Messages\Message.cs" />

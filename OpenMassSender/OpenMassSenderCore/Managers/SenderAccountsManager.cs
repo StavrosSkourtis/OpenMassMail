@@ -13,7 +13,7 @@ namespace OpenMassSenderCore.Managers
         //<summary>a list with all the sender accounts</summary>
         private List<SenderAccount> senders = new List<SenderAccount>();
         //<summary>loads all the sender accounts from the db</summary>
-        public void load(User user)
+        public void load(string user)
         {
 
         }
