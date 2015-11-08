@@ -6,6 +6,7 @@ using System.Threading;
 using OpenMassSenderCore.Managers;
 using System.IO;
 using System.Data.OleDb;
+using OpenMassSenderCore.Utils;
 
 namespace OpenMassSenderCore.Users
 {
@@ -25,6 +26,52 @@ namespace OpenMassSenderCore.Users
                 string userid="";
                 //database things go here
 
+                /*
+                 *  Create the database Connection
+                 */
+                using (OleDbConnection connection = new OleDbConnection(DatabaseUtils.CONNECTION_STRING))
+                {
+                    connection.Open();
+                    /*
+                     * Create the command
+                     */
+                    string query = "select id,password from user where username=@username";
+                    using (OleDbCommand cmd = new OleDbCommand(query, connection))
+                    {
+                        cmd.Parameters.AddWithValue("@username", username);
+
+                        OleDbDataReader reader = cmd.ExecuteReader();
+
+                        if (reader.Read())
+                        {
+                            string realPasswordHash = reader.GetString(1);
+
+                            //Check if the password is valid
+                            if (SecurityUtils.SHA256(password).Equals(realPasswordHash))
+                            {
+                                //The password is valid, store the users id
+                                userid = reader.GetString(0);
+                            }
+                            else
+                            {
+                                //The password is not valid
+                                // Estw -1 an den egine to login swsta
+                                userid = "-1";
+                            }
+                        }
+                        else
+                        {
+                            //Login failed
+                            // Estw -1 an den egine to login swsta
+                            userid = "-1";
+                        }
+
+                    }
+
+                    connection.Close();
+                }
+
+                
                 //write the user's id to a file so that the job execution service can know what user is logged in without the desktop
                 //project running
                 File.WriteAllText("omsloggeduser.dt", userid);
@@ -56,7 +103,7 @@ namespace OpenMassSenderCore.Users
         public void createUser(string username, string password)
         {
 
-            String connectionString = "Provider=Microsoft.Jet.OLEDB.4.0; " +"Data Source=" + Server.MapPath("~/OpenMassSender.accdb");
+            
 
 
             /*
@@ -69,7 +116,7 @@ namespace OpenMassSenderCore.Users
             /*
              *  Open a connection to the dataabase
              */
-            using (OleDbConnection connection = new OleDbConnection(connectionString))
+            using (OleDbConnection connection = new OleDbConnection(DatabaseUtils.CONNECTION_STRING))
             {   
                 //Open the database connection
                 connection.Open();
@@ -90,7 +137,7 @@ namespace OpenMassSenderCore.Users
                      *  Throw exception
                      */
                     if(result == 1){
-                        connection.Close
+                        connection.Close();
                         throw new UserExistsException("A user with username: "+username+" already exists");
                     }
                 }
@@ -99,18 +146,7 @@ namespace OpenMassSenderCore.Users
                 /*
                  *  Creating the password hash using SHA256
                  */
-                StringBuilder Sb = new StringBuilder();
-
-                using (SHA256 hash = SHA256Managed.Create())
-                {
-                    Encoding enc = Encoding.UTF8;
-                    Byte[] result = hash.ComputeHash(enc.GetBytes(password));
-
-                    foreach (Byte b in result)
-                        Sb.Append(b.ToString("x2"));
-                }
-
-                string hashedPassword = Sb.ToString();
+                string hashedPassword = SecurityUtils.SHA256(password);
 
                
 
