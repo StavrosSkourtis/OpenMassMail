@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading;
 using OpenMassSenderCore.Managers;
 using System.IO;
+using System.Data.OleDb;
 
 namespace OpenMassSenderCore.Users
 {
@@ -47,6 +48,90 @@ namespace OpenMassSenderCore.Users
                 //onLogin(LOGIN_STATUS.FAILURE);
             })).Start();
         }
+
+
+        /*
+         *  Creates a new user.
+         */
+        public void createUser(string username, string password)
+        {
+
+            String connectionString = "Provider=Microsoft.Jet.OLEDB.4.0; " +"Data Source=" + Server.MapPath("~/OpenMassSender.accdb");
+
+
+            /*
+             *  TO DO
+             *  check if username and password strings are valid
+             */
+
+
+
+            /*
+             *  Open a connection to the dataabase
+             */
+            using (OleDbConnection connection = new OleDbConnection(connectionString))
+            {   
+                //Open the database connection
+                connection.Open();
+
+
+                /*
+                 *  Checking if a user exists
+                 */
+                string userExistsQuery = "select * from user where username=@username";
+
+                using(OleDbCommand cmd = new OleDbCommand(userExistsQuery,connection)){
+                    cmd.Parameters.AddWithValue("@username" , username);
+
+                    int result = (int)cmd.ExecuteScalar();
+
+                    /*
+                     *  User exists
+                     *  Throw exception
+                     */
+                    if(result == 1){
+                        connection.Close
+                        throw new UserExistsException("A user with username: "+username+" already exists");
+                    }
+                }
+
+
+                /*
+                 *  Creating the password hash using SHA256
+                 */
+                StringBuilder Sb = new StringBuilder();
+
+                using (SHA256 hash = SHA256Managed.Create())
+                {
+                    Encoding enc = Encoding.UTF8;
+                    Byte[] result = hash.ComputeHash(enc.GetBytes(password));
+
+                    foreach (Byte b in result)
+                        Sb.Append(b.ToString("x2"));
+                }
+
+                string hashedPassword = Sb.ToString();
+
+               
+
+                /*  
+                 *  Insert the new user in the database
+                 */
+                string createUserQuery = "insert into user (username,password) values(@username,@password)"
+
+                using( OleDbCommand cmd = new OleDbCommand(createUserQuery,connection)){
+                    cmd.Parameters.AddWithValue("@username",username);
+                    cmd.Parameters.AddWithValue("@password",hashedPassword);
+
+                    cmd.ExecuteNonQuery();
+                }
+
+                //Close the database Connection
+                connection.Close();
+            }
+               
+        }
+
         private static User instance;
         private User() { }
         public static User getInstance()
