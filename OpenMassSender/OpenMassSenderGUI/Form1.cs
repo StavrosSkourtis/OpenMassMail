@@ -15,5 +15,11 @@ namespace OpenMassSenderGUI
         {
             InitializeComponent();
         }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            loginForm frm = new loginForm(() => { Console.Write("user logged in"); });
+            frm.Show();
+        }
     }
 }

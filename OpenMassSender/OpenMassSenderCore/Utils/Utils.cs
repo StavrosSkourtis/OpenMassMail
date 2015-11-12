@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Security.Cryptography;
 
 namespace OpenMassSenderCore.Utils
 {
@@ -15,7 +16,7 @@ namespace OpenMassSenderCore.Utils
             using (SHA256 hash = SHA256Managed.Create())
             {
                 Encoding enc = Encoding.UTF8;
-                Byte[] result = hash.ComputeHash(enc.GetBytes(password));
+                Byte[] result = hash.ComputeHash(enc.GetBytes(value));
 
                 foreach (Byte b in result)
                     Sb.Append(b.ToString("x2"));
@@ -27,6 +28,8 @@ namespace OpenMassSenderCore.Utils
 
     class DatabaseUtils
     {
-        public static string CONNECTION_STRING = "Provider=Microsoft.Jet.OLEDB.4.0; " +"Data Source=" + Server.MapPath("~/OpenMassSender.accdb");
+        //<TODO>fix the mappath error</TODO>
+        public static string CONNECTION_STRING = "empty";
+      //  public static string CONNECTION_STRING = "Provider=Microsoft.Jet.OLEDB.4.0; " +"Data Source=" + Microsoft.SqlServer.Server.MapPath("~/OpenMassSender.accdb");
     }
 }

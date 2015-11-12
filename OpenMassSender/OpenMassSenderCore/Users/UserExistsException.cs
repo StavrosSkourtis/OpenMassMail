@@ -5,7 +5,7 @@ using System.Text;
 
 namespace OpenMassSenderCore.Users
 {
-    class UserExistsException : Exception
+    public class UserExistsException : Exception
     {
         public UserExistsException()
         {

@@ -74,7 +74,7 @@ namespace OpenMassSenderCore.Users
                 
                 //write the user's id to a file so that the job execution service can know what user is logged in without the desktop
                 //project running
-                File.WriteAllText("omsloggeduser.dt", userid);
+                File.WriteAllText("omsloggeduser.dt", username+"|"+password+"|"+userid);
   
                 //if login successfull then load the receivers and sender accounts
                 ReceiversManager receiversManager = ReceiversManager.getInstance();
@@ -153,7 +153,7 @@ namespace OpenMassSenderCore.Users
                 /*  
                  *  Insert the new user in the database
                  */
-                string createUserQuery = "insert into user (username,password) values(@username,@password)"
+                string createUserQuery = "insert into user (username,password) values(@username,@password)";
 
                 using( OleDbCommand cmd = new OleDbCommand(createUserQuery,connection)){
                     cmd.Parameters.AddWithValue("@username",username);
