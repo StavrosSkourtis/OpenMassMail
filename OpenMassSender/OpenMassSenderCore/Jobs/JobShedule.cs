@@ -19,7 +19,7 @@ namespace OpenMassSenderCore.Jobs
         //<summary>returns true if the datetime has been reached and an execution is pending</summary>
         public bool ready()
         {
-            if (job.status == JobStatus.SHEDULED && nextExecution > DateTime.Now)
+            if (job.status == JobStatus.SHEDULED && DateTime.Now>nextExecution)
             {
                  return true;
             }
