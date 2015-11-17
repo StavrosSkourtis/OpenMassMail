@@ -29,3 +29,6 @@ H:\OpenMassMail\OpenMassSender\OpenMassSenderGUI\obj\Debug\OpenMassSenderGUI.Pro
 H:\OpenMassMail\OpenMassSender\OpenMassSenderGUI\obj\Debug\OMSDesktop.csproj.GenerateResource.Cache
 C:\Users\Stefanos\Programming\GitHub\OpenMassMail\OpenMassSender\OpenMassSenderGUI\obj\Debug\OpenMassSenderGUI.Form1.resources
 C:\Users\Stefanos\Programming\GitHub\OpenMassMail\OpenMassSender\OpenMassSenderGUI\obj\Debug\OpenMassSenderGUI.loginForm.resources
+C:\Users\dims\Documents\GitHub\OpenMassMail\OpenMassSender\OpenMassSenderGUI\obj\Debug\OpenMassSenderGUI.loginForm.resources
+C:\Users\dims\Documents\GitHub\OpenMassMail\OpenMassSender\OpenMassSenderGUI\obj\Debug\OpenMassSenderGUI.receiversWindow.resources
+C:\Users\dims\Documents\GitHub\OpenMassMail\OpenMassSender\OpenMassSenderGUI\obj\Debug\OpenMassSenderGUI.emailMessageEdit.resources

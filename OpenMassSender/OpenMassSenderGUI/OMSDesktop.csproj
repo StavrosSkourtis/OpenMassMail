@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>9.0.30729</ProductVersion>
+    <ProductVersion>9.0.21022</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{110CFCF2-AF89-4DD2-8606-4F367CA7B80D}</ProjectGuid>
     <OutputType>WinExe</OutputType>
@@ -68,6 +68,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="emailMessageEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="emailMessageEdit.Designer.cs">
+      <DependentUpon>emailMessageEdit.cs</DependentUpon>
+    </Compile>
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -83,6 +89,10 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="emailMessageEdit.resx">
+      <DependentUpon>emailMessageEdit.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -95,9 +105,14 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="receiversWindow.resx">
+      <DependentUpon>receiversWindow.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -107,6 +122,12 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="receiversWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="receiversWindow.Designer.cs">
+      <DependentUpon>receiversWindow.cs</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -146,6 +167,18 @@
       <ProductName>Windows Installer 3.1</ProductName>
       <Install>true</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\add-button.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\delete_button.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\show_not_ready_button.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\search_button.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
