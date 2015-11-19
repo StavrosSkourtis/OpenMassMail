@@ -15,15 +15,15 @@ namespace OpenMassSenderCore.Senders
         {
             this.sender = sender;
             smtpClient = new SmtpClient();
-            smtpClient.Port = sender.port;
+            smtpClient.Port = Int32.Parse((string)sender.get("port"));
             smtpClient.DeliveryMethod = SmtpDeliveryMethod.Network;
             smtpClient.UseDefaultCredentials = false;
-            smtpClient.Host = sender.host;
+            smtpClient.Host = (string)sender.get("host");
         }
         public override MessageStatus send(Message message, Receivers.Receiver receiver)
         {
             OpenMassSenderCore.Messages.MailMessage mailMessage = (OpenMassSenderCore.Messages.MailMessage)message;
-            System.Net.Mail.MailMessage mail = new System.Net.Mail.MailMessage(sender.email, receiver.getMail().mail);
+            System.Net.Mail.MailMessage mail = new System.Net.Mail.MailMessage((string)sender.get("email"), receiver.getMail().mail);
             mail.Subject = mailMessage.subject;
             mail.Body = mailMessage.replaceWildCards(receiver);
             try

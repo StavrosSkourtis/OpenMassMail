@@ -23,7 +23,7 @@ namespace OMSExecutionerService
 
             if (File.Exists("omsloggeduser.dt"))
             {
-                setUser(File.ReadAllText("omsloggeduser.dt"));
+                setUser(File.ReadAllText("omsloggeduser.dt").Split('|')[2]);
             }
         }
 
@@ -39,12 +39,11 @@ namespace OMSExecutionerService
             ReceiversManager.getInstance().load(user);
 
             if (user != null && jobsManager.load(userid)) executeIfReady(null);
-
-
         }
 
         public void executeIfReady(object source)
         {
+
             List<Job> jobs = jobsManager.getAllJobs();
             foreach (Job job in jobs)
             {

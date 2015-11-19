@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using OpenMassSenderCore.Receivers;
 using OpenMassSenderCore.Users;
+using System.Data;
 
 namespace OpenMassSenderCore.Managers
 {
@@ -11,7 +12,7 @@ namespace OpenMassSenderCore.Managers
     public class ReceiversManager
     {
         //<summary>A list with all the receivers</summary>
-        private Dictionary<string, List<Receiver>> receivers = new Dictionary<string, List<Receiver>>();
+        private Dictionary<string, DataTable> receivers = new Dictionary<string, DataTable>();
         //<sumarry>Loads the receivers list from the database</sumarry>
         //<param name="user">The loggedin user</param>
         public void load(string user)
@@ -24,47 +25,41 @@ namespace OpenMassSenderCore.Managers
         {
 
         }
-        //<sumarry>Returns a list with all group of receivers</summary>
-        public List<string> getReceiverGroups()
-        {
-            List<string> groups = new List<string>();
-            foreach (KeyValuePair<string, List<Receiver>> entry in receivers)
-            {
-                if (groups.Contains(entry.Key)) continue;
-                groups.Add(entry.Key);
-            }
-            return groups;
-        }
-
         //<sumarry>Returns a list with all the receivers</summary>
-        public List<Receiver> getAllReceiversOfGroup(string group)
+        public DataTable getAllReceiversOfGroup(string group)
         {
-            List<Receiver> receiversList;
+            DataTable receiversList;
             receivers.TryGetValue(group,out receiversList);
             return receiversList;
+        }
+
+        //<sumarry>Returns a list with all the groups of receivers</summary>
+        public DataTable getAllReceiverGroups(string group)
+        {
+            //TODO #stavros database stuff here
+            return new DataTable();
         }
 
         //<sumarry>Searches all the receivers that match specific critirias</summary>
         //<param name="query">the critirias of the search, for example "location=Thessaloniki;age>18" returns
         //the receivers location in thessaloniki and are of age 19 or higher
         //<returns>a subset of all the receivers</returns>
-        public List<Receiver> searchReceivers(string group,string query)
+        public DataTable searchReceivers(string group, string query)
         {
-            List<Receiver> receiversInGroup;
-            List<Receiver> receiversMaching=new List<Receiver>();
-            this.receivers.TryGetValue(group,out receiversInGroup);
+            DataTable receiversInGroup = getAllReceiversOfGroup(group);
+            DataTable receiversMaching=new DataTable();
             if (query.Equals("")){
-                
                 return receiversInGroup;
             }
-            
+            DataTable td=new DataTable();
+
             string[] queries = query.Split(';');
-            foreach (Receiver receiver in receiversInGroup)
+            foreach (DataRow row in receiversInGroup.Rows)
             {
                 Boolean containsAll = true;
                 foreach (string q in queries)
                 {
-                    if (((string)receiver.get("metadata")).Contains(q) == false) containsAll = false;
+                    if (row("meta").Contains(q) == false) containsAll = false;
                 }
                 if (containsAll) receiversMaching.Add(receiver);
             }

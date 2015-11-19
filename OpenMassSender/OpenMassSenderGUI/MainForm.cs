@@ -6,19 +6,24 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using OpenMassSenderCore;
+using OpenMassSenderCore.Users;
 
 namespace OpenMassSenderGUI
 {
-    public partial class Form1 : Form
+    public partial class MainForm : Form
     {
-        public Form1()
+        public MainForm()
         {
             InitializeComponent();
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
-
+            if (User.getInstance().userid.Equals("") || User.getInstance().userid == null)
+            {
+                showLoginForm();
+            }  
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
@@ -29,7 +34,17 @@ namespace OpenMassSenderGUI
 
         private void connectToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            loginForm frm = new loginForm(() => { Console.Write("user logged in"); });
+            showLoginForm();
+        }
+
+        public void showLoginForm()
+        {
+            loginForm frm = new loginForm(() =>
+            {
+                Invoke(new Action(() => connectToolStripMenuItem.Text = "Change account"));
+                Logger.log("user logged in with id" + User.getInstance().userid);
+            });
+            frm.TopMost = true;
             frm.Show();
         }
 

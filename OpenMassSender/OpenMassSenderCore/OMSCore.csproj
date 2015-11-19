@@ -57,10 +57,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Entity.cs" />
     <Compile Include="Jobs\Job.cs" />
     <Compile Include="Jobs\JobExecutionerInterface.cs" />
     <Compile Include="Jobs\JobShedule.cs" />
     <Compile Include="Jobs\PendingJobStatus.cs" />
+    <Compile Include="Logger.cs" />
     <Compile Include="Messages\MessageVariable.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Receivers\ContactInfo.cs" />

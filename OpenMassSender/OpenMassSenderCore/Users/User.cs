@@ -13,6 +13,7 @@ namespace OpenMassSenderCore.Users
     public enum LOGIN_STATUS{SUCCESS,FAILURE};
     public class User
     {
+        public string userid = "";
         //<summary>asynchronus method for getting all the user's lists(receivers,jobs,senders),using lamda to notify when ready</summary>
         //<param name="username">the username</param>
         //<param name="password">the password</param>
@@ -23,54 +24,59 @@ namespace OpenMassSenderCore.Users
             {
                 //check if the userame and password maches and if so pass the user's id to the managers, next the managers 
                 //will get their info from the db by using the userid e.g. select * from job where userid=$userid
-                string userid="";
                 //database things go here
 
                 /*
                  *  Create the database Connection
                  */
-                using (OleDbConnection connection = new OleDbConnection(DatabaseUtils.CONNECTION_STRING))
+                try
                 {
-                    connection.Open();
-                    /*
-                     * Create the command
-                     */
-                    string query = "select id,password from user where username=@username";
-                    using (OleDbCommand cmd = new OleDbCommand(query, connection))
+                    using (OleDbConnection connection = new OleDbConnection(DatabaseUtils.CONNECTION_STRING))
                     {
-                        cmd.Parameters.AddWithValue("@username", username);
-
-                        OleDbDataReader reader = cmd.ExecuteReader();
-
-                        if (reader.Read())
+                        connection.Open();
+                        /*
+                         * Create the command
+                         */
+                        string query = "select id,password from user where username=@username";
+                        using (OleDbCommand cmd = new OleDbCommand(query, connection))
                         {
-                            string realPasswordHash = reader.GetString(1);
+                            cmd.Parameters.AddWithValue("@username", username);
 
-                            //Check if the password is valid
-                            if (SecurityUtils.SHA256(password).Equals(realPasswordHash))
+                            OleDbDataReader reader = cmd.ExecuteReader();
+
+                            if (reader.Read())
                             {
-                                //The password is valid, store the users id
-                                userid = reader.GetString(0);
+                                string realPasswordHash = reader.GetString(1);
+
+                                //Check if the password is valid
+                                if (SecurityUtils.SHA256(password).Equals(realPasswordHash))
+                                {
+                                    //The password is valid, store the users id
+                                    userid = reader.GetString(0);
+                                }
+                                else
+                                {
+                                    //The password is not valid
+                                    // Estw -1 an den egine to login swsta
+                                    userid = "-1";
+                                }
                             }
                             else
                             {
-                                //The password is not valid
+                                //Login failed
                                 // Estw -1 an den egine to login swsta
                                 userid = "-1";
                             }
-                        }
-                        else
-                        {
-                            //Login failed
-                            // Estw -1 an den egine to login swsta
-                            userid = "-1";
+
                         }
 
+                        connection.Close();
                     }
-
-                    connection.Close();
                 }
-
+                catch (Exception ex)
+                {
+                    Logger.log("error: " + ex.Message);
+                }
                 
                 //write the user's id to a file so that the job execution service can know what user is logged in without the desktop
                 //project running
@@ -102,16 +108,10 @@ namespace OpenMassSenderCore.Users
          */
         public void createUser(string username, string password)
         {
-
-            
-
-
             /*
              *  TO DO
              *  check if username and password strings are valid
              */
-
-
 
             /*
              *  Open a connection to the dataabase

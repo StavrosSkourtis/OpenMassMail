@@ -5,14 +5,17 @@ using System.Text;
 
 namespace OpenMassSenderCore.SenderAccounts
 {
-    public class SenderAccount
+    public class SenderAccount:Entity
     {
+        
     }
     public class MailSenderAccount : SenderAccount
     {
-        public string email;
-        public int port;
-        public string host;
+        
+        /*to edit this fields now user fields.*/
+       // public string email;
+       // public int port;
+       // public string host;
     }
     public class SMSSenderAccount : SenderAccount
     {

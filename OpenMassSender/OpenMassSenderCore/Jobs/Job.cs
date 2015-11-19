@@ -54,7 +54,7 @@ namespace OpenMassSenderCore.Jobs
                 ReceiversManager.getInstance().searchReceivers(receiversDescriptor.group, receiversDescriptor.query)
                 , (SendStatusChanged status) =>
             {
-                Console.WriteLine("send to "+status.receiver.lastname+" "+(status.status==MessageStatus.SUCCEED?"success":"failure"));
+                Console.WriteLine("send to "+status.receiver.get("lastname")+" "+(status.status==MessageStatus.SUCCEED?"success":"failure"));
             });
             return massSender.status;
         }

@@ -36,9 +36,9 @@ namespace OpenMassSenderCore.Messages
         {
             string ret = message;
             if(replacableVariables.ContainsKey(Wildcards.RECEIVER_FIRST_NAME))
-                replacableVariables.Add(Wildcards.RECEIVER_FIRST_NAME, receiver.firstname);
+                replacableVariables.Add(Wildcards.RECEIVER_FIRST_NAME, (string)receiver.get("firstname"));
             if (replacableVariables.ContainsKey(Wildcards.RECEIVER_LAST_NAME))
-                replacableVariables.Add(Wildcards.RECEIVER_FIRST_NAME, receiver.lastname);
+                replacableVariables.Add(Wildcards.RECEIVER_FIRST_NAME, (string)receiver.get("lastname"));
 
             foreach (KeyValuePair<string, string> entry in replacableVariables)
             {
