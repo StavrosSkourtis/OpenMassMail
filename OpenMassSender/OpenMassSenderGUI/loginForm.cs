@@ -30,7 +30,7 @@ namespace OpenMassSenderGUI
                 Console.Write("asd");
                 return;
             }
-            User.getInstance().login(txtUsername.Text, txtPassword.Text, (status) =>
+            UsersManager.getInstance().login(txtUsername.Text, txtPassword.Text, (status) =>
             {
                 if (status == LOGIN_STATUS.SUCCESS)callBackListener();
                 else lblNotice.Text = "Something went wrong during login";           
@@ -46,8 +46,8 @@ namespace OpenMassSenderGUI
             }
             try
             {
-                User.getInstance().createUser(txtUsername.Text, txtPassword.Text);
-                User.getInstance().login(txtUsername.Text, txtPassword.Text, (status) =>
+                UsersManager.getInstance().createUser(txtUsername.Text, txtPassword.Text);
+                UsersManager.getInstance().login(txtUsername.Text, txtPassword.Text, (status) =>
                 {
                     if (status == LOGIN_STATUS.SUCCESS) callBackListener();
                     else lblNotice.Text = "Something went wrong during login";

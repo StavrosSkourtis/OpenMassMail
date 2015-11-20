@@ -9,7 +9,7 @@ namespace OpenMassSenderCore.Senders
    
     public abstract class Sender
     {
-        public abstract MessageStatus send(Messages.Message message, Receivers.Receiver receiver);
+        public abstract MessageStatus send(Messages.Message message, OpenMassSenderCore.OpenMassSenderDBDataSet.ReceiverRow receiver);
 
 
     }

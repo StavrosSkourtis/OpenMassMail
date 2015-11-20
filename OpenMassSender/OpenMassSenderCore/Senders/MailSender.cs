@@ -20,10 +20,10 @@ namespace OpenMassSenderCore.Senders
             smtpClient.UseDefaultCredentials = false;
             smtpClient.Host = (string)sender.get("host");
         }
-        public override MessageStatus send(Message message, Receivers.Receiver receiver)
+        public override MessageStatus send(Message message,OpenMassSenderCore.OpenMassSenderDBDataSet.ReceiverRow receiver)
         {
             OpenMassSenderCore.Messages.MailMessage mailMessage = (OpenMassSenderCore.Messages.MailMessage)message;
-            System.Net.Mail.MailMessage mail = new System.Net.Mail.MailMessage((string)sender.get("email"), receiver.getMail().mail);
+            System.Net.Mail.MailMessage mail = new System.Net.Mail.MailMessage((string)sender.get("email"), receiver.email);
             mail.Subject = mailMessage.subject;
             mail.Body = mailMessage.replaceWildCards(receiver);
             try

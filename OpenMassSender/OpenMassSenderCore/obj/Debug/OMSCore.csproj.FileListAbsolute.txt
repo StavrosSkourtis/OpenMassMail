@@ -6,3 +6,4 @@ C:\Users\Stefanos\Programming\GitHub\OpenMassMail\OpenMassSender\OpenMassSenderC
 C:\Users\Stefanos\Programming\GitHub\OpenMassMail\OpenMassSender\OpenMassSenderCore\bin\Debug\OpenMassSenderCore.dll.config
 C:\Users\Stefanos\Programming\GitHub\OpenMassMail\OpenMassSender\OpenMassSenderCore\bin\Debug\System.Data.SQLite.dll
 C:\Users\Stefanos\Programming\GitHub\OpenMassMail\OpenMassSender\OpenMassSenderCore\bin\Debug\System.Data.SQLite.xml
+C:\Users\Stefanos\Programming\GitHub\OpenMassMail\OpenMassSender\OpenMassSenderCore\bin\Debug\OpenMassSenderDB.accdb

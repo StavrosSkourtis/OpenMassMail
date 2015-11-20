@@ -10,8 +10,8 @@ namespace OpenMassSenderCore.Jobs
     public class PendingJobStatus
     {
         public List<SendStatusChanged> sent = new List<SendStatusChanged>();
-        public List<Receiver> pending = new List<Receiver>();
-        public List<Receiver> all = new List<Receiver>();
+        public List<OpenMassSenderCore.OpenMassSenderDBDataSet.ReceiverRow> pending = new List<OpenMassSenderCore.OpenMassSenderDBDataSet.ReceiverRow>();
+        public List<OpenMassSenderCore.OpenMassSenderDBDataSet.ReceiverRow> all = new List<OpenMassSenderCore.OpenMassSenderDBDataSet.ReceiverRow>();
         public double getPercent()
         {
             return ((double)sent.Count) / all.Count;

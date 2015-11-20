@@ -13,9 +13,11 @@ namespace OpenMassSenderCore.Managers
         //<summary>a list with all the sender accounts</summary>
         private List<SenderAccount> senders = new List<SenderAccount>();
         //<summary>loads all the sender accounts from the db</summary>
-        public void load(string user)
+        private string userid;
+        public bool setUserID(string user)
         {
-
+            this.userid = user;
+            return true;
         }
         //<summary>add a new sender account</summary>
         //<param name="senderAccount">the sender account to add</param>

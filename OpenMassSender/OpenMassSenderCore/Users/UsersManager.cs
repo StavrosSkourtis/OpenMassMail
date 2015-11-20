@@ -11,7 +11,7 @@ using OpenMassSenderCore.Utils;
 namespace OpenMassSenderCore.Users
 {
     public enum LOGIN_STATUS{SUCCESS,FAILURE};
-    public class User
+    public class UsersManager
     {
         public string userid = "";
         //<summary>asynchronus method for getting all the user's lists(receivers,jobs,senders),using lamda to notify when ready</summary>
@@ -84,16 +84,16 @@ namespace OpenMassSenderCore.Users
   
                 //if login successfull then load the receivers and sender accounts
                 ReceiversManager receiversManager = ReceiversManager.getInstance();
-                receiversManager.load(userid);
+                receiversManager.setUserID(userid);
 
                 //the sender account manager
                 SenderAccountsManager sendersManager = SenderAccountsManager.getInstance();
-                sendersManager.load(userid);
+                sendersManager.setUserID(userid);
 
                 //the job manager,used only to see info about the jobs and add new,the executing is handled by the 
                 //job executionaire service
                 JobsManager jobsManager = JobsManager.getInstance();
-                jobsManager.load(userid);
+                jobsManager.setUserID(userid);
 
                 onLogin(LOGIN_STATUS.SUCCESS);
 
@@ -168,11 +168,11 @@ namespace OpenMassSenderCore.Users
                
         }
 
-        private static User instance;
-        private User() { }
-        public static User getInstance()
+        private static UsersManager instance;
+        private UsersManager() { }
+        public static UsersManager getInstance()
         {
-            if (instance == null) instance = new User();
+            if (instance == null) instance = new UsersManager();
             return instance;
         }
     }

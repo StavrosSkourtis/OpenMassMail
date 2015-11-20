@@ -31,16 +31,16 @@ namespace OpenMassSenderGUI
 
         private void receiversWindow_Load(object sender, EventArgs e)
         {
-            List<string> groups=ReceiversManager.getInstance().getReceiverGroups();
-            foreach (string group in groups)
-            {
-                ComboBoxReceiversGroup.Items.Add(group);
-            }
+            cbReceiverGroups.DataSource = ReceiversManager.getInstance().getAllReceiverGroups();
+
+             
+            
         }
 
         public void refreshData()
         {
-            
+  
+
     
         }
 

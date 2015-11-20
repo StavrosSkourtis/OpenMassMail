@@ -9,9 +9,17 @@ namespace OpenMassSenderCore.Receivers
     public class MailInfo : ContactInfo
     {
         public string mail;
+        public MailInfo(string mail)
+        {
+            this.mail = mail;
+        }
     }
     public class PhoneInfo : ContactInfo
     {
         public string phoneNumber;
+        public PhoneInfo(string phoneNumber)
+        {
+            this.phoneNumber = phoneNumber;
+        }
     }
 }

@@ -32,13 +32,13 @@ namespace OpenMassSenderCore.Messages
             if (message.Contains(Wildcards.RECEIVER_LAST_NAME))
                 replacableVariables.Add(Wildcards.RECEIVER_LAST_NAME, null);
         }
-        public string replaceWildCards(Receiver receiver)
+        public string replaceWildCards(OpenMassSenderCore.OpenMassSenderDBDataSet.ReceiverRow receiver)
         {
             string ret = message;
             if(replacableVariables.ContainsKey(Wildcards.RECEIVER_FIRST_NAME))
-                replacableVariables.Add(Wildcards.RECEIVER_FIRST_NAME, (string)receiver.get("firstname"));
+                replacableVariables.Add(Wildcards.RECEIVER_FIRST_NAME, receiver.first_name);
             if (replacableVariables.ContainsKey(Wildcards.RECEIVER_LAST_NAME))
-                replacableVariables.Add(Wildcards.RECEIVER_FIRST_NAME, (string)receiver.get("lastname"));
+                replacableVariables.Add(Wildcards.RECEIVER_FIRST_NAME, receiver.last_name );
 
             foreach (KeyValuePair<string, string> entry in replacableVariables)
             {

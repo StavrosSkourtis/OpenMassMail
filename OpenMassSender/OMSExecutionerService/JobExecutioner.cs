@@ -29,16 +29,16 @@ namespace OMSExecutionerService
 
         public void jobHasBeenAdded()
         {
-            if (jobsManager.load(userid)) executeIfReady(null);
+            if (jobsManager.setUserID(userid)) executeIfReady(null);
         }
         //<summary>gets called by the desktop program as soon as the user gets authenticated,its part of the communication interface</summary>
         //<param name="user">the authenticated user</param>
         public void setUser(string user)
         {
             this.userid = user;
-            ReceiversManager.getInstance().load(user);
+            ReceiversManager.getInstance().setUserID(user);
 
-            if (user != null && jobsManager.load(userid)) executeIfReady(null);
+            if (user != null && jobsManager.setUserID(userid)) executeIfReady(null);
         }
 
         public void executeIfReady(object source)

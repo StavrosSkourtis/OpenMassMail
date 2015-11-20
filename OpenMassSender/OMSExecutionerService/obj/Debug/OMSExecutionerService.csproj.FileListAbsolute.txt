@@ -19,3 +19,4 @@ H:\OpenMassMail\OpenMassSender\OMSExecutionerService\bin\Debug\OpenMassSenderCor
 H:\OpenMassMail\OpenMassSender\OMSExecutionerService\obj\Debug\ResolveAssemblyReference.cache
 H:\OpenMassMail\OpenMassSender\OMSExecutionerService\obj\Debug\OMSExecutionerService.exe
 H:\OpenMassMail\OpenMassSender\OMSExecutionerService\obj\Debug\OMSExecutionerService.pdb
+C:\Users\Stefanos\Programming\GitHub\OpenMassMail\OpenMassSender\OMSExecutionerService\bin\Debug\OpenMassSenderDB.accdb

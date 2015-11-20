@@ -25,7 +25,7 @@ namespace OpenMassSenderCore.Senders
         //<summary>Call this to send a message to multiple receivers by using multiple threads</summary>
         //<param name="statusCallback">Lamda that gets called every time a message has been sended,
         //it returns the status of the transmition(FAILED,SUCCEDED) along with the receiver's inforation</param>
-        public void send(SenderAccount senderAccount,Message message, List<Receivers.Receiver> receivers, Action<SendStatusChanged> statusCallback)
+        public void send(SenderAccount senderAccount,Message message, List<OpenMassSenderCore.OpenMassSenderDBDataSet.ReceiverRow> receivers, Action<SendStatusChanged> statusCallback)
         {
             status.all.AddRange(receivers);
             status.pending.AddRange(receivers);
@@ -44,7 +44,7 @@ namespace OpenMassSenderCore.Senders
 
                 int count = sendsPerThread;
                 if (sendsPerThread * c + count > receivers.Count) count = receivers.Count - sendsPerThread * c;
-                List<Receivers.Receiver> subsetReceivers = receivers.GetRange(sendsPerThread * c, count);
+                List<OpenMassSenderCore.OpenMassSenderDBDataSet.ReceiverRow> subsetReceivers = receivers.GetRange(sendsPerThread * c, count);
 
                 SenderThread senderThread = new SenderThread(status, sender, message, subsetReceivers, (sentStatus) => statusCallback(sentStatus));
                 Thread workerThread = new Thread(senderThread.send);
@@ -57,10 +57,10 @@ namespace OpenMassSenderCore.Senders
     {
         Sender sender;
         Message message;
-        List<Receivers.Receiver> receivers;
+        List<OpenMassSenderCore.OpenMassSenderDBDataSet.ReceiverRow> receivers;
         Action<SendStatusChanged> statusCallback;
         PendingJobStatus pendingJobStatus;
-        public SenderThread(PendingJobStatus pendingJobStatus, Sender sender, Message message, List<Receivers.Receiver> receivers, Action<SendStatusChanged> statusCallback)
+        public SenderThread(PendingJobStatus pendingJobStatus, Sender sender, Message message, List<OpenMassSenderCore.OpenMassSenderDBDataSet.ReceiverRow> receivers, Action<SendStatusChanged> statusCallback)
         {
             this.pendingJobStatus = pendingJobStatus;
             this.message = message;
@@ -73,8 +73,9 @@ namespace OpenMassSenderCore.Senders
         //by using the callback</summary>
         public void send()
         {
-            foreach(Receivers.Receiver receiver in receivers){
-                MessageStatus status=sender.send(message, receiver);
+            foreach (OpenMassSenderCore.OpenMassSenderDBDataSet.ReceiverRow receiver in receivers)
+            {
+                MessageStatus status = sender.send(message, receiver);
                 SendStatusChanged sentStatus = new SendStatusChanged(receiver, status);
                 pendingJobStatus.pending.Remove(receiver);
                 pendingJobStatus.sent.Add(sentStatus);
@@ -84,9 +85,9 @@ namespace OpenMassSenderCore.Senders
     }
     public class SendStatusChanged
     {
-        public Receivers.Receiver receiver;
+        public OpenMassSenderCore.OpenMassSenderDBDataSet.ReceiverRow receiver;
         public MessageStatus status;
-        public SendStatusChanged(Receivers.Receiver receiver, MessageStatus status)
+        public SendStatusChanged(OpenMassSenderCore.OpenMassSenderDBDataSet.ReceiverRow receiver, MessageStatus status)
         {
             this.receiver = receiver;
             this.status = status;

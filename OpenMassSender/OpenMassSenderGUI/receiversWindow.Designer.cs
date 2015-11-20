@@ -28,14 +28,17 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel1 = new System.Windows.Forms.Panel();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.tbSearchQuery = new System.Windows.Forms.ToolStripTextBox();
             this.btnSearchReceiver = new System.Windows.Forms.ToolStripButton();
-            this.ComboBoxReceiversGroup = new System.Windows.Forms.ToolStripComboBox();
             this.btnOK = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.cbReceiverGroups = new System.Windows.Forms.ComboBox();
             this.panel1.SuspendLayout();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -62,6 +65,7 @@
             // 
             // splitContainer1.Panel1
             // 
+            this.splitContainer1.Panel1.Controls.Add(this.cbReceiverGroups);
             this.splitContainer1.Panel1.Controls.Add(this.toolStrip1);
             // 
             // splitContainer1.Panel2
@@ -76,8 +80,7 @@
             // 
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tbSearchQuery,
-            this.btnSearchReceiver,
-            this.ComboBoxReceiversGroup});
+            this.btnSearchReceiver});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(565, 29);
@@ -102,15 +105,6 @@
             this.btnSearchReceiver.Text = "Search";
             this.btnSearchReceiver.Click += new System.EventHandler(this.btnSearchReceiver_Click);
             // 
-            // ComboBoxReceiversGroup
-            // 
-            this.ComboBoxReceiversGroup.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.ComboBoxReceiversGroup.Margin = new System.Windows.Forms.Padding(20, 6, 1, 0);
-            this.ComboBoxReceiversGroup.Name = "ComboBoxReceiversGroup";
-            this.ComboBoxReceiversGroup.Size = new System.Drawing.Size(141, 23);
-            this.ComboBoxReceiversGroup.TextChanged += new System.EventHandler(this.ComboBoxReceiversGroup_TextChanged);
-            this.ComboBoxReceiversGroup.Click += new System.EventHandler(this.ComboBoxReceiversGroup_Click);
-            // 
             // btnOK
             // 
             this.btnOK.Location = new System.Drawing.Point(478, 424);
@@ -123,11 +117,43 @@
             // 
             // dataGridView1
             // 
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(161)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(161)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle2;
             this.dataGridView1.Location = new System.Drawing.Point(3, 3);
             this.dataGridView1.Name = "dataGridView1";
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(161)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView1.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.dataGridView1.Size = new System.Drawing.Size(559, 415);
             this.dataGridView1.TabIndex = 0;
+            // 
+            // cbReceiverGroups
+            // 
+            this.cbReceiverGroups.FormattingEnabled = true;
+            this.cbReceiverGroups.Location = new System.Drawing.Point(412, 5);
+            this.cbReceiverGroups.Name = "cbReceiverGroups";
+            this.cbReceiverGroups.Size = new System.Drawing.Size(141, 21);
+            this.cbReceiverGroups.TabIndex = 1;
             // 
             // receiversWindow
             // 
@@ -157,8 +183,8 @@
         private System.Windows.Forms.ToolStrip toolStrip1;
         private System.Windows.Forms.ToolStripTextBox tbSearchQuery;
         private System.Windows.Forms.ToolStripButton btnSearchReceiver;
-        private System.Windows.Forms.ToolStripComboBox ComboBoxReceiversGroup;
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.Button btnOK;
+        private System.Windows.Forms.ComboBox cbReceiverGroups;
     }
 }

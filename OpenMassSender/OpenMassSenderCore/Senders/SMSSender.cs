@@ -16,10 +16,10 @@ namespace OpenMassSenderCore.Senders
         {
             this.sender = sender;
         }
-        public override MessageStatus send(Message message, Receivers.Receiver receiver)
+        public override MessageStatus send(Message message, OpenMassSenderCore.OpenMassSenderDBDataSet.ReceiverRow receiver)
         {
             string url = sender.url;
-            url = url.Replace("$to", receiver.getPhoneNumber().ToString());
+            url = url.Replace("$to", receiver.phone_number.ToString());
             url = url.Replace("$message", message.replaceWildCards(receiver));
 
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);

@@ -20,7 +20,7 @@ namespace OpenMassSenderGUI
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            if (User.getInstance().userid.Equals("") || User.getInstance().userid == null)
+            if (UsersManager.getInstance().userid.Equals("") || UsersManager.getInstance().userid == null)
             {
                 showLoginForm();
             }  
@@ -42,7 +42,7 @@ namespace OpenMassSenderGUI
             loginForm frm = new loginForm(() =>
             {
                 Invoke(new Action(() => connectToolStripMenuItem.Text = "Change account"));
-                Logger.log("user logged in with id" + User.getInstance().userid);
+                Logger.log("user logged in with id" + UsersManager.getInstance().userid);
             });
             frm.TopMost = true;
             frm.Show();

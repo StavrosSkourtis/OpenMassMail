@@ -64,9 +64,21 @@
     <Compile Include="Jobs\PendingJobStatus.cs" />
     <Compile Include="Logger.cs" />
     <Compile Include="Messages\MessageVariable.cs" />
+    <Compile Include="OpenMassSenderDBDataSet.cs">
+      <DependentUpon>OpenMassSenderDBDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="OpenMassSenderDBDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>OpenMassSenderDBDataSet.xsd</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
     <Compile Include="Receivers\ContactInfo.cs" />
-    <Compile Include="Receivers\Receiver.cs" />
     <Compile Include="Receivers\ReceiversListDescriptor.cs" />
     <Compile Include="SenderAccounts\SenderAccount.cs" />
     <Compile Include="Senders\MailSender.cs" />
@@ -74,20 +86,41 @@
     <Compile Include="Senders\MassSender.cs" />
     <Compile Include="Senders\Sender.cs" />
     <Compile Include="Senders\SMSSender.cs" />
-    <Compile Include="Managers\JobsManager.cs" />
-    <Compile Include="Managers\ReceiversManager.cs" />
-    <Compile Include="Managers\SenderAccountsManager.cs" />
-    <Compile Include="Users\User.cs" />
+    <Compile Include="Jobs\JobsManager.cs" />
+    <Compile Include="Receivers\ReceiversManager.cs" />
+    <Compile Include="SenderAccounts\SenderAccountsManager.cs" />
+    <Compile Include="Users\UsersManager.cs" />
     <Compile Include="Users\UserExistsException.cs" />
     <Compile Include="Utils\Utils.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
     <None Include="Database\Database.sql" />
+    <None Include="OpenMassSenderDBDataSet.xsc">
+      <DependentUpon>OpenMassSenderDBDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="OpenMassSenderDBDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>OpenMassSenderDBDataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="OpenMassSenderDBDataSet.xss">
+      <DependentUpon>OpenMassSenderDBDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="OpenMassSenderDB.accdb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="System.Data.SQLite.dll" />
     <Content Include="System.Data.SQLite.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Managers\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

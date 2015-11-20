@@ -48,13 +48,15 @@ namespace OpenMassSenderCore.Jobs
         public PendingJobStatus execute()
         {
             massSender=new MassSender();
-
+            OpenMassSenderCore.OpenMassSenderDBDataSet.ReceiverDataTable receivers=ReceiversManager.getInstance().searchReceivers(receiversDescriptor.group, receiversDescriptor.query);
+            List<OpenMassSenderCore.OpenMassSenderDBDataSet.ReceiverRow> receiversList=new List<OpenMassSenderCore.OpenMassSenderDBDataSet.ReceiverRow>();
+            foreach(OpenMassSenderCore.OpenMassSenderDBDataSet.ReceiverRow row in receivers){
+                receiversList.Add(row);
+            }
             massSender.send(this.sender,
-                message,
-                ReceiversManager.getInstance().searchReceivers(receiversDescriptor.group, receiversDescriptor.query)
-                , (SendStatusChanged status) =>
+                message, receiversList, (SendStatusChanged status) =>
             {
-                Console.WriteLine("send to "+status.receiver.get("lastname")+" "+(status.status==MessageStatus.SUCCEED?"success":"failure"));
+                Console.WriteLine("send to "+status.receiver.last_name+" "+(status.status==MessageStatus.SUCCEED?"success":"failure"));
             });
             return massSender.status;
         }
