@@ -6,39 +6,45 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using OpenMassSenderCore.Users;
 using System.IO;
+using OpenMassSenderCore.OpenMassSenderDBDataSetTableAdapters;
 
 namespace OpenMassSenderGUI
 {
-    public partial class loginForm : Form
+    public partial class LoginForm : Form
     {
-        Action callBackListener;
-        public loginForm(Action callBackListener)
+        Action<string,string,string> callBackListener;
+        public LoginForm(Action<string, string, string> callBackListener)
         {
             this.callBackListener = callBackListener;
             InitializeComponent();
             btnCreateAccount.Visible = false;
             btnCreateAccount.Enabled = false;
+
+            TextBox.CheckForIllegalCrossThreadCalls = false;
+            Label.CheckForIllegalCrossThreadCalls = false;
         }
 
         private void btnLogin_Click(object sender, EventArgs e)
         {
-            if (txtPassword.Text.Equals("") || txtUsername.Text.Equals(""))
+            callBackListener("testname", "testpassword", "0");
+            //this.Close();
+           /* if (txtPassword.Text.Equals("") || txtUsername.Text.Equals(""))
             {
                 lblNotice.Text = "You need to fill all the fields";
                 Console.Write("asd");
                 return;
             }
-            UsersManager.getInstance().login(txtUsername.Text, txtPassword.Text, (status) =>
+            UserTableAdapter.getInstance().login(txtUsername.Text, txtPassword.Text, (status,userid) =>
             {
-                if (status == LOGIN_STATUS.SUCCESS)callBackListener();
-                else lblNotice.Text = "Something went wrong during login";           
-            });
+                if (callBackListener != null && status == LOGIN_STATUS.SUCCESS) callBackListener(txtUsername.Text, txtPassword.Text, userid);
+                else lblNotice.Text = "Something went wrong during login(wrong password?)";           
+            });*/
         }
 
         private void btnCreateAccount_Click(object sender, EventArgs e)
         {
+            
             if (txtPassword.Text.Equals("") || txtUsername.Text.Equals(""))
             {
                 lblNotice.Text = "You need to fill all the fields";
@@ -46,10 +52,10 @@ namespace OpenMassSenderGUI
             }
             try
             {
-                UsersManager.getInstance().createUser(txtUsername.Text, txtPassword.Text);
-                UsersManager.getInstance().login(txtUsername.Text, txtPassword.Text, (status) =>
+                UserTableAdapter.getInstance().createUser(txtUsername.Text, txtPassword.Text);
+                UserTableAdapter.getInstance().login(txtUsername.Text, txtPassword.Text, (status,userid) =>
                 {
-                    if (status == LOGIN_STATUS.SUCCESS) callBackListener();
+                    if (callBackListener != null && status == LOGIN_STATUS.SUCCESS) callBackListener(txtUsername.Text, txtPassword.Text, userid);
                     else lblNotice.Text = "Something went wrong during login";
                 });
             }

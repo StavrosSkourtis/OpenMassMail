@@ -6,7 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using OpenMassSenderCore.Managers;
+using OpenMassSenderCore.OpenMassSenderDBDataSetTableAdapters;
 
 namespace OpenMassSenderGUI
 {
@@ -20,8 +20,7 @@ namespace OpenMassSenderGUI
         private void btnOK_Click_1(object sender, EventArgs e)
         {
             //apla gia na kanw testing to emailMessageEdit form, den tha kanei load apo dw kanonika
-            emailMessageEdit frm = new emailMessageEdit();
-            frm.Show();
+            this.Close();
         }
 
         private void btnSearchReceiver_Click(object sender, EventArgs e)
@@ -31,7 +30,7 @@ namespace OpenMassSenderGUI
 
         private void receiversWindow_Load(object sender, EventArgs e)
         {
-            cbReceiverGroups.DataSource = ReceiversManager.getInstance().getAllReceiverGroups();
+            cbReceiverGroups.DataSource = ReceiverTableAdapter.getInstance().getAllReceiverGroups();
 
              
             

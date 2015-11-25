@@ -24,7 +24,10 @@ namespace OMSExecutionerService
 
                         host.Open();
 
+                        new JobExecutioner();
+
                         Console.WriteLine("Job executioner is running");
+
                     }
                }
     }

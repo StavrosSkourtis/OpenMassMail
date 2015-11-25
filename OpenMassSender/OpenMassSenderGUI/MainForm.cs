@@ -7,7 +7,9 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using OpenMassSenderCore;
-using OpenMassSenderCore.Users;
+using OpenMassSenderCore.OpenMassSenderDBDataSetTableAdapters;
+using System.IO;
+
 
 namespace OpenMassSenderGUI
 {
@@ -20,7 +22,7 @@ namespace OpenMassSenderGUI
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            if (UsersManager.getInstance().userid.Equals("") || UsersManager.getInstance().userid == null)
+            if (UserTableAdapter.getInstance().userid == null || UserTableAdapter.getInstance().userid.Equals(""))
             {
                 showLoginForm();
             }  
@@ -39,13 +41,24 @@ namespace OpenMassSenderGUI
 
         public void showLoginForm()
         {
-            loginForm frm = new loginForm(() =>
-            {
-                Invoke(new Action(() => connectToolStripMenuItem.Text = "Change account"));
-                Logger.log("user logged in with id" + UsersManager.getInstance().userid);
+            this.Hide();
+            LoginForm loginForm = null;
+            loginForm=new LoginForm((username,password,userid)=>{
+                //write the user's id to a file so that the job execution service can know what user is logged in without the desktop
+                //project running
+                File.WriteAllText("omsloggeduser.dt", username + "|" + password + "|" + userid);
+
+                ReceiverTableAdapter.getInstance().setUserID(userid) ;
+                SenderAccountTableAdapter.getInstance().setUserID(userid);
+                JobTableAdapter.getInstance().setUserID(userid);
+                JobScheduleTableAdapter.getInstance().setUserID(userid);
+                MessageTableAdapter.getInstance().setUserID(userid);
+                SenderAccountTableAdapter.getInstance().setUserID(userid);
+
+                loginForm.Close();
             });
-            frm.TopMost = true;
-            frm.Show();
+            loginForm.TopMost = true;
+            loginForm.ShowDialog();
         }
 
         private void manageSendersToolStripMenuItem_Click(object sender, EventArgs e)
