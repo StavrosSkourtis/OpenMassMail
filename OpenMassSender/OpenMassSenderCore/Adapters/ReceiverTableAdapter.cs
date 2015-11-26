@@ -11,7 +11,7 @@ namespace OpenMassSenderCore.OpenMassSenderDBDataSetTableAdapters
 
         partial class ReceiverTableAdapter
         {
-            private string userid;
+            public string userid;
             public bool setUserID(string user)
             {
                 this.userid = user;
@@ -28,13 +28,6 @@ namespace OpenMassSenderCore.OpenMassSenderDBDataSetTableAdapters
             public OpenMassSenderCore.OpenMassSenderDBDataSet.ReceiverDataTable getAllReceiversOfGroup(string group)
             {
                 return null;
-            }
-
-            //<sumarry>Returns a list with all the groups of receivers</summary>
-            public OpenMassSenderCore.OpenMassSenderDBDataSet.ReceiverDataTable getAllReceiverGroups()
-            {
-                //TODO #stavros database stuff here
-                return new OpenMassSenderCore.OpenMassSenderDBDataSet.ReceiverDataTable();
             }
 
             //<sumarry>Searches all the receivers that match specific critirias</summary>

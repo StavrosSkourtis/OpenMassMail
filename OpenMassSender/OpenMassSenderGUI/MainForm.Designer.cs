@@ -32,21 +32,21 @@
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.listView1 = new System.Windows.Forms.ListView();
             this.ColumnNumber = new System.Windows.Forms.ColumnHeader();
+            this.ColumnName = new System.Windows.Forms.ColumnHeader();
+            this.columnStatus = new System.Windows.Forms.ColumnHeader();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
+            this.btnAdd = new System.Windows.Forms.ToolStripButton();
+            this.btnDelete = new System.Windows.Forms.ToolStripButton();
+            this.btnShowNotReady = new System.Windows.Forms.ToolStripButton();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.menuItemFile = new System.Windows.Forms.ToolStripMenuItem();
+            this.connectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.manageSendersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuItemJobs = new System.Windows.Forms.ToolStripMenuItem();
             this.menuItemOptions = new System.Windows.Forms.ToolStripMenuItem();
             this.tabControlMainWindow = new System.Windows.Forms.TabControl();
             this.tabPageStatus = new System.Windows.Forms.TabPage();
             this.tabPageMessage = new System.Windows.Forms.TabPage();
-            this.ColumnName = new System.Windows.Forms.ColumnHeader();
-            this.columnStatus = new System.Windows.Forms.ColumnHeader();
-            this.connectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.manageSendersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.btnAdd = new System.Windows.Forms.ToolStripButton();
-            this.btnDelete = new System.Windows.Forms.ToolStripButton();
-            this.btnShowNotReady = new System.Windows.Forms.ToolStripButton();
             this.panel1.SuspendLayout();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -102,6 +102,16 @@
             this.ColumnNumber.Text = "       #";
             this.ColumnNumber.Width = 40;
             // 
+            // ColumnName
+            // 
+            this.ColumnName.Text = "Name";
+            this.ColumnName.Width = 200;
+            // 
+            // columnStatus
+            // 
+            this.columnStatus.Text = "Status";
+            this.columnStatus.Width = 250;
+            // 
             // toolStrip1
             // 
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -113,6 +123,39 @@
             this.toolStrip1.Size = new System.Drawing.Size(565, 25);
             this.toolStrip1.TabIndex = 1;
             this.toolStrip1.Text = "toolStrip1";
+            // 
+            // btnAdd
+            // 
+            this.btnAdd.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.btnAdd.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnAdd.Image = global::OpenMassSenderGUI.Properties.Resources.add_button;
+            this.btnAdd.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnAdd.Name = "btnAdd";
+            this.btnAdd.Size = new System.Drawing.Size(23, 22);
+            this.btnAdd.Text = "Add";
+            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
+            // 
+            // btnDelete
+            // 
+            this.btnDelete.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.btnDelete.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnDelete.Image = global::OpenMassSenderGUI.Properties.Resources.delete_button;
+            this.btnDelete.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnDelete.Name = "btnDelete";
+            this.btnDelete.Size = new System.Drawing.Size(23, 22);
+            this.btnDelete.Text = "Delete";
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
+            // 
+            // btnShowNotReady
+            // 
+            this.btnShowNotReady.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.btnShowNotReady.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnShowNotReady.Image = global::OpenMassSenderGUI.Properties.Resources.show_not_ready_button;
+            this.btnShowNotReady.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnShowNotReady.Name = "btnShowNotReady";
+            this.btnShowNotReady.Size = new System.Drawing.Size(23, 22);
+            this.btnShowNotReady.Text = "ShowNotReady";
+            this.btnShowNotReady.Click += new System.EventHandler(this.btnShowNotReady_Click);
             // 
             // menuStrip1
             // 
@@ -134,6 +177,20 @@
             this.menuItemFile.Name = "menuItemFile";
             this.menuItemFile.Size = new System.Drawing.Size(37, 20);
             this.menuItemFile.Text = "File";
+            // 
+            // connectToolStripMenuItem
+            // 
+            this.connectToolStripMenuItem.Name = "connectToolStripMenuItem";
+            this.connectToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
+            this.connectToolStripMenuItem.Text = "Connect";
+            this.connectToolStripMenuItem.Click += new System.EventHandler(this.connectToolStripMenuItem_Click);
+            // 
+            // manageSendersToolStripMenuItem
+            // 
+            this.manageSendersToolStripMenuItem.Name = "manageSendersToolStripMenuItem";
+            this.manageSendersToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
+            this.manageSendersToolStripMenuItem.Text = "Manage senders";
+            this.manageSendersToolStripMenuItem.Click += new System.EventHandler(this.manageSendersToolStripMenuItem_Click);
             // 
             // menuItemJobs
             // 
@@ -177,70 +234,14 @@
             this.tabPageMessage.Text = "Message";
             this.tabPageMessage.UseVisualStyleBackColor = true;
             // 
-            // ColumnName
-            // 
-            this.ColumnName.Text = "Name";
-            this.ColumnName.Width = 200;
-            // 
-            // columnStatus
-            // 
-            this.columnStatus.Text = "Status";
-            this.columnStatus.Width = 250;
-            // 
-            // connectToolStripMenuItem
-            // 
-            this.connectToolStripMenuItem.Name = "connectToolStripMenuItem";
-            this.connectToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
-            this.connectToolStripMenuItem.Text = "Connect";
-            this.connectToolStripMenuItem.Click += new System.EventHandler(this.connectToolStripMenuItem_Click);
-            // 
-            // manageSendersToolStripMenuItem
-            // 
-            this.manageSendersToolStripMenuItem.Name = "manageSendersToolStripMenuItem";
-            this.manageSendersToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
-            this.manageSendersToolStripMenuItem.Text = "Manage senders";
-            this.manageSendersToolStripMenuItem.Click += new System.EventHandler(this.manageSendersToolStripMenuItem_Click);
-            // 
-            // btnAdd
-            // 
-            this.btnAdd.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.btnAdd.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnAdd.Image = global::OpenMassSenderGUI.Properties.Resources.add_button;
-            this.btnAdd.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnAdd.Name = "btnAdd";
-            this.btnAdd.Size = new System.Drawing.Size(23, 22);
-            this.btnAdd.Text = "Add";
-            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
-            // 
-            // btnDelete
-            // 
-            this.btnDelete.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.btnDelete.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnDelete.Image = global::OpenMassSenderGUI.Properties.Resources.delete_button;
-            this.btnDelete.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnDelete.Name = "btnDelete";
-            this.btnDelete.Size = new System.Drawing.Size(23, 22);
-            this.btnDelete.Text = "Delete";
-            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
-            // 
-            // btnShowNotReady
-            // 
-            this.btnShowNotReady.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.btnShowNotReady.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnShowNotReady.Image = global::OpenMassSenderGUI.Properties.Resources.show_not_ready_button;
-            this.btnShowNotReady.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnShowNotReady.Name = "btnShowNotReady";
-            this.btnShowNotReady.Size = new System.Drawing.Size(23, 22);
-            this.btnShowNotReady.Text = "ShowNotReady";
-            // 
-            // Form1
+            // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(565, 486);
             this.Controls.Add(this.panel1);
             this.MainMenuStrip = this.menuStrip1;
-            this.Name = "Form1";
+            this.Name = "MainForm";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.panel1.ResumeLayout(false);

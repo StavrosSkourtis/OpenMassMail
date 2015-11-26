@@ -16,7 +16,7 @@ namespace OpenMassSenderGUI
         public MessageVariablesForm(OpenMassSenderCore.OpenMassSenderDBDataSet.MessageRow message)
         {
             this.message = message;
-            this.variables = message.replacableVariables;
+            this.variables = message.replacableVariablesMap;
             InitializeComponent();
             foreach (KeyValuePair<string, string> entry in variables)
             {
@@ -45,7 +45,7 @@ namespace OpenMassSenderGUI
             var listViewItem = new ListViewItem(row);
             lvVariables.Items.Add(listViewItem);
 
-            message.variablesUpdated();
+            message.variablesListUpdated();
         }
 
         private void btnRemove_Click(object sender, EventArgs e)
@@ -58,7 +58,7 @@ namespace OpenMassSenderGUI
                     variables.Remove(a.GetSubItemAt(0,a.Index).Text);
                 }
             }
-            message.variablesUpdated();
+            message.variablesListUpdated();
         }
     }
 }

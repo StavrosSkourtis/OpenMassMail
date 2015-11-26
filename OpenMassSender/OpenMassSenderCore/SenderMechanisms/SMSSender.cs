@@ -14,7 +14,7 @@ namespace OpenMassSenderCore.Senders
         {
             this.sender = sender;
         }
-        public override OpenMassSenderCore.OpenMassSenderDBDataSet.MessageStatus send(OpenMassSenderCore.OpenMassSenderDBDataSet.MessageRow message, OpenMassSenderCore.OpenMassSenderDBDataSet.ReceiverRow receiver)
+        public override string send(OpenMassSenderCore.OpenMassSenderDBDataSet.MessageRow message, OpenMassSenderCore.OpenMassSenderDBDataSet.ReceiverRow receiver)
         {
             string url = sender.sms_url;
             url = url.Replace("$to", receiver.phone_number.ToString());

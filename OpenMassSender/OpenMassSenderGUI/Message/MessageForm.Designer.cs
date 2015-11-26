@@ -39,11 +39,13 @@
             this.tbMessageContent = new System.Windows.Forms.TextBox();
             this.tbSubject = new System.Windows.Forms.TextBox();
             this.ofd1 = new System.Windows.Forms.OpenFileDialog();
+            this.btnPreviewHTML = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.btnPreviewHTML);
             this.panel1.Controls.Add(this.lblLinkedFile);
             this.panel1.Controls.Add(this.lblTextLengthWarning);
             this.panel1.Controls.Add(this.btnFileLink);
@@ -133,7 +135,7 @@
             this.tbMessageContent.Location = new System.Drawing.Point(15, 80);
             this.tbMessageContent.Multiline = true;
             this.tbMessageContent.Name = "tbMessageContent";
-            this.tbMessageContent.Size = new System.Drawing.Size(538, 365);
+            this.tbMessageContent.Size = new System.Drawing.Size(538, 354);
             this.tbMessageContent.TabIndex = 1;
             this.tbMessageContent.TextChanged += new System.EventHandler(this.tbMessageContent_TextChanged);
             // 
@@ -147,6 +149,16 @@
             // ofd1
             // 
             this.ofd1.FileName = "openFileDialog1";
+            // 
+            // btnPreviewHTML
+            // 
+            this.btnPreviewHTML.Location = new System.Drawing.Point(15, 441);
+            this.btnPreviewHTML.Name = "btnPreviewHTML";
+            this.btnPreviewHTML.Size = new System.Drawing.Size(137, 23);
+            this.btnPreviewHTML.TabIndex = 9;
+            this.btnPreviewHTML.Text = "Preview HTML message";
+            this.btnPreviewHTML.UseVisualStyleBackColor = true;
+            this.btnPreviewHTML.Click += new System.EventHandler(this.btnPreviewHTML_Click);
             // 
             // MessageForm
             // 
@@ -176,5 +188,6 @@
         private System.Windows.Forms.Label lblTextLengthWarning;
         private System.Windows.Forms.Label lblLinkedFile;
         private System.Windows.Forms.OpenFileDialog ofd1;
+        private System.Windows.Forms.Button btnPreviewHTML;
     }
 }

@@ -8,7 +8,7 @@ namespace OpenMassSenderCore.OpenMassSenderDBDataSetTableAdapters
     //<summary>A job is a sheduled/pending or already executed action of whatever type(mail,sms)</summary>
     partial class SenderAccountTableAdapter
     {
-        private string userid;
+        public string userid;
         public bool setUserID(string user)
         {
             this.userid = user;

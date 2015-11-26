@@ -10,7 +10,6 @@ namespace OpenMassSenderCore
     {
         partial class JobScheduleRow
         {
-            public RepeatableJob repeatableShedule = RepeatableJob.NON_REPEATABLE;
             //<summary>returns true if the datetime has been reached and an execution is pending</summary>
             public bool ready()
             {
@@ -31,14 +30,19 @@ namespace OpenMassSenderCore
             public void jobExecutionStarted()
             {
                 lastExecution = nextExecution;
-                if (repeatableShedule == RepeatableJob.NON_REPEATABLE) nextExecution = DateTime.MaxValue;
-                else if (repeatableShedule == RepeatableJob.DAILY) nextExecution = lastExecution.AddDays(1);
-                else if (repeatableShedule == RepeatableJob.MONTHLY) nextExecution = lastExecution.AddMonths(1);
-                else if (repeatableShedule == RepeatableJob.WEAKLY) nextExecution = lastExecution.AddDays(7);
-                else if (repeatableShedule == RepeatableJob.YEARLY) nextExecution = lastExecution.AddYears(1);
+                
+                if (repeatable == RepeatableJob.NON_REPEATABLE) nextExecution = DateTime.MaxValue;
+                else if (repeatable == RepeatableJob.DAILY) nextExecution = lastExecution.AddDays(1);
+                else if (repeatable == RepeatableJob.MONTHLY) nextExecution = lastExecution.AddMonths(1);
+                else if (repeatable == RepeatableJob.WEAKLY) nextExecution = lastExecution.AddDays(7);
+                else if (repeatable == RepeatableJob.YEARLY) nextExecution = lastExecution.AddYears(1);
             }
 
         }
     }
-    public enum RepeatableJob { DAILY, WEAKLY, MONTHLY, YEARLY, NON_REPEATABLE };
+    public class RepeatableJob
+    {
+        public static string DAILY = "DAILY",
+            WEAKLY = "WEAKLY", MONTHLY = "MONTHLY", YEARLY = "YEARLY", NON_REPEATABLE = "NON_REPEATABLE";
+    };
 }

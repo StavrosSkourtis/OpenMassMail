@@ -11,3 +11,11 @@ namespace OpenMassSenderCore.OpenMassSenderDBDataSetTableAdapters {
     public partial class SenderAccountTableAdapter {
     }
 }
+
+namespace OpenMassSenderCore.OpenMassSenderDBDataSetTableAdapters
+{
+    
+    
+    public partial class ReceiverTableAdapter {
+    }
+}

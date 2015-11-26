@@ -68,9 +68,16 @@ namespace OpenMassSenderGUI
             this.Close();
         }
 
-        private void MessageForm_Load(object sender, EventArgs e)
+        private MessagePreviewForm messagePreview = null;
+        private void btnPreviewHTML_Click(object sender, EventArgs e)
         {
+            if (messagePreview == null || messagePreview.IsDisposed || messagePreview.IsAccessible == false)
+            {
+                messagePreview = new MessagePreviewForm(message);
+            }
 
+            messagePreview.Show();
+            messagePreview.Focus();
         }
 
 

@@ -73,5 +73,10 @@ namespace OpenMassSenderGUI
             receiversWindow frm = new receiversWindow();
             frm.Show();
         }
+
+        private void btnShowNotReady_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

@@ -10,7 +10,7 @@ namespace OpenMassSenderCore.OpenMassSenderDBDataSetTableAdapters
     public partial class JobTableAdapter
     {
         //<summary>A list with all the jobs</summary>
-        private string userid;
+        public string userid;
         public bool setUserID(string user)
         {
             this.userid = user;

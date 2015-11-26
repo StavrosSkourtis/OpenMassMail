@@ -20,7 +20,7 @@ namespace OpenMassSenderCore.Senders
             smtpClient.UseDefaultCredentials = false;
             smtpClient.Host = (string)sender.host;
         }
-        public override OpenMassSenderCore.OpenMassSenderDBDataSet.MessageStatus send(OpenMassSenderCore.OpenMassSenderDBDataSet.MessageRow message,OpenMassSenderCore.OpenMassSenderDBDataSet.ReceiverRow receiver)
+        public override string send(OpenMassSenderCore.OpenMassSenderDBDataSet.MessageRow message,OpenMassSenderCore.OpenMassSenderDBDataSet.ReceiverRow receiver)
         {
             System.Net.Mail.MailMessage mail = new System.Net.Mail.MailMessage(sender.email, receiver.email);
             mail.Subject = message.subject;

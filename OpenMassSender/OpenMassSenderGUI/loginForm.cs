@@ -27,7 +27,7 @@ namespace OpenMassSenderGUI
 
         private void btnLogin_Click(object sender, EventArgs e)
         {
-            callBackListener("testname", "testpassword", "0");
+            callBackListener("testname", "testpassword", "1");
             //this.Close();
            /* if (txtPassword.Text.Equals("") || txtUsername.Text.Equals(""))
             {

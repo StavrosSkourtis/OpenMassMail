@@ -73,7 +73,7 @@ namespace OpenMassSenderCore.Senders
         {
             foreach (OpenMassSenderCore.OpenMassSenderDBDataSet.ReceiverRow receiver in receivers)
             {
-                OpenMassSenderCore.OpenMassSenderDBDataSet.MessageStatus status = sender.send(message, receiver);
+                string status = sender.send(message, receiver);
                 SendStatusChanged sentStatus = new SendStatusChanged(receiver, status);
                 pendingJobStatus.pending.Remove(receiver);
                 pendingJobStatus.sent.Add(sentStatus);
@@ -84,8 +84,8 @@ namespace OpenMassSenderCore.Senders
     public class SendStatusChanged
     {
         public OpenMassSenderCore.OpenMassSenderDBDataSet.ReceiverRow receiver;
-        public OpenMassSenderCore.OpenMassSenderDBDataSet.MessageStatus status;
-        public SendStatusChanged(OpenMassSenderCore.OpenMassSenderDBDataSet.ReceiverRow receiver, OpenMassSenderCore.OpenMassSenderDBDataSet.MessageStatus status)
+        public string status;
+        public SendStatusChanged(OpenMassSenderCore.OpenMassSenderDBDataSet.ReceiverRow receiver,string status)
         {
             this.receiver = receiver;
             this.status = status;

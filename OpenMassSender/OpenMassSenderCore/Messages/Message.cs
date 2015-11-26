@@ -8,17 +8,17 @@ namespace OpenMassSenderCore
 {
     public partial class OpenMassSenderDBDataSet
     {
-        public enum MessageStatus { ERROR, SUCCEED };
+        public class MessageStatus { public static string ERROR = "ERROR", SUCCEED = "SUCCESS"; };
 
         partial class MessageRow
         {
             //<summary>The status of the message</summary>
-            public MessageStatus status;
+            public string status;
             //<summary>A message can contain variables that are replaced upon send,for example $receiverName 
             //will be replaced with the receiver's name</summary>
             public Dictionary<string, string> replacableVariablesMap = new Dictionary<string, string>();
             //<summary>The message the message(no shit sherlock)</summary>
-            public string linkedFile=null;
+ 
             public void setMessage(string message)
             {
                 this.message = message;
