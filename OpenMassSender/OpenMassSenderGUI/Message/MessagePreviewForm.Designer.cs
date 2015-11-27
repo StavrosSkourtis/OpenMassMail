@@ -48,7 +48,6 @@
             this.Controls.Add(this.webBrowser1);
             this.Name = "MessagePreviewForm";
             this.Text = "Message Preview";
-            this.Load += new System.EventHandler(this.MessagePreviewForm_Load);
             this.ResumeLayout(false);
 
         }

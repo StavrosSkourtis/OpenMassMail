@@ -18,6 +18,7 @@ namespace OpenMassSenderGUI
         public MainForm()
         {
             InitializeComponent();
+            Logger.logWindow = new LoggerForm();
         }
 
         private void Form1_Load(object sender, EventArgs e)

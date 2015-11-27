@@ -8,6 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 using System.IO;
 using OpenMassSenderCore.OpenMassSenderDBDataSetTableAdapters;
+using System.Text.RegularExpressions;
 
 namespace OpenMassSenderGUI
 {

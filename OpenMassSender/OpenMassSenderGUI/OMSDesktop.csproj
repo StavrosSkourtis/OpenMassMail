@@ -69,6 +69,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="LoggerForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="LoggerForm.Designer.cs">
+      <DependentUpon>LoggerForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -82,20 +88,29 @@
     <Compile Include="LoginForm.Designer.cs">
       <DependentUpon>LoginForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="MessageForm.cs">
+    <Compile Include="Message\MessageForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="MessageForm.Designer.cs">
+    <Compile Include="Message\MessageForm.Designer.cs">
       <DependentUpon>MessageForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="MessageVariablesForm.cs">
+    <Compile Include="Message\MessagePreviewForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="MessageVariablesForm.Designer.cs">
+    <Compile Include="Message\MessagePreviewForm.Designer.cs">
+      <DependentUpon>MessagePreviewForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Message\MessageVariablesForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Message\MessageVariablesForm.Designer.cs">
       <DependentUpon>MessageVariablesForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="LoggerForm.resx">
+      <DependentUpon>LoggerForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -103,10 +118,13 @@
     <EmbeddedResource Include="LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="MessageForm.resx">
+    <EmbeddedResource Include="Message\MessageForm.resx">
       <DependentUpon>MessageForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="MessageVariablesForm.resx">
+    <EmbeddedResource Include="Message\MessagePreviewForm.resx">
+      <DependentUpon>MessagePreviewForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Message\MessageVariablesForm.resx">
       <DependentUpon>MessageVariablesForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">

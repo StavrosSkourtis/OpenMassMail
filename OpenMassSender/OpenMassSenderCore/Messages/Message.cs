@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 
 
 namespace OpenMassSenderCore
@@ -21,12 +22,17 @@ namespace OpenMassSenderCore
  
             public void setMessage(string message)
             {
+
                 this.message = message;
-                if (message.Contains(Wildcards.RECEIVER_FIRST_NAME))
+                if (message.Contains(Wildcards.RECEIVER_FIRST_NAME) 
+                    && replacableVariablesMap.ContainsKey(Wildcards.RECEIVER_FIRST_NAME)==false)
                     replacableVariablesMap.Add(Wildcards.RECEIVER_FIRST_NAME, null);
-                if (message.Contains(Wildcards.RECEIVER_LAST_NAME))
+                if (message.Contains(Wildcards.RECEIVER_LAST_NAME)
+                    && replacableVariablesMap.ContainsKey(Wildcards.RECEIVER_LAST_NAME) == false)
                     replacableVariablesMap.Add(Wildcards.RECEIVER_LAST_NAME, null);
             }
+            private static Regex containsHtml = new Regex(@"$DATE(*)");
+            private static Regex datePattern = new Regex(@"\$DATE\((.*?)\)");
             public string replaceWildCards(OpenMassSenderCore.OpenMassSenderDBDataSet.ReceiverRow receiver)
             {
                 string ret = message;
@@ -34,12 +40,19 @@ namespace OpenMassSenderCore
                     replacableVariablesMap.Add(Wildcards.RECEIVER_FIRST_NAME, receiver.first_name);
                 if (replacableVariablesMap.ContainsKey(Wildcards.RECEIVER_LAST_NAME))
                     replacableVariablesMap.Add(Wildcards.RECEIVER_FIRST_NAME, receiver.last_name);
-
+   
                 foreach (KeyValuePair<string, string> entry in replacableVariablesMap)
                 {
                     ret = ret.Replace(entry.Key, entry.Value);
                 }
-
+                if (message.Contains(Wildcards.DATE))
+                {
+                    foreach (Match m in datePattern.Matches(ret))
+                    {
+                        string datepattern = m.Value.Split('(')[1].Split(')')[0];
+                        ret = ret.Replace(m.Value, DateTime.Now.ToString(datepattern));
+                    }
+                }
                 return ret;
             }
             public void variablesListUpdated()
@@ -65,6 +78,7 @@ namespace OpenMassSenderCore
     {
         public static string RECEIVER_FIRST_NAME = "$receiver_fname";
         public static string RECEIVER_LAST_NAME = "$receiver_lname";
+        public static string DATE = "$date";
 
     }
 }

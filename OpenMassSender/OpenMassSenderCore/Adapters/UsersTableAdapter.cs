@@ -76,7 +76,7 @@ namespace OpenMassSenderCore.OpenMassSenderDBDataSetTableAdapters
                     }
                     catch (Exception ex)
                     {
-                        Logger.log("error: " + ex.Message);
+                        Logger.log("error","error: " + ex.Message);
                     }
 
                     onLogin(LOGIN_STATUS.SUCCESS, userid);

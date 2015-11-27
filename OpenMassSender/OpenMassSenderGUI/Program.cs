@@ -4,6 +4,7 @@ using System.Linq;
 using System.Windows.Forms;
 using OpenMassSenderCore.OpenMassSenderDBDataSetTableAdapters;
 using System.IO;
+using OpenMassSenderCore;
 
 namespace OpenMassSenderGUI
 {

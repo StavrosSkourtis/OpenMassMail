@@ -29,6 +29,8 @@
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
+            this.tbContent = new System.Windows.Forms.RichTextBox();
+            this.btnPreviewHTML = new System.Windows.Forms.Button();
             this.lblLinkedFile = new System.Windows.Forms.Label();
             this.lblTextLengthWarning = new System.Windows.Forms.Label();
             this.btnFileLink = new System.Windows.Forms.Button();
@@ -36,15 +38,14 @@
             this.btnOK = new System.Windows.Forms.Button();
             this.labelContent = new System.Windows.Forms.Label();
             this.labelSubject = new System.Windows.Forms.Label();
-            this.tbMessageContent = new System.Windows.Forms.TextBox();
             this.tbSubject = new System.Windows.Forms.TextBox();
             this.ofd1 = new System.Windows.Forms.OpenFileDialog();
-            this.btnPreviewHTML = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.tbContent);
             this.panel1.Controls.Add(this.btnPreviewHTML);
             this.panel1.Controls.Add(this.lblLinkedFile);
             this.panel1.Controls.Add(this.lblTextLengthWarning);
@@ -53,13 +54,32 @@
             this.panel1.Controls.Add(this.btnOK);
             this.panel1.Controls.Add(this.labelContent);
             this.panel1.Controls.Add(this.labelSubject);
-            this.panel1.Controls.Add(this.tbMessageContent);
             this.panel1.Controls.Add(this.tbSubject);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(565, 510);
             this.panel1.TabIndex = 0;
+            this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
+            // 
+            // tbContent
+            // 
+            this.tbContent.Location = new System.Drawing.Point(15, 80);
+            this.tbContent.Name = "tbContent";
+            this.tbContent.Size = new System.Drawing.Size(538, 355);
+            this.tbContent.TabIndex = 10;
+            this.tbContent.Text = "";
+            this.tbContent.TextChanged += new System.EventHandler(this.tbContent_TextChanged);
+            // 
+            // btnPreviewHTML
+            // 
+            this.btnPreviewHTML.Location = new System.Drawing.Point(15, 441);
+            this.btnPreviewHTML.Name = "btnPreviewHTML";
+            this.btnPreviewHTML.Size = new System.Drawing.Size(137, 23);
+            this.btnPreviewHTML.TabIndex = 9;
+            this.btnPreviewHTML.Text = "Preview HTML message";
+            this.btnPreviewHTML.UseVisualStyleBackColor = true;
+            this.btnPreviewHTML.Click += new System.EventHandler(this.btnPreviewHTML_Click);
             // 
             // lblLinkedFile
             // 
@@ -130,35 +150,17 @@
             this.labelSubject.TabIndex = 2;
             this.labelSubject.Text = "Subject";
             // 
-            // tbMessageContent
-            // 
-            this.tbMessageContent.Location = new System.Drawing.Point(15, 80);
-            this.tbMessageContent.Multiline = true;
-            this.tbMessageContent.Name = "tbMessageContent";
-            this.tbMessageContent.Size = new System.Drawing.Size(538, 354);
-            this.tbMessageContent.TabIndex = 1;
-            this.tbMessageContent.TextChanged += new System.EventHandler(this.tbMessageContent_TextChanged);
-            // 
             // tbSubject
             // 
             this.tbSubject.Location = new System.Drawing.Point(15, 28);
             this.tbSubject.Name = "tbSubject";
             this.tbSubject.Size = new System.Drawing.Size(538, 20);
             this.tbSubject.TabIndex = 0;
+            this.tbSubject.TextChanged += new System.EventHandler(this.tbSubject_TextChanged);
             // 
             // ofd1
             // 
             this.ofd1.FileName = "openFileDialog1";
-            // 
-            // btnPreviewHTML
-            // 
-            this.btnPreviewHTML.Location = new System.Drawing.Point(15, 441);
-            this.btnPreviewHTML.Name = "btnPreviewHTML";
-            this.btnPreviewHTML.Size = new System.Drawing.Size(137, 23);
-            this.btnPreviewHTML.TabIndex = 9;
-            this.btnPreviewHTML.Text = "Preview HTML message";
-            this.btnPreviewHTML.UseVisualStyleBackColor = true;
-            this.btnPreviewHTML.Click += new System.EventHandler(this.btnPreviewHTML_Click);
             // 
             // MessageForm
             // 
@@ -179,7 +181,6 @@
 
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label labelSubject;
-        private System.Windows.Forms.TextBox tbMessageContent;
         private System.Windows.Forms.TextBox tbSubject;
         private System.Windows.Forms.Button btnOK;
         private System.Windows.Forms.Label labelContent;
@@ -189,5 +190,6 @@
         private System.Windows.Forms.Label lblLinkedFile;
         private System.Windows.Forms.OpenFileDialog ofd1;
         private System.Windows.Forms.Button btnPreviewHTML;
+        private System.Windows.Forms.RichTextBox tbContent;
     }
 }

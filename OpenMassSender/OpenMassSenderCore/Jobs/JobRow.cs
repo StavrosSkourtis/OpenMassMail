@@ -56,7 +56,7 @@ namespace OpenMassSenderCore
                 massSender.send(this.sender,
                     message, receiversList, (SendStatusChanged status) =>
                 {
-                    Logger.log("send to "+status.receiver.last_name+" "+(status.status==MessageStatus.SUCCEED?"success":"failure"));
+                    Logger.log("log","send to "+status.receiver.last_name+" "+(status.status==MessageStatus.SUCCEED?"success":"failure"));
                 });
                 return massSender.status;
             }
