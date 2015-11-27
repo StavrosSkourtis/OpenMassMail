@@ -20,7 +20,7 @@ namespace OpenMassSenderGUI
             InitializeComponent();
             foreach (KeyValuePair<string, string> entry in variables)
             {
-                string[] row = {entry.Key,entry.Value};
+                string[] row = {entry.Key,entry.Value!=null?"dynamic":entry.Value};
                 var listViewItem = new ListViewItem(row);
                 lvVariables.Items.Add(listViewItem);
             }
@@ -59,6 +59,11 @@ namespace OpenMassSenderGUI
                 }
             }
             message.variablesListUpdated();
+        }
+
+        private void MessageVariablesForm_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

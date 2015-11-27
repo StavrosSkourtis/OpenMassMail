@@ -1,6 +1,6 @@
 ﻿namespace OMSExecutionerService
 {
-    partial class Service1
+    partial class OMSService
     {
         /// <summary> 
         /// Required designer variable.

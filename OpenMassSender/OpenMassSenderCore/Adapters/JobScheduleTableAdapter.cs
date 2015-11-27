@@ -15,11 +15,24 @@ namespace OpenMassSenderCore.OpenMassSenderDBDataSetTableAdapters
             
             return true;
         }
+
+        public OpenMassSenderCore.OpenMassSenderDBDataSet.JobScheduleDataTable dataTable = new OpenMassSenderCore.OpenMassSenderDBDataSet.JobScheduleDataTable();
+        public OpenMassSenderCore.OpenMassSenderDBDataSet.JobScheduleRow getNewRow()
+        {
+            return dataTable.NewJobScheduleRow();
+        }
+        public void submitRow(OpenMassSenderCore.OpenMassSenderDBDataSet.JobScheduleRow row)
+        {
+            dataTable.Rows.Add(row);
+            Update(dataTable);
+        }
+
         private static JobScheduleTableAdapter instance;
         public static JobScheduleTableAdapter getInstance()
         {
             if (instance == null) instance = new JobScheduleTableAdapter();
             return instance;
         }
+
     }
 }

@@ -56,6 +56,7 @@
     <Reference Include="System.ServiceModel">
       <RequiredTargetFramework>3.0</RequiredTargetFramework>
     </Reference>
+    <Reference Include="System.ServiceProcess" />
     <Reference Include="System.Xml.Linq">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
@@ -158,6 +159,10 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\OMSExecutionerService\OMSExecutionerService.csproj">
+      <Project>{962DF8C0-42AE-45C7-B0ED-F58219F09211}</Project>
+      <Name>OMSExecutionerService</Name>
+    </ProjectReference>
     <ProjectReference Include="..\OpenMassSenderCore\OMSCore.csproj">
       <Project>{3F47D15A-EB0A-4253-9B00-0735221FF535}</Project>
       <Name>OMSCore</Name>

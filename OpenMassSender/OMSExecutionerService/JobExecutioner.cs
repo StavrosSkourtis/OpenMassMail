@@ -11,7 +11,7 @@ namespace OMSExecutionerService
 {
     //<summary>implementation of the JobExecutioner which will execute jobs when they will be ready, implements the interface
     //descirbed at CoreProject->Jobs->JobExecutionerInterface</summary>
-    class JobExecutioner : JobExecutionerInterface
+    public class JobExecutioner : JobExecutionerInterface
     {
         string userid;
         public JobExecutioner()
@@ -23,7 +23,7 @@ namespace OMSExecutionerService
                 setUser(File.ReadAllText("omsloggeduser.dt").Split('|')[2]);
             }
         }
-
+        //<summary>notify the executioner that a new job has been added</summary>
         public void jobHasBeenAdded()
         {
             if (JobTableAdapter.getInstance().setUserID(userid)) executeIfReady(null);
@@ -37,7 +37,7 @@ namespace OMSExecutionerService
 
             if (user != null && JobTableAdapter.getInstance().setUserID(userid)) executeIfReady(null);
         }
-
+        //<summary>check if any of the pending/scheduled jobs are ready for execution</summary>
         public void executeIfReady(object source)
         {
             foreach (OpenMassSenderCore.OpenMassSenderDBDataSet.JobRow job in JobTableAdapter.getInstance().GetData())

@@ -14,6 +14,19 @@ namespace OpenMassSenderCore.OpenMassSenderDBDataSetTableAdapters
             this.userid = user;
             return true;
         }
+        
+
+        public OpenMassSenderCore.OpenMassSenderDBDataSet.MessageDataTable dataTable = new OpenMassSenderCore.OpenMassSenderDBDataSet.MessageDataTable();
+        public OpenMassSenderCore.OpenMassSenderDBDataSet.MessageRow getNewRow()
+        {
+            return dataTable.NewMessageRow();
+        }
+        public void submitRow(OpenMassSenderCore.OpenMassSenderDBDataSet.MessageDataTable row)
+        {
+            dataTable.Rows.Add(row);
+            Update(dataTable);
+        }
+
         private static MessageTableAdapter instance;
         public static MessageTableAdapter getInstance()
         {

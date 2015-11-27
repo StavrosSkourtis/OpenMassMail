@@ -9,9 +9,10 @@ using System.Text;
 
 namespace OMSExecutionerService
 {
-    public partial class Service1 : ServiceBase
+    public partial class OMSService : ServiceBase
     {
-        public Service1()
+        public static string SERVICE_NAME = "OMSExecutioner";
+        public OMSService()
         {
             InitializeComponent();
         }

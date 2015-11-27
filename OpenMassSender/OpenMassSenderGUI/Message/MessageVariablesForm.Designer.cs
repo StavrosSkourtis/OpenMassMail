@@ -132,6 +132,7 @@
             this.Name = "MessageVariablesForm";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.Text = "MessageVariablesForm";
+            this.Load += new System.EventHandler(this.MessageVariablesForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.errorProv)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

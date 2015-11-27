@@ -17,6 +17,17 @@ namespace OpenMassSenderCore.OpenMassSenderDBDataSetTableAdapters
             return true;
         }
 
+        public OpenMassSenderCore.OpenMassSenderDBDataSet.JobDataTable dataTable = new OpenMassSenderCore.OpenMassSenderDBDataSet.JobDataTable();
+        public OpenMassSenderCore.OpenMassSenderDBDataSet.JobRow getNewRow()
+        {
+            return dataTable.NewJobRow();
+        }
+        public void submitRow(OpenMassSenderCore.OpenMassSenderDBDataSet.JobDataTable row)
+        {
+            dataTable.Rows.Add(row);
+            Update(dataTable);
+        }
+
         private static JobTableAdapter instance;
         public static JobTableAdapter getInstance()
         {

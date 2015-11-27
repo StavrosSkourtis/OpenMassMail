@@ -56,6 +56,17 @@ namespace OpenMassSenderCore.OpenMassSenderDBDataSetTableAdapters
                 }
                 return receiversMaching;
             }
+
+            public OpenMassSenderCore.OpenMassSenderDBDataSet.ReceiverDataTable dataTable = new OpenMassSenderCore.OpenMassSenderDBDataSet.ReceiverDataTable();
+            public OpenMassSenderCore.OpenMassSenderDBDataSet.ReceiverRow getNewRow()
+            {
+                return dataTable.NewReceiverRow();
+            }
+            public void submitRow(OpenMassSenderCore.OpenMassSenderDBDataSet.ReceiverRow row)
+            {
+                dataTable.Rows.Add(row);
+                Update(dataTable);
+            }
              
             private static ReceiverTableAdapter instance;
             public static ReceiverTableAdapter getInstance()
