@@ -61,5 +61,20 @@ namespace OpenMassSenderGUI
             }
 
         }
+        OpenFileDialog ofd = new OpenFileDialog();
+        private void button2_Click(object sender, EventArgs e)
+        {
+            if (ofd.ShowDialog() == DialogResult.OK)
+            {
+                filepathtextbox.Text = ofd.FileName;
+            }
+       }
+        private void checkform(){
+            if (jobtextbox.Text = "" || typecomboBox.Click  || filepathtextbox.Text = "" || recieverstextBox.Text = "" || executejob.Text = "") 
+            {
+            
+            }
+        }
     }
+
 }

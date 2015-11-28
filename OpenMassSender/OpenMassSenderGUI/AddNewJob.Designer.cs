@@ -29,14 +29,14 @@
         private void InitializeComponent()
         {
             this.label1 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.jobtextbox = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.typecomboBox = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.recieverstextBox = new System.Windows.Forms.TextBox();
             this.button3 = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
@@ -46,7 +46,7 @@
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.monthCalendar1 = new System.Windows.Forms.MonthCalendar();
             this.delete = new System.Windows.Forms.Button();
-            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.filepathtextbox = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.SuspendLayout();
@@ -61,12 +61,12 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Job Tittle";
             // 
-            // textBox1
+            // jobtextbox
             // 
-            this.textBox1.Location = new System.Drawing.Point(15, 29);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(349, 20);
-            this.textBox1.TabIndex = 1;
+            this.jobtextbox.Location = new System.Drawing.Point(15, 29);
+            this.jobtextbox.Name = "jobtextbox";
+            this.jobtextbox.Size = new System.Drawing.Size(349, 20);
+            this.jobtextbox.TabIndex = 1;
             // 
             // label2
             // 
@@ -77,16 +77,16 @@
             this.label2.TabIndex = 2;
             this.label2.Text = "Choose Type(sms/email)";
             // 
-            // comboBox1
+            // typecomboBox
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Items.AddRange(new object[] {
+            this.typecomboBox.FormattingEnabled = true;
+            this.typecomboBox.Items.AddRange(new object[] {
             "SMS",
             "Email"});
-            this.comboBox1.Location = new System.Drawing.Point(15, 83);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(78, 21);
-            this.comboBox1.TabIndex = 3;
+            this.typecomboBox.Location = new System.Drawing.Point(15, 83);
+            this.typecomboBox.Name = "typecomboBox";
+            this.typecomboBox.Size = new System.Drawing.Size(78, 21);
+            this.typecomboBox.TabIndex = 3;
             // 
             // label3
             // 
@@ -114,6 +114,7 @@
             this.button2.TabIndex = 6;
             this.button2.Text = "Browse File";
             this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // label4
             // 
@@ -124,12 +125,12 @@
             this.label4.TabIndex = 7;
             this.label4.Text = "Recievers";
             // 
-            // textBox2
+            // recieverstextBox
             // 
-            this.textBox2.Location = new System.Drawing.Point(15, 232);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(209, 20);
-            this.textBox2.TabIndex = 8;
+            this.recieverstextBox.Location = new System.Drawing.Point(15, 232);
+            this.recieverstextBox.Name = "recieverstextBox";
+            this.recieverstextBox.Size = new System.Drawing.Size(209, 20);
+            this.recieverstextBox.TabIndex = 8;
             // 
             // button3
             // 
@@ -193,7 +194,7 @@
             // 
             // pictureBox2
             // 
-            this.pictureBox2.Location = new System.Drawing.Point(298, 157);
+            this.pictureBox2.Location = new System.Drawing.Point(314, 157);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(213, 162);
             this.pictureBox2.TabIndex = 15;
@@ -201,7 +202,7 @@
             // 
             // monthCalendar1
             // 
-            this.monthCalendar1.Location = new System.Drawing.Point(298, 157);
+            this.monthCalendar1.Location = new System.Drawing.Point(314, 157);
             this.monthCalendar1.Name = "monthCalendar1";
             this.monthCalendar1.TabIndex = 16;
             this.monthCalendar1.Visible = false;
@@ -209,7 +210,7 @@
             // 
             // delete
             // 
-            this.delete.Location = new System.Drawing.Point(317, 295);
+            this.delete.Location = new System.Drawing.Point(339, 295);
             this.delete.Name = "delete";
             this.delete.Size = new System.Drawing.Size(144, 23);
             this.delete.TabIndex = 17;
@@ -217,19 +218,19 @@
             this.delete.UseVisualStyleBackColor = true;
             this.delete.Click += new System.EventHandler(this.delete_Click);
             // 
-            // textBox3
+            // filepathtextbox
             // 
-            this.textBox3.Location = new System.Drawing.Point(15, 175);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(271, 20);
-            this.textBox3.TabIndex = 18;
+            this.filepathtextbox.Location = new System.Drawing.Point(15, 175);
+            this.filepathtextbox.Name = "filepathtextbox";
+            this.filepathtextbox.Size = new System.Drawing.Size(271, 20);
+            this.filepathtextbox.TabIndex = 18;
             // 
             // AddNewJob
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(523, 327);
-            this.Controls.Add(this.textBox3);
+            this.ClientSize = new System.Drawing.Size(565, 334);
+            this.Controls.Add(this.filepathtextbox);
             this.Controls.Add(this.delete);
             this.Controls.Add(this.monthCalendar1);
             this.Controls.Add(this.pictureBox2);
@@ -239,14 +240,14 @@
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.button3);
-            this.Controls.Add(this.textBox2);
+            this.Controls.Add(this.recieverstextBox);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.comboBox1);
+            this.Controls.Add(this.typecomboBox);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.jobtextbox);
             this.Controls.Add(this.label1);
             this.Name = "AddNewJob";
             this.Text = "AddNewJob";
@@ -260,14 +261,14 @@
         #endregion
 
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox jobtextbox;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox typecomboBox;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox recieverstextBox;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
@@ -277,6 +278,6 @@
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.MonthCalendar monthCalendar1;
         private System.Windows.Forms.Button delete;
-        private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.TextBox filepathtextbox;
     }
 }
