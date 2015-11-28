@@ -16,15 +16,11 @@ namespace OpenMassSenderGUI
             InitializeComponent();
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void pictureBox1_Click(object sender, EventArgs e)
         {
             delete.Hide();
             monthCalendar1.Show();
+
         }
         int temp = 0;
         private void monthCalendar1_DateChanged(object sender, DateRangeEventArgs e)
@@ -44,20 +40,6 @@ namespace OpenMassSenderGUI
 
         }
 
-        private void repeatjob_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-            String s = repeatjob.Text;
-            if (s.Equals("Edit"))
-            {
-                delete.Hide();
-                monthCalendar1.Show(); 
-                temp = 1;
-
-            }
-
-        }
-
         private void delete_Click(object sender, EventArgs e)
         {
             if (repeatjob.SelectedIndex > 4)
@@ -67,26 +49,17 @@ namespace OpenMassSenderGUI
 
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void repeatjob_SelectedIndexChanged(object sender, EventArgs e)
         {
-
-            AddNewJob testDialog = new AddNewJob ();
-
-            // Show testDialog as a modal dialog and determine if DialogResult = OK.
-            if (testDialog.ShowDialog(this) == DialogResult.OK)
+            String s = repeatjob.Text;
+            if (s.Equals("Edit"))
             {
-                // Read the contents of testDialog's TextBox.
-                this.textBox3 .Text = testDialog.TextBox1.Text;
+                delete.Hide();
+                monthCalendar1.Show();
+                temp = 1;
+
             }
-            else
-            {
-                this.textBox3.Text = "Cancelled";
-            }
-            testDialog.Dispose();
-           
-        
+
         }
-
-        
     }
 }

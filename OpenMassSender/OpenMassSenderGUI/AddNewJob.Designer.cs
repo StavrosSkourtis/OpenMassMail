@@ -105,7 +105,6 @@
             this.button1.TabIndex = 5;
             this.button1.Text = "Edit";
             this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // button2
             // 
@@ -115,7 +114,6 @@
             this.button2.TabIndex = 6;
             this.button2.Text = "Browse File";
             this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // label4
             // 
@@ -185,10 +183,10 @@
             // pictureBox1
             // 
             this.pictureBox1.Image = global::OpenMassSenderGUI.Properties.Resources.calendar;
-            this.pictureBox1.Location = new System.Drawing.Point(130, 298);
+            this.pictureBox1.Location = new System.Drawing.Point(136, 298);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(16, 16);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+            this.pictureBox1.Size = new System.Drawing.Size(23, 20);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.pictureBox1.TabIndex = 14;
             this.pictureBox1.TabStop = false;
             this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
