@@ -44,6 +44,7 @@
             // 
             // btnRemove
             // 
+            this.btnRemove.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnRemove.Location = new System.Drawing.Point(276, 217);
             this.btnRemove.Name = "btnRemove";
             this.btnRemove.Size = new System.Drawing.Size(71, 23);
@@ -54,6 +55,7 @@
             // 
             // Add
             // 
+            this.Add.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.Add.Location = new System.Drawing.Point(200, 217);
             this.Add.Name = "Add";
             this.Add.Size = new System.Drawing.Size(70, 23);
@@ -64,6 +66,9 @@
             // 
             // lvVariables
             // 
+            this.lvVariables.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.lvVariables.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.replace,
             this.with});
@@ -72,6 +77,7 @@
             this.lvVariables.Size = new System.Drawing.Size(336, 199);
             this.lvVariables.TabIndex = 6;
             this.lvVariables.UseCompatibleStateImageBehavior = false;
+            this.lvVariables.View = System.Windows.Forms.View.List;
             // 
             // replace
             // 
@@ -83,6 +89,8 @@
             // 
             // txtReplace
             // 
+            this.txtReplace.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.txtReplace.Location = new System.Drawing.Point(12, 266);
             this.txtReplace.Name = "txtReplace";
             this.txtReplace.Size = new System.Drawing.Size(335, 20);
@@ -90,6 +98,8 @@
             // 
             // lblReplace
             // 
+            this.lblReplace.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.lblReplace.AutoSize = true;
             this.lblReplace.Location = new System.Drawing.Point(8, 250);
             this.lblReplace.Name = "lblReplace";
@@ -99,6 +109,8 @@
             // 
             // txtWith
             // 
+            this.txtWith.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.txtWith.Location = new System.Drawing.Point(12, 314);
             this.txtWith.Name = "txtWith";
             this.txtWith.Size = new System.Drawing.Size(336, 20);
@@ -106,6 +118,8 @@
             // 
             // label1
             // 
+            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(9, 298);
             this.label1.Name = "label1";

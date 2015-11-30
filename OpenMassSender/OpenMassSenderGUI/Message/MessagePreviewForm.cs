@@ -19,7 +19,12 @@ namespace OpenMassSenderGUI
         public void setMessage(OpenMassSenderCore.OpenMassSenderDBDataSet.MessageRow message)
         {
             this.Text = "Message Preview - " + message.subject;
-            this.webBrowser1.DocumentText = message.message;
+            this.webBrowser1.DocumentText = message.replaceWildCards(null);
+        }
+
+        private void MessagePreviewForm_Load(object sender, EventArgs e)
+        {
+
         }
 
     }

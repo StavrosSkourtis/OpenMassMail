@@ -10,7 +10,7 @@ using System.IO;
 using System.Text.RegularExpressions;
 
 namespace OpenMassSenderGUI
-{
+{ 
     public partial class MessageForm : Form
     { 
         OpenMassSenderCore.OpenMassSenderDBDataSet.MessageRow message;
@@ -18,12 +18,15 @@ namespace OpenMassSenderGUI
         {
             InitializeComponent();
             this.message = message;
-            if (message.linkedFile != null)
+            if (message.linkedFile != null && message.linkedFile!="")
             {
                 tbContent.Enabled = false;
                 lblLinkedFile.Text = message.linkedFile;
                 btnFileLink.Text = "Unlink file";
             }
+            this.tbContent.Text = message.message;
+            this.tbSubject.Text = message.subject;
+
         }
         Regex containsHtml = new Regex(@"<\s*([^ >]+)[^>]*>.*?<\s*/\s*\1\s*>");
         private void tbContent_TextChanged(object sender, EventArgs e)
@@ -34,14 +37,14 @@ namespace OpenMassSenderGUI
             }
             message.setMessage(tbContent.Text);
 
-            if (containsHtml.IsMatch(message.message))
-            {
-                btnPreviewHTML.Visible = true;
-            }
-            else
-            {
-                btnPreviewHTML.Visible = false;
-            }
+         //   if (containsHtml.IsMatch(message.message))
+         //   {
+                btnPreview.Visible = true;
+         //   }
+       //     else
+        //    {
+        //        btnPreviewHTML.Visible = false;
+        //    }
         }
         private void btnVariables_Click(object sender, EventArgs e)
         {
@@ -89,23 +92,10 @@ namespace OpenMassSenderGUI
             messagePreview.Focus();
         }
 
-        private void panel1_Paint(object sender, PaintEventArgs e)
-        {
-            btnPreviewHTML.Visible = false;
-        }
 
         private void tbSubject_TextChanged(object sender, EventArgs e)
         {
             message.subject = tbSubject.Text;
         }
-
-        private void MessageForm_Load(object sender, EventArgs e)
-        {
-
-        }
-
-
-
-
     }
 }

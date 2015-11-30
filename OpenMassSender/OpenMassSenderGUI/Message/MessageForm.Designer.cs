@@ -30,7 +30,7 @@
         {
             this.panel1 = new System.Windows.Forms.Panel();
             this.tbContent = new System.Windows.Forms.RichTextBox();
-            this.btnPreviewHTML = new System.Windows.Forms.Button();
+            this.btnPreview = new System.Windows.Forms.Button();
             this.lblLinkedFile = new System.Windows.Forms.Label();
             this.lblTextLengthWarning = new System.Windows.Forms.Label();
             this.btnFileLink = new System.Windows.Forms.Button();
@@ -46,7 +46,7 @@
             // panel1
             // 
             this.panel1.Controls.Add(this.tbContent);
-            this.panel1.Controls.Add(this.btnPreviewHTML);
+            this.panel1.Controls.Add(this.btnPreview);
             this.panel1.Controls.Add(this.lblLinkedFile);
             this.panel1.Controls.Add(this.lblTextLengthWarning);
             this.panel1.Controls.Add(this.btnFileLink);
@@ -60,10 +60,10 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(565, 510);
             this.panel1.TabIndex = 0;
-            this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
             // tbContent
             // 
+            this.tbContent.AutoWordSelection = true;
             this.tbContent.Location = new System.Drawing.Point(15, 80);
             this.tbContent.Name = "tbContent";
             this.tbContent.Size = new System.Drawing.Size(538, 355);
@@ -71,15 +71,15 @@
             this.tbContent.Text = "";
             this.tbContent.TextChanged += new System.EventHandler(this.tbContent_TextChanged);
             // 
-            // btnPreviewHTML
+            // btnPreview
             // 
-            this.btnPreviewHTML.Location = new System.Drawing.Point(15, 441);
-            this.btnPreviewHTML.Name = "btnPreviewHTML";
-            this.btnPreviewHTML.Size = new System.Drawing.Size(137, 23);
-            this.btnPreviewHTML.TabIndex = 9;
-            this.btnPreviewHTML.Text = "Preview HTML message";
-            this.btnPreviewHTML.UseVisualStyleBackColor = true;
-            this.btnPreviewHTML.Click += new System.EventHandler(this.btnPreviewHTML_Click);
+            this.btnPreview.Location = new System.Drawing.Point(15, 441);
+            this.btnPreview.Name = "btnPreview";
+            this.btnPreview.Size = new System.Drawing.Size(137, 23);
+            this.btnPreview.TabIndex = 9;
+            this.btnPreview.Text = "Preview message";
+            this.btnPreview.UseVisualStyleBackColor = true;
+            this.btnPreview.Click += new System.EventHandler(this.btnPreviewHTML_Click);
             // 
             // lblLinkedFile
             // 
@@ -170,7 +170,6 @@
             this.Controls.Add(this.panel1);
             this.Name = "MessageForm";
             this.Text = "emailMessageEdit";
-            this.Load += new System.EventHandler(this.MessageForm_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.ResumeLayout(false);
@@ -189,7 +188,7 @@
         private System.Windows.Forms.Label lblTextLengthWarning;
         private System.Windows.Forms.Label lblLinkedFile;
         private System.Windows.Forms.OpenFileDialog ofd1;
-        private System.Windows.Forms.Button btnPreviewHTML;
+        private System.Windows.Forms.Button btnPreview;
         private System.Windows.Forms.RichTextBox tbContent;
     }
 }
