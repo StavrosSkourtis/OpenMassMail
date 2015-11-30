@@ -57,15 +57,15 @@ namespace OpenMassSenderCore.OpenMassSenderDBDataSetTableAdapters
                 return receiversMaching;
             }
 
-            public OpenMassSenderCore.OpenMassSenderDBDataSet.ReceiverDataTable dataTable = new OpenMassSenderCore.OpenMassSenderDBDataSet.ReceiverDataTable();
+          
             public OpenMassSenderCore.OpenMassSenderDBDataSet.ReceiverRow getNewRow()
             {
-                return dataTable.NewReceiverRow();
+                return OpenMassSenderDBDataSet.getInstance().Receiver.NewReceiverRow();
             }
             public void submitRow(OpenMassSenderCore.OpenMassSenderDBDataSet.ReceiverRow row)
             {
-                dataTable.Rows.Add(row);
-                Update(dataTable);
+                OpenMassSenderDBDataSet.getInstance().Receiver.Rows.Add(row);
+                Update(OpenMassSenderDBDataSet.getInstance().Receiver);
             }
              
             private static ReceiverTableAdapter instance;

@@ -6,9 +6,10 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using OpenMassSenderCore.OpenMassSenderDBDataSetTableAdapters;
-using OpenMassSenderCore;
+
+
 using System.Data.Common;
+using OpenMassSenderCore.OpenMassSenderDBDataSetTableAdapters;
 
 namespace OpenMassSenderGUI
 {
@@ -21,8 +22,8 @@ namespace OpenMassSenderGUI
 
         private void button1_Click(object sender, EventArgs e)
         {
-            OpenMassSenderCore.OpenMassSenderDBDataSet.JobRow job=JobTableAdapter.getInstance().getNewRow();
-            OpenMassSenderCore.OpenMassSenderDBDataSet.MessageRow message = MessageTableAdapter.getInstance().getNewRow();
+            OpenMassSenderCore.OpenMassSenderDBDataSet.JobRow job = JobTableAdapter.getInstance().getNewRow();
+            OpenMassSenderCore.OpenMassSenderDBDataSet.MessageRow message = MessageTableAdapter.getInstance().getNewRow(job);
 
             job.query = "";
             job.group = "smaplist1";
@@ -31,8 +32,9 @@ namespace OpenMassSenderGUI
             job.user = 1;
             job.message =message.ID;
 
-            message.subject = "A friendly notice";
+            
             message.setMessage("hi $receiver_fname, This message send at $DATE(dd/MM/yyyy) is a notice");
+            message.subject = "A friendly notice";
             message.job = job.ID;
             message.replaceVariables = "customer=Customer";
             message.user = job.user;

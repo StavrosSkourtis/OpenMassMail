@@ -6,13 +6,17 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using OpenMassSenderCore.OpenMassSenderDBDataSetTableAdapters;
 
 namespace OpenMassSenderGUI
 {
     public partial class AddNewJob : Form
     {
-        public AddNewJob()
+        OpenMassSenderCore.OpenMassSenderDBDataSet.JobRow job;
+        public AddNewJob(OpenMassSenderCore.OpenMassSenderDBDataSet.JobRow job)
         {
+            if (job == null) this.job = JobTableAdapter.getInstance().getNewRow();
+            else this.job = job;
             InitializeComponent();
         }
 
@@ -70,10 +74,26 @@ namespace OpenMassSenderGUI
             }
        }
         private void checkform(){
-            if (jobtextbox.Text = "" || typecomboBox.Click  || filepathtextbox.Text = "" || recieverstextBox.Text = "" || executejob.Text = "") 
+            if (jobtextbox.Text == "" || typecomboBox.SelectedItem!=null  || filepathtextbox.Text == "" || recieverstextBox.Text == "" || executejob.Text == "") 
             {
             
             }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            MessageForm messageForm = new MessageForm(job.messageObject);
+            messageForm.ShowDialog();
+        }
+
+        private void executejob_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void AddNewJob_Load(object sender, EventArgs e)
+        {
+
         }
     }
 

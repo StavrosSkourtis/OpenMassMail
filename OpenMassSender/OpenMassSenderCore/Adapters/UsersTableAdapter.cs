@@ -152,8 +152,8 @@ namespace OpenMassSenderCore.OpenMassSenderDBDataSetTableAdapters
                    
             }
 
-            public OpenMassSenderCore.OpenMassSenderDBDataSet.UserDataTable dataTable = new OpenMassSenderCore.OpenMassSenderDBDataSet.UserAccountDataTable();
-            public OpenMassSenderCore.OpenMassSenderDBDataSet.UserAccountRow getNewRow()
+            public OpenMassSenderCore.OpenMassSenderDBDataSet.UserDataTable dataTable = new OpenMassSenderCore.OpenMassSenderDBDataSet.UserDataTable();
+            public OpenMassSenderCore.OpenMassSenderDBDataSet.UserRow getNewRow()
             {
                 return dataTable.NewUserRow();
             }

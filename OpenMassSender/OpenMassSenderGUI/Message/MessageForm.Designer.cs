@@ -170,6 +170,7 @@
             this.Controls.Add(this.panel1);
             this.Name = "MessageForm";
             this.Text = "emailMessageEdit";
+            this.Load += new System.EventHandler(this.MessageForm_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.ResumeLayout(false);

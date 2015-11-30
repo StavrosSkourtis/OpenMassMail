@@ -76,6 +76,12 @@
     <Compile Include="About.Designer.cs">
       <DependentUpon>About.cs</DependentUpon>
     </Compile>
+    <Compile Include="AddNewJob.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AddNewJob.Designer.cs">
+      <DependentUpon>AddNewJob.cs</DependentUpon>
+    </Compile>
     <Compile Include="LoggerForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -117,6 +123,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="About.resx">
       <DependentUpon>About.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AddNewJob.resx">
+      <DependentUpon>AddNewJob.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="LoggerForm.resx">
       <DependentUpon>LoggerForm.cs</DependentUpon>
@@ -232,6 +241,10 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="assets\omsicon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\calendar.gif" />
+    <Content Include="Resources\calendar1.gif" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

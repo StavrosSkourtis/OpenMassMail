@@ -35,6 +35,8 @@ namespace OpenMassSenderGUI
         {
             //----------------->thano edw<------------------------
             //kwdikas gia to anoigma tis add form
+            AddNewJob newJobForm = new AddNewJob(null);
+            newJobForm.Show();
         }
 
         private void connectToolStripMenuItem_Click(object sender, EventArgs e)

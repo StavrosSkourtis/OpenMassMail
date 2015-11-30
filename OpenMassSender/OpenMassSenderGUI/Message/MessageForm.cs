@@ -57,7 +57,7 @@ namespace OpenMassSenderGUI
             if (btnFileLink.Text.Equals("Unlink file"))
             {
                 tbContent.Enabled = true;
-                message.linkedFile=null;
+                message.linkedFile="";
                 lblLinkedFile.Text = "";
                 btnFileLink.Text = "Link file";
             }
@@ -96,6 +96,11 @@ namespace OpenMassSenderGUI
         private void tbSubject_TextChanged(object sender, EventArgs e)
         {
             message.subject = tbSubject.Text;
+        }
+
+        private void MessageForm_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

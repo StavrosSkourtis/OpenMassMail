@@ -54,6 +54,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Adapters\Dataset.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Adapters\JobScheduleTableAdapter.cs">
       <SubType>Component</SubType>
     </Compile>

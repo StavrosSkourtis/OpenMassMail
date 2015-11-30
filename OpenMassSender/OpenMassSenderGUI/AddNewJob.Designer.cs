@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AddNewJob));
             this.label1 = new System.Windows.Forms.Label();
             this.jobtextbox = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
@@ -81,8 +82,8 @@
             // 
             this.typecomboBox.FormattingEnabled = true;
             this.typecomboBox.Items.AddRange(new object[] {
-            "SMS",
-            "Email"});
+            "sms",
+            "email"});
             this.typecomboBox.Location = new System.Drawing.Point(15, 83);
             this.typecomboBox.Name = "typecomboBox";
             this.typecomboBox.Size = new System.Drawing.Size(78, 21);
@@ -105,6 +106,7 @@
             this.button1.TabIndex = 5;
             this.button1.Text = "Edit";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // button2
             // 
@@ -165,6 +167,7 @@
             this.executejob.Name = "executejob";
             this.executejob.Size = new System.Drawing.Size(115, 20);
             this.executejob.TabIndex = 12;
+            this.executejob.TextChanged += new System.EventHandler(this.executejob_TextChanged);
             // 
             // repeatjob
             // 
@@ -183,7 +186,7 @@
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Image = global::OpenMassSenderGUI.Properties.Resources.calendar;
+            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
             this.pictureBox1.Location = new System.Drawing.Point(136, 298);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(23, 20);
@@ -251,6 +254,7 @@
             this.Controls.Add(this.label1);
             this.Name = "AddNewJob";
             this.Text = "AddNewJob";
+            this.Load += new System.EventHandler(this.AddNewJob_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.ResumeLayout(false);

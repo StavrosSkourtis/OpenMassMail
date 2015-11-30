@@ -15,16 +15,24 @@ namespace OpenMassSenderCore.OpenMassSenderDBDataSetTableAdapters
             return true;
         }
         
-
-        public OpenMassSenderCore.OpenMassSenderDBDataSet.MessageDataTable dataTable = new OpenMassSenderCore.OpenMassSenderDBDataSet.MessageDataTable();
-        public OpenMassSenderCore.OpenMassSenderDBDataSet.MessageRow getNewRow()
+        public OpenMassSenderCore.OpenMassSenderDBDataSet.MessageRow getNewRow(OpenMassSenderCore.OpenMassSenderDBDataSet.JobRow job)
         {
-            return dataTable.NewMessageRow();
+            OpenMassSenderCore.OpenMassSenderDBDataSet.MessageRow message = OpenMassSenderDBDataSet.getInstance().Message.NewMessageRow();
+            message.subject = "";
+            message.replaceVariables = "";
+            message.user = 0;
+            message.job = job.ID;
+            message.type ="";
+            message.message = "";
+            message.linkedFile ="";
+            job.message = message.ID;
+            job.messageObject = message;
+            return message;
         }
-        public void submitRow(OpenMassSenderCore.OpenMassSenderDBDataSet.MessageDataTable row)
+        public void submitRow(OpenMassSenderCore.OpenMassSenderDBDataSet.MessageRow row)
         {
-            dataTable.Rows.Add(row);
-            Update(dataTable);
+            OpenMassSenderDBDataSet.getInstance().Message.Rows.Add(row);
+            Update(OpenMassSenderDBDataSet.getInstance().Message);
         }
 
         private static MessageTableAdapter instance;

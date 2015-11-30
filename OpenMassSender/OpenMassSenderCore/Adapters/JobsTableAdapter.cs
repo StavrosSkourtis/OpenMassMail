@@ -16,16 +16,17 @@ namespace OpenMassSenderCore.OpenMassSenderDBDataSetTableAdapters
             this.userid = user;
             return true;
         }
-
-        public OpenMassSenderCore.OpenMassSenderDBDataSet.JobDataTable dataTable = new OpenMassSenderCore.OpenMassSenderDBDataSet.JobDataTable();
         public OpenMassSenderCore.OpenMassSenderDBDataSet.JobRow getNewRow()
         {
-            return dataTable.NewJobRow();
+            OpenMassSenderCore.OpenMassSenderDBDataSet.JobRow job = OpenMassSenderDBDataSet.getInstance().Job.NewJobRow();
+            OpenMassSenderCore.OpenMassSenderDBDataSet.MessageRow message = MessageTableAdapter.getInstance().getNewRow(job);
+            return job;
         }
-        public void submitRow(OpenMassSenderCore.OpenMassSenderDBDataSet.JobDataTable row)
+        public void submitRow(OpenMassSenderCore.OpenMassSenderDBDataSet.JobRow row)
         {
-            dataTable.Rows.Add(row);
-            Update(dataTable);
+            OpenMassSenderDBDataSet.getInstance().Job.Rows.Add(row);
+            Update(OpenMassSenderDBDataSet.getInstance().Job);
+           // OpenMassSenderDBDataSet.getInstance().Job.AcceptChanges();
         }
 
         private static JobTableAdapter instance;
@@ -35,5 +36,4 @@ namespace OpenMassSenderCore.OpenMassSenderDBDataSetTableAdapters
             return instance;
         }
     }
- 
 }

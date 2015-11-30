@@ -12,6 +12,10 @@ namespace OpenMassSenderCore
         public static void log(string category,string text)
         {
             logs.Add(new LogEntry(category, text));
+            if (category.Equals("error"))
+            {
+                openLogger();
+            }
         }
         public static Form logWindow = null;
         public static void openLogger()
