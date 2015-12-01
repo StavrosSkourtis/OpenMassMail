@@ -17,7 +17,7 @@ namespace OpenMassSenderCore.OpenMassSenderDBDataSetTableAdapters
         
         public OpenMassSenderCore.OpenMassSenderDBDataSet.MessageRow getNewRow(OpenMassSenderCore.OpenMassSenderDBDataSet.JobRow job)
         {
-            OpenMassSenderCore.OpenMassSenderDBDataSet.MessageRow message = OpenMassSenderDBDataSet.getInstance().Message.NewMessageRow();
+            OpenMassSenderCore.OpenMassSenderDBDataSet.MessageRow message = OpenMassSenderDBDataSet.getInstance().Message.NewMessageRow(); 
             message.subject = "";
             message.replaceVariables = "";
             message.user = 0;

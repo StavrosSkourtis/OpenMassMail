@@ -20,6 +20,8 @@ namespace OpenMassSenderCore.OpenMassSenderDBDataSetTableAdapters
         {
             OpenMassSenderCore.OpenMassSenderDBDataSet.JobRow job = OpenMassSenderDBDataSet.getInstance().Job.NewJobRow();
             OpenMassSenderCore.OpenMassSenderDBDataSet.MessageRow message = MessageTableAdapter.getInstance().getNewRow(job);
+            OpenMassSenderCore.OpenMassSenderDBDataSet.JobScheduleRow shedule = JobScheduleTableAdapter.getInstance().getNewRow(job);
+
             return job;
         }
         public void submitRow(OpenMassSenderCore.OpenMassSenderDBDataSet.JobRow row)

@@ -36,15 +36,6 @@ namespace OpenMassSenderGUI
                 lblTextLengthWarning.Text = (160 - tbContent.Text.Length) + " characters left";
             }
             message.setMessage(tbContent.Text);
-
-         //   if (containsHtml.IsMatch(message.message))
-         //   {
-           //     btnPreview.Visible = true;
-         //   }
-       //     else
-        //    {
-        //        btnPreviewHTML.Visible = false;
-        //    }
         }
         private void btnVariables_Click(object sender, EventArgs e)
         {
@@ -103,7 +94,7 @@ namespace OpenMassSenderGUI
 
         private void tsbtnPreview_Click(object sender, EventArgs e)
         {
-            if (messagePreview == null || messagePreview.IsDisposed || messagePreview.IsAccessible == false)
+            if (messagePreview == null || messagePreview.IsDisposed)
             {
                 messagePreview = new MessagePreviewForm(message);
             }

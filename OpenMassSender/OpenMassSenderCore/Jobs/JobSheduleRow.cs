@@ -11,9 +11,8 @@ namespace OpenMassSenderCore
         partial class JobScheduleRow
         {
             //<summary>returns true if the datetime has been reached and an execution is pending</summary>
-            public bool ready()
+            public bool ready(JobRow job)
             {
-                JobRow job = (JobRow)JobTableAdapter.getInstance().GetDataById(this.job).Rows[0];
                 if (job.status == OpenMassSenderCore.OpenMassSenderDBDataSet.JobRow.JobStatus.SHEDULED && DateTime.Now > nextExecution)
                 {
                     return true;

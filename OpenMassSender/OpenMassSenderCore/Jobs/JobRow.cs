@@ -19,10 +19,8 @@ namespace OpenMassSenderCore
             //<summary>returns true if the job is ready for execution,makes sense if the job has a shedule</summary>
             public bool isReadForExecution()
             {
-                
-           //     JobScheduleRow shedule = (JobScheduleRow)JobScheduleTableAdapter.getInstance().GetDataByJob(ID).Rows[0];
-           //     return shedule.ready();   
-                return false;
+                if (JobScheduleRow == null) return false;
+                return JobScheduleRow.ready(this);
             }
 
             //<summary>sets the status of the job between PENDING,SHEDULED,FINISHED</summary>

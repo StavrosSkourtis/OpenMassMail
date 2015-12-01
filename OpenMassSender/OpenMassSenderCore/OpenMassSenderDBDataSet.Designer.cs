@@ -41,11 +41,11 @@ namespace OpenMassSenderCore {
         
         private global::System.Data.DataRelation relationSenderAccountJob;
         
-        private global::System.Data.DataRelation relationJobJobSchedule;
-        
         private global::System.Data.DataRelation relationUserReceiver;
         
         private global::System.Data.DataRelation relationUserSenderAccount;
+        
+        private global::System.Data.DataRelation relationJobScheduleJob;
         
         private global::System.Data.SchemaSerializationMode _schemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
         
@@ -308,9 +308,9 @@ namespace OpenMassSenderCore {
             }
             this.relationMessageJob = this.Relations["MessageJob"];
             this.relationSenderAccountJob = this.Relations["SenderAccountJob"];
-            this.relationJobJobSchedule = this.Relations["JobJobSchedule"];
             this.relationUserReceiver = this.Relations["UserReceiver"];
             this.relationUserSenderAccount = this.Relations["UserSenderAccount"];
+            this.relationJobScheduleJob = this.Relations["JobScheduleJob"];
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -340,10 +340,6 @@ namespace OpenMassSenderCore {
                         this.tableSenderAccount.IDColumn}, new global::System.Data.DataColumn[] {
                         this.tableJob.sender_accountColumn}, false);
             this.Relations.Add(this.relationSenderAccountJob);
-            this.relationJobJobSchedule = new global::System.Data.DataRelation("JobJobSchedule", new global::System.Data.DataColumn[] {
-                        this.tableJob.IDColumn}, new global::System.Data.DataColumn[] {
-                        this.tableJobSchedule.jobColumn}, false);
-            this.Relations.Add(this.relationJobJobSchedule);
             this.relationUserReceiver = new global::System.Data.DataRelation("UserReceiver", new global::System.Data.DataColumn[] {
                         this.tableUser.IDColumn}, new global::System.Data.DataColumn[] {
                         this.tableReceiver.userColumn}, false);
@@ -352,6 +348,10 @@ namespace OpenMassSenderCore {
                         this.tableUser.IDColumn}, new global::System.Data.DataColumn[] {
                         this.tableSenderAccount.userColumn}, false);
             this.Relations.Add(this.relationUserSenderAccount);
+            this.relationJobScheduleJob = new global::System.Data.DataRelation("JobScheduleJob", new global::System.Data.DataColumn[] {
+                        this.tableJobSchedule.IDColumn}, new global::System.Data.DataColumn[] {
+                        this.tableJob.scheduleColumn}, false);
+            this.Relations.Add(this.relationJobScheduleJob);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -471,6 +471,8 @@ namespace OpenMassSenderCore {
             
             private global::System.Data.DataColumn columngroup;
             
+            private global::System.Data.DataColumn columnschedule;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public JobDataTable() {
                 this.TableName = "Job";
@@ -551,6 +553,13 @@ namespace OpenMassSenderCore {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn scheduleColumn {
+                get {
+                    return this.columnschedule;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -579,7 +588,7 @@ namespace OpenMassSenderCore {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public JobRow AddJobRow(SenderAccountRow parentSenderAccountRowBySenderAccountJob, MessageRow parentMessageRowByMessageJob, string status, int user, string query, string group) {
+            public JobRow AddJobRow(SenderAccountRow parentSenderAccountRowBySenderAccountJob, MessageRow parentMessageRowByMessageJob, string status, int user, string query, string group, JobScheduleRow parentJobScheduleRowByJobScheduleJob) {
                 JobRow rowJobRow = ((JobRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         null,
@@ -588,12 +597,16 @@ namespace OpenMassSenderCore {
                         status,
                         user,
                         query,
-                        group};
+                        group,
+                        null};
                 if ((parentSenderAccountRowBySenderAccountJob != null)) {
                     columnValuesArray[1] = parentSenderAccountRowBySenderAccountJob[0];
                 }
                 if ((parentMessageRowByMessageJob != null)) {
                     columnValuesArray[2] = parentMessageRowByMessageJob[0];
+                }
+                if ((parentJobScheduleRowByJobScheduleJob != null)) {
+                    columnValuesArray[7] = parentJobScheduleRowByJobScheduleJob[3];
                 }
                 rowJobRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowJobRow);
@@ -627,6 +640,7 @@ namespace OpenMassSenderCore {
                 this.columnuser = base.Columns["user"];
                 this.columnquery = base.Columns["query"];
                 this.columngroup = base.Columns["group"];
+                this.columnschedule = base.Columns["schedule"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -645,6 +659,8 @@ namespace OpenMassSenderCore {
                 base.Columns.Add(this.columnquery);
                 this.columngroup = new global::System.Data.DataColumn("group", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columngroup);
+                this.columnschedule = new global::System.Data.DataColumn("schedule", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnschedule);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
                                 this.columnID}, true));
                 this.columnID.AutoIncrement = true;
@@ -780,13 +796,13 @@ namespace OpenMassSenderCore {
         [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
         public partial class JobScheduleDataTable : global::System.Data.TypedTableBase<JobScheduleRow> {
             
-            private global::System.Data.DataColumn columnjob;
-            
             private global::System.Data.DataColumn columnrepeatable;
             
             private global::System.Data.DataColumn columnnextExecution;
             
             private global::System.Data.DataColumn columnlastExecution;
+            
+            private global::System.Data.DataColumn columnID;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public JobScheduleDataTable() {
@@ -819,13 +835,6 @@ namespace OpenMassSenderCore {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn jobColumn {
-                get {
-                    return this.columnjob;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public global::System.Data.DataColumn repeatableColumn {
                 get {
                     return this.columnrepeatable;
@@ -843,6 +852,13 @@ namespace OpenMassSenderCore {
             public global::System.Data.DataColumn lastExecutionColumn {
                 get {
                     return this.columnlastExecution;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn IDColumn {
+                get {
+                    return this.columnID;
                 }
             }
             
@@ -875,25 +891,22 @@ namespace OpenMassSenderCore {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public JobScheduleRow AddJobScheduleRow(JobRow parentJobRowByJobJobSchedule, string repeatable, System.DateTime nextExecution, System.DateTime lastExecution) {
+            public JobScheduleRow AddJobScheduleRow(string repeatable, System.DateTime nextExecution, System.DateTime lastExecution) {
                 JobScheduleRow rowJobScheduleRow = ((JobScheduleRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
-                        null,
                         repeatable,
                         nextExecution,
-                        lastExecution};
-                if ((parentJobRowByJobJobSchedule != null)) {
-                    columnValuesArray[0] = parentJobRowByJobJobSchedule[0];
-                }
+                        lastExecution,
+                        null};
                 rowJobScheduleRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowJobScheduleRow);
                 return rowJobScheduleRow;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public JobScheduleRow FindByjob(int job) {
+            public JobScheduleRow FindByID(int ID) {
                 return ((JobScheduleRow)(this.Rows.Find(new object[] {
-                            job})));
+                            ID})));
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -910,27 +923,30 @@ namespace OpenMassSenderCore {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             internal void InitVars() {
-                this.columnjob = base.Columns["job"];
                 this.columnrepeatable = base.Columns["repeatable"];
                 this.columnnextExecution = base.Columns["nextExecution"];
                 this.columnlastExecution = base.Columns["lastExecution"];
+                this.columnID = base.Columns["ID"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             private void InitClass() {
-                this.columnjob = new global::System.Data.DataColumn("job", typeof(int), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnjob);
                 this.columnrepeatable = new global::System.Data.DataColumn("repeatable", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnrepeatable);
                 this.columnnextExecution = new global::System.Data.DataColumn("nextExecution", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnnextExecution);
                 this.columnlastExecution = new global::System.Data.DataColumn("lastExecution", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnlastExecution);
+                this.columnID = new global::System.Data.DataColumn("ID", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnID);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
-                                this.columnjob}, true));
-                this.columnjob.AllowDBNull = false;
-                this.columnjob.Unique = true;
+                                this.columnID}, true));
                 this.columnrepeatable.MaxLength = 255;
+                this.columnID.AutoIncrement = true;
+                this.columnID.AutoIncrementSeed = -1;
+                this.columnID.AutoIncrementStep = -1;
+                this.columnID.AllowDBNull = false;
+                this.columnID.Unique = true;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1390,10 +1406,6 @@ namespace OpenMassSenderCore {
             
             private global::System.Data.DataColumn columnID;
             
-            private global::System.Data.DataColumn columnfirst_name;
-            
-            private global::System.Data.DataColumn columnlast_name;
-            
             private global::System.Data.DataColumn columnemail;
             
             private global::System.Data.DataColumn columnphone_number;
@@ -1438,20 +1450,6 @@ namespace OpenMassSenderCore {
             public global::System.Data.DataColumn IDColumn {
                 get {
                     return this.columnID;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn first_nameColumn {
-                get {
-                    return this.columnfirst_name;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn last_nameColumn {
-                get {
-                    return this.columnlast_name;
                 }
             }
             
@@ -1519,19 +1517,17 @@ namespace OpenMassSenderCore {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public ReceiverRow AddReceiverRow(string first_name, string last_name, string email, string phone_number, string metadata, string group, UserRow parentUserRowByUserReceiver) {
+            public ReceiverRow AddReceiverRow(string email, string phone_number, string metadata, string group, UserRow parentUserRowByUserReceiver) {
                 ReceiverRow rowReceiverRow = ((ReceiverRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         null,
-                        first_name,
-                        last_name,
                         email,
                         phone_number,
                         metadata,
                         group,
                         null};
                 if ((parentUserRowByUserReceiver != null)) {
-                    columnValuesArray[7] = parentUserRowByUserReceiver[0];
+                    columnValuesArray[5] = parentUserRowByUserReceiver[0];
                 }
                 rowReceiverRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowReceiverRow);
@@ -1559,8 +1555,6 @@ namespace OpenMassSenderCore {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             internal void InitVars() {
                 this.columnID = base.Columns["ID"];
-                this.columnfirst_name = base.Columns["first_name"];
-                this.columnlast_name = base.Columns["last_name"];
                 this.columnemail = base.Columns["email"];
                 this.columnphone_number = base.Columns["phone_number"];
                 this.columnmetadata = base.Columns["metadata"];
@@ -1572,10 +1566,6 @@ namespace OpenMassSenderCore {
             private void InitClass() {
                 this.columnID = new global::System.Data.DataColumn("ID", typeof(int), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnID);
-                this.columnfirst_name = new global::System.Data.DataColumn("first_name", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnfirst_name);
-                this.columnlast_name = new global::System.Data.DataColumn("last_name", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnlast_name);
                 this.columnemail = new global::System.Data.DataColumn("email", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnemail);
                 this.columnphone_number = new global::System.Data.DataColumn("phone_number", typeof(string), null, global::System.Data.MappingType.Element);
@@ -1593,8 +1583,6 @@ namespace OpenMassSenderCore {
                 this.columnID.AutoIncrementStep = -1;
                 this.columnID.AllowDBNull = false;
                 this.columnID.Unique = true;
-                this.columnfirst_name.MaxLength = 255;
-                this.columnlast_name.MaxLength = 255;
                 this.columnemail.MaxLength = 255;
                 this.columnphone_number.MaxLength = 255;
                 this.columnmetadata.MaxLength = 255;
@@ -2439,6 +2427,21 @@ namespace OpenMassSenderCore {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public int schedule {
+                get {
+                    try {
+                        return ((int)(this[this.tableJob.scheduleColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'schedule\' in table \'Job\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableJob.scheduleColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public MessageRow MessageRow {
                 get {
                     return ((MessageRow)(this.GetParentRow(this.Table.ParentRelations["MessageJob"])));
@@ -2455,6 +2458,16 @@ namespace OpenMassSenderCore {
                 }
                 set {
                     this.SetParentRow(value, this.Table.ParentRelations["SenderAccountJob"]);
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public JobScheduleRow JobScheduleRow {
+                get {
+                    return ((JobScheduleRow)(this.GetParentRow(this.Table.ParentRelations["JobScheduleJob"])));
+                }
+                set {
+                    this.SetParentRow(value, this.Table.ParentRelations["JobScheduleJob"]);
                 }
             }
             
@@ -2519,13 +2532,13 @@ namespace OpenMassSenderCore {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public JobScheduleRow[] GetJobScheduleRows() {
-                if ((this.Table.ChildRelations["JobJobSchedule"] == null)) {
-                    return new JobScheduleRow[0];
-                }
-                else {
-                    return ((JobScheduleRow[])(base.GetChildRows(this.Table.ChildRelations["JobJobSchedule"])));
-                }
+            public bool IsscheduleNull() {
+                return this.IsNull(this.tableJob.scheduleColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetscheduleNull() {
+                this[this.tableJob.scheduleColumn] = global::System.Convert.DBNull;
             }
         }
         
@@ -2541,16 +2554,6 @@ namespace OpenMassSenderCore {
             internal JobScheduleRow(global::System.Data.DataRowBuilder rb) : 
                     base(rb) {
                 this.tableJobSchedule = ((JobScheduleDataTable)(this.Table));
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public int job {
-                get {
-                    return ((int)(this[this.tableJobSchedule.jobColumn]));
-                }
-                set {
-                    this[this.tableJobSchedule.jobColumn] = value;
-                }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -2599,12 +2602,12 @@ namespace OpenMassSenderCore {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public JobRow JobRow {
+            public int ID {
                 get {
-                    return ((JobRow)(this.GetParentRow(this.Table.ParentRelations["JobJobSchedule"])));
+                    return ((int)(this[this.tableJobSchedule.IDColumn]));
                 }
                 set {
-                    this.SetParentRow(value, this.Table.ParentRelations["JobJobSchedule"]);
+                    this[this.tableJobSchedule.IDColumn] = value;
                 }
             }
             
@@ -2636,6 +2639,16 @@ namespace OpenMassSenderCore {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public void SetlastExecutionNull() {
                 this[this.tableJobSchedule.lastExecutionColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public JobRow[] GetJobRows() {
+                if ((this.Table.ChildRelations["JobScheduleJob"] == null)) {
+                    return new JobRow[0];
+                }
+                else {
+                    return ((JobRow[])(base.GetChildRows(this.Table.ChildRelations["JobScheduleJob"])));
+                }
             }
         }
         
@@ -2874,36 +2887,6 @@ namespace OpenMassSenderCore {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public string first_name {
-                get {
-                    try {
-                        return ((string)(this[this.tableReceiver.first_nameColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'first_name\' in table \'Receiver\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tableReceiver.first_nameColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public string last_name {
-                get {
-                    try {
-                        return ((string)(this[this.tableReceiver.last_nameColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'last_name\' in table \'Receiver\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tableReceiver.last_nameColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public string email {
                 get {
                     try {
@@ -2986,26 +2969,6 @@ namespace OpenMassSenderCore {
                 set {
                     this.SetParentRow(value, this.Table.ParentRelations["UserReceiver"]);
                 }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public bool Isfirst_nameNull() {
-                return this.IsNull(this.tableReceiver.first_nameColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void Setfirst_nameNull() {
-                this[this.tableReceiver.first_nameColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public bool Islast_nameNull() {
-                return this.IsNull(this.tableReceiver.last_nameColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void Setlast_nameNull() {
-                this[this.tableReceiver.last_nameColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -3711,10 +3674,11 @@ namespace OpenMassSenderCore.OpenMassSenderDBDataSetTableAdapters {
             tableMapping.ColumnMappings.Add("user", "user");
             tableMapping.ColumnMappings.Add("query", "query");
             tableMapping.ColumnMappings.Add("group", "group");
+            tableMapping.ColumnMappings.Add("schedule", "schedule");
             this._adapter.TableMappings.Add(tableMapping);
             this._adapter.DeleteCommand = new global::System.Data.OleDb.OleDbCommand();
             this._adapter.DeleteCommand.Connection = this.Connection;
-            this._adapter.DeleteCommand.CommandText = @"DELETE FROM `Job` WHERE ((`ID` = ?) AND ((? = 1 AND `sender_account` IS NULL) OR (`sender_account` = ?)) AND ((? = 1 AND `message` IS NULL) OR (`message` = ?)) AND ((? = 1 AND `status` IS NULL) OR (`status` = ?)) AND ((? = 1 AND `user` IS NULL) OR (`user` = ?)) AND ((? = 1 AND `query` IS NULL) OR (`query` = ?)) AND ((? = 1 AND `group` IS NULL) OR (`group` = ?)))";
+            this._adapter.DeleteCommand.CommandText = @"DELETE FROM `Job` WHERE ((`ID` = ?) AND ((? = 1 AND `sender_account` IS NULL) OR (`sender_account` = ?)) AND ((? = 1 AND `message` IS NULL) OR (`message` = ?)) AND ((? = 1 AND `status` IS NULL) OR (`status` = ?)) AND ((? = 1 AND `user` IS NULL) OR (`user` = ?)) AND ((? = 1 AND `query` IS NULL) OR (`query` = ?)) AND ((? = 1 AND `group` IS NULL) OR (`group` = ?)) AND ((? = 1 AND `schedule` IS NULL) OR (`schedule` = ?)))";
             this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_ID", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "ID", global::System.Data.DataRowVersion.Original, false, null));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_sender_account", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "sender_account", global::System.Data.DataRowVersion.Original, true, null));
@@ -3729,10 +3693,12 @@ namespace OpenMassSenderCore.OpenMassSenderDBDataSetTableAdapters {
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_query", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "query", global::System.Data.DataRowVersion.Original, false, null));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_group", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "group", global::System.Data.DataRowVersion.Original, true, null));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_group", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "group", global::System.Data.DataRowVersion.Original, false, null));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_schedule", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "schedule", global::System.Data.DataRowVersion.Original, true, null));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_schedule", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "schedule", global::System.Data.DataRowVersion.Original, false, null));
             this._adapter.InsertCommand = new global::System.Data.OleDb.OleDbCommand();
             this._adapter.InsertCommand.Connection = this.Connection;
             this._adapter.InsertCommand.CommandText = "INSERT INTO `Job` (`sender_account`, `message`, `status`, `user`, `query`, `group" +
-                "`) VALUES (?, ?, ?, ?, ?, ?)";
+                "`, `schedule`) VALUES (?, ?, ?, ?, ?, ?, ?)";
             this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("sender_account", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "sender_account", global::System.Data.DataRowVersion.Current, false, null));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("message", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "message", global::System.Data.DataRowVersion.Current, false, null));
@@ -3740,9 +3706,10 @@ namespace OpenMassSenderCore.OpenMassSenderDBDataSetTableAdapters {
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("user", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "user", global::System.Data.DataRowVersion.Current, false, null));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("query", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "query", global::System.Data.DataRowVersion.Current, false, null));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("group", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "group", global::System.Data.DataRowVersion.Current, false, null));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("schedule", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "schedule", global::System.Data.DataRowVersion.Current, false, null));
             this._adapter.UpdateCommand = new global::System.Data.OleDb.OleDbCommand();
             this._adapter.UpdateCommand.Connection = this.Connection;
-            this._adapter.UpdateCommand.CommandText = @"UPDATE `Job` SET `sender_account` = ?, `message` = ?, `status` = ?, `user` = ?, `query` = ?, `group` = ? WHERE ((`ID` = ?) AND ((? = 1 AND `sender_account` IS NULL) OR (`sender_account` = ?)) AND ((? = 1 AND `message` IS NULL) OR (`message` = ?)) AND ((? = 1 AND `status` IS NULL) OR (`status` = ?)) AND ((? = 1 AND `user` IS NULL) OR (`user` = ?)) AND ((? = 1 AND `query` IS NULL) OR (`query` = ?)) AND ((? = 1 AND `group` IS NULL) OR (`group` = ?)))";
+            this._adapter.UpdateCommand.CommandText = @"UPDATE `Job` SET `sender_account` = ?, `message` = ?, `status` = ?, `user` = ?, `query` = ?, `group` = ?, `schedule` = ? WHERE ((`ID` = ?) AND ((? = 1 AND `sender_account` IS NULL) OR (`sender_account` = ?)) AND ((? = 1 AND `message` IS NULL) OR (`message` = ?)) AND ((? = 1 AND `status` IS NULL) OR (`status` = ?)) AND ((? = 1 AND `user` IS NULL) OR (`user` = ?)) AND ((? = 1 AND `query` IS NULL) OR (`query` = ?)) AND ((? = 1 AND `group` IS NULL) OR (`group` = ?)) AND ((? = 1 AND `schedule` IS NULL) OR (`schedule` = ?)))";
             this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("sender_account", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "sender_account", global::System.Data.DataRowVersion.Current, false, null));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("message", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "message", global::System.Data.DataRowVersion.Current, false, null));
@@ -3750,6 +3717,7 @@ namespace OpenMassSenderCore.OpenMassSenderDBDataSetTableAdapters {
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("user", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "user", global::System.Data.DataRowVersion.Current, false, null));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("query", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "query", global::System.Data.DataRowVersion.Current, false, null));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("group", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "group", global::System.Data.DataRowVersion.Current, false, null));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("schedule", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "schedule", global::System.Data.DataRowVersion.Current, false, null));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_ID", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "ID", global::System.Data.DataRowVersion.Original, false, null));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_sender_account", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "sender_account", global::System.Data.DataRowVersion.Original, true, null));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_sender_account", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "sender_account", global::System.Data.DataRowVersion.Original, false, null));
@@ -3763,6 +3731,8 @@ namespace OpenMassSenderCore.OpenMassSenderDBDataSetTableAdapters {
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_query", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "query", global::System.Data.DataRowVersion.Original, false, null));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_group", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "group", global::System.Data.DataRowVersion.Original, true, null));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_group", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "group", global::System.Data.DataRowVersion.Original, false, null));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_schedule", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "schedule", global::System.Data.DataRowVersion.Original, true, null));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_schedule", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "schedule", global::System.Data.DataRowVersion.Original, false, null));
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -3776,13 +3746,13 @@ namespace OpenMassSenderCore.OpenMassSenderDBDataSetTableAdapters {
             this._commandCollection = new global::System.Data.OleDb.OleDbCommand[2];
             this._commandCollection[0] = new global::System.Data.OleDb.OleDbCommand();
             this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = "SELECT        ID, sender_account, message, status, [user], query, [group]\r\nFROM  " +
-                "          Job";
+            this._commandCollection[0].CommandText = "SELECT ID, sender_account, message, status, [user], query, [group], schedule FROM" +
+                " Job";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[1] = new global::System.Data.OleDb.OleDbCommand();
             this._commandCollection[1].Connection = this.Connection;
-            this._commandCollection[1].CommandText = "SELECT ID, [group], message, query, sender_account, status, [user] FROM Job WHERE" +
-                " (ID = ?)";
+            this._commandCollection[1].CommandText = "SELECT ID, [group], message, query, sender_account, status, [user], schedule FROM" +
+                " Job WHERE (ID = ?)";
             this._commandCollection[1].CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[1].Parameters.Add(new global::System.Data.OleDb.OleDbParameter("ID", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "ID", global::System.Data.DataRowVersion.Current, false, null));
         }
@@ -3861,7 +3831,7 @@ namespace OpenMassSenderCore.OpenMassSenderDBDataSetTableAdapters {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, true)]
-        public virtual int Delete(int Original_ID, global::System.Nullable<int> Original_sender_account, global::System.Nullable<int> Original_message, string Original_status, global::System.Nullable<int> Original_user, string Original_query, string Original_group) {
+        public virtual int Delete(int Original_ID, global::System.Nullable<int> Original_sender_account, global::System.Nullable<int> Original_message, string Original_status, global::System.Nullable<int> Original_user, string Original_query, string Original_group, global::System.Nullable<int> Original_schedule) {
             this.Adapter.DeleteCommand.Parameters[0].Value = ((int)(Original_ID));
             if ((Original_sender_account.HasValue == true)) {
                 this.Adapter.DeleteCommand.Parameters[1].Value = ((object)(0));
@@ -3911,6 +3881,14 @@ namespace OpenMassSenderCore.OpenMassSenderDBDataSetTableAdapters {
                 this.Adapter.DeleteCommand.Parameters[11].Value = ((object)(0));
                 this.Adapter.DeleteCommand.Parameters[12].Value = ((string)(Original_group));
             }
+            if ((Original_schedule.HasValue == true)) {
+                this.Adapter.DeleteCommand.Parameters[13].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[14].Value = ((int)(Original_schedule.Value));
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[13].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[14].Value = global::System.DBNull.Value;
+            }
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.DeleteCommand.Connection.State;
             if (((this.Adapter.DeleteCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -3930,7 +3908,7 @@ namespace OpenMassSenderCore.OpenMassSenderDBDataSetTableAdapters {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
-        public virtual int Insert(global::System.Nullable<int> sender_account, global::System.Nullable<int> message, string status, global::System.Nullable<int> user, string query, string group) {
+        public virtual int Insert(global::System.Nullable<int> sender_account, global::System.Nullable<int> message, string status, global::System.Nullable<int> user, string query, string group, global::System.Nullable<int> schedule) {
             if ((sender_account.HasValue == true)) {
                 this.Adapter.InsertCommand.Parameters[0].Value = ((int)(sender_account.Value));
             }
@@ -3967,6 +3945,12 @@ namespace OpenMassSenderCore.OpenMassSenderDBDataSetTableAdapters {
             else {
                 this.Adapter.InsertCommand.Parameters[5].Value = ((string)(group));
             }
+            if ((schedule.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[6].Value = ((int)(schedule.Value));
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[6].Value = global::System.DBNull.Value;
+            }
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
             if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -3986,7 +3970,7 @@ namespace OpenMassSenderCore.OpenMassSenderDBDataSetTableAdapters {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(global::System.Nullable<int> sender_account, global::System.Nullable<int> message, string status, global::System.Nullable<int> user, string query, string group, int Original_ID, global::System.Nullable<int> Original_sender_account, global::System.Nullable<int> Original_message, string Original_status, global::System.Nullable<int> Original_user, string Original_query, string Original_group) {
+        public virtual int Update(global::System.Nullable<int> sender_account, global::System.Nullable<int> message, string status, global::System.Nullable<int> user, string query, string group, global::System.Nullable<int> schedule, int Original_ID, global::System.Nullable<int> Original_sender_account, global::System.Nullable<int> Original_message, string Original_status, global::System.Nullable<int> Original_user, string Original_query, string Original_group, global::System.Nullable<int> Original_schedule) {
             if ((sender_account.HasValue == true)) {
                 this.Adapter.UpdateCommand.Parameters[0].Value = ((int)(sender_account.Value));
             }
@@ -4023,54 +4007,68 @@ namespace OpenMassSenderCore.OpenMassSenderDBDataSetTableAdapters {
             else {
                 this.Adapter.UpdateCommand.Parameters[5].Value = ((string)(group));
             }
-            this.Adapter.UpdateCommand.Parameters[6].Value = ((int)(Original_ID));
-            if ((Original_sender_account.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[7].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[8].Value = ((int)(Original_sender_account.Value));
+            if ((schedule.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[6].Value = ((int)(schedule.Value));
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[7].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[8].Value = global::System.DBNull.Value;
+                this.Adapter.UpdateCommand.Parameters[6].Value = global::System.DBNull.Value;
+            }
+            this.Adapter.UpdateCommand.Parameters[7].Value = ((int)(Original_ID));
+            if ((Original_sender_account.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[8].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[9].Value = ((int)(Original_sender_account.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[8].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[9].Value = global::System.DBNull.Value;
             }
             if ((Original_message.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[9].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[10].Value = ((int)(Original_message.Value));
+                this.Adapter.UpdateCommand.Parameters[10].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[11].Value = ((int)(Original_message.Value));
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[9].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[10].Value = global::System.DBNull.Value;
+                this.Adapter.UpdateCommand.Parameters[10].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[11].Value = global::System.DBNull.Value;
             }
             if ((Original_status == null)) {
-                this.Adapter.UpdateCommand.Parameters[11].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[12].Value = global::System.DBNull.Value;
+                this.Adapter.UpdateCommand.Parameters[12].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[13].Value = global::System.DBNull.Value;
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[11].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[12].Value = ((string)(Original_status));
+                this.Adapter.UpdateCommand.Parameters[12].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[13].Value = ((string)(Original_status));
             }
             if ((Original_user.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[13].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[14].Value = ((int)(Original_user.Value));
+                this.Adapter.UpdateCommand.Parameters[14].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[15].Value = ((int)(Original_user.Value));
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[13].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[14].Value = global::System.DBNull.Value;
+                this.Adapter.UpdateCommand.Parameters[14].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[15].Value = global::System.DBNull.Value;
             }
             if ((Original_query == null)) {
-                this.Adapter.UpdateCommand.Parameters[15].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[16].Value = global::System.DBNull.Value;
+                this.Adapter.UpdateCommand.Parameters[16].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[17].Value = global::System.DBNull.Value;
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[15].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[16].Value = ((string)(Original_query));
+                this.Adapter.UpdateCommand.Parameters[16].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[17].Value = ((string)(Original_query));
             }
             if ((Original_group == null)) {
-                this.Adapter.UpdateCommand.Parameters[17].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[18].Value = global::System.DBNull.Value;
+                this.Adapter.UpdateCommand.Parameters[18].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[19].Value = global::System.DBNull.Value;
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[17].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[18].Value = ((string)(Original_group));
+                this.Adapter.UpdateCommand.Parameters[18].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[19].Value = ((string)(Original_group));
+            }
+            if ((Original_schedule.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[20].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[21].Value = ((int)(Original_schedule.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[20].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[21].Value = global::System.DBNull.Value;
             }
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
             if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
@@ -4204,48 +4202,46 @@ namespace OpenMassSenderCore.OpenMassSenderDBDataSetTableAdapters {
             global::System.Data.Common.DataTableMapping tableMapping = new global::System.Data.Common.DataTableMapping();
             tableMapping.SourceTable = "Table";
             tableMapping.DataSetTable = "JobSchedule";
-            tableMapping.ColumnMappings.Add("job", "job");
             tableMapping.ColumnMappings.Add("repeatable", "repeatable");
             tableMapping.ColumnMappings.Add("nextExecution", "nextExecution");
             tableMapping.ColumnMappings.Add("lastExecution", "lastExecution");
+            tableMapping.ColumnMappings.Add("ID", "ID");
             this._adapter.TableMappings.Add(tableMapping);
             this._adapter.DeleteCommand = new global::System.Data.OleDb.OleDbCommand();
             this._adapter.DeleteCommand.Connection = this.Connection;
-            this._adapter.DeleteCommand.CommandText = "DELETE FROM `JobSchedule` WHERE ((`job` = ?) AND ((? = 1 AND `repeatable` IS NULL" +
-                ") OR (`repeatable` = ?)) AND ((? = 1 AND `nextExecution` IS NULL) OR (`nextExecu" +
-                "tion` = ?)) AND ((? = 1 AND `lastExecution` IS NULL) OR (`lastExecution` = ?)))";
+            this._adapter.DeleteCommand.CommandText = "DELETE FROM `JobSchedule` WHERE (((? = 1 AND `repeatable` IS NULL) OR (`repeatabl" +
+                "e` = ?)) AND ((? = 1 AND `nextExecution` IS NULL) OR (`nextExecution` = ?)) AND " +
+                "((? = 1 AND `lastExecution` IS NULL) OR (`lastExecution` = ?)) AND (`ID` = ?))";
             this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_job", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "job", global::System.Data.DataRowVersion.Original, false, null));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_repeatable", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "repeatable", global::System.Data.DataRowVersion.Original, true, null));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_repeatable", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "repeatable", global::System.Data.DataRowVersion.Original, false, null));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_nextExecution", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "nextExecution", global::System.Data.DataRowVersion.Original, true, null));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_nextExecution", global::System.Data.OleDb.OleDbType.Date, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "nextExecution", global::System.Data.DataRowVersion.Original, false, null));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_lastExecution", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "lastExecution", global::System.Data.DataRowVersion.Original, true, null));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_lastExecution", global::System.Data.OleDb.OleDbType.Date, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "lastExecution", global::System.Data.DataRowVersion.Original, false, null));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_ID", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "ID", global::System.Data.DataRowVersion.Original, false, null));
             this._adapter.InsertCommand = new global::System.Data.OleDb.OleDbCommand();
             this._adapter.InsertCommand.Connection = this.Connection;
-            this._adapter.InsertCommand.CommandText = "INSERT INTO `JobSchedule` (`job`, `repeatable`, `nextExecution`, `lastExecution`)" +
-                " VALUES (?, ?, ?, ?)";
+            this._adapter.InsertCommand.CommandText = "INSERT INTO `JobSchedule` (`repeatable`, `nextExecution`, `lastExecution`) VALUES" +
+                " (?, ?, ?)";
             this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("job", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "job", global::System.Data.DataRowVersion.Current, false, null));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("repeatable", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "repeatable", global::System.Data.DataRowVersion.Current, false, null));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("nextExecution", global::System.Data.OleDb.OleDbType.Date, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "nextExecution", global::System.Data.DataRowVersion.Current, false, null));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("lastExecution", global::System.Data.OleDb.OleDbType.Date, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "lastExecution", global::System.Data.DataRowVersion.Current, false, null));
             this._adapter.UpdateCommand = new global::System.Data.OleDb.OleDbCommand();
             this._adapter.UpdateCommand.Connection = this.Connection;
-            this._adapter.UpdateCommand.CommandText = @"UPDATE `JobSchedule` SET `job` = ?, `repeatable` = ?, `nextExecution` = ?, `lastExecution` = ? WHERE ((`job` = ?) AND ((? = 1 AND `repeatable` IS NULL) OR (`repeatable` = ?)) AND ((? = 1 AND `nextExecution` IS NULL) OR (`nextExecution` = ?)) AND ((? = 1 AND `lastExecution` IS NULL) OR (`lastExecution` = ?)))";
+            this._adapter.UpdateCommand.CommandText = @"UPDATE `JobSchedule` SET `repeatable` = ?, `nextExecution` = ?, `lastExecution` = ? WHERE (((? = 1 AND `repeatable` IS NULL) OR (`repeatable` = ?)) AND ((? = 1 AND `nextExecution` IS NULL) OR (`nextExecution` = ?)) AND ((? = 1 AND `lastExecution` IS NULL) OR (`lastExecution` = ?)) AND (`ID` = ?))";
             this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("job", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "job", global::System.Data.DataRowVersion.Current, false, null));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("repeatable", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "repeatable", global::System.Data.DataRowVersion.Current, false, null));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("nextExecution", global::System.Data.OleDb.OleDbType.Date, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "nextExecution", global::System.Data.DataRowVersion.Current, false, null));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("lastExecution", global::System.Data.OleDb.OleDbType.Date, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "lastExecution", global::System.Data.DataRowVersion.Current, false, null));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_job", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "job", global::System.Data.DataRowVersion.Original, false, null));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_repeatable", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "repeatable", global::System.Data.DataRowVersion.Original, true, null));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_repeatable", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "repeatable", global::System.Data.DataRowVersion.Original, false, null));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_nextExecution", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "nextExecution", global::System.Data.DataRowVersion.Original, true, null));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_nextExecution", global::System.Data.OleDb.OleDbType.Date, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "nextExecution", global::System.Data.DataRowVersion.Original, false, null));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_lastExecution", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "lastExecution", global::System.Data.DataRowVersion.Original, true, null));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_lastExecution", global::System.Data.OleDb.OleDbType.Date, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "lastExecution", global::System.Data.DataRowVersion.Original, false, null));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_ID", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "ID", global::System.Data.DataRowVersion.Original, false, null));
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -4259,12 +4255,12 @@ namespace OpenMassSenderCore.OpenMassSenderDBDataSetTableAdapters {
             this._commandCollection = new global::System.Data.OleDb.OleDbCommand[2];
             this._commandCollection[0] = new global::System.Data.OleDb.OleDbCommand();
             this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = "SELECT job, repeatable, nextExecution, lastExecution FROM JobSchedule";
+            this._commandCollection[0].CommandText = "SELECT repeatable, nextExecution, lastExecution, ID FROM JobSchedule";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[1] = new global::System.Data.OleDb.OleDbCommand();
             this._commandCollection[1].Connection = this.Connection;
-            this._commandCollection[1].CommandText = "SELECT job, repeatable, nextExecution, lastExecution FROM JobSchedule WHERE job=?" +
-                "";
+            this._commandCollection[1].CommandText = "SELECT repeatable, nextExecution, lastExecution, ID FROM JobSchedule WHERE (job =" +
+                " ?)";
             this._commandCollection[1].CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[1].Parameters.Add(new global::System.Data.OleDb.OleDbParameter("job", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "job", global::System.Data.DataRowVersion.Current, false, null));
         }
@@ -4353,37 +4349,32 @@ namespace OpenMassSenderCore.OpenMassSenderDBDataSetTableAdapters {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, true)]
-        public virtual int Delete(global::System.Nullable<int> Original_job, string Original_repeatable, global::System.Nullable<global::System.DateTime> Original_nextExecution, global::System.Nullable<global::System.DateTime> Original_lastExecution) {
-            if ((Original_job.HasValue == true)) {
-                this.Adapter.DeleteCommand.Parameters[0].Value = ((int)(Original_job.Value));
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[0].Value = global::System.DBNull.Value;
-            }
+        public virtual int Delete(string Original_repeatable, global::System.Nullable<global::System.DateTime> Original_nextExecution, global::System.Nullable<global::System.DateTime> Original_lastExecution, int Original_ID) {
             if ((Original_repeatable == null)) {
-                this.Adapter.DeleteCommand.Parameters[1].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[2].Value = global::System.DBNull.Value;
+                this.Adapter.DeleteCommand.Parameters[0].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[1].Value = global::System.DBNull.Value;
             }
             else {
-                this.Adapter.DeleteCommand.Parameters[1].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[2].Value = ((string)(Original_repeatable));
+                this.Adapter.DeleteCommand.Parameters[0].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[1].Value = ((string)(Original_repeatable));
             }
             if ((Original_nextExecution.HasValue == true)) {
-                this.Adapter.DeleteCommand.Parameters[3].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[4].Value = ((System.DateTime)(Original_nextExecution.Value));
+                this.Adapter.DeleteCommand.Parameters[2].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[3].Value = ((System.DateTime)(Original_nextExecution.Value));
             }
             else {
-                this.Adapter.DeleteCommand.Parameters[3].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[4].Value = global::System.DBNull.Value;
+                this.Adapter.DeleteCommand.Parameters[2].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[3].Value = global::System.DBNull.Value;
             }
             if ((Original_lastExecution.HasValue == true)) {
-                this.Adapter.DeleteCommand.Parameters[5].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[6].Value = ((System.DateTime)(Original_lastExecution.Value));
+                this.Adapter.DeleteCommand.Parameters[4].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[5].Value = ((System.DateTime)(Original_lastExecution.Value));
             }
             else {
-                this.Adapter.DeleteCommand.Parameters[5].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[6].Value = global::System.DBNull.Value;
+                this.Adapter.DeleteCommand.Parameters[4].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[5].Value = global::System.DBNull.Value;
             }
+            this.Adapter.DeleteCommand.Parameters[6].Value = ((int)(Original_ID));
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.DeleteCommand.Connection.State;
             if (((this.Adapter.DeleteCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -4403,30 +4394,24 @@ namespace OpenMassSenderCore.OpenMassSenderDBDataSetTableAdapters {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
-        public virtual int Insert(global::System.Nullable<int> job, string repeatable, global::System.Nullable<global::System.DateTime> nextExecution, global::System.Nullable<global::System.DateTime> lastExecution) {
-            if ((job.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[0].Value = ((int)(job.Value));
-            }
-            else {
+        public virtual int Insert(string repeatable, global::System.Nullable<global::System.DateTime> nextExecution, global::System.Nullable<global::System.DateTime> lastExecution) {
+            if ((repeatable == null)) {
                 this.Adapter.InsertCommand.Parameters[0].Value = global::System.DBNull.Value;
             }
-            if ((repeatable == null)) {
-                this.Adapter.InsertCommand.Parameters[1].Value = global::System.DBNull.Value;
-            }
             else {
-                this.Adapter.InsertCommand.Parameters[1].Value = ((string)(repeatable));
+                this.Adapter.InsertCommand.Parameters[0].Value = ((string)(repeatable));
             }
             if ((nextExecution.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[2].Value = ((System.DateTime)(nextExecution.Value));
+                this.Adapter.InsertCommand.Parameters[1].Value = ((System.DateTime)(nextExecution.Value));
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[1].Value = global::System.DBNull.Value;
+            }
+            if ((lastExecution.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[2].Value = ((System.DateTime)(lastExecution.Value));
             }
             else {
                 this.Adapter.InsertCommand.Parameters[2].Value = global::System.DBNull.Value;
-            }
-            if ((lastExecution.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[3].Value = ((System.DateTime)(lastExecution.Value));
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[3].Value = global::System.DBNull.Value;
             }
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
             if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
@@ -4447,61 +4432,50 @@ namespace OpenMassSenderCore.OpenMassSenderDBDataSetTableAdapters {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(global::System.Nullable<int> job, string repeatable, global::System.Nullable<global::System.DateTime> nextExecution, global::System.Nullable<global::System.DateTime> lastExecution, global::System.Nullable<int> Original_job, string Original_repeatable, global::System.Nullable<global::System.DateTime> Original_nextExecution, global::System.Nullable<global::System.DateTime> Original_lastExecution) {
-            if ((job.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[0].Value = ((int)(job.Value));
-            }
-            else {
+        public virtual int Update(string repeatable, global::System.Nullable<global::System.DateTime> nextExecution, global::System.Nullable<global::System.DateTime> lastExecution, string Original_repeatable, global::System.Nullable<global::System.DateTime> Original_nextExecution, global::System.Nullable<global::System.DateTime> Original_lastExecution, int Original_ID) {
+            if ((repeatable == null)) {
                 this.Adapter.UpdateCommand.Parameters[0].Value = global::System.DBNull.Value;
             }
-            if ((repeatable == null)) {
-                this.Adapter.UpdateCommand.Parameters[1].Value = global::System.DBNull.Value;
-            }
             else {
-                this.Adapter.UpdateCommand.Parameters[1].Value = ((string)(repeatable));
+                this.Adapter.UpdateCommand.Parameters[0].Value = ((string)(repeatable));
             }
             if ((nextExecution.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[2].Value = ((System.DateTime)(nextExecution.Value));
+                this.Adapter.UpdateCommand.Parameters[1].Value = ((System.DateTime)(nextExecution.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[1].Value = global::System.DBNull.Value;
+            }
+            if ((lastExecution.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[2].Value = ((System.DateTime)(lastExecution.Value));
             }
             else {
                 this.Adapter.UpdateCommand.Parameters[2].Value = global::System.DBNull.Value;
             }
-            if ((lastExecution.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[3].Value = ((System.DateTime)(lastExecution.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[3].Value = global::System.DBNull.Value;
-            }
-            if ((Original_job.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[4].Value = ((int)(Original_job.Value));
-            }
-            else {
+            if ((Original_repeatable == null)) {
+                this.Adapter.UpdateCommand.Parameters[3].Value = ((object)(1));
                 this.Adapter.UpdateCommand.Parameters[4].Value = global::System.DBNull.Value;
             }
-            if ((Original_repeatable == null)) {
+            else {
+                this.Adapter.UpdateCommand.Parameters[3].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[4].Value = ((string)(Original_repeatable));
+            }
+            if ((Original_nextExecution.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[5].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[6].Value = ((System.DateTime)(Original_nextExecution.Value));
+            }
+            else {
                 this.Adapter.UpdateCommand.Parameters[5].Value = ((object)(1));
                 this.Adapter.UpdateCommand.Parameters[6].Value = global::System.DBNull.Value;
             }
-            else {
-                this.Adapter.UpdateCommand.Parameters[5].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[6].Value = ((string)(Original_repeatable));
-            }
-            if ((Original_nextExecution.HasValue == true)) {
+            if ((Original_lastExecution.HasValue == true)) {
                 this.Adapter.UpdateCommand.Parameters[7].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[8].Value = ((System.DateTime)(Original_nextExecution.Value));
+                this.Adapter.UpdateCommand.Parameters[8].Value = ((System.DateTime)(Original_lastExecution.Value));
             }
             else {
                 this.Adapter.UpdateCommand.Parameters[7].Value = ((object)(1));
                 this.Adapter.UpdateCommand.Parameters[8].Value = global::System.DBNull.Value;
             }
-            if ((Original_lastExecution.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[9].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[10].Value = ((System.DateTime)(Original_lastExecution.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[9].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[10].Value = global::System.DBNull.Value;
-            }
+            this.Adapter.UpdateCommand.Parameters[9].Value = ((int)(Original_ID));
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
             if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -4516,13 +4490,6 @@ namespace OpenMassSenderCore.OpenMassSenderDBDataSetTableAdapters {
                     this.Adapter.UpdateCommand.Connection.Close();
                 }
             }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(string repeatable, global::System.Nullable<global::System.DateTime> nextExecution, global::System.Nullable<global::System.DateTime> lastExecution, global::System.Nullable<int> Original_job, string Original_repeatable, global::System.Nullable<global::System.DateTime> Original_nextExecution, global::System.Nullable<global::System.DateTime> Original_lastExecution) {
-            return this.Update(Original_job, repeatable, nextExecution, lastExecution, Original_job, Original_repeatable, Original_nextExecution, Original_lastExecution);
         }
     }
     
@@ -5177,8 +5144,6 @@ namespace OpenMassSenderCore.OpenMassSenderDBDataSetTableAdapters {
             tableMapping.SourceTable = "Table";
             tableMapping.DataSetTable = "Receiver";
             tableMapping.ColumnMappings.Add("ID", "ID");
-            tableMapping.ColumnMappings.Add("first_name", "first_name");
-            tableMapping.ColumnMappings.Add("last_name", "last_name");
             tableMapping.ColumnMappings.Add("email", "email");
             tableMapping.ColumnMappings.Add("phone_number", "phone_number");
             tableMapping.ColumnMappings.Add("metadata", "metadata");
@@ -5187,13 +5152,9 @@ namespace OpenMassSenderCore.OpenMassSenderDBDataSetTableAdapters {
             this._adapter.TableMappings.Add(tableMapping);
             this._adapter.DeleteCommand = new global::System.Data.OleDb.OleDbCommand();
             this._adapter.DeleteCommand.Connection = this.Connection;
-            this._adapter.DeleteCommand.CommandText = @"DELETE FROM `Receiver` WHERE ((`ID` = ?) AND ((? = 1 AND `first_name` IS NULL) OR (`first_name` = ?)) AND ((? = 1 AND `last_name` IS NULL) OR (`last_name` = ?)) AND ((? = 1 AND `email` IS NULL) OR (`email` = ?)) AND ((? = 1 AND `phone_number` IS NULL) OR (`phone_number` = ?)) AND ((? = 1 AND `metadata` IS NULL) OR (`metadata` = ?)) AND ((? = 1 AND `group` IS NULL) OR (`group` = ?)) AND ((? = 1 AND `user` IS NULL) OR (`user` = ?)))";
+            this._adapter.DeleteCommand.CommandText = @"DELETE FROM `Receiver` WHERE ((`ID` = ?) AND ((? = 1 AND `email` IS NULL) OR (`email` = ?)) AND ((? = 1 AND `phone_number` IS NULL) OR (`phone_number` = ?)) AND ((? = 1 AND `metadata` IS NULL) OR (`metadata` = ?)) AND ((? = 1 AND `group` IS NULL) OR (`group` = ?)) AND ((? = 1 AND `user` IS NULL) OR (`user` = ?)))";
             this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_ID", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "ID", global::System.Data.DataRowVersion.Original, false, null));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_first_name", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "first_name", global::System.Data.DataRowVersion.Original, true, null));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_first_name", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "first_name", global::System.Data.DataRowVersion.Original, false, null));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_last_name", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "last_name", global::System.Data.DataRowVersion.Original, true, null));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_last_name", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "last_name", global::System.Data.DataRowVersion.Original, false, null));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_email", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "email", global::System.Data.DataRowVersion.Original, true, null));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_email", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "email", global::System.Data.DataRowVersion.Original, false, null));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_phone_number", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "phone_number", global::System.Data.DataRowVersion.Original, true, null));
@@ -5201,37 +5162,29 @@ namespace OpenMassSenderCore.OpenMassSenderDBDataSetTableAdapters {
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_metadata", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "metadata", global::System.Data.DataRowVersion.Original, true, null));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_metadata", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "metadata", global::System.Data.DataRowVersion.Original, false, null));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_group", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "group", global::System.Data.DataRowVersion.Original, true, null));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_group", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "group", global::System.Data.DataRowVersion.Original, false, null));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_group", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "group", global::System.Data.DataRowVersion.Original, false, null));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_user", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "user", global::System.Data.DataRowVersion.Original, true, null));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_user", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "user", global::System.Data.DataRowVersion.Original, false, null));
             this._adapter.InsertCommand = new global::System.Data.OleDb.OleDbCommand();
             this._adapter.InsertCommand.Connection = this.Connection;
-            this._adapter.InsertCommand.CommandText = "INSERT INTO `Receiver` (`first_name`, `last_name`, `email`, `phone_number`, `meta" +
-                "data`, `group`, `user`) VALUES (?, ?, ?, ?, ?, ?, ?)";
+            this._adapter.InsertCommand.CommandText = "INSERT INTO `Receiver` (`email`, `phone_number`, `metadata`, `group`, `user`) VAL" +
+                "UES (?, ?, ?, ?, ?)";
             this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("first_name", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "first_name", global::System.Data.DataRowVersion.Current, false, null));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("last_name", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "last_name", global::System.Data.DataRowVersion.Current, false, null));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("email", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "email", global::System.Data.DataRowVersion.Current, false, null));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("phone_number", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "phone_number", global::System.Data.DataRowVersion.Current, false, null));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("metadata", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "metadata", global::System.Data.DataRowVersion.Current, false, null));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("group", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "group", global::System.Data.DataRowVersion.Current, false, null));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("group", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "group", global::System.Data.DataRowVersion.Current, false, null));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("user", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "user", global::System.Data.DataRowVersion.Current, false, null));
             this._adapter.UpdateCommand = new global::System.Data.OleDb.OleDbCommand();
             this._adapter.UpdateCommand.Connection = this.Connection;
-            this._adapter.UpdateCommand.CommandText = @"UPDATE `Receiver` SET `first_name` = ?, `last_name` = ?, `email` = ?, `phone_number` = ?, `metadata` = ?, `group` = ?, `user` = ? WHERE ((`ID` = ?) AND ((? = 1 AND `first_name` IS NULL) OR (`first_name` = ?)) AND ((? = 1 AND `last_name` IS NULL) OR (`last_name` = ?)) AND ((? = 1 AND `email` IS NULL) OR (`email` = ?)) AND ((? = 1 AND `phone_number` IS NULL) OR (`phone_number` = ?)) AND ((? = 1 AND `metadata` IS NULL) OR (`metadata` = ?)) AND ((? = 1 AND `group` IS NULL) OR (`group` = ?)) AND ((? = 1 AND `user` IS NULL) OR (`user` = ?)))";
+            this._adapter.UpdateCommand.CommandText = @"UPDATE `Receiver` SET `email` = ?, `phone_number` = ?, `metadata` = ?, `group` = ?, `user` = ? WHERE ((`ID` = ?) AND ((? = 1 AND `email` IS NULL) OR (`email` = ?)) AND ((? = 1 AND `phone_number` IS NULL) OR (`phone_number` = ?)) AND ((? = 1 AND `metadata` IS NULL) OR (`metadata` = ?)) AND ((? = 1 AND `group` IS NULL) OR (`group` = ?)) AND ((? = 1 AND `user` IS NULL) OR (`user` = ?)))";
             this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("first_name", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "first_name", global::System.Data.DataRowVersion.Current, false, null));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("last_name", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "last_name", global::System.Data.DataRowVersion.Current, false, null));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("email", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "email", global::System.Data.DataRowVersion.Current, false, null));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("phone_number", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "phone_number", global::System.Data.DataRowVersion.Current, false, null));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("metadata", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "metadata", global::System.Data.DataRowVersion.Current, false, null));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("group", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "group", global::System.Data.DataRowVersion.Current, false, null));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("group", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "group", global::System.Data.DataRowVersion.Current, false, null));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("user", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "user", global::System.Data.DataRowVersion.Current, false, null));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_ID", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "ID", global::System.Data.DataRowVersion.Original, false, null));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_first_name", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "first_name", global::System.Data.DataRowVersion.Original, true, null));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_first_name", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "first_name", global::System.Data.DataRowVersion.Original, false, null));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_last_name", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "last_name", global::System.Data.DataRowVersion.Original, true, null));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_last_name", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "last_name", global::System.Data.DataRowVersion.Original, false, null));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_email", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "email", global::System.Data.DataRowVersion.Original, true, null));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_email", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "email", global::System.Data.DataRowVersion.Original, false, null));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_phone_number", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "phone_number", global::System.Data.DataRowVersion.Original, true, null));
@@ -5239,7 +5192,7 @@ namespace OpenMassSenderCore.OpenMassSenderDBDataSetTableAdapters {
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_metadata", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "metadata", global::System.Data.DataRowVersion.Original, true, null));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_metadata", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "metadata", global::System.Data.DataRowVersion.Original, false, null));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_group", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "group", global::System.Data.DataRowVersion.Original, true, null));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_group", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "group", global::System.Data.DataRowVersion.Original, false, null));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_group", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "group", global::System.Data.DataRowVersion.Original, false, null));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_user", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "user", global::System.Data.DataRowVersion.Original, true, null));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_user", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "user", global::System.Data.DataRowVersion.Original, false, null));
         }
@@ -5255,13 +5208,12 @@ namespace OpenMassSenderCore.OpenMassSenderDBDataSetTableAdapters {
             this._commandCollection = new global::System.Data.OleDb.OleDbCommand[3];
             this._commandCollection[0] = new global::System.Data.OleDb.OleDbCommand();
             this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = "SELECT ID, first_name, last_name, email, phone_number, metadata, [group], [user] " +
-                "FROM Receiver";
+            this._commandCollection[0].CommandText = "SELECT ID, email, phone_number, metadata, [group], [user] FROM Receiver";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[1] = new global::System.Data.OleDb.OleDbCommand();
             this._commandCollection[1].Connection = this.Connection;
-            this._commandCollection[1].CommandText = "SELECT ID, first_name, last_name, email, phone_number, metadata, [group], [user] " +
-                "FROM Receiver WHERE id=?";
+            this._commandCollection[1].CommandText = "SELECT ID, email, phone_number, metadata, [group], [user] FROM Receiver WHERE (ID" +
+                " = ?)";
             this._commandCollection[1].CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[1].Parameters.Add(new global::System.Data.OleDb.OleDbParameter("ID", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "ID", global::System.Data.DataRowVersion.Current, false, null));
             this._commandCollection[2] = new global::System.Data.OleDb.OleDbCommand();
@@ -5361,63 +5313,47 @@ namespace OpenMassSenderCore.OpenMassSenderDBDataSetTableAdapters {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, true)]
-        public virtual int Delete(int Original_ID, string Original_first_name, string Original_last_name, string Original_email, string Original_phone_number, string Original_metadata, global::System.Nullable<int> Original_group, global::System.Nullable<int> Original_user) {
+        public virtual int Delete(int Original_ID, string Original_email, string Original_phone_number, string Original_metadata, string Original_group, global::System.Nullable<int> Original_user) {
             this.Adapter.DeleteCommand.Parameters[0].Value = ((int)(Original_ID));
-            if ((Original_first_name == null)) {
+            if ((Original_email == null)) {
                 this.Adapter.DeleteCommand.Parameters[1].Value = ((object)(1));
                 this.Adapter.DeleteCommand.Parameters[2].Value = global::System.DBNull.Value;
             }
             else {
                 this.Adapter.DeleteCommand.Parameters[1].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[2].Value = ((string)(Original_first_name));
+                this.Adapter.DeleteCommand.Parameters[2].Value = ((string)(Original_email));
             }
-            if ((Original_last_name == null)) {
+            if ((Original_phone_number == null)) {
                 this.Adapter.DeleteCommand.Parameters[3].Value = ((object)(1));
                 this.Adapter.DeleteCommand.Parameters[4].Value = global::System.DBNull.Value;
             }
             else {
                 this.Adapter.DeleteCommand.Parameters[3].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[4].Value = ((string)(Original_last_name));
+                this.Adapter.DeleteCommand.Parameters[4].Value = ((string)(Original_phone_number));
             }
-            if ((Original_email == null)) {
+            if ((Original_metadata == null)) {
                 this.Adapter.DeleteCommand.Parameters[5].Value = ((object)(1));
                 this.Adapter.DeleteCommand.Parameters[6].Value = global::System.DBNull.Value;
             }
             else {
                 this.Adapter.DeleteCommand.Parameters[5].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[6].Value = ((string)(Original_email));
+                this.Adapter.DeleteCommand.Parameters[6].Value = ((string)(Original_metadata));
             }
-            if ((Original_phone_number == null)) {
+            if ((Original_group == null)) {
                 this.Adapter.DeleteCommand.Parameters[7].Value = ((object)(1));
                 this.Adapter.DeleteCommand.Parameters[8].Value = global::System.DBNull.Value;
             }
             else {
                 this.Adapter.DeleteCommand.Parameters[7].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[8].Value = ((string)(Original_phone_number));
-            }
-            if ((Original_metadata == null)) {
-                this.Adapter.DeleteCommand.Parameters[9].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[10].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[9].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[10].Value = ((string)(Original_metadata));
-            }
-            if ((Original_group.HasValue == true)) {
-                this.Adapter.DeleteCommand.Parameters[11].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[12].Value = ((int)(Original_group.Value));
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[11].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[12].Value = global::System.DBNull.Value;
+                this.Adapter.DeleteCommand.Parameters[8].Value = ((string)(Original_group));
             }
             if ((Original_user.HasValue == true)) {
-                this.Adapter.DeleteCommand.Parameters[13].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[14].Value = ((int)(Original_user.Value));
+                this.Adapter.DeleteCommand.Parameters[9].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[10].Value = ((int)(Original_user.Value));
             }
             else {
-                this.Adapter.DeleteCommand.Parameters[13].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[14].Value = global::System.DBNull.Value;
+                this.Adapter.DeleteCommand.Parameters[9].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[10].Value = global::System.DBNull.Value;
             }
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.DeleteCommand.Connection.State;
             if (((this.Adapter.DeleteCommand.Connection.State & global::System.Data.ConnectionState.Open) 
@@ -5438,48 +5374,36 @@ namespace OpenMassSenderCore.OpenMassSenderDBDataSetTableAdapters {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
-        public virtual int Insert(string first_name, string last_name, string email, string phone_number, string metadata, global::System.Nullable<int> group, global::System.Nullable<int> user) {
-            if ((first_name == null)) {
+        public virtual int Insert(string email, string phone_number, string metadata, string group, global::System.Nullable<int> user) {
+            if ((email == null)) {
                 this.Adapter.InsertCommand.Parameters[0].Value = global::System.DBNull.Value;
             }
             else {
-                this.Adapter.InsertCommand.Parameters[0].Value = ((string)(first_name));
+                this.Adapter.InsertCommand.Parameters[0].Value = ((string)(email));
             }
-            if ((last_name == null)) {
+            if ((phone_number == null)) {
                 this.Adapter.InsertCommand.Parameters[1].Value = global::System.DBNull.Value;
             }
             else {
-                this.Adapter.InsertCommand.Parameters[1].Value = ((string)(last_name));
+                this.Adapter.InsertCommand.Parameters[1].Value = ((string)(phone_number));
             }
-            if ((email == null)) {
+            if ((metadata == null)) {
                 this.Adapter.InsertCommand.Parameters[2].Value = global::System.DBNull.Value;
             }
             else {
-                this.Adapter.InsertCommand.Parameters[2].Value = ((string)(email));
+                this.Adapter.InsertCommand.Parameters[2].Value = ((string)(metadata));
             }
-            if ((phone_number == null)) {
+            if ((group == null)) {
                 this.Adapter.InsertCommand.Parameters[3].Value = global::System.DBNull.Value;
             }
             else {
-                this.Adapter.InsertCommand.Parameters[3].Value = ((string)(phone_number));
-            }
-            if ((metadata == null)) {
-                this.Adapter.InsertCommand.Parameters[4].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[4].Value = ((string)(metadata));
-            }
-            if ((group.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[5].Value = ((int)(group.Value));
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[5].Value = global::System.DBNull.Value;
+                this.Adapter.InsertCommand.Parameters[3].Value = ((string)(group));
             }
             if ((user.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[6].Value = ((int)(user.Value));
+                this.Adapter.InsertCommand.Parameters[4].Value = ((int)(user.Value));
             }
             else {
-                this.Adapter.InsertCommand.Parameters[6].Value = global::System.DBNull.Value;
+                this.Adapter.InsertCommand.Parameters[4].Value = global::System.DBNull.Value;
             }
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
             if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
@@ -5500,105 +5424,77 @@ namespace OpenMassSenderCore.OpenMassSenderDBDataSetTableAdapters {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(string first_name, string last_name, string email, string phone_number, string metadata, global::System.Nullable<int> group, global::System.Nullable<int> user, int Original_ID, string Original_first_name, string Original_last_name, string Original_email, string Original_phone_number, string Original_metadata, global::System.Nullable<int> Original_group, global::System.Nullable<int> Original_user) {
-            if ((first_name == null)) {
+        public virtual int Update(string email, string phone_number, string metadata, string group, global::System.Nullable<int> user, int Original_ID, string Original_email, string Original_phone_number, string Original_metadata, string Original_group, global::System.Nullable<int> Original_user) {
+            if ((email == null)) {
                 this.Adapter.UpdateCommand.Parameters[0].Value = global::System.DBNull.Value;
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[0].Value = ((string)(first_name));
+                this.Adapter.UpdateCommand.Parameters[0].Value = ((string)(email));
             }
-            if ((last_name == null)) {
+            if ((phone_number == null)) {
                 this.Adapter.UpdateCommand.Parameters[1].Value = global::System.DBNull.Value;
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[1].Value = ((string)(last_name));
+                this.Adapter.UpdateCommand.Parameters[1].Value = ((string)(phone_number));
             }
-            if ((email == null)) {
+            if ((metadata == null)) {
                 this.Adapter.UpdateCommand.Parameters[2].Value = global::System.DBNull.Value;
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[2].Value = ((string)(email));
+                this.Adapter.UpdateCommand.Parameters[2].Value = ((string)(metadata));
             }
-            if ((phone_number == null)) {
+            if ((group == null)) {
                 this.Adapter.UpdateCommand.Parameters[3].Value = global::System.DBNull.Value;
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[3].Value = ((string)(phone_number));
-            }
-            if ((metadata == null)) {
-                this.Adapter.UpdateCommand.Parameters[4].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[4].Value = ((string)(metadata));
-            }
-            if ((group.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[5].Value = ((int)(group.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[5].Value = global::System.DBNull.Value;
+                this.Adapter.UpdateCommand.Parameters[3].Value = ((string)(group));
             }
             if ((user.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[6].Value = ((int)(user.Value));
+                this.Adapter.UpdateCommand.Parameters[4].Value = ((int)(user.Value));
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[6].Value = global::System.DBNull.Value;
+                this.Adapter.UpdateCommand.Parameters[4].Value = global::System.DBNull.Value;
             }
-            this.Adapter.UpdateCommand.Parameters[7].Value = ((int)(Original_ID));
-            if ((Original_first_name == null)) {
+            this.Adapter.UpdateCommand.Parameters[5].Value = ((int)(Original_ID));
+            if ((Original_email == null)) {
+                this.Adapter.UpdateCommand.Parameters[6].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[7].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[6].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[7].Value = ((string)(Original_email));
+            }
+            if ((Original_phone_number == null)) {
                 this.Adapter.UpdateCommand.Parameters[8].Value = ((object)(1));
                 this.Adapter.UpdateCommand.Parameters[9].Value = global::System.DBNull.Value;
             }
             else {
                 this.Adapter.UpdateCommand.Parameters[8].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[9].Value = ((string)(Original_first_name));
+                this.Adapter.UpdateCommand.Parameters[9].Value = ((string)(Original_phone_number));
             }
-            if ((Original_last_name == null)) {
+            if ((Original_metadata == null)) {
                 this.Adapter.UpdateCommand.Parameters[10].Value = ((object)(1));
                 this.Adapter.UpdateCommand.Parameters[11].Value = global::System.DBNull.Value;
             }
             else {
                 this.Adapter.UpdateCommand.Parameters[10].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[11].Value = ((string)(Original_last_name));
+                this.Adapter.UpdateCommand.Parameters[11].Value = ((string)(Original_metadata));
             }
-            if ((Original_email == null)) {
+            if ((Original_group == null)) {
                 this.Adapter.UpdateCommand.Parameters[12].Value = ((object)(1));
                 this.Adapter.UpdateCommand.Parameters[13].Value = global::System.DBNull.Value;
             }
             else {
                 this.Adapter.UpdateCommand.Parameters[12].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[13].Value = ((string)(Original_email));
-            }
-            if ((Original_phone_number == null)) {
-                this.Adapter.UpdateCommand.Parameters[14].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[15].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[14].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[15].Value = ((string)(Original_phone_number));
-            }
-            if ((Original_metadata == null)) {
-                this.Adapter.UpdateCommand.Parameters[16].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[17].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[16].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[17].Value = ((string)(Original_metadata));
-            }
-            if ((Original_group.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[18].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[19].Value = ((int)(Original_group.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[18].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[19].Value = global::System.DBNull.Value;
+                this.Adapter.UpdateCommand.Parameters[13].Value = ((string)(Original_group));
             }
             if ((Original_user.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[20].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[21].Value = ((int)(Original_user.Value));
+                this.Adapter.UpdateCommand.Parameters[14].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[15].Value = ((int)(Original_user.Value));
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[20].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[21].Value = global::System.DBNull.Value;
+                this.Adapter.UpdateCommand.Parameters[14].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[15].Value = global::System.DBNull.Value;
             }
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
             if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
@@ -6814,6 +6710,15 @@ namespace OpenMassSenderCore.OpenMassSenderDBDataSetTableAdapters {
                     allChangedRows.AddRange(updatedRows);
                 }
             }
+            if ((this._jobScheduleTableAdapter != null)) {
+                global::System.Data.DataRow[] updatedRows = dataSet.JobSchedule.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
+                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
+                if (((updatedRows != null) 
+                            && (0 < updatedRows.Length))) {
+                    result = (result + this._jobScheduleTableAdapter.Update(updatedRows));
+                    allChangedRows.AddRange(updatedRows);
+                }
+            }
             if ((this._jobTableAdapter != null)) {
                 global::System.Data.DataRow[] updatedRows = dataSet.Job.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
                 updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
@@ -6829,15 +6734,6 @@ namespace OpenMassSenderCore.OpenMassSenderDBDataSetTableAdapters {
                 if (((updatedRows != null) 
                             && (0 < updatedRows.Length))) {
                     result = (result + this._receiverTableAdapter.Update(updatedRows));
-                    allChangedRows.AddRange(updatedRows);
-                }
-            }
-            if ((this._jobScheduleTableAdapter != null)) {
-                global::System.Data.DataRow[] updatedRows = dataSet.JobSchedule.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
-                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
-                if (((updatedRows != null) 
-                            && (0 < updatedRows.Length))) {
-                    result = (result + this._jobScheduleTableAdapter.Update(updatedRows));
                     allChangedRows.AddRange(updatedRows);
                 }
             }
@@ -6874,6 +6770,14 @@ namespace OpenMassSenderCore.OpenMassSenderDBDataSetTableAdapters {
                     allAddedRows.AddRange(addedRows);
                 }
             }
+            if ((this._jobScheduleTableAdapter != null)) {
+                global::System.Data.DataRow[] addedRows = dataSet.JobSchedule.Select(null, null, global::System.Data.DataViewRowState.Added);
+                if (((addedRows != null) 
+                            && (0 < addedRows.Length))) {
+                    result = (result + this._jobScheduleTableAdapter.Update(addedRows));
+                    allAddedRows.AddRange(addedRows);
+                }
+            }
             if ((this._jobTableAdapter != null)) {
                 global::System.Data.DataRow[] addedRows = dataSet.Job.Select(null, null, global::System.Data.DataViewRowState.Added);
                 if (((addedRows != null) 
@@ -6890,14 +6794,6 @@ namespace OpenMassSenderCore.OpenMassSenderDBDataSetTableAdapters {
                     allAddedRows.AddRange(addedRows);
                 }
             }
-            if ((this._jobScheduleTableAdapter != null)) {
-                global::System.Data.DataRow[] addedRows = dataSet.JobSchedule.Select(null, null, global::System.Data.DataViewRowState.Added);
-                if (((addedRows != null) 
-                            && (0 < addedRows.Length))) {
-                    result = (result + this._jobScheduleTableAdapter.Update(addedRows));
-                    allAddedRows.AddRange(addedRows);
-                }
-            }
             return result;
         }
         
@@ -6907,14 +6803,6 @@ namespace OpenMassSenderCore.OpenMassSenderDBDataSetTableAdapters {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         private int UpdateDeletedRows(OpenMassSenderDBDataSet dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allChangedRows) {
             int result = 0;
-            if ((this._jobScheduleTableAdapter != null)) {
-                global::System.Data.DataRow[] deletedRows = dataSet.JobSchedule.Select(null, null, global::System.Data.DataViewRowState.Deleted);
-                if (((deletedRows != null) 
-                            && (0 < deletedRows.Length))) {
-                    result = (result + this._jobScheduleTableAdapter.Update(deletedRows));
-                    allChangedRows.AddRange(deletedRows);
-                }
-            }
             if ((this._receiverTableAdapter != null)) {
                 global::System.Data.DataRow[] deletedRows = dataSet.Receiver.Select(null, null, global::System.Data.DataViewRowState.Deleted);
                 if (((deletedRows != null) 
@@ -6928,6 +6816,14 @@ namespace OpenMassSenderCore.OpenMassSenderDBDataSetTableAdapters {
                 if (((deletedRows != null) 
                             && (0 < deletedRows.Length))) {
                     result = (result + this._jobTableAdapter.Update(deletedRows));
+                    allChangedRows.AddRange(deletedRows);
+                }
+            }
+            if ((this._jobScheduleTableAdapter != null)) {
+                global::System.Data.DataRow[] deletedRows = dataSet.JobSchedule.Select(null, null, global::System.Data.DataViewRowState.Deleted);
+                if (((deletedRows != null) 
+                            && (0 < deletedRows.Length))) {
+                    result = (result + this._jobScheduleTableAdapter.Update(deletedRows));
                     allChangedRows.AddRange(deletedRows);
                 }
             }

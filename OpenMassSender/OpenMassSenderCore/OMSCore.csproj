@@ -83,6 +83,9 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Logger.cs" />
+    <Compile Include="Messages\Receiver.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="OpenMassSenderDBDataSet.cs">
       <DependentUpon>OpenMassSenderDBDataSet.xsd</DependentUpon>
       <SubType>Component</SubType>

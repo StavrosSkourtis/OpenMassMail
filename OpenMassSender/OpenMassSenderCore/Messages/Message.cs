@@ -24,12 +24,9 @@ namespace OpenMassSenderCore
             {
 
                 this.message = message;
-                if (message.Contains(Wildcards.RECEIVER_FIRST_NAME) 
-                    && replacableVariablesMap.ContainsKey(Wildcards.RECEIVER_FIRST_NAME)==false)
-                    replacableVariablesMap.Add(Wildcards.RECEIVER_FIRST_NAME, null);
-                if (message.Contains(Wildcards.RECEIVER_LAST_NAME)
-                    && replacableVariablesMap.ContainsKey(Wildcards.RECEIVER_LAST_NAME) == false)
-                    replacableVariablesMap.Add(Wildcards.RECEIVER_LAST_NAME, null);
+                if (message.Contains(Wildcards.META)
+                    && replacableVariablesMap.ContainsKey(Wildcards.META) == false)
+                    replacableVariablesMap.Add(Wildcards.META, null);
                 if (message.Contains(Wildcards.DATE)
                     && replacableVariablesMap.ContainsKey(Wildcards.DATE) == false)
                     replacableVariablesMap.Add(Wildcards.DATE, null);
@@ -38,22 +35,31 @@ namespace OpenMassSenderCore
             public string replaceWildCards(OpenMassSenderCore.OpenMassSenderDBDataSet.ReceiverRow receiver)
             {
                 Regex datePattern = new Regex(@"\$DATE\((.*?)\)");
-                string ret = message;
-                foreach (KeyValuePair<string, string> entry in replacableVariablesMap)
-                {
-                    string value=null;
-                    if (receiver!=null && entry.Key == Wildcards.RECEIVER_FIRST_NAME) value = receiver.first_name;
-                    else if (receiver != null && entry.Key == Wildcards.RECEIVER_LAST_NAME) value = receiver.last_name;
-                    else value = entry.Value;
+                Regex medatadataPattern = new Regex(@"\$META\((.*?)\)");
 
-                    if(value!=null)ret = ret.Replace(entry.Key,value);
-                }
+                string ret = message;
                 if (message.Contains(Wildcards.DATE))
                 {
                     foreach (Match m in datePattern.Matches(ret))
                     {
                         string datepattern = m.Value.Split('(')[1].Split(')')[0];
                         ret = ret.Replace(m.Value, DateTime.Now.ToString(datepattern));
+                    }
+                }
+                if (message.Contains(Wildcards.META) && receiver!=null)
+                {
+                    Dictionary<string, string> md = receiver.getMetadataList();
+                    foreach (Match m in datePattern.Matches(ret))
+                    {
+                        string datepattern = m.Value.Split('(')[1].Split(')')[0];
+                        string value=null;
+                        try
+                        {
+                            md.TryGetValue(datepattern,out value);
+                        }
+                        catch (Exception ex) { }
+                        
+                        if(value!=null)ret = ret.Replace(m.Value, datepattern);
                     }
                 }
                 return ret;
@@ -79,9 +85,7 @@ namespace OpenMassSenderCore
     }
     public class Wildcards
     {
-        public static string RECEIVER_FIRST_NAME = "$receiver_fname";
-        public static string RECEIVER_LAST_NAME = "$receiver_lname";
         public static string DATE = "$DATE";
-
+        public static string META = "$META";
     }
 }
