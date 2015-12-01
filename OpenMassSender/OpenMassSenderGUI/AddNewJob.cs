@@ -71,6 +71,7 @@ namespace OpenMassSenderGUI
             if (ofd.ShowDialog() == DialogResult.OK)
             {
                 filepathtextbox.Text = ofd.FileName;
+                
             }
        }
         private void checkform(){
@@ -82,8 +83,20 @@ namespace OpenMassSenderGUI
 
         private void button1_Click(object sender, EventArgs e)
         {
-            MessageForm messageForm = new MessageForm(job.messageObject);
-            messageForm.ShowDialog();
+            string str = typecomboBox.Text;
+            if(str.Equals("email"))
+            {
+                
+                MessageForm messageForm = new MessageForm(job.messageObject);
+                messageForm.ShowDialog();
+            }
+            if (str.Equals("sms")) 
+            {
+                
+                
+            }
+                
+            
         }
 
         private void executejob_TextChanged(object sender, EventArgs e)
