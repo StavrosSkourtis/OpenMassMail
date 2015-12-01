@@ -21,7 +21,6 @@ namespace OpenMassSenderCore.OpenMassSenderDBDataSetTableAdapters
             message.subject = "";
             message.replaceVariables = "";
             message.user = 0;
-            message.job = job.ID;
             message.type ="";
             message.message = "";
             message.linkedFile ="";

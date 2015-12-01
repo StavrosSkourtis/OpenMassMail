@@ -39,7 +39,7 @@ namespace OpenMassSenderGUI
 
          //   if (containsHtml.IsMatch(message.message))
          //   {
-                btnPreview.Visible = true;
+           //     btnPreview.Visible = true;
          //   }
        //     else
         //    {
@@ -48,8 +48,7 @@ namespace OpenMassSenderGUI
         }
         private void btnVariables_Click(object sender, EventArgs e)
         {
-            MessageVariablesForm variablesForm = new MessageVariablesForm(message);
-            variablesForm.Show();
+
         }
 
         private void btnFileLink_Click(object sender, EventArgs e)
@@ -83,13 +82,7 @@ namespace OpenMassSenderGUI
         private MessagePreviewForm messagePreview = null;
         private void btnPreviewHTML_Click(object sender, EventArgs e)
         {
-            if (messagePreview == null || messagePreview.IsDisposed || messagePreview.IsAccessible == false)
-            {
-                messagePreview = new MessagePreviewForm(message);
-            }
 
-            messagePreview.Show();
-            messagePreview.Focus();
         }
 
 
@@ -101,6 +94,28 @@ namespace OpenMassSenderGUI
         private void MessageForm_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void panel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void tsbtnPreview_Click(object sender, EventArgs e)
+        {
+            if (messagePreview == null || messagePreview.IsDisposed || messagePreview.IsAccessible == false)
+            {
+                messagePreview = new MessagePreviewForm(message);
+            }
+
+            messagePreview.Show();
+            messagePreview.Focus();
+        }
+
+        private void tsbrnVariables_Click(object sender, EventArgs e)
+        {
+            MessageVariablesForm variablesForm = new MessageVariablesForm(message);
+            variablesForm.Show();
         }
     }
 }

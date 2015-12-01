@@ -13,10 +13,9 @@ namespace OpenMassSenderCore
         {
             public class JobStatus {public static string PENDING="PENDING",SHEDULED="SHEDULED",FINISHED="FINISHED"; };
             public string title;
-
+            public MessageRow messageObject;
             public SenderAccountRow sender;
             public MassSender massSender;
-            public MessageRow messageObject;
             //<summary>returns true if the job is ready for execution,makes sense if the job has a shedule</summary>
             public bool isReadForExecution()
             {

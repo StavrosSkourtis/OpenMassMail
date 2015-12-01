@@ -2,6 +2,9 @@
     
     
     public partial class OpenMassSenderDBDataSet {
+        partial class JobDataTable
+        {
+        }
     }
 }
 
