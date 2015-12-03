@@ -30,7 +30,7 @@ namespace OpenMassSenderGUI
 
         private void receiversWindow_Load(object sender, EventArgs e)
         {
-            cbReceiverGroups.DataSource = ReceiverTableAdapter.getInstance().GetGroups(Int32.Parse(ReceiverTableAdapter.getInstance().userid));
+            cbReceiverGroups.DataSource = ReceiverTableAdapter.getInstance().GetGroups(Int32.Parse(UserTableAdapter.getInstance().userid));
             cbReceiverGroups.DisplayMember = "group";
             cbReceiverGroups.ValueMember = "group";
         }

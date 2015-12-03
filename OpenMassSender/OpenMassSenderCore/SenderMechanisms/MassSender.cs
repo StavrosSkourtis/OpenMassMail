@@ -35,7 +35,7 @@ namespace OpenMassSenderCore.Senders
 
             for (int c = 0; c < threads; c++)
             {
-                Sender sender=null;
+                Sender sender = null;
 
                 if (message.type.Equals("sms")) sender = new SMSSender(senderAccount);
                 else if (message.type.Equals("email")) sender = new MailSender(senderAccount);
@@ -44,7 +44,7 @@ namespace OpenMassSenderCore.Senders
                 if (sendsPerThread * c + count > receivers.Count) count = receivers.Count - sendsPerThread * c;
                 List<OpenMassSenderCore.OpenMassSenderDBDataSet.ReceiverRow> subsetReceivers = receivers.GetRange(sendsPerThread * c, count);
 
-                SenderThread senderThread = new SenderThread(status, sender, message, subsetReceivers, (sentStatus) => statusCallback(sentStatus));
+                SenderThread senderThread = new SenderThread(status,message, sender , subsetReceivers, (sentStatus) => statusCallback(sentStatus));
                 Thread workerThread = new Thread(senderThread.send);
 
                 workerThread.Start();
@@ -58,7 +58,7 @@ namespace OpenMassSenderCore.Senders
         List<OpenMassSenderCore.OpenMassSenderDBDataSet.ReceiverRow> receivers;
         Action<SendStatusChanged> statusCallback;
         PendingJobStatus pendingJobStatus;
-        public SenderThread(PendingJobStatus pendingJobStatus, Sender sender, OpenMassSenderCore.OpenMassSenderDBDataSet.MessageRow message, List<OpenMassSenderCore.OpenMassSenderDBDataSet.ReceiverRow> receivers, Action<SendStatusChanged> statusCallback)
+        public SenderThread(PendingJobStatus pendingJobStatus,OpenMassSenderCore.OpenMassSenderDBDataSet.MessageRow message,Sender sender, List<OpenMassSenderCore.OpenMassSenderDBDataSet.ReceiverRow> receivers, Action<SendStatusChanged> statusCallback)
         {
             this.pendingJobStatus = pendingJobStatus;
             this.message = message;
@@ -79,6 +79,7 @@ namespace OpenMassSenderCore.Senders
                 pendingJobStatus.sent.Add(sentStatus);
                 statusCallback(sentStatus);
             }
+
         }
     }
     public class SendStatusChanged

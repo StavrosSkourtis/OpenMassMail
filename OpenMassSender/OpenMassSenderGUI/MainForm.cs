@@ -52,14 +52,6 @@ namespace OpenMassSenderGUI
                 //write the user's id to a file so that the job execution service can know what user is logged in without the desktop
                 //project running
                 File.WriteAllText("omsloggeduser.dt", username + "|" + password + "|" + userid);
-
-                ReceiverTableAdapter.getInstance().setUserID(userid) ;
-                SenderAccountTableAdapter.getInstance().setUserID(userid);
-                JobTableAdapter.getInstance().setUserID(userid);
-                JobScheduleTableAdapter.getInstance().setUserID(userid);
-                MessageTableAdapter.getInstance().setUserID(userid);
-                SenderAccountTableAdapter.getInstance().setUserID(userid);
-
                 loginForm.Close();
             });
             loginForm.TopMost = true;

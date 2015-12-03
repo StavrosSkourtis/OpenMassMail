@@ -57,5 +57,11 @@ namespace OpenMassSenderGUI
             }
             
         }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            OpenMassSenderCore.OpenMassSenderDBDataSet.JobRow job = JobTableAdapter.getInstance().GetDataById(1)[0];
+            job.execute();
+        }
     }
 }

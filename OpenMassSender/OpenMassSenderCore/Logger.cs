@@ -11,6 +11,7 @@ namespace OpenMassSenderCore
         public static List<LogEntry> logs = new List<LogEntry>();
         public static void log(string category,string text)
         {
+            Console.WriteLine("tag:" + category + "  message:" + text);
             logs.Add(new LogEntry(category, text));
             if (category.Equals("error"))
             {

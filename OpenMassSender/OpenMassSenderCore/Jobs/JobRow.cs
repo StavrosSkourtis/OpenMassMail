@@ -14,7 +14,6 @@ namespace OpenMassSenderCore
             public class JobStatus {public static string PENDING="PENDING",SHEDULED="SHEDULED",FINISHED="FINISHED"; };
             public string title;
             public MessageRow messageObject;
-            public SenderAccountRow sender;
             public MassSender massSender;
             //<summary>returns true if the job is ready for execution,makes sense if the job has a shedule</summary>
             public bool isReadForExecution()
@@ -46,16 +45,19 @@ namespace OpenMassSenderCore
                 massSender=new MassSender();
                 OpenMassSenderCore.OpenMassSenderDBDataSet.ReceiverDataTable receivers = ReceiverTableAdapter.getInstance().searchReceivers(group, query);
                 List<OpenMassSenderCore.OpenMassSenderDBDataSet.ReceiverRow> receiversList=new List<OpenMassSenderCore.OpenMassSenderDBDataSet.ReceiverRow>();
-                foreach(OpenMassSenderCore.OpenMassSenderDBDataSet.ReceiverRow row in receivers){
-                    receiversList.Add(row);
+                foreach (ReceiverRow rec in receivers)
+                {
+                    receiversList.Add(rec);
                 }
-            
                 MessageRow message = (MessageRow)MessageTableAdapter.getInstance().GetDataById(this.message).Rows[0];
+                SenderAccountRow sender = (SenderAccountRow)SenderAccountTableAdapter.getInstance().GetDataById(this.sender_account).Rows[0];
 
-                massSender.send(this.sender,
+                Logger.log("log", "creating mass sender for " + sender.ID + " message " + message.ID);
+                Logger.log("receivers:", "receivers:" + receiversList.Count);
+                massSender.send(sender,
                     message, receiversList, (SendStatusChanged status) =>
                 {
-                    Logger.log("log","send to "+status.receiver.last_name+" "+(status.status==MessageStatus.SUCCEED?"success":"failure"));
+                    Logger.log("log","send to "+status.receiver.ID+" "+(status.status==MessageStatus.SUCCEED?"success":"failure"));
                 });
                 return massSender.status;
             }

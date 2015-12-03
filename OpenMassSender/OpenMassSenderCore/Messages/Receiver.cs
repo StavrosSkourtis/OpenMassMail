@@ -19,20 +19,39 @@ namespace OpenMassSenderCore
             //<summary>The message the message(no shit sherlock)</summary>
 
 
+            public string getMetadataByName(string name)
+            {
+                string meta=null;
+                try
+                {
+                    getMetadataList().TryGetValue(name,out meta);
+                }
+                catch (Exception ex)
+                {
+                    Logger.log("error", ex.Message);
+                }
+                return meta;
+            }
+
+            private int lastMetadataHash = 0;
+            private Dictionary<string, string> metadataList = new Dictionary<string, string>();
             public Dictionary<string, string> getMetadataList()
             {
-                Dictionary<string,string> data = new Dictionary<string,string>();
-
-                string[] mdata = this.metadata.Split(';');
-                foreach (string s in mdata)
-                {
-                    try
-                    {
-                        data.Add(s.Split('=')[0], s.Split('=')[1]);
-                    }
-                    catch (Exception ex) { }
-                }
-                return data;
+                  if (this.metadata.GetHashCode() != lastMetadataHash)
+                  {
+                      lastMetadataHash = this.metadata.GetHashCode();
+                      metadataList.Clear();
+                      string[] mdata = this.metadata.Split(';');
+                      foreach (string s in mdata)
+                      {
+                          try
+                          {
+                              metadataList.Add(s.Split('=')[0], s.Split('=')[1]);
+                          }
+                          catch (Exception ex) { }
+                      }
+                  }
+                  return metadataList;
             }
         }
     }

@@ -11,13 +11,7 @@ namespace OpenMassSenderCore.OpenMassSenderDBDataSetTableAdapters
 
         partial class ReceiverTableAdapter
         {
-            public string userid;
-            public bool setUserID(string user)
-            {
-                this.userid = user;
-                return true;
-            }
-            
+
             //<sumarry>Adds a new receiver</summary>
             //<param name="job">The receiver to add</param>
             public void add(string group, OpenMassSenderCore.OpenMassSenderDBDataSet.ReceiverRow receiver)
@@ -27,6 +21,15 @@ namespace OpenMassSenderCore.OpenMassSenderDBDataSetTableAdapters
             //<sumarry>Returns a list with all the receivers</summary>
             public OpenMassSenderCore.OpenMassSenderDBDataSet.ReceiverDataTable getAllReceiversOfGroup(string group)
             {
+                try
+                {
+                    OpenMassSenderCore.OpenMassSenderDBDataSet.ReceiverDataTable receivers = this.GetDataByGroup(Int32.Parse(UserTableAdapter.getInstance().userid), group);
+                    return receivers;
+                }
+                catch (Exception ex)
+                {
+                    Logger.log("error", ex.Message);
+                }
                 return null;
             }
 
@@ -38,7 +41,7 @@ namespace OpenMassSenderCore.OpenMassSenderDBDataSetTableAdapters
             {
                 OpenMassSenderCore.OpenMassSenderDBDataSet.ReceiverDataTable receiversInGroup = getAllReceiversOfGroup(group);
                 OpenMassSenderCore.OpenMassSenderDBDataSet.ReceiverDataTable receiversMaching = new OpenMassSenderCore.OpenMassSenderDBDataSet.ReceiverDataTable();
-                if (query.Equals(""))
+                if (query==null || query.Equals(""))
                 {
                     return receiversInGroup;
                 }

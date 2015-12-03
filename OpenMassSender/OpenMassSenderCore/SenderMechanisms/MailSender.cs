@@ -22,6 +22,7 @@ namespace OpenMassSenderCore.Senders
         }
         public override string send(OpenMassSenderCore.OpenMassSenderDBDataSet.MessageRow message,OpenMassSenderCore.OpenMassSenderDBDataSet.ReceiverRow receiver)
         {
+            Logger.log("log", "sending to " + receiver.ID + " of job " + message.job);
             System.Net.Mail.MailMessage mail = new System.Net.Mail.MailMessage(sender.email, receiver.email);
             mail.Subject = message.subject;
             mail.Body = message.replaceWildCards(receiver);

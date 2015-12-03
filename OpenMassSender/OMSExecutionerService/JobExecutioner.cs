@@ -26,16 +26,14 @@ namespace OMSExecutionerService
         //<summary>notify the executioner that a new job has been added</summary>
         public void jobHasBeenAdded()
         {
-            if (JobTableAdapter.getInstance().setUserID(userid)) executeIfReady(null);
+            executeIfReady(null);
         }
         //<summary>gets called by the desktop program as soon as the user gets authenticated,its part of the communication interface</summary>
         //<param name="user">the authenticated user</param>
         public void setUser(string user)
         {
             this.userid = user;
-            ReceiverTableAdapter.getInstance().setUserID(user);
-
-            if (user != null && JobTableAdapter.getInstance().setUserID(userid)) executeIfReady(null);
+            if (user != null) executeIfReady(null);
         }
         //<summary>check if any of the pending/scheduled jobs are ready for execution</summary>
         public void executeIfReady(object source)

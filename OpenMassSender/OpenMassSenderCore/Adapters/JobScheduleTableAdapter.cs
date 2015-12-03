@@ -8,13 +8,6 @@ namespace OpenMassSenderCore.OpenMassSenderDBDataSetTableAdapters
     //<summary>A job is a sheduled/pending or already executed action of whatever type(mail,sms)</summary>
     partial class JobScheduleTableAdapter
     {
-        private string userid;
-        public bool setUserID(string user)
-        {
-            this.userid = user;
-            
-            return true;
-        }
         public OpenMassSenderCore.OpenMassSenderDBDataSet.JobScheduleRow getNewRow(OpenMassSenderCore.OpenMassSenderDBDataSet.JobRow job)
         {
             OpenMassSenderCore.OpenMassSenderDBDataSet.JobScheduleRow schedule=OpenMassSenderDBDataSet.getInstance().JobSchedule.NewJobScheduleRow();

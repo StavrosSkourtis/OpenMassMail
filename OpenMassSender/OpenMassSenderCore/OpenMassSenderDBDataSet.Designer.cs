@@ -1851,7 +1851,7 @@ namespace OpenMassSenderCore {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public SenderAccountRow AddSenderAccountRow(int ID, string email, string first_name, string last_name, string host, int port, string sms_url, UserRow parentUserRowByUserSenderAccount, int type) {
+            public SenderAccountRow AddSenderAccountRow(int ID, string email, string first_name, string last_name, string host, int port, string sms_url, UserRow parentUserRowByUserSenderAccount, string type) {
                 SenderAccountRow rowSenderAccountRow = ((SenderAccountRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         ID,
@@ -1920,7 +1920,7 @@ namespace OpenMassSenderCore {
                 base.Columns.Add(this.columnsms_url);
                 this.columnuser = new global::System.Data.DataColumn("user", typeof(int), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnuser);
-                this.columntype = new global::System.Data.DataColumn("type", typeof(int), null, global::System.Data.MappingType.Element);
+                this.columntype = new global::System.Data.DataColumn("type", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columntype);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
                                 this.columnID}, true));
@@ -2399,11 +2399,11 @@ namespace OpenMassSenderCore {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public string query {
                 get {
-                    try {
-                        return ((string)(this[this.tableJob.queryColumn]));
+                    if (this.IsqueryNull()) {
+                        return null;
                     }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'query\' in table \'Job\' is DBNull.", e);
+                    else {
+                        return ((string)(this[this.tableJob.queryColumn]));
                     }
                 }
                 set {
@@ -2414,11 +2414,11 @@ namespace OpenMassSenderCore {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public string group {
                 get {
-                    try {
-                        return ((string)(this[this.tableJob.groupColumn]));
+                    if (this.IsgroupNull()) {
+                        return null;
                     }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'group\' in table \'Job\' is DBNull.", e);
+                    else {
+                        return ((string)(this[this.tableJob.groupColumn]));
                     }
                 }
                 set {
@@ -2919,11 +2919,11 @@ namespace OpenMassSenderCore {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public string metadata {
                 get {
-                    try {
-                        return ((string)(this[this.tableReceiver.metadataColumn]));
+                    if (this.IsmetadataNull()) {
+                        return null;
                     }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'metadata\' in table \'Receiver\' is DBNull.", e);
+                    else {
+                        return ((string)(this[this.tableReceiver.metadataColumn]));
                     }
                 }
                 set {
@@ -3049,11 +3049,11 @@ namespace OpenMassSenderCore {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public string email {
                 get {
-                    try {
-                        return ((string)(this[this.tableSenderAccount.emailColumn]));
+                    if (this.IsemailNull()) {
+                        return null;
                     }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'email\' in table \'SenderAccount\' is DBNull.", e);
+                    else {
+                        return ((string)(this[this.tableSenderAccount.emailColumn]));
                     }
                 }
                 set {
@@ -3124,11 +3124,11 @@ namespace OpenMassSenderCore {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public string sms_url {
                 get {
-                    try {
-                        return ((string)(this[this.tableSenderAccount.sms_urlColumn]));
+                    if (this.Issms_urlNull()) {
+                        return null;
                     }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'sms_url\' in table \'SenderAccount\' is DBNull.", e);
+                    else {
+                        return ((string)(this[this.tableSenderAccount.sms_urlColumn]));
                     }
                 }
                 set {
@@ -3152,10 +3152,10 @@ namespace OpenMassSenderCore {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public int type {
+            public string type {
                 get {
                     try {
-                        return ((int)(this[this.tableSenderAccount.typeColumn]));
+                        return ((string)(this[this.tableSenderAccount.typeColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
                         throw new global::System.Data.StrongTypingException("The value for column \'type\' in table \'SenderAccount\' is DBNull.", e);
@@ -5205,7 +5205,7 @@ namespace OpenMassSenderCore.OpenMassSenderDBDataSetTableAdapters {
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         private void InitCommandCollection() {
-            this._commandCollection = new global::System.Data.OleDb.OleDbCommand[3];
+            this._commandCollection = new global::System.Data.OleDb.OleDbCommand[4];
             this._commandCollection[0] = new global::System.Data.OleDb.OleDbCommand();
             this._commandCollection[0].Connection = this.Connection;
             this._commandCollection[0].CommandText = "SELECT ID, email, phone_number, metadata, [group], [user] FROM Receiver";
@@ -5218,9 +5218,16 @@ namespace OpenMassSenderCore.OpenMassSenderDBDataSetTableAdapters {
             this._commandCollection[1].Parameters.Add(new global::System.Data.OleDb.OleDbParameter("ID", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "ID", global::System.Data.DataRowVersion.Current, false, null));
             this._commandCollection[2] = new global::System.Data.OleDb.OleDbCommand();
             this._commandCollection[2].Connection = this.Connection;
-            this._commandCollection[2].CommandText = "SELECT distinct [group] FROM Receiver where [user]=?";
+            this._commandCollection[2].CommandText = "SELECT ID, email, phone_number, metadata, [group], [user] FROM Receiver where [us" +
+                "er]=? and [group]=?";
             this._commandCollection[2].CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[2].Parameters.Add(new global::System.Data.OleDb.OleDbParameter("user", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "user", global::System.Data.DataRowVersion.Current, false, null));
+            this._commandCollection[2].Parameters.Add(new global::System.Data.OleDb.OleDbParameter("group", global::System.Data.OleDb.OleDbType.WChar, 255, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "group", global::System.Data.DataRowVersion.Current, false, null));
+            this._commandCollection[3] = new global::System.Data.OleDb.OleDbCommand();
+            this._commandCollection[3].Connection = this.Connection;
+            this._commandCollection[3].CommandText = "SELECT distinct [group] FROM Receiver where [user]=?";
+            this._commandCollection[3].CommandType = global::System.Data.CommandType.Text;
+            this._commandCollection[3].Parameters.Add(new global::System.Data.OleDb.OleDbParameter("user", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "user", global::System.Data.DataRowVersion.Current, false, null));
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -5272,8 +5279,30 @@ namespace OpenMassSenderCore.OpenMassSenderDBDataSetTableAdapters {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, false)]
-        public virtual OpenMassSenderDBDataSet.ReceiverDataTable GetGroups(global::System.Nullable<int> user) {
+        public virtual OpenMassSenderDBDataSet.ReceiverDataTable GetDataByGroup(global::System.Nullable<int> user, string group) {
             this.Adapter.SelectCommand = this.CommandCollection[2];
+            if ((user.HasValue == true)) {
+                this.Adapter.SelectCommand.Parameters[0].Value = ((int)(user.Value));
+            }
+            else {
+                this.Adapter.SelectCommand.Parameters[0].Value = global::System.DBNull.Value;
+            }
+            if ((group == null)) {
+                this.Adapter.SelectCommand.Parameters[1].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.SelectCommand.Parameters[1].Value = ((string)(group));
+            }
+            OpenMassSenderDBDataSet.ReceiverDataTable dataTable = new OpenMassSenderDBDataSet.ReceiverDataTable();
+            this.Adapter.Fill(dataTable);
+            return dataTable;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, false)]
+        public virtual OpenMassSenderDBDataSet.ReceiverDataTable GetGroups(global::System.Nullable<int> user) {
+            this.Adapter.SelectCommand = this.CommandCollection[3];
             if ((user.HasValue == true)) {
                 this.Adapter.SelectCommand.Parameters[0].Value = ((int)(user.Value));
             }

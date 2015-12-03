@@ -13,7 +13,7 @@ namespace OpenMassSenderCore.OpenMassSenderDBDataSetTableAdapters
 
         partial class UserTableAdapter
         {
-            public string userid = "";
+            public string userid = "1";
             //<summary>asynchronus method for getting all the user's lists(receivers,jobs,senders),using lamda to notify when ready</summary>
             //<param name="username">the username</param>
             //<param name="password">the password</param>
