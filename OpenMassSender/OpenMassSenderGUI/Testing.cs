@@ -41,7 +41,7 @@ namespace OpenMassSenderGUI
             message.type = "email";
             message.linkedFile = "";
 
-            MessageForm msgForm = new MessageForm(message);
+            MessageForm msgForm = new MessageForm(message,this);
             msgForm.Show();
 
             JobTableAdapter.getInstance().submitRow(job);
