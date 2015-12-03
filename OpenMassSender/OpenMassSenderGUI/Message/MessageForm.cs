@@ -12,10 +12,14 @@ using System.Text.RegularExpressions;
 namespace OpenMassSenderGUI
 { 
     public partial class MessageForm : Form
-    { 
+    {
+        private AddNewJob formparent = null;
+
         OpenMassSenderCore.OpenMassSenderDBDataSet.MessageRow message;
-        public MessageForm(OpenMassSenderCore.OpenMassSenderDBDataSet.MessageRow message)
+        public MessageForm(OpenMassSenderCore.OpenMassSenderDBDataSet.MessageRow message,Form frm)
         {
+            formparent = frm as AddNewJob;
+
             InitializeComponent();
             this.message = message;
             if (message.linkedFile != null && message.linkedFile!="")
@@ -67,6 +71,8 @@ namespace OpenMassSenderGUI
 
         private void btnOK_Click(object sender, EventArgs e)
         {
+            this.formparent.filepath = tbSubject.Text;
+            formparent.Show();
             this.Close();
         }
 
