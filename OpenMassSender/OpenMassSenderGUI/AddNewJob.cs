@@ -74,28 +74,13 @@ namespace OpenMassSenderGUI
                 
             }
        }
-        private void checkform(){
-            if (jobtextbox.Text == "" || typecomboBox.SelectedItem!=null  || filepathtextbox.Text == "" || recieverstextBox.Text == "" || executejob.Text == "") 
-            {
-            
-            }
-        }
+        
 
         private void button1_Click(object sender, EventArgs e)
         {
-            string str = typecomboBox.Text;
-            if(str.Equals("email"))
-            {
-                
-                MessageForm messageForm = new MessageForm(job.messageObject);
-                messageForm.ShowDialog();
-            }
-            if (str.Equals("sms")) 
-            {
-                
-                
-            }
-                
+            
+            MessageForm messageForm = new MessageForm(job.messageObject, this);
+            messageForm.ShowDialog();
             
         }
 
@@ -108,6 +93,44 @@ namespace OpenMassSenderGUI
         {
 
         }
+        public string filepath
+        {
+            get { return filepathtextbox.Text; }
+            set { filepathtextbox.Text = value; }
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            receiversWindow frm = new receiversWindow();
+            frm.ShowDialog();
+        }
+
+        private void jobtextbox_Leave(object sender, EventArgs e)
+        {
+            if (jobtextbox.Text  == "") 
+            {
+                errorProvider.SetError(jobtextbox,"you must fill this field");
+            }
+        }
+
+        private void jobtextbox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            errorProvider.Clear();
+        }
+
+        private void recieverstextBox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            errorProvider.Clear();
+        }
+
+        private void recieverstextBox_Leave(object sender, EventArgs e)
+        {
+            if (recieverstextBox.Text == "") 
+            {
+                errorProvider.SetError(recieverstextBox, "you must fill this field");
+            }
+        }
+
     }
 
 }
