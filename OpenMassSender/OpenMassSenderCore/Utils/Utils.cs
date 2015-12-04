@@ -29,7 +29,7 @@ namespace OpenMassSenderCore.Utils
     class DatabaseUtils
     {
         //<TODO>fix the mappath error</TODO>
-        public static string CONNECTION_STRING = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=|DataDirectory|\\OpenMassSenderDB.accdb";
+        public static string CONNECTION_STRING = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=OpenMassSenderDB.accdb";
      //   public static string CONNECTION_STRING = "Provider=Microsoft.Jet.OLEDB.4.0; " +"Data Source=" + Microsoft.SqlServer.Server.MapPath("~/OpenMassSender.accdb");
     }
 }

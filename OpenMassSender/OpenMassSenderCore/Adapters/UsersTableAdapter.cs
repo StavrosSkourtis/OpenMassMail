@@ -6,6 +6,7 @@ using System.Threading;
 using System.IO;
 using System.Data.OleDb;
 using OpenMassSenderCore.Utils;
+using System.Windows.Forms;
 
 namespace OpenMassSenderCore.OpenMassSenderDBDataSetTableAdapters
 {
@@ -38,7 +39,7 @@ namespace OpenMassSenderCore.OpenMassSenderDBDataSetTableAdapters
                             /*
                              * Create the command
                              */
-                            string query = "select id,password from user where username=@username";
+                            string query = "select `id`,`password` from `user` where username=@username";
                             using (OleDbCommand cmd = new OleDbCommand(query, connection))
                             {
                                 cmd.Parameters.AddWithValue("@username", username);
@@ -53,7 +54,7 @@ namespace OpenMassSenderCore.OpenMassSenderDBDataSetTableAdapters
                                     if (SecurityUtils.SHA256(password).Equals(realPasswordHash))
                                     {
                                         //The password is valid, store the users id
-                                        userid = reader.GetString(0);
+                                        userid = Convert.ToString(reader.GetValue(0));
                                     }
                                     else
                                     {
@@ -78,7 +79,7 @@ namespace OpenMassSenderCore.OpenMassSenderDBDataSetTableAdapters
                     {
                         Logger.log("error","error: " + ex.Message);
                     }
-
+                    MessageBox.Show(userid);
                     onLogin(LOGIN_STATUS.SUCCESS, userid);
 
                     //else if login unsuccesfull
@@ -101,52 +102,63 @@ namespace OpenMassSenderCore.OpenMassSenderDBDataSetTableAdapters
                  *  Open a connection to the dataabase
                  */
                 using (OleDbConnection connection = new OleDbConnection(DatabaseUtils.CONNECTION_STRING))
-                {   
+                {
+
                     //Open the database connection
                     connection.Open();
-
 
                     /*
                      *  Checking if a user exists
                      */
-                    string userExistsQuery = "select * from user where username=@username";
+                    string userExistsQuery = "select * from `user` where username=@username";
 
                     using(OleDbCommand cmd = new OleDbCommand(userExistsQuery,connection)){
-                        cmd.Parameters.AddWithValue("@username" , username);
+                       
 
-                        int result = (int)cmd.ExecuteScalar();
+                        
+
+                        cmd.Parameters.AddWithValue("@username", username);
+                        
+                        OleDbDataReader reader = cmd.ExecuteReader();
 
                         /*
                          *  User exists
                          *  Throw exception
                          */
-                        if(result == 1){
-                            connection.Close();
+                        if (reader.Read())
+                        {
                             throw new UserExistsException("A user with username: "+username+" already exists");
                         }
+                      
+                        
                     }
+                    connection.Close();
+                }
 
-
+                using (OleDbConnection connection = new OleDbConnection(DatabaseUtils.CONNECTION_STRING))
+                {
+                    connection.Open();
                     /*
                      *  Creating the password hash using SHA256
                      */
                     string hashedPassword = SecurityUtils.SHA256(password);
 
-                   
+
 
                     /*  
                      *  Insert the new user in the database
                      */
-                    string createUserQuery = "insert into user (username,password) values(@username,@password)";
+                    string createUserQuery = "insert into `user` (`username`,`password`) values(@username,@password)";
 
-                    using( OleDbCommand cmd = new OleDbCommand(createUserQuery,connection)){
-                        cmd.Parameters.AddWithValue("@username",username);
-                        cmd.Parameters.AddWithValue("@password",hashedPassword);
+                    using (OleDbCommand cmd = new OleDbCommand(createUserQuery, connection))
+                    {
+                        
+                        cmd.Parameters.AddWithValue("@username", username);
+                        cmd.Parameters.AddWithValue("@password", hashedPassword);
 
                         cmd.ExecuteNonQuery();
+                        
                     }
-
-                    //Close the database Connection
                     connection.Close();
                 }
                    
