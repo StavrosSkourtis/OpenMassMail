@@ -79,7 +79,7 @@ namespace OpenMassSenderCore.OpenMassSenderDBDataSetTableAdapters
                     {
                         Logger.log("error","error: " + ex.Message);
                     }
-                    MessageBox.Show(userid);
+                    
                     onLogin(LOGIN_STATUS.SUCCESS, userid);
 
                     //else if login unsuccesfull
