@@ -14,7 +14,7 @@ namespace OpenMassSenderCore.OpenMassSenderDBDataSetTableAdapters
 
         partial class UserTableAdapter
         {
-            public string userid = "1";
+            public string userid = "";
             //<summary>asynchronus method for getting all the user's lists(receivers,jobs,senders),using lamda to notify when ready</summary>
             //<param name="username">the username</param>
             //<param name="password">the password</param>
@@ -55,12 +55,14 @@ namespace OpenMassSenderCore.OpenMassSenderDBDataSetTableAdapters
                                     {
                                         //The password is valid, store the users id
                                         userid = Convert.ToString(reader.GetValue(0));
+                                        onLogin(LOGIN_STATUS.SUCCESS, userid);
                                     }
                                     else
                                     {
                                         //The password is not valid
                                         // Estw -1 an den egine to login swsta
                                         userid = "-1";
+                                        onLogin(LOGIN_STATUS.FAILURE, userid);
                                     }
                                 }
                                 else
@@ -68,6 +70,7 @@ namespace OpenMassSenderCore.OpenMassSenderDBDataSetTableAdapters
                                     //Login failed
                                     // Estw -1 an den egine to login swsta
                                     userid = "-1";
+                                    Console.WriteLine("fail 2");
                                 }
 
                             }
@@ -78,12 +81,8 @@ namespace OpenMassSenderCore.OpenMassSenderDBDataSetTableAdapters
                     catch (Exception ex)
                     {
                         Logger.log("error","error: " + ex.Message);
+                        onLogin(LOGIN_STATUS.FAILURE, userid);
                     }
-                    
-                    onLogin(LOGIN_STATUS.SUCCESS, userid);
-
-                    //else if login unsuccesfull
-                    //onLogin(LOGIN_STATUS.FAILURE);
                 })).Start();
             }
 

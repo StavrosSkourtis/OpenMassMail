@@ -23,8 +23,8 @@ namespace OpenMassSenderGUI
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            Testing testing = new Testing();
-            testing.Show();
+          //  Testing testing = new Testing();
+          // testing.Show();
             if (UserTableAdapter.getInstance().userid == null || UserTableAdapter.getInstance().userid.Equals(""))
             {
                 showLoginForm();

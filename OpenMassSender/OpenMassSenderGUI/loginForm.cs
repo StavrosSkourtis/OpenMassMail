@@ -28,19 +28,18 @@ namespace OpenMassSenderGUI
 
         private void btnLogin_Click(object sender, EventArgs e)
         {
-            callBackListener("testname", "testpassword", "1");
+           // callBackListener("testname", "testpassword", "1");
             //this.Close();
-           /* if (txtPassword.Text.Equals("") || txtUsername.Text.Equals(""))
+            if (txtPassword.Text.Equals("") || txtUsername.Text.Equals(""))
             {
                 lblNotice.Text = "You need to fill all the fields";
-                Console.Write("asd");
                 return;
             }
             UserTableAdapter.getInstance().login(txtUsername.Text, txtPassword.Text, (status,userid) =>
             {
                 if (callBackListener != null && status == LOGIN_STATUS.SUCCESS) callBackListener(txtUsername.Text, txtPassword.Text, userid);
                 else lblNotice.Text = "Something went wrong during login(wrong password?)";           
-            });*/
+            });
         }
 
         private void btnCreateAccount_Click(object sender, EventArgs e)
