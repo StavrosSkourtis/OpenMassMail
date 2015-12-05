@@ -40,18 +40,15 @@ namespace OpenMassSenderGUI
             listViewJobs.Items.Clear();
 
             // Display items in the ListView control
-            for (int i = 0; i < dtable.Rows.Count; i++)
-            {
-                DataRow drow = dtable.Rows[i];
+            foreach (OpenMassSenderCore.OpenMassSenderDBDataSet.JobRow row in JobTableAdapter.getInstance().GetData()) {
 
                 // Only row that have not been deleted
-                if (drow.RowState != DataRowState.Deleted)
+                if (row.RowState != DataRowState.Deleted)
                 {
                     // Define the list items
-                    ListViewItem lvi = new ListViewItem(drow["status"].ToString());
-                    lvi.SubItems.Add(drow["ID"].ToString());
-                    //lvi.SubItems.Add(drow["price"].ToString());
-                    //lvi.SubItems.Add(drow["pubdate"].ToString());
+                    ListViewItem lvi = new ListViewItem(row["ID"].ToString());
+                    lvi.SubItems.Add("tratara".ToString());
+                    lvi.SubItems.Add(row["status"].ToString());
 
                     // Add the list items to the ListView
                     listViewJobs.Items.Add(lvi);
