@@ -98,7 +98,7 @@ namespace OpenMassSenderGUI
         {
 
 
-            /*
+            
             //Clear the list view
             listViewReceivers.Items.Clear();
 
@@ -106,6 +106,7 @@ namespace OpenMassSenderGUI
              
             foreach (OpenMassSenderCore.OpenMassSenderDBDataSet.ReceiverRow row in ReceiverTableAdapter.getInstance().searchReceivers(cbReceiversGroup.SelectedItem.ToString(), tbSearch.Text))
             {
+                Console.WriteLine("asd:" + row.ID);
                 if (row.RowState != DataRowState.Deleted)
                 {
                     ListViewItem item = new ListViewItem(row.ID.ToString());
@@ -118,7 +119,7 @@ namespace OpenMassSenderGUI
                 }
             }
 
-           */
+           
         }
 
 

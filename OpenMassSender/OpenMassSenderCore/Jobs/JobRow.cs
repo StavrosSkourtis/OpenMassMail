@@ -43,12 +43,8 @@ namespace OpenMassSenderCore
             {
                 
                 massSender=new MassSender();
-                OpenMassSenderCore.OpenMassSenderDBDataSet.ReceiverDataTable receivers = ReceiverTableAdapter.getInstance().searchReceivers(group, query);
-                List<OpenMassSenderCore.OpenMassSenderDBDataSet.ReceiverRow> receiversList=new List<OpenMassSenderCore.OpenMassSenderDBDataSet.ReceiverRow>();
-                foreach (ReceiverRow rec in receivers)
-                {
-                    receiversList.Add(rec);
-                }
+                List<OpenMassSenderCore.OpenMassSenderDBDataSet.ReceiverRow> receiversList = ReceiverTableAdapter.getInstance().searchReceivers(group, query);
+    
                 MessageRow message = (MessageRow)MessageTableAdapter.getInstance().GetDataById(this.message).Rows[0];
                 SenderAccountRow sender = (SenderAccountRow)SenderAccountTableAdapter.getInstance().GetDataById(this.sender_account).Rows[0];
 

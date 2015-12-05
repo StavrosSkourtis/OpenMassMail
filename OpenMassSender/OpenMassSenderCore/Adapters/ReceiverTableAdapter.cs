@@ -23,7 +23,7 @@ namespace OpenMassSenderCore.OpenMassSenderDBDataSetTableAdapters
             {
                 try
                 {
-                    OpenMassSenderCore.OpenMassSenderDBDataSet.ReceiverDataTable receivers = this.GetDataByGroup(Int32.Parse(UserTableAdapter.getInstance().userid), group);
+                    OpenMassSenderCore.OpenMassSenderDBDataSet.ReceiverDataTable receivers = this.GetDataByGroup(1, group);
                     return receivers;
                 }
                 catch (Exception ex)
@@ -37,25 +37,28 @@ namespace OpenMassSenderCore.OpenMassSenderDBDataSetTableAdapters
             //<param name="query">the critirias of the search, for example "location=Thessaloniki;age>18" returns
             //the receivers location in thessaloniki and are of age 19 or higher
             //<returns>a subset of all the receivers</returns>
-            public OpenMassSenderCore.OpenMassSenderDBDataSet.ReceiverDataTable searchReceivers(string group, string query)
+            public List<OpenMassSenderCore.OpenMassSenderDBDataSet.ReceiverRow> searchReceivers(string group, string query)
             {
                 OpenMassSenderCore.OpenMassSenderDBDataSet.ReceiverDataTable receiversInGroup = getAllReceiversOfGroup(group);
-                OpenMassSenderCore.OpenMassSenderDBDataSet.ReceiverDataTable receiversMaching = new OpenMassSenderCore.OpenMassSenderDBDataSet.ReceiverDataTable();
+                List<OpenMassSenderCore.OpenMassSenderDBDataSet.ReceiverRow> receiversMaching = new List<OpenMassSenderDBDataSet.ReceiverRow>();
                 if (query==null || query.Equals(""))
                 {
-                    return receiversInGroup;
+                    foreach(OpenMassSenderCore.OpenMassSenderDBDataSet.ReceiverRow row in receiversInGroup){
+                        receiversMaching.Add(row);
+                    }
+                    return receiversMaching;
                 }
                 DataTable td = new DataTable();
 
                 string[] queries = query.Split(';');
-                foreach (DataRow row in receiversInGroup.Rows)
+                foreach (OpenMassSenderCore.OpenMassSenderDBDataSet.ReceiverRow row in receiversInGroup.Rows)
                 {
                     Boolean containsAll = true;
                     foreach (string q in queries)
                     {
                         if (row["metadata"].ToString().Contains(q) == false) containsAll = false;
                     }
-                    if (containsAll) receiversMaching.Rows.Add(row);
+                    if (containsAll) receiversMaching.Add(row);
                 }
                 return receiversMaching;
             }
