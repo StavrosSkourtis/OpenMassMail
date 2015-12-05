@@ -30,7 +30,7 @@
         {
             this.panel1 = new System.Windows.Forms.Panel();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-            this.listView1 = new System.Windows.Forms.ListView();
+            this.listViewJobs = new System.Windows.Forms.ListView();
             this.ColumnNumber = new System.Windows.Forms.ColumnHeader();
             this.ColumnName = new System.Windows.Forms.ColumnHeader();
             this.columnStatus = new System.Windows.Forms.ColumnHeader();
@@ -43,7 +43,13 @@
             this.connectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.manageSendersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuItemJobs = new System.Windows.Forms.ToolStripMenuItem();
+            this.manageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.senderAccountsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.manageToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.menuItemOptions = new System.Windows.Forms.ToolStripMenuItem();
+            this.preferencesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.openLoggerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tabControlMainWindow = new System.Windows.Forms.TabControl();
             this.tabPageStatus = new System.Windows.Forms.TabPage();
             this.tabPageMessage = new System.Windows.Forms.TabPage();
@@ -59,9 +65,10 @@
             // panel1
             // 
             this.panel1.Controls.Add(this.splitContainer1);
-            this.panel1.Location = new System.Drawing.Point(0, 1);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(565, 484);
+            this.panel1.Size = new System.Drawing.Size(565, 486);
             this.panel1.TabIndex = 0;
             // 
             // splitContainer1
@@ -73,29 +80,30 @@
             // 
             // splitContainer1.Panel1
             // 
-            this.splitContainer1.Panel1.Controls.Add(this.listView1);
+            this.splitContainer1.Panel1.Controls.Add(this.listViewJobs);
             this.splitContainer1.Panel1.Controls.Add(this.toolStrip1);
             this.splitContainer1.Panel1.Controls.Add(this.menuStrip1);
             // 
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.tabControlMainWindow);
-            this.splitContainer1.Size = new System.Drawing.Size(565, 484);
-            this.splitContainer1.SplitterDistance = 362;
+            this.splitContainer1.Size = new System.Drawing.Size(565, 486);
+            this.splitContainer1.SplitterDistance = 363;
             this.splitContainer1.TabIndex = 0;
             // 
-            // listView1
+            // listViewJobs
             // 
-            this.listView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.listViewJobs.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.ColumnNumber,
             this.ColumnName,
             this.columnStatus});
-            this.listView1.Location = new System.Drawing.Point(0, 52);
-            this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(561, 312);
-            this.listView1.TabIndex = 3;
-            this.listView1.UseCompatibleStateImageBehavior = false;
-            this.listView1.View = System.Windows.Forms.View.Details;
+            this.listViewJobs.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.listViewJobs.Location = new System.Drawing.Point(0, 49);
+            this.listViewJobs.Name = "listViewJobs";
+            this.listViewJobs.Size = new System.Drawing.Size(565, 314);
+            this.listViewJobs.TabIndex = 3;
+            this.listViewJobs.UseCompatibleStateImageBehavior = false;
+            this.listViewJobs.View = System.Windows.Forms.View.Details;
             // 
             // ColumnNumber
             // 
@@ -110,7 +118,7 @@
             // columnStatus
             // 
             this.columnStatus.Text = "Status";
-            this.columnStatus.Width = 250;
+            this.columnStatus.Width = 317;
             // 
             // toolStrip1
             // 
@@ -162,6 +170,7 @@
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.menuItemFile,
             this.menuItemJobs,
+            this.senderAccountsToolStripMenuItem,
             this.menuItemOptions});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
@@ -175,43 +184,88 @@
             this.connectToolStripMenuItem,
             this.manageSendersToolStripMenuItem});
             this.menuItemFile.Name = "menuItemFile";
-            this.menuItemFile.Size = new System.Drawing.Size(37, 20);
-            this.menuItemFile.Text = "File";
+            this.menuItemFile.Size = new System.Drawing.Size(42, 20);
+            this.menuItemFile.Text = "User";
             // 
             // connectToolStripMenuItem
             // 
             this.connectToolStripMenuItem.Name = "connectToolStripMenuItem";
-            this.connectToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
-            this.connectToolStripMenuItem.Text = "Connect";
+            this.connectToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.connectToolStripMenuItem.Text = "Connect/Reconnect";
             this.connectToolStripMenuItem.Click += new System.EventHandler(this.connectToolStripMenuItem_Click);
             // 
             // manageSendersToolStripMenuItem
             // 
             this.manageSendersToolStripMenuItem.Name = "manageSendersToolStripMenuItem";
-            this.manageSendersToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
-            this.manageSendersToolStripMenuItem.Text = "Manage senders";
+            this.manageSendersToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.manageSendersToolStripMenuItem.Text = "Options";
             this.manageSendersToolStripMenuItem.Click += new System.EventHandler(this.manageSendersToolStripMenuItem_Click);
             // 
             // menuItemJobs
             // 
+            this.menuItemJobs.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.manageToolStripMenuItem});
             this.menuItemJobs.Name = "menuItemJobs";
-            this.menuItemJobs.Size = new System.Drawing.Size(42, 20);
-            this.menuItemJobs.Text = "Jobs";
+            this.menuItemJobs.Size = new System.Drawing.Size(68, 20);
+            this.menuItemJobs.Text = "Receivers";
+            // 
+            // manageToolStripMenuItem
+            // 
+            this.manageToolStripMenuItem.Name = "manageToolStripMenuItem";
+            this.manageToolStripMenuItem.Size = new System.Drawing.Size(117, 22);
+            this.manageToolStripMenuItem.Text = "Manage";
+            // 
+            // senderAccountsToolStripMenuItem
+            // 
+            this.senderAccountsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.manageToolStripMenuItem1});
+            this.senderAccountsToolStripMenuItem.Name = "senderAccountsToolStripMenuItem";
+            this.senderAccountsToolStripMenuItem.Size = new System.Drawing.Size(108, 20);
+            this.senderAccountsToolStripMenuItem.Text = "Sender Accounts";
+            // 
+            // manageToolStripMenuItem1
+            // 
+            this.manageToolStripMenuItem1.Name = "manageToolStripMenuItem1";
+            this.manageToolStripMenuItem1.Size = new System.Drawing.Size(117, 22);
+            this.manageToolStripMenuItem1.Text = "Manage";
             // 
             // menuItemOptions
             // 
+            this.menuItemOptions.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.preferencesToolStripMenuItem,
+            this.settingsToolStripMenuItem,
+            this.openLoggerToolStripMenuItem});
             this.menuItemOptions.Name = "menuItemOptions";
             this.menuItemOptions.Size = new System.Drawing.Size(61, 20);
             this.menuItemOptions.Text = "Options";
+            // 
+            // preferencesToolStripMenuItem
+            // 
+            this.preferencesToolStripMenuItem.Name = "preferencesToolStripMenuItem";
+            this.preferencesToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
+            this.preferencesToolStripMenuItem.Text = "Preferences";
+            // 
+            // settingsToolStripMenuItem
+            // 
+            this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
+            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
+            this.settingsToolStripMenuItem.Text = "Settings";
+            // 
+            // openLoggerToolStripMenuItem
+            // 
+            this.openLoggerToolStripMenuItem.Name = "openLoggerToolStripMenuItem";
+            this.openLoggerToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
+            this.openLoggerToolStripMenuItem.Text = "Open Logger";
             // 
             // tabControlMainWindow
             // 
             this.tabControlMainWindow.Controls.Add(this.tabPageStatus);
             this.tabControlMainWindow.Controls.Add(this.tabPageMessage);
-            this.tabControlMainWindow.Location = new System.Drawing.Point(4, 4);
+            this.tabControlMainWindow.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.tabControlMainWindow.Location = new System.Drawing.Point(0, 5);
             this.tabControlMainWindow.Name = "tabControlMainWindow";
             this.tabControlMainWindow.SelectedIndex = 0;
-            this.tabControlMainWindow.Size = new System.Drawing.Size(561, 114);
+            this.tabControlMainWindow.Size = new System.Drawing.Size(565, 114);
             this.tabControlMainWindow.TabIndex = 0;
             // 
             // tabPageStatus
@@ -219,7 +273,7 @@
             this.tabPageStatus.Location = new System.Drawing.Point(4, 22);
             this.tabPageStatus.Name = "tabPageStatus";
             this.tabPageStatus.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageStatus.Size = new System.Drawing.Size(553, 88);
+            this.tabPageStatus.Size = new System.Drawing.Size(557, 88);
             this.tabPageStatus.TabIndex = 0;
             this.tabPageStatus.Text = "Status";
             this.tabPageStatus.UseVisualStyleBackColor = true;
@@ -229,7 +283,7 @@
             this.tabPageMessage.Location = new System.Drawing.Point(4, 22);
             this.tabPageMessage.Name = "tabPageMessage";
             this.tabPageMessage.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageMessage.Size = new System.Drawing.Size(553, 88);
+            this.tabPageMessage.Size = new System.Drawing.Size(557, 88);
             this.tabPageMessage.TabIndex = 1;
             this.tabPageMessage.Text = "Message";
             this.tabPageMessage.UseVisualStyleBackColor = true;
@@ -273,12 +327,18 @@
         private System.Windows.Forms.ToolStripButton btnAdd;
         private System.Windows.Forms.ToolStripButton btnDelete;
         private System.Windows.Forms.ToolStripButton btnShowNotReady;
-        private System.Windows.Forms.ListView listView1;
+        private System.Windows.Forms.ListView listViewJobs;
         private System.Windows.Forms.ColumnHeader ColumnNumber;
         private System.Windows.Forms.ColumnHeader ColumnName;
         private System.Windows.Forms.ColumnHeader columnStatus;
         private System.Windows.Forms.ToolStripMenuItem connectToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem manageSendersToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem preferencesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem settingsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem openLoggerToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem manageToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem senderAccountsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem manageToolStripMenuItem1;
     }
 }
 

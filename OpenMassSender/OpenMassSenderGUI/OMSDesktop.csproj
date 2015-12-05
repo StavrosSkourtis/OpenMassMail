@@ -88,11 +88,11 @@
     <Compile Include="LoggerForm.Designer.cs">
       <DependentUpon>LoggerForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="MainForm.cs">
+    <Compile Include="Open Mass Sender - Jobs.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="MainForm.Designer.cs">
-      <DependentUpon>MainForm.cs</DependentUpon>
+    <Compile Include="Open Mass Sender - Jobs.Designer.cs">
+      <DependentUpon>Open Mass Sender - Jobs.cs</DependentUpon>
     </Compile>
     <Compile Include="JobExecutioner\JobExecutionerCommunicator.cs" />
     <Compile Include="LoginForm.cs">
@@ -133,8 +133,8 @@
       <DependentUpon>LoggerForm.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="MainForm.resx">
-      <DependentUpon>MainForm.cs</DependentUpon>
+    <EmbeddedResource Include="Open Mass Sender - Jobs.resx">
+      <DependentUpon>Open Mass Sender - Jobs.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="LoginForm.resx">

@@ -20,3 +20,4 @@ C:\Users\Stefanos\Programming\GitHub\OpenMassMail\OpenMassSender\OMSExecutionerS
 C:\Users\Stefanos\Programming\GitHub\OpenMassMail\OpenMassSender\OMSExecutionerService\bin\Debug\OpenMassSenderCore.pdb
 C:\Users\Stefanos\Programming\GitHub\OpenMassMail\OpenMassSender\OMSExecutionerService\obj\Debug\OMSExecutionerService.exe
 C:\Users\Stefanos\Programming\GitHub\OpenMassMail\OpenMassSender\OMSExecutionerService\obj\Debug\OMSExecutionerService.pdb
+C:\Users\dims\Documents\GitHub\OpenMassMail\OpenMassSender\OMSExecutionerService\bin\Debug\OpenMassSenderDB.accdb
