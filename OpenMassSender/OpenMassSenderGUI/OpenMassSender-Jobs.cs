@@ -46,9 +46,9 @@ namespace OpenMassSenderGUI
                 if (row.RowState != DataRowState.Deleted)
                 {
                     // Define the list items
-                    ListViewItem lvi = new ListViewItem(row["ID"].ToString());
-                    lvi.SubItems.Add("tratara".ToString());
-                    lvi.SubItems.Add(row["status"].ToString());
+                    ListViewItem lvi = new ListViewItem(row.ID.ToString());
+                    lvi.SubItems.Add(row.job_name.ToString());
+                    lvi.SubItems.Add(row.status.ToString());
 
                     // Add the list items to the ListView
                     listViewJobs.Items.Add(lvi);
@@ -83,22 +83,26 @@ namespace OpenMassSenderGUI
             loginForm.ShowDialog();
         }
 
-        private void manageSendersToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            //----------------->thano edw<------------------------
-            //kwdikas gia to anoigma tis manage senders form
-        }
-
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            //apla gia na kanw testing to receiversWindow, den tha kanei load apo dw kanonika
-            receiversWindow frm = new receiversWindow();
-            frm.Show();
+
         }
 
         private void btnShowNotReady_Click(object sender, EventArgs e)
         {
             
+        }
+
+        private void manageToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            receiversWindow frm = new receiversWindow();
+            frm.Show();
+        }
+
+        private void manageToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            //----------------->thano edw<------------------------
+            //kwdikas gia to anoigma tis manage senders form
         }
     }
 }

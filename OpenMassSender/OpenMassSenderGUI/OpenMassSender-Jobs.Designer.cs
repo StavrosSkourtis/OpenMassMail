@@ -41,7 +41,6 @@
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.menuItemFile = new System.Windows.Forms.ToolStripMenuItem();
             this.connectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.manageSendersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuItemJobs = new System.Windows.Forms.ToolStripMenuItem();
             this.manageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.senderAccountsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -181,8 +180,7 @@
             // menuItemFile
             // 
             this.menuItemFile.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.connectToolStripMenuItem,
-            this.manageSendersToolStripMenuItem});
+            this.connectToolStripMenuItem});
             this.menuItemFile.Name = "menuItemFile";
             this.menuItemFile.Size = new System.Drawing.Size(42, 20);
             this.menuItemFile.Text = "User";
@@ -190,16 +188,9 @@
             // connectToolStripMenuItem
             // 
             this.connectToolStripMenuItem.Name = "connectToolStripMenuItem";
-            this.connectToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.connectToolStripMenuItem.Text = "Connect/Reconnect";
+            this.connectToolStripMenuItem.Size = new System.Drawing.Size(183, 22);
+            this.connectToolStripMenuItem.Text = "Connect/Disconnect";
             this.connectToolStripMenuItem.Click += new System.EventHandler(this.connectToolStripMenuItem_Click);
-            // 
-            // manageSendersToolStripMenuItem
-            // 
-            this.manageSendersToolStripMenuItem.Name = "manageSendersToolStripMenuItem";
-            this.manageSendersToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.manageSendersToolStripMenuItem.Text = "Options";
-            this.manageSendersToolStripMenuItem.Click += new System.EventHandler(this.manageSendersToolStripMenuItem_Click);
             // 
             // menuItemJobs
             // 
@@ -212,8 +203,9 @@
             // manageToolStripMenuItem
             // 
             this.manageToolStripMenuItem.Name = "manageToolStripMenuItem";
-            this.manageToolStripMenuItem.Size = new System.Drawing.Size(117, 22);
+            this.manageToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.manageToolStripMenuItem.Text = "Manage";
+            this.manageToolStripMenuItem.Click += new System.EventHandler(this.manageToolStripMenuItem_Click);
             // 
             // senderAccountsToolStripMenuItem
             // 
@@ -226,8 +218,9 @@
             // manageToolStripMenuItem1
             // 
             this.manageToolStripMenuItem1.Name = "manageToolStripMenuItem1";
-            this.manageToolStripMenuItem1.Size = new System.Drawing.Size(117, 22);
+            this.manageToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
             this.manageToolStripMenuItem1.Text = "Manage";
+            this.manageToolStripMenuItem1.Click += new System.EventHandler(this.manageToolStripMenuItem1_Click);
             // 
             // menuItemOptions
             // 
@@ -332,7 +325,6 @@
         private System.Windows.Forms.ColumnHeader ColumnName;
         private System.Windows.Forms.ColumnHeader columnStatus;
         private System.Windows.Forms.ToolStripMenuItem connectToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem manageSendersToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem preferencesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem settingsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem openLoggerToolStripMenuItem;
