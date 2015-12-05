@@ -23,7 +23,7 @@ namespace OpenMassSenderCore.OpenMassSenderDBDataSetTableAdapters
             {
                 try
                 {
-                    OpenMassSenderCore.OpenMassSenderDBDataSet.ReceiverDataTable receivers = this.GetDataByGroup(1, group);
+                    OpenMassSenderCore.OpenMassSenderDBDataSet.ReceiverDataTable receivers = this.GetDataByGroup(Int32.Parse(UserTableAdapter.getInstance().userid), group);
                     return receivers;
                 }
                 catch (Exception ex)
