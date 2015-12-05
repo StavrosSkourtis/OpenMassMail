@@ -14,7 +14,7 @@ namespace OpenMassSenderCore.OpenMassSenderDBDataSetTableAdapters
 
         partial class UserTableAdapter
         {
-            public string userid = "";
+            public string userid;
             //<summary>asynchronus method for getting all the user's lists(receivers,jobs,senders),using lamda to notify when ready</summary>
             //<param name="username">the username</param>
             //<param name="password">the password</param>
@@ -60,16 +60,16 @@ namespace OpenMassSenderCore.OpenMassSenderDBDataSetTableAdapters
                                     else
                                     {
                                         //The password is not valid
-                                        // Estw -1 an den egine to login swsta
-                                        userid = "-1";
+                                        //Login has faild , userid is null
+                                        userid = null;
                                         onLogin(LOGIN_STATUS.FAILURE, userid);
                                     }
                                 }
                                 else
                                 {
                                     //Login failed
-                                    // Estw -1 an den egine to login swsta
-                                    userid = "-1";
+                                    //Login has faild , userid is null
+                                    userid = null;
                                     Console.WriteLine("fail 2");
                                 }
 
