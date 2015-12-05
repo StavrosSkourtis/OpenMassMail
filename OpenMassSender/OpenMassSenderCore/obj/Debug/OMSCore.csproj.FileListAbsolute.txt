@@ -12,3 +12,10 @@ C:\Users\dims\Documents\GitHub\OpenMassMail\OpenMassSender\OpenMassSenderCore\bi
 C:\Users\dims\Documents\GitHub\OpenMassMail\OpenMassSender\OpenMassSenderCore\obj\Debug\ResolveAssemblyReference.cache
 C:\Users\dims\Documents\GitHub\OpenMassMail\OpenMassSender\OpenMassSenderCore\obj\Debug\OpenMassSenderCore.dll
 C:\Users\dims\Documents\GitHub\OpenMassMail\OpenMassSender\OpenMassSenderCore\obj\Debug\OpenMassSenderCore.pdb
+H:\OpenMassMail\OpenMassSender\OpenMassSenderCore\bin\Debug\OpenMassSenderDB.accdb
+H:\OpenMassMail\OpenMassSender\OpenMassSenderCore\bin\Debug\OpenMassSenderCore.dll.config
+H:\OpenMassMail\OpenMassSender\OpenMassSenderCore\bin\Debug\OpenMassSenderCore.dll
+H:\OpenMassMail\OpenMassSender\OpenMassSenderCore\bin\Debug\OpenMassSenderCore.pdb
+H:\OpenMassMail\OpenMassSender\OpenMassSenderCore\obj\Debug\ResolveAssemblyReference.cache
+H:\OpenMassMail\OpenMassSender\OpenMassSenderCore\obj\Debug\OpenMassSenderCore.dll
+H:\OpenMassMail\OpenMassSender\OpenMassSenderCore\obj\Debug\OpenMassSenderCore.pdb

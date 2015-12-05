@@ -33,12 +33,13 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel1 = new System.Windows.Forms.Panel();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.label1 = new System.Windows.Forms.Label();
+            this.cbReceiverGroups = new System.Windows.Forms.ComboBox();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.tbSearchQuery = new System.Windows.Forms.ToolStripTextBox();
             this.btnSearchReceiver = new System.Windows.Forms.ToolStripButton();
             this.btnOK = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.cbReceiverGroups = new System.Windows.Forms.ComboBox();
             this.panel1.SuspendLayout();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -53,7 +54,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(565, 486);
+            this.panel1.Size = new System.Drawing.Size(671, 617);
             this.panel1.TabIndex = 0;
             // 
             // splitContainer1
@@ -65,6 +66,7 @@
             // 
             // splitContainer1.Panel1
             // 
+            this.splitContainer1.Panel1.Controls.Add(this.label1);
             this.splitContainer1.Panel1.Controls.Add(this.cbReceiverGroups);
             this.splitContainer1.Panel1.Controls.Add(this.toolStrip1);
             // 
@@ -72,9 +74,28 @@
             // 
             this.splitContainer1.Panel2.Controls.Add(this.btnOK);
             this.splitContainer1.Panel2.Controls.Add(this.dataGridView1);
-            this.splitContainer1.Size = new System.Drawing.Size(565, 486);
-            this.splitContainer1.SplitterDistance = 29;
+            this.splitContainer1.Size = new System.Drawing.Size(671, 617);
+            this.splitContainer1.SplitterDistance = 36;
             this.splitContainer1.TabIndex = 0;
+            // 
+            // label1
+            // 
+            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(392, 11);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(120, 13);
+            this.label1.TabIndex = 2;
+            this.label1.Text = "Select Receivers Group";
+            // 
+            // cbReceiverGroups
+            // 
+            this.cbReceiverGroups.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.cbReceiverGroups.FormattingEnabled = true;
+            this.cbReceiverGroups.Location = new System.Drawing.Point(518, 8);
+            this.cbReceiverGroups.Name = "cbReceiverGroups";
+            this.cbReceiverGroups.Size = new System.Drawing.Size(141, 21);
+            this.cbReceiverGroups.TabIndex = 1;
             // 
             // toolStrip1
             // 
@@ -83,7 +104,7 @@
             this.btnSearchReceiver});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(565, 29);
+            this.toolStrip1.Size = new System.Drawing.Size(671, 29);
             this.toolStrip1.TabIndex = 0;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -107,7 +128,8 @@
             // 
             // btnOK
             // 
-            this.btnOK.Location = new System.Drawing.Point(478, 424);
+            this.btnOK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnOK.Location = new System.Drawing.Point(593, 545);
             this.btnOK.Name = "btnOK";
             this.btnOK.Size = new System.Drawing.Size(75, 23);
             this.btnOK.TabIndex = 2;
@@ -117,6 +139,9 @@
             // 
             // dataGridView1
             // 
+            this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
             dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(161)));
@@ -144,22 +169,14 @@
             dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dataGridView1.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
-            this.dataGridView1.Size = new System.Drawing.Size(559, 415);
+            this.dataGridView1.Size = new System.Drawing.Size(668, 536);
             this.dataGridView1.TabIndex = 0;
-            // 
-            // cbReceiverGroups
-            // 
-            this.cbReceiverGroups.FormattingEnabled = true;
-            this.cbReceiverGroups.Location = new System.Drawing.Point(412, 5);
-            this.cbReceiverGroups.Name = "cbReceiverGroups";
-            this.cbReceiverGroups.Size = new System.Drawing.Size(141, 21);
-            this.cbReceiverGroups.TabIndex = 1;
             // 
             // receiversWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(565, 486);
+            this.ClientSize = new System.Drawing.Size(671, 617);
             this.Controls.Add(this.panel1);
             this.Name = "receiversWindow";
             this.Text = "receiversWindow";
@@ -186,5 +203,6 @@
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.Button btnOK;
         private System.Windows.Forms.ComboBox cbReceiverGroups;
+        private System.Windows.Forms.Label label1;
     }
 }

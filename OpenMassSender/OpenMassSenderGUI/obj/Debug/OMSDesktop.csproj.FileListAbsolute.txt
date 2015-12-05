@@ -14,7 +14,6 @@ H:\OpenMassMail\OpenMassSender\OpenMassSenderGUI\bin\Debug\OpenMassSenderGUI.pdb
 H:\OpenMassMail\OpenMassSender\OpenMassSenderGUI\bin\Debug\OpenMassSenderCore.dll
 H:\OpenMassMail\OpenMassSender\OpenMassSenderGUI\bin\Debug\OpenMassSenderCore.pdb
 H:\OpenMassMail\OpenMassSender\OpenMassSenderGUI\obj\Debug\ResolveAssemblyReference.cache
-H:\OpenMassMail\OpenMassSender\OpenMassSenderGUI\obj\Debug\OpenMassSenderGUI.Form1.resources
 H:\OpenMassMail\OpenMassSender\OpenMassSenderGUI\obj\Debug\OpenMassSenderGUI.Properties.Resources.resources
 H:\OpenMassMail\OpenMassSender\OpenMassSenderGUI\obj\Debug\OMSDesktop.csproj.GenerateResource.Cache
 C:\Users\dims\Documents\GitHub\OpenMassMail\OpenMassSender\OpenMassSenderGUI\obj\Debug\OpenMassSenderGUI.loginForm.resources
@@ -52,3 +51,17 @@ C:\Users\dims\Documents\GitHub\OpenMassMail\OpenMassSender\OpenMassSenderGUI\obj
 C:\Users\dims\Documents\GitHub\OpenMassMail\OpenMassSender\OpenMassSenderGUI\obj\Debug\OpenMassSenderGUI.MessagePreviewForm.resources
 C:\Users\dims\Documents\GitHub\OpenMassMail\OpenMassSender\OpenMassSenderGUI\obj\Debug\OpenMassSenderGUI.MessageVariablesForm.resources
 C:\Users\dims\Documents\GitHub\OpenMassMail\OpenMassSender\OpenMassSenderGUI\obj\Debug\OpenMassSenderGUI.Testing.resources
+H:\OpenMassMail\OpenMassSender\OpenMassSenderGUI\bin\Debug\OpenMassSenderDB.accdb
+H:\OpenMassMail\OpenMassSender\OpenMassSenderGUI\bin\Debug\OMSExecutionerService.exe
+H:\OpenMassMail\OpenMassSender\OpenMassSenderGUI\bin\Debug\OMSExecutionerService.pdb
+H:\OpenMassMail\OpenMassSender\OpenMassSenderGUI\obj\Debug\OpenMassSenderGUI.About.resources
+H:\OpenMassMail\OpenMassSender\OpenMassSenderGUI\obj\Debug\OpenMassSenderGUI.AddNewJob.resources
+H:\OpenMassMail\OpenMassSender\OpenMassSenderGUI\obj\Debug\OpenMassSenderGUI.LoggerForm.resources
+H:\OpenMassMail\OpenMassSender\OpenMassSenderGUI\obj\Debug\OpenMassSenderGUI.MainForm.resources
+H:\OpenMassMail\OpenMassSender\OpenMassSenderGUI\obj\Debug\OpenMassSenderGUI.LoginForm.resources
+H:\OpenMassMail\OpenMassSender\OpenMassSenderGUI\obj\Debug\OpenMassSenderGUI.MessageForm.resources
+H:\OpenMassMail\OpenMassSender\OpenMassSenderGUI\obj\Debug\OpenMassSenderGUI.MessagePreviewForm.resources
+H:\OpenMassMail\OpenMassSender\OpenMassSenderGUI\obj\Debug\OpenMassSenderGUI.MessageVariablesForm.resources
+H:\OpenMassMail\OpenMassSender\OpenMassSenderGUI\obj\Debug\OpenMassSenderGUI.receiversWindow.resources
+H:\OpenMassMail\OpenMassSender\OpenMassSenderGUI\obj\Debug\OpenMassSenderGUI.Testing.resources
+H:\OpenMassMail\OpenMassSender\OpenMassSenderGUI\obj\Debug\OpenMassSenderGUI.ViewReceiversForm.resources

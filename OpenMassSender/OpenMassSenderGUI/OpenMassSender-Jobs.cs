@@ -95,7 +95,7 @@ namespace OpenMassSenderGUI
 
         private void manageToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            receiversWindow frm = new receiversWindow();
+            ViewReceiversForm frm = new ViewReceiversForm();
             frm.Show();
         }
 
