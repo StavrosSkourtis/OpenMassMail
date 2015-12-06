@@ -12,6 +12,7 @@ namespace OpenMassSenderGUI
 {
     public partial class ViewReceiversForm : Form
     {
+
         public ViewReceiversForm()
         {
             InitializeComponent();
@@ -33,9 +34,6 @@ namespace OpenMassSenderGUI
         {
 
             cbReceiversGroup.Items.Clear();
-
-            cbReceiversGroup.Items.Add("All");
-            cbReceiversGroup.SelectedIndex = 0;
             /*
              *  Loop through all the receivers and add the rows to the table
              */
@@ -46,83 +44,52 @@ namespace OpenMassSenderGUI
                     cbReceiversGroup.Items.Add(row.group);
                 }
             }
-            
-        }
-
-
-        /* 
-         *  Updates the data in the list view by the group parameter.
-         *  If group is "All" the List View will be populated by all the receivers
-         */
-        private void UpdateListViewData(string group)
-        {
-            /*
-             *  Clear the list view
-             */
-            listViewReceivers.Items.Clear();
-
-            // Define the ReceiverDataTable object
-            OpenMassSenderCore.OpenMassSenderDBDataSet.ReceiverDataTable receiverTable;
-
-            // Create the DataTable and fill by group, if group is "All" get all the receivers
-            if( group == "All")
-                receiverTable = ReceiverTableAdapter.getInstance().GetData();
-            else
-                receiverTable = ReceiverTableAdapter.getInstance().GetDataByGroupOnly(group);
-            
-            /*
-             *  Loop through all the receivers and add the rows to the table
-             */
-            foreach (OpenMassSenderCore.OpenMassSenderDBDataSet.ReceiverRow row in receiverTable)
-            {
-                if (row.RowState != DataRowState.Deleted)
-                {
-                    ListViewItem item = new ListViewItem(row.ID.ToString());
-                    item.SubItems.Add(row.email.ToString());
-                    item.SubItems.Add(row.phone_number.ToString());
-                    item.SubItems.Add(row.metadata.ToString());
-                    item.SubItems.Add(row.group.ToString());
-
-                    listViewReceivers.Items.Add(item);
-                }
-            }
-        }
-
-        private void cbReceiversGroup_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            //Update the ListBox by selected group
-            UpdateListViewData(cbReceiversGroup.SelectedItem.ToString());
+            // IF there is at least on item in te combo box set the first one as the selected
+            if(cbReceiversGroup.Items.Count>0)
+                cbReceiversGroup.SelectedIndex = 0;
         }
 
         private void bntSearchReceiver_Click(object sender, EventArgs e)
         {
 
-
             
-            //Clear the list view
-            listViewReceivers.Items.Clear();
+            dgvReceivers.DataSource = ReceiverTableAdapter.getInstance().searchReceivers(cbReceiversGroup.SelectedItem.ToString(), tbSearch.Text); ;
+            dgvReceivers.Columns["user"].Visible = false;
+            dgvReceivers.Columns["UserRow"].Visible = false;
+            dgvReceivers.Columns["HasErrors"].Visible = false;
+            dgvReceivers.Columns["RowError"].Visible = false;
+            dgvReceivers.Columns["RowState"].Visible = false;
+            dgvReceivers.Columns["Table"].Visible = false;
+            dgvReceivers.Columns["metadata"].Visible = false;
 
-            // Loop through all the receivers and add the rows to the table
-             
-            foreach (OpenMassSenderCore.OpenMassSenderDBDataSet.ReceiverRow row in ReceiverTableAdapter.getInstance().searchReceivers(cbReceiversGroup.SelectedItem.ToString(), tbSearch.Text))
-            {
-                Console.WriteLine("asd:" + row.ID);
-                if (row.RowState != DataRowState.Deleted)
-                {
-                    ListViewItem item = new ListViewItem(row.ID.ToString());
-                    item.SubItems.Add(row.email.ToString());
-                    item.SubItems.Add(row.phone_number.ToString());
-                    item.SubItems.Add(row.metadata.ToString());
-                    item.SubItems.Add(row.group.ToString());
-
-                    listViewReceivers.Items.Add(item);
-                }
-            }
-
-           
         }
 
+        private void dgvReceivers_CellClick(object sender, DataGridViewCellEventArgs e)
+        {   
+           
+            // Check if the row index bellows to the data and not the header
+            if ( e.RowIndex >= 0 )
+            {
+                // Clear all the current rows
+                dgvDetails.Rows.Clear();
 
+                // Split the metadata string by ';'
+                string[] propertyRows = dgvReceivers.Rows[e.RowIndex].Cells["metadata"].Value.ToString().Split(';');
+
+                // Loop through every pair of metadata
+                foreach (string propertyRow in propertyRows)
+                {   
+                    // Split the pair of data by '='
+                    string[] propertyData = propertyRow.Split('=');
+
+                    // Add the data to a new Row
+                    dgvDetails.Rows.Add(propertyData[0], propertyData[1]);
+
+                }
+
+            }
+            
+        }
 
     }
 }
