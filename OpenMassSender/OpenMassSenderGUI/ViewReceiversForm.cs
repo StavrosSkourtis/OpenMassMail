@@ -51,8 +51,11 @@ namespace OpenMassSenderGUI
 
         private void bntSearchReceiver_Click(object sender, EventArgs e)
         {
-
-            
+            searchReceivers();
+        }
+        public void searchReceivers()
+        {
+            dgvDetails.Rows.Clear();
             dgvReceivers.DataSource = ReceiverTableAdapter.getInstance().searchReceivers(cbReceiversGroup.SelectedItem.ToString(), tbSearch.Text); ;
             dgvReceivers.Columns["user"].Visible = false;
             dgvReceivers.Columns["UserRow"].Visible = false;
@@ -61,7 +64,6 @@ namespace OpenMassSenderGUI
             dgvReceivers.Columns["RowState"].Visible = false;
             dgvReceivers.Columns["Table"].Visible = false;
             dgvReceivers.Columns["metadata"].Visible = false;
-
         }
 
         private void dgvReceivers_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -90,6 +92,18 @@ namespace OpenMassSenderGUI
             }
             
         }
+
+        private void cbReceiversGroup_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            searchReceivers();
+        }
+
+        private void tbSearch_TextChanged(object sender, EventArgs e)
+        {
+            searchReceivers();
+        }
+
+
 
     }
 }
