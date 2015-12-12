@@ -26,7 +26,7 @@ namespace OpenMassSenderCore
                 nextExecution = DateTime.Now;
             }
             //<summary>notify that the job execution has been started for the nextExecution date and set the nextExecution</summary>
-            public void jobExecutionStarted()
+            public void jobExecutionFinished()
             {
                 lastExecution = nextExecution;
                 

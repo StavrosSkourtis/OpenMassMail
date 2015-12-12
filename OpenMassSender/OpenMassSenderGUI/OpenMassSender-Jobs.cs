@@ -11,6 +11,10 @@ using OpenMassSenderCore;
 using OpenMassSenderCore.OpenMassSenderDBDataSetTableAdapters;
 using System.IO;
 using OpenMassSenderCore.Utils;
+using System.ServiceProcess;
+using OMSExecutionerService;
+using System.Threading;
+using OpenMassSenderCore.Senders;
 
 
 namespace OpenMassSenderGUI
@@ -31,29 +35,53 @@ namespace OpenMassSenderGUI
             {
                 showLoginForm();
             }
-  
-            //populate listview with data
-            // Get the table from the data set
-            DataTable dtable = OpenMassSenderDBDataSet.getInstance().Tables["Job"];
 
-            // Clear the ListView control
-            listViewJobs.Items.Clear();
-
-            // Display items in the ListView control
-            foreach (OpenMassSenderCore.OpenMassSenderDBDataSet.JobRow row in JobTableAdapter.getInstance().GetData()) {
-
-                // Only row that have not been deleted
-                if (row.RowState != DataRowState.Deleted)
+            (new Thread(() =>
+           {
+                while (true)
                 {
-                    // Define the list items
-                    ListViewItem lvi = new ListViewItem(row.ID.ToString());
-                    lvi.SubItems.Add(row.job_name.ToString());
-                    lvi.SubItems.Add(row.status.ToString());
+                    //populate listview with data
+                    // Get the table from the data set
+                    DataTable dtable = OpenMassSenderDBDataSet.getInstance().Tables["Job"];
 
-                    // Add the list items to the ListView
-                    listViewJobs.Items.Add(lvi);
+                    // Clear the ListView control
+                    listViewJobs.Items.Clear();
+                    // Display items in the ListView control
+                    foreach (OpenMassSenderCore.OpenMassSenderDBDataSet.JobRow row in JobTableAdapter.getInstance().GetDataByUser(Int32.Parse(UserTableAdapter.getInstance().userid)))
+                    {
+                        // Only row that have not been deleted
+                        if (row.RowState != DataRowState.Deleted)
+                        {
+                            // Define the list items
+                            ListViewItem lvi = new ListViewItem(row.ID.ToString());
+                            lvi.SubItems.Add(row.job_name.ToString());
+                            if (row.status == OpenMassSenderCore.OpenMassSenderDBDataSet.JobRow.JobStatus.SHEDULED)
+                            {
+                                lvi.SubItems.Add(row.status.ToString() + "(" + row.NextExecution + ")");
+                            }
+                            else if (row.status == OpenMassSenderCore.OpenMassSenderDBDataSet.JobRow.JobStatus.PENDING)
+                            {
+                                MassSender massSender=null;
+                                OpenMassSenderCore.OpenMassSenderDBDataSet.JobRow.massSenders.TryGetValue(row.ID, out massSender);
+                                if (massSender != null)
+                                {
+                                    lvi.SubItems.Add(row.status.ToString() + "(" + ((float)massSender.sendsTried / massSender.totalSends) * 100 + "%)");
+                                }
+                                else
+                                {
+                                    lvi.SubItems.Add(row.status.ToString());
+                                }
+                            }
+
+
+
+                            // Add the list items to the ListView
+                            listViewJobs.Items.Add(lvi);
+                        }
+                    }
+                    Thread.Sleep(1000);
                 }
-            }
+            })).Start();
         }
 
         private void btnAdd_Click(object sender, EventArgs e)

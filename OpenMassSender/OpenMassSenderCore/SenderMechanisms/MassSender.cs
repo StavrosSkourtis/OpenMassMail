@@ -10,6 +10,9 @@ namespace OpenMassSenderCore.Senders
 {
     public class MassSender
     {
+        public int sendsTried = 0;
+        public int totalSends = 0;
+
         //<summary>holds the status of a pending(currently executing) job</summary>
         public PendingJobStatus status=new PendingJobStatus();
 
@@ -18,7 +21,7 @@ namespace OpenMassSenderCore.Senders
         public List<Thread> activeThreads = new List<Thread>();
 
         //<summary>The maximum amount of threads we are gonna use for this job</summary>
-        private int max_threads = 200;
+        private int max_threads = 1;
 
         //<summary>Call this to send a message to multiple receivers by using multiple threads</summary>
         //<param name="statusCallback">Lamda that gets called every time a message has been sended,
@@ -29,7 +32,7 @@ namespace OpenMassSenderCore.Senders
             status.pending.AddRange(receivers);
 
             int threads = Math.Min(receivers.Count, max_threads);
-
+            totalSends = receivers.Count;
             int sendsPerThread = receivers.Count / threads;
             if (receivers.Count < threads) sendsPerThread = 1;
 
@@ -43,23 +46,27 @@ namespace OpenMassSenderCore.Senders
                 int count = sendsPerThread;
                 if (sendsPerThread * c + count > receivers.Count) count = receivers.Count - sendsPerThread * c;
                 List<OpenMassSenderCore.OpenMassSenderDBDataSet.ReceiverRow> subsetReceivers = receivers.GetRange(sendsPerThread * c, count);
-
-                SenderThread senderThread = new SenderThread(status,message, sender , subsetReceivers, (sentStatus) => statusCallback(sentStatus));
+                
+                SenderThread senderThread = new SenderThread(this,status, message, sender, subsetReceivers, (sentStatus) => statusCallback(sentStatus));
                 Thread workerThread = new Thread(senderThread.send);
-
+              
+                activeThreads.Add(workerThread);
                 workerThread.Start();
+
             }
         }
     }
     public class SenderThread
     {
+        MassSender massSender;
         Sender sender;
         OpenMassSenderCore.OpenMassSenderDBDataSet.MessageRow message;
         List<OpenMassSenderCore.OpenMassSenderDBDataSet.ReceiverRow> receivers;
         Action<SendStatusChanged> statusCallback;
         PendingJobStatus pendingJobStatus;
-        public SenderThread(PendingJobStatus pendingJobStatus,OpenMassSenderCore.OpenMassSenderDBDataSet.MessageRow message,Sender sender, List<OpenMassSenderCore.OpenMassSenderDBDataSet.ReceiverRow> receivers, Action<SendStatusChanged> statusCallback)
+        public SenderThread(MassSender massSender,PendingJobStatus pendingJobStatus,OpenMassSenderCore.OpenMassSenderDBDataSet.MessageRow message,Sender sender, List<OpenMassSenderCore.OpenMassSenderDBDataSet.ReceiverRow> receivers, Action<SendStatusChanged> statusCallback)
         {
+            this.massSender = massSender;
             this.pendingJobStatus = pendingJobStatus;
             this.message = message;
             this.receivers = receivers;
@@ -74,12 +81,13 @@ namespace OpenMassSenderCore.Senders
             foreach (OpenMassSenderCore.OpenMassSenderDBDataSet.ReceiverRow receiver in receivers)
             {
                 string status = sender.send(message, receiver);
+                massSender.sendsTried++;
                 SendStatusChanged sentStatus = new SendStatusChanged(receiver, status);
                 pendingJobStatus.pending.Remove(receiver);
                 pendingJobStatus.sent.Add(sentStatus);
                 statusCallback(sentStatus);
+             
             }
-
         }
     }
     public class SendStatusChanged

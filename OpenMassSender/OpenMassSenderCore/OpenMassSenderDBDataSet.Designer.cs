@@ -3789,7 +3789,7 @@ namespace OpenMassSenderCore.OpenMassSenderDBDataSetTableAdapters {
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         private void InitCommandCollection() {
-            this._commandCollection = new global::System.Data.OleDb.OleDbCommand[2];
+            this._commandCollection = new global::System.Data.OleDb.OleDbCommand[3];
             this._commandCollection[0] = new global::System.Data.OleDb.OleDbCommand();
             this._commandCollection[0].Connection = this.Connection;
             this._commandCollection[0].CommandText = "SELECT ID, sender_account, message, status, [user], query, [group], schedule, job" +
@@ -3801,6 +3801,12 @@ namespace OpenMassSenderCore.OpenMassSenderDBDataSetTableAdapters {
                 "_name FROM Job WHERE (ID = ?)";
             this._commandCollection[1].CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[1].Parameters.Add(new global::System.Data.OleDb.OleDbParameter("ID", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "ID", global::System.Data.DataRowVersion.Current, false, null));
+            this._commandCollection[2] = new global::System.Data.OleDb.OleDbCommand();
+            this._commandCollection[2].Connection = this.Connection;
+            this._commandCollection[2].CommandText = "SELECT ID, sender_account, message, status, [user], query, [group], schedule, job" +
+                "_name FROM Job where [user]=?";
+            this._commandCollection[2].CommandType = global::System.Data.CommandType.Text;
+            this._commandCollection[2].Parameters.Add(new global::System.Data.OleDb.OleDbParameter("user", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "user", global::System.Data.DataRowVersion.Current, false, null));
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -3844,6 +3850,22 @@ namespace OpenMassSenderCore.OpenMassSenderDBDataSetTableAdapters {
         public virtual OpenMassSenderDBDataSet.JobDataTable GetDataById(int ID) {
             this.Adapter.SelectCommand = this.CommandCollection[1];
             this.Adapter.SelectCommand.Parameters[0].Value = ((int)(ID));
+            OpenMassSenderDBDataSet.JobDataTable dataTable = new OpenMassSenderDBDataSet.JobDataTable();
+            this.Adapter.Fill(dataTable);
+            return dataTable;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, false)]
+        public virtual OpenMassSenderDBDataSet.JobDataTable GetDataByUser(global::System.Nullable<int> user) {
+            this.Adapter.SelectCommand = this.CommandCollection[2];
+            if ((user.HasValue == true)) {
+                this.Adapter.SelectCommand.Parameters[0].Value = ((int)(user.Value));
+            }
+            else {
+                this.Adapter.SelectCommand.Parameters[0].Value = global::System.DBNull.Value;
+            }
             OpenMassSenderDBDataSet.JobDataTable dataTable = new OpenMassSenderDBDataSet.JobDataTable();
             this.Adapter.Fill(dataTable);
             return dataTable;
@@ -4341,7 +4363,7 @@ namespace OpenMassSenderCore.OpenMassSenderDBDataSetTableAdapters {
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         private void InitCommandCollection() {
-            this._commandCollection = new global::System.Data.OleDb.OleDbCommand[2];
+            this._commandCollection = new global::System.Data.OleDb.OleDbCommand[3];
             this._commandCollection[0] = new global::System.Data.OleDb.OleDbCommand();
             this._commandCollection[0].Connection = this.Connection;
             this._commandCollection[0].CommandText = "SELECT repeatable, nextExecution, lastExecution, ID FROM JobSchedule";
@@ -4352,6 +4374,11 @@ namespace OpenMassSenderCore.OpenMassSenderDBDataSetTableAdapters {
                 " ?)";
             this._commandCollection[1].CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[1].Parameters.Add(new global::System.Data.OleDb.OleDbParameter("job", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "job", global::System.Data.DataRowVersion.Current, false, null));
+            this._commandCollection[2] = new global::System.Data.OleDb.OleDbCommand();
+            this._commandCollection[2].Connection = this.Connection;
+            this._commandCollection[2].CommandText = "SELECT repeatable, nextExecution, lastExecution, ID FROM JobSchedule where ID=?";
+            this._commandCollection[2].CommandType = global::System.Data.CommandType.Text;
+            this._commandCollection[2].Parameters.Add(new global::System.Data.OleDb.OleDbParameter("ID", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "ID", global::System.Data.DataRowVersion.Current, false, null));
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -4405,6 +4432,17 @@ namespace OpenMassSenderCore.OpenMassSenderDBDataSetTableAdapters {
             else {
                 this.Adapter.SelectCommand.Parameters[0].Value = global::System.DBNull.Value;
             }
+            OpenMassSenderDBDataSet.JobScheduleDataTable dataTable = new OpenMassSenderDBDataSet.JobScheduleDataTable();
+            this.Adapter.Fill(dataTable);
+            return dataTable;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, false)]
+        public virtual OpenMassSenderDBDataSet.JobScheduleDataTable GetDataByID(int ID) {
+            this.Adapter.SelectCommand = this.CommandCollection[2];
+            this.Adapter.SelectCommand.Parameters[0].Value = ((int)(ID));
             OpenMassSenderDBDataSet.JobScheduleDataTable dataTable = new OpenMassSenderDBDataSet.JobScheduleDataTable();
             this.Adapter.Fill(dataTable);
             return dataTable;

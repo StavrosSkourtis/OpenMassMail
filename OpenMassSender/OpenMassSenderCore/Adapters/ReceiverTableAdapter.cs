@@ -19,16 +19,22 @@ namespace OpenMassSenderCore.OpenMassSenderDBDataSetTableAdapters
 
             }
             //<sumarry>Returns a list with all the receivers</summary>
-            public OpenMassSenderCore.OpenMassSenderDBDataSet.ReceiverDataTable getAllReceiversOfGroup(string group)
+            public List<OpenMassSenderCore.OpenMassSenderDBDataSet.ReceiverRow> getAllReceiversOfGroup(string group)
             {
                 try
                 {
                     OpenMassSenderCore.OpenMassSenderDBDataSet.ReceiverDataTable receivers = this.GetDataByGroup(Int32.Parse(UserTableAdapter.getInstance().userid), group);
-                    return receivers;
+                    List<OpenMassSenderCore.OpenMassSenderDBDataSet.ReceiverRow> receiversList = new List<OpenMassSenderDBDataSet.ReceiverRow>();
+                    foreach (OpenMassSenderCore.OpenMassSenderDBDataSet.ReceiverRow row in receivers)
+                    {
+                        receiversList.Add(row);
+                    }
+
+                    return receiversList;
                 }
                 catch (Exception ex)
                 {
-                    Logger.log("error", ex.Message);
+                    Logger.log("error2", ex.Message);
                 }
                 return null;
             }
@@ -39,7 +45,8 @@ namespace OpenMassSenderCore.OpenMassSenderDBDataSetTableAdapters
             //<returns>a subset of all the receivers</returns>
             public List<OpenMassSenderCore.OpenMassSenderDBDataSet.ReceiverRow> searchReceivers(string group, string query)
             {
-                OpenMassSenderCore.OpenMassSenderDBDataSet.ReceiverDataTable receiversInGroup = getAllReceiversOfGroup(group);
+   
+                List<OpenMassSenderCore.OpenMassSenderDBDataSet.ReceiverRow> receiversInGroup = getAllReceiversOfGroup(group);
                 List<OpenMassSenderCore.OpenMassSenderDBDataSet.ReceiverRow> receiversMaching = new List<OpenMassSenderDBDataSet.ReceiverRow>();
                 if (query==null || query.Equals(""))
                 {
@@ -51,7 +58,7 @@ namespace OpenMassSenderCore.OpenMassSenderDBDataSetTableAdapters
                 DataTable td = new DataTable();
 
                 string[] queries = query.Split(';');
-                foreach (OpenMassSenderCore.OpenMassSenderDBDataSet.ReceiverRow row in receiversInGroup.Rows)
+                foreach (OpenMassSenderCore.OpenMassSenderDBDataSet.ReceiverRow row in receiversInGroup)
                 {
                     Boolean containsAll = true;
                     foreach (string q in queries)

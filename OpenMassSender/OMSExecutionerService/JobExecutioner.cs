@@ -5,6 +5,8 @@ using System.Text;
 using OpenMassSenderCore.Jobs;
 using System.IO;
 using OpenMassSenderCore.OpenMassSenderDBDataSetTableAdapters;
+using System.Threading;
+using OpenMassSenderCore;
 
 
 namespace OMSExecutionerService
@@ -16,36 +18,52 @@ namespace OMSExecutionerService
         string userid;
         public JobExecutioner()
         {
-            System.Threading.Timer timer = new System.Threading.Timer(executeIfReady, null, 3000, 3000);
-
+        
             if (File.Exists("omsloggeduser.dt"))
             {
                 setUser(File.ReadAllText("omsloggeduser.dt").Split('|')[2]);
             }
+
+            (new Thread(() =>
+            {
+                while (true)
+                {
+                    executeIfReady();
+                    Thread.Sleep(2000);
+                }
+            })).Start();
         }
         //<summary>notify the executioner that a new job has been added</summary>
         public void jobHasBeenAdded()
         {
-            executeIfReady(null);
+            executeIfReady();
         }
         //<summary>gets called by the desktop program as soon as the user gets authenticated,its part of the communication interface</summary>
         //<param name="user">the authenticated user</param>
         public void setUser(string user)
         {
             this.userid = user;
-            if (user != null) executeIfReady(null);
+            if (user != null) executeIfReady();
         }
         //<summary>check if any of the pending/scheduled jobs are ready for execution</summary>
-        public void executeIfReady(object source)
+        public void executeIfReady()
         {
-            foreach (OpenMassSenderCore.OpenMassSenderDBDataSet.JobRow job in JobTableAdapter.getInstance().GetData())
+            if (UserTableAdapter.getInstance().userid == null) return;
+            try
             {
-                if (job.isReadForExecution())
+                foreach (OpenMassSenderCore.OpenMassSenderDBDataSet.JobRow job in JobTableAdapter.getInstance().GetDataByUser(Int32.Parse(UserTableAdapter.getInstance().userid)))
                 {
-                    job.execute();
+                    if (job.isReadForExecution())
+                    {
+                        job.execute();
+                    }
                 }
-
             }
+            catch (Exception ex)
+            {
+                Logger.log("error", ex.Message);
+            }
+
         }
     }
 }

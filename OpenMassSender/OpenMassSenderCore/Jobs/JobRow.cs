@@ -11,6 +11,9 @@ namespace OpenMassSenderCore
     {
         partial class JobRow
         {
+            public static Dictionary<int, MassSender> massSenders = new Dictionary<int, MassSender>();
+
+
             public class JobStatus {public static string PENDING="PENDING",SHEDULED="SHEDULED",FINISHED="FINISHED"; };
             public string title;
             public MessageRow messageObject;
@@ -18,8 +21,8 @@ namespace OpenMassSenderCore
             //<summary>returns true if the job is ready for execution,makes sense if the job has a shedule</summary>
             public bool isReadForExecution()
             {
-                if (JobScheduleRow == null) return false;
-                return JobScheduleRow.ready(this);
+                JobScheduleRow schedule = JobScheduleTableAdapter.getInstance().GetDataByID(this.schedule)[0];
+                return schedule.ready(this);
             }
 
             //<summary>sets the status of the job between PENDING,SHEDULED,FINISHED</summary>
@@ -27,6 +30,16 @@ namespace OpenMassSenderCore
             public void setStatus(JobStatus status)
             {
                 //this.status = status;
+            }
+
+            public DateTime NextExecution
+            {
+
+                get
+                {
+                    JobScheduleRow schedule = (JobScheduleRow)JobScheduleTableAdapter.getInstance().GetDataByID(this.schedule).Rows[0];
+                    return schedule.nextExecution;
+                }
             }
 
             //<summary>returns the status of the job including all the SendStatusChanged messages that got isued</summary>
@@ -41,20 +54,50 @@ namespace OpenMassSenderCore
             //and the status of the executing job will be available to the desktop program via the JobExecutionaireInterface</returns>
             public PendingJobStatus execute()
             {
-                
+                JobScheduleRow schedule = JobScheduleTableAdapter.getInstance().GetDataByID(this.schedule)[0];
+                if(massSenders.ContainsKey(this.ID))massSenders.Remove(ID);
                 massSender=new MassSender();
+                massSenders.Add(ID,massSender);
+
                 List<OpenMassSenderCore.OpenMassSenderDBDataSet.ReceiverRow> receiversList = ReceiverTableAdapter.getInstance().searchReceivers(group, query);
     
                 MessageRow message = (MessageRow)MessageTableAdapter.getInstance().GetDataById(this.message).Rows[0];
                 SenderAccountRow sender = (SenderAccountRow)SenderAccountTableAdapter.getInstance().GetDataById(this.sender_account).Rows[0];
 
                 Logger.log("log", "creating mass sender for " + sender.ID + " message " + message.ID);
-                Logger.log("receivers:", "receivers:" + receiversList.Count);
+                this.status = JobStatus.PENDING;
+                JobTableAdapter.getInstance().Update(this);
                 massSender.send(sender,
                     message, receiversList, (SendStatusChanged status) =>
                 {
-                    Logger.log("log","send to "+status.receiver.ID+" "+(status.status==MessageStatus.SUCCEED?"success":"failure"));
+                    try
+                    {
+                        if (massSender.sendsTried == massSender.totalSends)
+                        {
+                            if (schedule != null)
+                            {
+                                if (schedule.repeatable == RepeatableJob.NON_REPEATABLE)
+                                {
+                                    this.status = JobStatus.FINISHED;
+                                }
+                                else
+                                {
+                                    this.status = JobStatus.SHEDULED;
+                                }
+                                schedule.jobExecutionFinished();
+                            }
+                            Logger.log("log", "job " + this.ID + " finished, next execution is " + schedule.nextExecution);
+                            JobTableAdapter.getInstance().Update(this);
+                            JobScheduleTableAdapter.getInstance().Update(schedule);
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        Logger.log("error", ex.Message);
+                    }
                 });
+      
+
                 return massSender.status;
             }
         }

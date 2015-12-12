@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Net.Mail;
+using System.Threading;
 
 
 namespace OpenMassSenderCore.Senders 
@@ -22,16 +23,17 @@ namespace OpenMassSenderCore.Senders
         }
         public override string send(OpenMassSenderCore.OpenMassSenderDBDataSet.MessageRow message,OpenMassSenderCore.OpenMassSenderDBDataSet.ReceiverRow receiver)
         {
-            Logger.log("log", "sending to " + receiver.ID + " of job " + message.job);
-            System.Net.Mail.MailMessage mail = new System.Net.Mail.MailMessage(sender.email, receiver.email);
-            mail.Subject = message.subject;
-            mail.Body = message.replaceWildCards(receiver);
+            Thread.Sleep(500);
             try
             {
-                smtpClient.Send(mail);
+          //      System.Net.Mail.MailMessage mail = new System.Net.Mail.MailMessage(sender.email, receiver.email);
+          //      mail.Subject = message.subject;
+          //      mail.Body = message.replaceWildCards(receiver);
+          //      smtpClient.Send(mail);
             }
             catch (Exception ex)
             {
+                Logger.log("error", ex.Message);
                 return OpenMassSenderCore.OpenMassSenderDBDataSet.MessageStatus.ERROR;
             }
             return OpenMassSenderCore.OpenMassSenderDBDataSet.MessageStatus.SUCCEED;
