@@ -37,8 +37,10 @@ namespace OpenMassSenderGUI
             }
             if (temp == 1)
             {
-                repeatjob.Items.Add(monthCalendar1.SelectionStart.ToString());
+                repeatjob.Items.Insert(0, monthCalendar1.SelectionStart.ToString());
                 monthCalendar1.Visible = false;
+                this.repeatjob.SelectedIndex = 0;
+
                 delete.Show();
             }
 
@@ -46,10 +48,17 @@ namespace OpenMassSenderGUI
 
         private void delete_Click(object sender, EventArgs e)
         {
-            if (repeatjob.SelectedIndex > 4)
+            String s = repeatjob.Text;
+            if (s.Equals("Day") || s.Equals("Week") || s.Equals("Month") || s.Equals("Year"))
+            {
+
+            }
+            else
             {
                 repeatjob.Items.Remove(repeatjob.SelectedItem);
+                this.repeatjob.SelectedIndex = 0;
             }
+
 
         }
 
@@ -84,13 +93,12 @@ namespace OpenMassSenderGUI
             
         }
 
-        private void executejob_TextChanged(object sender, EventArgs e)
-        {
-
-        }
+        
 
         private void AddNewJob_Load(object sender, EventArgs e)
         {
+            this.typecomboBox.SelectedIndex = 0;
+            this.repeatjob.SelectedIndex = 0;
 
         }
         public string filepath
@@ -105,32 +113,22 @@ namespace OpenMassSenderGUI
             frm.ShowDialog();
         }
 
-        private void jobtextbox_Leave(object sender, EventArgs e)
+        private void button4_Click(object sender, EventArgs e)
         {
-            if (jobtextbox.Text  == "") 
+            
+            if (jobtextbox.Text == "" || filepathtextbox.Text == "" || executejob.Text == "")
             {
-                errorProvider.SetError(jobtextbox,"you must fill this field");
+                MessageBox.Show("You must fill a job title,fill a subject of message and choose a date", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else 
+            {
+                this.Close();
             }
         }
 
-        private void jobtextbox_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            errorProvider.Clear();
-        }
+        
 
-        private void recieverstextBox_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            errorProvider.Clear();
-        }
-
-        private void recieverstextBox_Leave(object sender, EventArgs e)
-        {
-            if (recieverstextBox.Text == "") 
-            {
-                errorProvider.SetError(recieverstextBox, "you must fill this field");
-            }
-        }
-
+        
     }
 
 }

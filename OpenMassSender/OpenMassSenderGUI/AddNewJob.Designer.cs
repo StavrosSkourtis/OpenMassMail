@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AddNewJob));
             this.label1 = new System.Windows.Forms.Label();
             this.jobtextbox = new System.Windows.Forms.TextBox();
@@ -49,10 +48,9 @@
             this.monthCalendar1 = new System.Windows.Forms.MonthCalendar();
             this.delete = new System.Windows.Forms.Button();
             this.filepathtextbox = new System.Windows.Forms.TextBox();
-            this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
+            this.button4 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -71,8 +69,6 @@
             this.jobtextbox.Name = "jobtextbox";
             this.jobtextbox.Size = new System.Drawing.Size(349, 20);
             this.jobtextbox.TabIndex = 1;
-            this.jobtextbox.Leave += new System.EventHandler(this.jobtextbox_Leave);
-            this.jobtextbox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.jobtextbox_KeyPress);
             // 
             // label2
             // 
@@ -138,12 +134,10 @@
             this.recieverstextBox.Name = "recieverstextBox";
             this.recieverstextBox.Size = new System.Drawing.Size(194, 20);
             this.recieverstextBox.TabIndex = 8;
-            this.recieverstextBox.Leave += new System.EventHandler(this.recieverstextBox_Leave);
-            this.recieverstextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.recieverstextBox_KeyPress);
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(233, 232);
+            this.button3.Location = new System.Drawing.Point(233, 229);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(53, 23);
             this.button3.TabIndex = 9;
@@ -175,7 +169,7 @@
             this.executejob.Name = "executejob";
             this.executejob.Size = new System.Drawing.Size(115, 20);
             this.executejob.TabIndex = 12;
-            this.executejob.TextChanged += new System.EventHandler(this.executejob_TextChanged);
+           
             // 
             // repeatjob
             // 
@@ -236,15 +230,22 @@
             this.filepathtextbox.Size = new System.Drawing.Size(271, 20);
             this.filepathtextbox.TabIndex = 18;
             // 
-            // errorProvider
+            // button4
             // 
-            this.errorProvider.ContainerControl = this;
+            this.button4.Location = new System.Drawing.Point(15, 348);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(271, 23);
+            this.button4.TabIndex = 19;
+            this.button4.Text = "Add New Job";
+            this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
             // AddNewJob
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(565, 334);
+            this.ClientSize = new System.Drawing.Size(565, 391);
+            this.Controls.Add(this.button4);
             this.Controls.Add(this.filepathtextbox);
             this.Controls.Add(this.delete);
             this.Controls.Add(this.monthCalendar1);
@@ -269,7 +270,6 @@
             this.Load += new System.EventHandler(this.AddNewJob_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -296,6 +296,6 @@
         private System.Windows.Forms.MonthCalendar monthCalendar1;
         private System.Windows.Forms.Button delete;
         private System.Windows.Forms.TextBox filepathtextbox;
-        private System.Windows.Forms.ErrorProvider errorProvider;
+        private System.Windows.Forms.Button button4;
     }
 }
