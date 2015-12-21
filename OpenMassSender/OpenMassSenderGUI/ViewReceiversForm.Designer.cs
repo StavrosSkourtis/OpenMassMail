@@ -42,7 +42,7 @@
             this.dgvDetails = new System.Windows.Forms.DataGridView();
             this.dataName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataValue = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.button1 = new System.Windows.Forms.Button();
+            this.saveMetadataChangesButton = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.toolStrip1.SuspendLayout();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -135,7 +135,7 @@
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.dgvDetails);
-            this.splitContainer1.Panel2.Controls.Add(this.button1);
+            this.splitContainer1.Panel2.Controls.Add(this.saveMetadataChangesButton);
             this.splitContainer1.Panel2.Controls.Add(this.label1);
             this.splitContainer1.Size = new System.Drawing.Size(865, 553);
             this.splitContainer1.SplitterDistance = 621;
@@ -144,6 +144,8 @@
             // 
             // dgvReceivers
             // 
+            this.dgvReceivers.AllowUserToAddRows = false;
+            this.dgvReceivers.AllowUserToDeleteRows = false;
             this.dgvReceivers.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvReceivers.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.dgvReceivers.BackgroundColor = System.Drawing.SystemColors.ControlLightLight;
@@ -183,15 +185,16 @@
             this.dataValue.HeaderText = "Value";
             this.dataValue.Name = "dataValue";
             // 
-            // button1
+            // saveMetadataChangesButton
             // 
-            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.button1.Location = new System.Drawing.Point(147, 498);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(93, 43);
-            this.button1.TabIndex = 2;
-            this.button1.Text = "Save Changes";
-            this.button1.UseVisualStyleBackColor = true;
+            this.saveMetadataChangesButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.saveMetadataChangesButton.Location = new System.Drawing.Point(147, 498);
+            this.saveMetadataChangesButton.Name = "saveMetadataChangesButton";
+            this.saveMetadataChangesButton.Size = new System.Drawing.Size(93, 43);
+            this.saveMetadataChangesButton.TabIndex = 2;
+            this.saveMetadataChangesButton.Text = "Save Changes";
+            this.saveMetadataChangesButton.UseVisualStyleBackColor = true;
+            this.saveMetadataChangesButton.Click += new System.EventHandler(this.saveMetaDataChanges_Click);
             // 
             // label1
             // 
@@ -242,7 +245,7 @@
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.DataGridView dgvReceivers;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button saveMetadataChangesButton;
         private System.Windows.Forms.DataGridView dgvDetails;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataName;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataValue;
