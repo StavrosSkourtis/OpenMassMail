@@ -145,7 +145,6 @@
             // dgvReceivers
             // 
             this.dgvReceivers.AllowUserToAddRows = false;
-            this.dgvReceivers.AllowUserToDeleteRows = false;
             this.dgvReceivers.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvReceivers.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.dgvReceivers.BackgroundColor = System.Drawing.SystemColors.ControlLightLight;
@@ -157,6 +156,8 @@
             this.dgvReceivers.Name = "dgvReceivers";
             this.dgvReceivers.Size = new System.Drawing.Size(621, 553);
             this.dgvReceivers.TabIndex = 0;
+            this.dgvReceivers.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvReceivers_CellValueChanged);
+            this.dgvReceivers.UserDeletingRow += new System.Windows.Forms.DataGridViewRowCancelEventHandler(this.dgvReceivers_UserDeletingRow);
             this.dgvReceivers.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvReceivers_CellClick);
             // 
             // dgvDetails

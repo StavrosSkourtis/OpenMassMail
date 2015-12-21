@@ -71,6 +71,7 @@ namespace OpenMassSenderGUI
             idCol = new DataGridViewTextBoxColumn();
             idCol.HeaderText = "id";
             idCol.Name = "id";
+            idCol.ReadOnly = true;
             dgvReceivers.Columns.Add(idCol);
 
             
@@ -113,7 +114,8 @@ namespace OpenMassSenderGUI
                 dgvReceivers.Rows.Add(new Object[] { row["ID"] , row["email"] , row["phone_number"] , row["metadata"] ,row["group"]});       
             }
 
-            updateMetadataGridView(dgvReceivers.CurrentCell.RowIndex);
+            if( dgvReceivers.CurrentCell != null)
+                updateMetadataGridView(dgvReceivers.CurrentCell.RowIndex);
         }
 
         private void dgvReceivers_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -123,8 +125,8 @@ namespace OpenMassSenderGUI
 
         private void updateMetadataGridView(int rowId)
         {
-            // Check if the row index bellows to the data and not the header
-            if (rowId >= 0)
+            // Check if the row index bellows to the data and not the header or the new rowid
+            if (rowId >= 0 && dgvReceivers.NewRowIndex != rowId)
             {
                 // Clear all the current rows
                 dgvDetails.Rows.Clear();
@@ -183,6 +185,32 @@ namespace OpenMassSenderGUI
             MessageBox.Show("Metadata of Receiver " + id + " was updated successfuly!"); 
             
             searchReceivers();
+
+        }
+
+        private void dgvReceivers_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
+            string email = dgvReceivers.Rows[e.RowIndex].Cells["email"].Value.ToString();
+            string phone_number = dgvReceivers.Rows[e.RowIndex].Cells["phone_number"].Value.ToString();
+            string group = dgvReceivers.Rows[e.RowIndex].Cells["group"].Value.ToString();
+            int id = Convert.ToInt32(dgvReceivers.Rows[e.RowIndex].Cells["id"].Value.ToString());
+
+            ReceiverTableAdapter.getInstance().UpdateReceiverData(email, phone_number, group, id);
+
+            
+        }
+
+        private void dgvReceivers_UserDeletingRow(object sender, DataGridViewRowCancelEventArgs e)
+        {
+
+            if (MessageBox.Show("Are you sure you want to delete this receiver?", "Deleting Receiver Confirmation", MessageBoxButtons.YesNo) == DialogResult.Yes)
+            {   
+                ReceiverTableAdapter.getInstance().DeleteReceiverById(Convert.ToInt32(e.Row.Cells["id"].Value.ToString()));
+            }
+            else
+            {
+                e.Cancel = true;
+            }
 
         }
 
