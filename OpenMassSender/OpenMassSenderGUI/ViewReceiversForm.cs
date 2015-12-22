@@ -54,6 +54,9 @@ namespace OpenMassSenderGUI
         private void CreateDataGridViewColumns()
         {
 
+            dgvReceivers.Rows.Clear();
+            dgvReceivers.Columns.Clear();
+
             List<string> groups = new List<string>();
 
             foreach (OpenMassSenderCore.OpenMassSenderDBDataSet.ReceiverRow row in ReceiverTableAdapter.getInstance().GetDataByDistinctGroups())
@@ -95,6 +98,7 @@ namespace OpenMassSenderGUI
             groupCol.HeaderText = "group";
             groupCol.Name = "group";
             groupCol.DataSource = groups;
+            
             dgvReceivers.Columns.Add(groupCol);
 
             dgvReceivers.Columns["metadata"].Visible = false;
@@ -137,6 +141,8 @@ namespace OpenMassSenderGUI
                 // Loop through every pair of metadata
                 foreach (string propertyRow in propertyRows)
                 {
+                    if (propertyRow == "")
+                        break;
                     // Split the pair of data by '='
                     string[] propertyData = propertyRow.Split('=');
 
@@ -212,6 +218,15 @@ namespace OpenMassSenderGUI
                 e.Cancel = true;
             }
 
+        }
+
+        private void bntAddReceiver_Click(object sender, EventArgs e)
+        {
+            AddReceiverForm form = new AddReceiverForm();
+            form.ShowDialog();
+            CreateDataGridViewColumns();
+            UpdateGroupComboBox();
+            searchReceivers();
         }
 
 

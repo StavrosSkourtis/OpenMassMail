@@ -66,3 +66,4 @@ C:\Users\Stefanos\Programming\GitHub\OpenMassMail\OpenMassSender\OpenMassSenderG
 C:\Users\Stefanos\Programming\GitHub\OpenMassMail\OpenMassSender\OpenMassSenderGUI\obj\Debug\OMSDesktop.csproj.GenerateResource.Cache
 C:\Users\Stefanos\Programming\GitHub\OpenMassMail\OpenMassSender\OpenMassSenderGUI\obj\Debug\OpenMassSenderGUI.exe
 C:\Users\Stefanos\Programming\GitHub\OpenMassMail\OpenMassSender\OpenMassSenderGUI\obj\Debug\OpenMassSenderGUI.pdb
+H:\OpenMassMail\OpenMassSender\OpenMassSenderGUI\obj\Debug\OpenMassSenderGUI.AddReceiverForm.resources
