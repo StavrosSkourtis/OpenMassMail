@@ -18,6 +18,7 @@ namespace OpenMassSenderCore
             public string title;
             public MessageRow messageObject;
             public MassSender massSender;
+            public JobScheduleRow scheduleObject;
             //<summary>returns true if the job is ready for execution,makes sense if the job has a shedule</summary>
             public bool isReadForExecution()
             {
@@ -64,7 +65,7 @@ namespace OpenMassSenderCore
                 MessageRow message = (MessageRow)MessageTableAdapter.getInstance().GetDataById(this.message).Rows[0];
                 SenderAccountRow sender = (SenderAccountRow)SenderAccountTableAdapter.getInstance().GetDataById(this.sender_account).Rows[0];
 
-                Logger.log("log", "creating mass sender for " + sender.ID + " message " + message.ID);
+                Logger.log("creating mass sender for " + sender.ID + " message " + message.ID);
                 this.status = JobStatus.PENDING;
                 JobTableAdapter.getInstance().Update(this);
                 massSender.send(sender,
@@ -86,14 +87,14 @@ namespace OpenMassSenderCore
                                 }
                                 schedule.jobExecutionFinished();
                             }
-                            Logger.log("log", "job " + this.ID + " finished, next execution is " + schedule.nextExecution);
+                            Logger.log("job " + this.ID + " finished, next execution is " + schedule.nextExecution);
                             JobTableAdapter.getInstance().Update(this);
                             JobScheduleTableAdapter.getInstance().Update(schedule);
                         }
                     }
                     catch (Exception ex)
                     {
-                        Logger.log("error", ex.Message);
+                        Logger.error(ex.Message);
                     }
                 });
       

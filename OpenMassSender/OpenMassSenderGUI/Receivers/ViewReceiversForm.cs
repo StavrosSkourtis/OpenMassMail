@@ -12,11 +12,41 @@ namespace OpenMassSenderGUI
 {
     public partial class ViewReceiversForm : Form
     {
-
-        public ViewReceiversForm()
+        Action<string,string> okCallback;
+        public ViewReceiversForm(Action<string, string> okCallback,string group,string query)
         {
             InitializeComponent();
+
+            if (query != null && group != null)
+            {
+                this.tbSearch.Text = query;
+                /*when the form opens,if the group parrameter is not null then select the specified group*/
+                /*
+                for (int c = 0; c < cbReceiversGroup.Items.Count; c++)
+                {
+                    if (cbReceiversGroup.Items[c].ToString().Equals(group))
+                    {
+                        cbReceiversGroup.SelectedIndex = c;
+                        cbReceiversGroup.SelectedItem = cbReceiversGroup.Items[c];
+                    }
+                }*/
+            }
+          
+
+
             CreateDataGridViewColumns();
+            this.okCallback = okCallback;
+            if (okCallback == null)
+            {
+                btnOk.Visible = false;
+            }
+            else
+            {
+                btnOk.Visible = true;
+            }
+
+      
+
         }
 
         private void ViewReceiversForm_Load(object sender, EventArgs e)
@@ -48,6 +78,8 @@ namespace OpenMassSenderGUI
             // IF there is at least on item in te combo box set the first one as the selected
             if(cbReceiversGroup.Items.Count>0)
                 cbReceiversGroup.SelectedIndex = 0;
+
+
         }
 
 
@@ -111,9 +143,13 @@ namespace OpenMassSenderGUI
         }
         public void searchReceivers()
         {
+            if (cbReceiversGroup.SelectedItem == null) return;
+
             dgvDetails.Rows.Clear();
 
             dgvReceivers.Rows.Clear();
+
+
             foreach(OpenMassSenderCore.OpenMassSenderDBDataSet.ReceiverRow row in ReceiverTableAdapter.getInstance().searchReceivers(cbReceiversGroup.SelectedItem.ToString(), tbSearch.Text)){
                 dgvReceivers.Rows.Add(new Object[] { row["ID"] , row["email"] , row["phone_number"] , row["metadata"] ,row["group"]});       
             }
@@ -227,6 +263,12 @@ namespace OpenMassSenderGUI
             CreateDataGridViewColumns();
             UpdateGroupComboBox();
             searchReceivers();
+        }
+
+        private void btnOk_Click(object sender, EventArgs e)
+        {
+            if (okCallback != null) okCallback(cbReceiversGroup.SelectedItem.ToString(),tbSearch.Text);
+            this.Close();
         }
 
 

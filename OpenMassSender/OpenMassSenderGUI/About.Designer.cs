@@ -28,9 +28,9 @@
         private void InitializeComponent()
         {
             this.tableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
+            this.logoPictureBox = new System.Windows.Forms.PictureBox();
             this.labelProductName = new System.Windows.Forms.Label();
             this.labelVersion = new System.Windows.Forms.Label();
-            this.logoPictureBox = new System.Windows.Forms.PictureBox();
             this.textBoxDescription = new System.Windows.Forms.TextBox();
             this.tableLayoutPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.logoPictureBox)).BeginInit();
@@ -57,6 +57,17 @@
             this.tableLayoutPanel.Size = new System.Drawing.Size(417, 265);
             this.tableLayoutPanel.TabIndex = 0;
             // 
+            // logoPictureBox
+            // 
+            this.logoPictureBox.Image = global::OpenMassSenderGUI.Properties.Resources.omsicon;
+            this.logoPictureBox.Location = new System.Drawing.Point(3, 3);
+            this.logoPictureBox.Name = "logoPictureBox";
+            this.tableLayoutPanel.SetRowSpan(this.logoPictureBox, 3);
+            this.logoPictureBox.Size = new System.Drawing.Size(131, 131);
+            this.logoPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.logoPictureBox.TabIndex = 12;
+            this.logoPictureBox.TabStop = false;
+            // 
             // labelProductName
             // 
             this.labelProductName.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -80,17 +91,6 @@
             this.labelVersion.TabIndex = 0;
             this.labelVersion.Text = "v0.4";
             this.labelVersion.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // logoPictureBox
-            // 
-            this.logoPictureBox.Image = global::OpenMassSenderGUI.Properties.Resources.omsicon;
-            this.logoPictureBox.Location = new System.Drawing.Point(3, 3);
-            this.logoPictureBox.Name = "logoPictureBox";
-            this.tableLayoutPanel.SetRowSpan(this.logoPictureBox, 3);
-            this.logoPictureBox.Size = new System.Drawing.Size(131, 131);
-            this.logoPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.logoPictureBox.TabIndex = 12;
-            this.logoPictureBox.TabStop = false;
             // 
             // textBoxDescription
             // 

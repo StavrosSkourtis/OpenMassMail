@@ -9,15 +9,27 @@ namespace OpenMassSenderCore
     public class Logger
     {
         public static List<LogEntry> logs = new List<LogEntry>();
-        public static void log(string category,string text)
+        private static void log(string category,string text)
         {
-            Console.WriteLine("tag:" + category + "  message:" + text);
             logs.Add(new LogEntry(category, text));
-            if (category.Equals("error"))
+            if (category.Equals("ERROR"))
             {
                 openLogger();
             }
         }
+        public static void log(string text)
+        {
+            log("LOG", text);
+        }
+        public static void error(string text)
+        {
+            log("ERROR", text);
+        }
+        public static void debug(string text)
+        {
+            log("DEBUG", text);
+        }
+
         public static Form logWindow = null;
         public static void openLogger()
         {
@@ -29,6 +41,7 @@ namespace OpenMassSenderCore
     }
     public class LogEntry
     {
+        public bool consumed = false;
         public string tag, text;
         public DateTime date;
         public LogEntry(string tag, string text)

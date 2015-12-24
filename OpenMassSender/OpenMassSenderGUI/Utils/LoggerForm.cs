@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using OpenMassSenderCore;
+using System.Threading;
 
 namespace OpenMassSenderGUI
 {
@@ -19,32 +20,40 @@ namespace OpenMassSenderGUI
 
         private void cbTags_Click(object sender, EventArgs e)
         {
-            update(null);
+            update();
         }
-        private void update(object source)
+        private void update()
         {
+            Console.WriteLine("CURENT L222OG:");
             if (cbTags.SelectedItem == null)
             {
                 cbTags.SelectedIndex =1;
             }
-            string tag = cbTags.SelectedItem.ToString();
+            string tag = cbTags.SelectedItem.ToString().ToUpper();
             foreach(LogEntry log in Logger.logs){
-                if (log.tag.Equals(tag) == false) continue;
-                tbLog.Text += log.text + Environment.NewLine;
-                Logger.logs.Remove(log);
+                if (log.consumed || log.tag.Equals(tag) == false) continue;
+                var listViewItem = new ListViewItem(new string[] { log.date.Hour + ":" + log.date.Minute + ":" + log.date.Second, log.tag, log.text });
+                lvLogs.Items.Add(listViewItem);
+                log.consumed = true;
             }
         }
-
+        Thread logThread = null;
         private void LoggerForm_Load(object sender, EventArgs e)
         {
-            System.Threading.Timer timer = new System.Threading.Timer(update, null, 500, 500);
-
+            (logThread=new Thread(() => {
+                while (true)
+                {
+                    update();
+                    Thread.Sleep(500);
+                }
+            })).Start();
         }
 
         private void LoggerForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             this.Hide();
             e.Cancel = true;
+            if (logThread != null) logThread.Abort();
         }
     }
 }

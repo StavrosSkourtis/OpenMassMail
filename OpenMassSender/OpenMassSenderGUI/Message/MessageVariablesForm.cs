@@ -54,7 +54,7 @@ namespace OpenMassSenderGUI
             }
             catch (Exception ex)
             {
-                Logger.log("error", ex.Message);
+                Logger.error(ex.Message);
                 MessageBox.Show("can'd add this item, maybe the key already exists");
             }
 

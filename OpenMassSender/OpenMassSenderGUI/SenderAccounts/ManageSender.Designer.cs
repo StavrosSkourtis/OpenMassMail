@@ -1,4 +1,5 @@
-﻿namespace OpenMassSenderGUI
+﻿using OpenMassSenderCore.OpenMassSenderDBDataSetTableAdapters;
+namespace OpenMassSenderGUI
 {
     partial class ManageSender
     {
@@ -31,9 +32,9 @@
             this.components = new System.ComponentModel.Container();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.senderdataGridView = new System.Windows.Forms.DataGridView();
-            this.openMassSenderDBDataSet = new OpenMassSenderGUI.OpenMassSenderDBDataSet();
+            this.openMassSenderDBDataSet = new OpenMassSenderCore.OpenMassSenderDBDataSet();
             this.senderAccountBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.senderAccountTableAdapter = new OpenMassSenderGUI.OpenMassSenderDBDataSetTableAdapters.SenderAccountTableAdapter();
+            this.senderAccountTableAdapter = new OpenMassSenderCore.OpenMassSenderDBDataSetTableAdapters.SenderAccountTableAdapter();
             this.iDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.emailDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.firstnameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -177,9 +178,9 @@
 
         private System.Windows.Forms.ToolStrip toolStrip1;
         private System.Windows.Forms.DataGridView senderdataGridView;
-        private OpenMassSenderDBDataSet openMassSenderDBDataSet;
+        private OpenMassSenderCore.OpenMassSenderDBDataSet openMassSenderDBDataSet;
         private System.Windows.Forms.BindingSource senderAccountBindingSource;
-        private OpenMassSenderGUI.OpenMassSenderDBDataSetTableAdapters.SenderAccountTableAdapter senderAccountTableAdapter;
+        private SenderAccountTableAdapter senderAccountTableAdapter;
         private System.Windows.Forms.DataGridViewTextBoxColumn iDDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn emailDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn firstnameDataGridViewTextBoxColumn;

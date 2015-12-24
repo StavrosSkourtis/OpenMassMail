@@ -218,7 +218,7 @@
             // manageToolStripMenuItem1
             // 
             this.manageToolStripMenuItem1.Name = "manageToolStripMenuItem1";
-            this.manageToolStripMenuItem1.Size = new System.Drawing.Size(117, 22);
+            this.manageToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
             this.manageToolStripMenuItem1.Text = "Manage";
             this.manageToolStripMenuItem1.Click += new System.EventHandler(this.manageToolStripMenuItem1_Click);
             // 
@@ -235,20 +235,21 @@
             // preferencesToolStripMenuItem
             // 
             this.preferencesToolStripMenuItem.Name = "preferencesToolStripMenuItem";
-            this.preferencesToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
+            this.preferencesToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.preferencesToolStripMenuItem.Text = "Preferences";
             // 
             // settingsToolStripMenuItem
             // 
             this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
-            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
+            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.settingsToolStripMenuItem.Text = "Settings";
             // 
             // openLoggerToolStripMenuItem
             // 
             this.openLoggerToolStripMenuItem.Name = "openLoggerToolStripMenuItem";
-            this.openLoggerToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
+            this.openLoggerToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.openLoggerToolStripMenuItem.Text = "Open Logger";
+            this.openLoggerToolStripMenuItem.Click += new System.EventHandler(this.openLoggerToolStripMenuItem_Click);
             // 
             // tabControlMainWindow
             // 

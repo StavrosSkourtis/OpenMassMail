@@ -34,7 +34,7 @@ namespace OpenMassSenderCore.OpenMassSenderDBDataSetTableAdapters
                 }
                 catch (Exception ex)
                 {
-                    Logger.log("error2", ex.Message);
+                    Logger.error(ex.Message);
                 }
                 return null;
             }

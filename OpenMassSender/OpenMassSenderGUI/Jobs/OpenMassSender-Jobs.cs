@@ -38,6 +38,7 @@ namespace OpenMassSenderGUI
 
             (new Thread(() =>
            {
+               /*
                 while (true)
                 {
                     //populate listview with data
@@ -80,8 +81,10 @@ namespace OpenMassSenderGUI
                         }
                     }
                     Thread.Sleep(1000);
+               
                 }
-            })).Start();
+                */
+           })).Start();
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
@@ -123,14 +126,21 @@ namespace OpenMassSenderGUI
 
         private void manageToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ViewReceiversForm frm = new ViewReceiversForm();
+            ViewReceiversForm frm = new ViewReceiversForm(null,null,null);
             frm.Show();
         }
 
         private void manageToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            //----------------->thano edw<------------------------
-            //kwdikas gia to anoigma tis manage senders form
+            ManageSender frm = new ManageSender();
+            frm.Show();
+            
+        }
+
+        private void openLoggerToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            LoggerForm frm = new LoggerForm();
+            frm.Show();
         }
     }
 }

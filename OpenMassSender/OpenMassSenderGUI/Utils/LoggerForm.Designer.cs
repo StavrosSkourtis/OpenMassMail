@@ -30,7 +30,10 @@
         {
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.cbTags = new System.Windows.Forms.ToolStripComboBox();
-            this.tbLog = new System.Windows.Forms.RichTextBox();
+            this.lvLogs = new System.Windows.Forms.ListView();
+            this.time = new System.Windows.Forms.ColumnHeader();
+            this.tag = new System.Windows.Forms.ColumnHeader();
+            this.message = new System.Windows.Forms.ColumnHeader();
             this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -58,22 +61,39 @@
             this.cbTags.Size = new System.Drawing.Size(121, 25);
             this.cbTags.Click += new System.EventHandler(this.cbTags_Click);
             // 
-            // tbLog
+            // lvLogs
             // 
-            this.tbLog.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tbLog.Location = new System.Drawing.Point(0, 25);
-            this.tbLog.Name = "tbLog";
-            this.tbLog.ReadOnly = true;
-            this.tbLog.Size = new System.Drawing.Size(399, 400);
-            this.tbLog.TabIndex = 1;
-            this.tbLog.Text = "";
+            this.lvLogs.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.time,
+            this.tag,
+            this.message});
+            this.lvLogs.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lvLogs.Location = new System.Drawing.Point(0, 25);
+            this.lvLogs.Name = "lvLogs";
+            this.lvLogs.Size = new System.Drawing.Size(399, 400);
+            this.lvLogs.TabIndex = 1;
+            this.lvLogs.UseCompatibleStateImageBehavior = false;
+            this.lvLogs.View = System.Windows.Forms.View.Details;
+            // 
+            // time
+            // 
+            this.time.Text = "Time";
+            // 
+            // tag
+            // 
+            this.tag.Text = "Tag";
+            // 
+            // message
+            // 
+            this.message.Text = "Message";
+            this.message.Width = 300;
             // 
             // LoggerForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(399, 425);
-            this.Controls.Add(this.tbLog);
+            this.Controls.Add(this.lvLogs);
             this.Controls.Add(this.toolStrip1);
             this.Name = "LoggerForm";
             this.Text = "LoggerForm";
@@ -90,6 +110,9 @@
 
         private System.Windows.Forms.ToolStrip toolStrip1;
         private System.Windows.Forms.ToolStripComboBox cbTags;
-        private System.Windows.Forms.RichTextBox tbLog;
+        private System.Windows.Forms.ListView lvLogs;
+        private System.Windows.Forms.ColumnHeader time;
+        private System.Windows.Forms.ColumnHeader tag;
+        private System.Windows.Forms.ColumnHeader message;
     }
 }

@@ -85,7 +85,7 @@
             // lblPassword
             // 
             this.lblPassword.AutoSize = true;
-            this.lblPassword.Location = new System.Drawing.Point(13, 70);
+            this.lblPassword.Location = new System.Drawing.Point(16, 73);
             this.lblPassword.Name = "lblPassword";
             this.lblPassword.Size = new System.Drawing.Size(56, 13);
             this.lblPassword.TabIndex = 5;
@@ -109,7 +109,7 @@
             this.btnCreateAccount.UseVisualStyleBackColor = true;
             this.btnCreateAccount.Click += new System.EventHandler(this.btnCreateAccount_Click);
             // 
-            // loginForm
+            // LoginForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -122,7 +122,7 @@
             this.Controls.Add(this.txtUsername);
             this.Controls.Add(this.lblRegister);
             this.Controls.Add(this.btnLogin);
-            this.Name = "loginForm";
+            this.Name = "LoginForm";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.Text = "loginForm";
             this.Load += new System.EventHandler(this.loginForm_Load);

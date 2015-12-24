@@ -29,12 +29,14 @@
         private void InitializeComponent()
         {
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
+            this.bntAddReceiver = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripLabel2 = new System.Windows.Forms.ToolStripLabel();
             this.tbSearch = new System.Windows.Forms.ToolStripTextBox();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
             this.cbReceiversGroup = new System.Windows.Forms.ToolStripComboBox();
+            this.bntSearchReceiver = new System.Windows.Forms.ToolStripButton();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.dgvReceivers = new System.Windows.Forms.DataGridView();
             this.dgvDetails = new System.Windows.Forms.DataGridView();
@@ -42,8 +44,7 @@
             this.dataValue = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.saveMetadataChangesButton = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
-            this.bntAddReceiver = new System.Windows.Forms.ToolStripButton();
-            this.bntSearchReceiver = new System.Windows.Forms.ToolStripButton();
+            this.btnOk = new System.Windows.Forms.Button();
             this.toolStrip1.SuspendLayout();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -68,6 +69,15 @@
             this.toolStrip1.Size = new System.Drawing.Size(865, 25);
             this.toolStrip1.TabIndex = 0;
             this.toolStrip1.Text = "toolStrip1";
+            // 
+            // bntAddReceiver
+            // 
+            this.bntAddReceiver.Image = global::OpenMassSenderGUI.Properties.Resources.add_button;
+            this.bntAddReceiver.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.bntAddReceiver.Name = "bntAddReceiver";
+            this.bntAddReceiver.Size = new System.Drawing.Size(96, 22);
+            this.bntAddReceiver.Text = "Add Receiver";
+            this.bntAddReceiver.Click += new System.EventHandler(this.bntAddReceiver_Click);
             // 
             // toolStripSeparator1
             // 
@@ -104,6 +114,16 @@
             this.cbReceiversGroup.Size = new System.Drawing.Size(121, 25);
             this.cbReceiversGroup.SelectedIndexChanged += new System.EventHandler(this.cbReceiversGroup_SelectedIndexChanged);
             // 
+            // bntSearchReceiver
+            // 
+            this.bntSearchReceiver.Image = global::OpenMassSenderGUI.Properties.Resources.search_button;
+            this.bntSearchReceiver.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.bntSearchReceiver.Name = "bntSearchReceiver";
+            this.bntSearchReceiver.Overflow = System.Windows.Forms.ToolStripItemOverflow.Never;
+            this.bntSearchReceiver.Size = new System.Drawing.Size(62, 22);
+            this.bntSearchReceiver.Text = "Search";
+            this.bntSearchReceiver.Click += new System.EventHandler(this.bntSearchReceiver_Click);
+            // 
             // splitContainer1
             // 
             this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -116,6 +136,7 @@
             // 
             // splitContainer1.Panel2
             // 
+            this.splitContainer1.Panel2.Controls.Add(this.btnOk);
             this.splitContainer1.Panel2.Controls.Add(this.dgvDetails);
             this.splitContainer1.Panel2.Controls.Add(this.saveMetadataChangesButton);
             this.splitContainer1.Panel2.Controls.Add(this.label1);
@@ -190,24 +211,15 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Receiver Details";
             // 
-            // bntAddReceiver
+            // btnOk
             // 
-            this.bntAddReceiver.Image = global::OpenMassSenderGUI.Properties.Resources.add_button;
-            this.bntAddReceiver.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.bntAddReceiver.Name = "bntAddReceiver";
-            this.bntAddReceiver.Size = new System.Drawing.Size(96, 22);
-            this.bntAddReceiver.Text = "Add Receiver";
-            this.bntAddReceiver.Click += new System.EventHandler(this.bntAddReceiver_Click);
-            // 
-            // bntSearchReceiver
-            // 
-            this.bntSearchReceiver.Image = global::OpenMassSenderGUI.Properties.Resources.search_button;
-            this.bntSearchReceiver.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.bntSearchReceiver.Name = "bntSearchReceiver";
-            this.bntSearchReceiver.Overflow = System.Windows.Forms.ToolStripItemOverflow.Never;
-            this.bntSearchReceiver.Size = new System.Drawing.Size(62, 22);
-            this.bntSearchReceiver.Text = "Search";
-            this.bntSearchReceiver.Click += new System.EventHandler(this.bntSearchReceiver_Click);
+            this.btnOk.Location = new System.Drawing.Point(67, 498);
+            this.btnOk.Name = "btnOk";
+            this.btnOk.Size = new System.Drawing.Size(74, 43);
+            this.btnOk.TabIndex = 4;
+            this.btnOk.Text = "Ok";
+            this.btnOk.UseVisualStyleBackColor = true;
+            this.btnOk.Click += new System.EventHandler(this.btnOk_Click);
             // 
             // ViewReceiversForm
             // 
@@ -251,5 +263,6 @@
         private System.Windows.Forms.DataGridView dgvDetails;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataName;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataValue;
+        private System.Windows.Forms.Button btnOk;
     }
 }

@@ -12,6 +12,7 @@ namespace OpenMassSenderCore.OpenMassSenderDBDataSetTableAdapters
         {
             OpenMassSenderCore.OpenMassSenderDBDataSet.JobScheduleRow schedule=OpenMassSenderDBDataSet.getInstance().JobSchedule.NewJobScheduleRow();
             job.schedule =schedule.ID;
+            job.scheduleObject = schedule;
             schedule.repeatable = RepeatableJob.NON_REPEATABLE;
             return schedule;
         }

@@ -61,7 +61,7 @@ namespace OMSExecutionerService
             }
             catch (Exception ex)
             {
-                Logger.log("error", ex.Message);
+                Logger.error(ex.Message);
             }
 
         }

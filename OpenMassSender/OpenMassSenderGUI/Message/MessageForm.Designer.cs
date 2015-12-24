@@ -30,6 +30,9 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MessageForm));
             this.panel1 = new System.Windows.Forms.Panel();
+            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
+            this.tsbtnPreview = new System.Windows.Forms.ToolStripButton();
+            this.tsbrnVariables = new System.Windows.Forms.ToolStripButton();
             this.tbContent = new System.Windows.Forms.RichTextBox();
             this.lblLinkedFile = new System.Windows.Forms.Label();
             this.lblTextLengthWarning = new System.Windows.Forms.Label();
@@ -39,9 +42,6 @@
             this.labelSubject = new System.Windows.Forms.Label();
             this.tbSubject = new System.Windows.Forms.TextBox();
             this.ofd1 = new System.Windows.Forms.OpenFileDialog();
-            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
-            this.tsbtnPreview = new System.Windows.Forms.ToolStripButton();
-            this.tsbrnVariables = new System.Windows.Forms.ToolStripButton();
             this.panel1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -63,6 +63,37 @@
             this.panel1.Size = new System.Drawing.Size(565, 510);
             this.panel1.TabIndex = 0;
             this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
+            // 
+            // toolStrip1
+            // 
+            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsbtnPreview,
+            this.tsbrnVariables});
+            this.toolStrip1.Location = new System.Drawing.Point(0, 0);
+            this.toolStrip1.Name = "toolStrip1";
+            this.toolStrip1.Size = new System.Drawing.Size(565, 25);
+            this.toolStrip1.TabIndex = 11;
+            this.toolStrip1.Text = "toolStrip1";
+            // 
+            // tsbtnPreview
+            // 
+            this.tsbtnPreview.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.tsbtnPreview.Image = ((System.Drawing.Image)(resources.GetObject("tsbtnPreview.Image")));
+            this.tsbtnPreview.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbtnPreview.Name = "tsbtnPreview";
+            this.tsbtnPreview.Size = new System.Drawing.Size(52, 22);
+            this.tsbtnPreview.Text = "Preview";
+            this.tsbtnPreview.Click += new System.EventHandler(this.tsbtnPreview_Click);
+            // 
+            // tsbrnVariables
+            // 
+            this.tsbrnVariables.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.tsbrnVariables.Image = ((System.Drawing.Image)(resources.GetObject("tsbrnVariables.Image")));
+            this.tsbrnVariables.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbrnVariables.Name = "tsbrnVariables";
+            this.tsbrnVariables.Size = new System.Drawing.Size(57, 22);
+            this.tsbrnVariables.Text = "Variables";
+            this.tsbrnVariables.Click += new System.EventHandler(this.tsbrnVariables_Click);
             // 
             // tbContent
             // 
@@ -153,45 +184,16 @@
             // 
             this.ofd1.FileName = "openFileDialog1";
             // 
-            // toolStrip1
-            // 
-            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tsbtnPreview,
-            this.tsbrnVariables});
-            this.toolStrip1.Location = new System.Drawing.Point(0, 0);
-            this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(565, 25);
-            this.toolStrip1.TabIndex = 11;
-            this.toolStrip1.Text = "toolStrip1";
-            // 
-            // tsbtnPreview
-            // 
-            this.tsbtnPreview.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.tsbtnPreview.Image = ((System.Drawing.Image)(resources.GetObject("tsbtnPreview.Image")));
-            this.tsbtnPreview.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tsbtnPreview.Name = "tsbtnPreview";
-            this.tsbtnPreview.Size = new System.Drawing.Size(52, 22);
-            this.tsbtnPreview.Text = "Preview";
-            this.tsbtnPreview.Click += new System.EventHandler(this.tsbtnPreview_Click);
-            // 
-            // tsbrnVariables
-            // 
-            this.tsbrnVariables.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.tsbrnVariables.Image = ((System.Drawing.Image)(resources.GetObject("tsbrnVariables.Image")));
-            this.tsbrnVariables.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tsbrnVariables.Name = "tsbrnVariables";
-            this.tsbrnVariables.Size = new System.Drawing.Size(57, 22);
-            this.tsbrnVariables.Text = "Variables";
-            this.tsbrnVariables.Click += new System.EventHandler(this.tsbrnVariables_Click);
-            // 
             // MessageForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.ClientSize = new System.Drawing.Size(565, 510);
             this.Controls.Add(this.panel1);
+            this.ForeColor = System.Drawing.SystemColors.ControlText;
             this.Name = "MessageForm";
-            this.Text = "emailMessageEdit";
+            this.Text = "New Message";
             this.Load += new System.EventHandler(this.MessageForm_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();

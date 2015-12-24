@@ -71,7 +71,6 @@ namespace OpenMassSenderGUI
 
         private void btnOK_Click(object sender, EventArgs e)
         {
-            this.formparent.filepath = tbSubject.Text;
             formparent.Show();
             this.Close();
         }

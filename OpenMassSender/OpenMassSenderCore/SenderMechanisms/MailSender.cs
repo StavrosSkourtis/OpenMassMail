@@ -33,7 +33,7 @@ namespace OpenMassSenderCore.Senders
             }
             catch (Exception ex)
             {
-                Logger.log("error", ex.Message);
+                Logger.error(ex.Message);
                 return OpenMassSenderCore.OpenMassSenderDBDataSet.MessageStatus.ERROR;
             }
             return OpenMassSenderCore.OpenMassSenderDBDataSet.MessageStatus.SUCCEED;

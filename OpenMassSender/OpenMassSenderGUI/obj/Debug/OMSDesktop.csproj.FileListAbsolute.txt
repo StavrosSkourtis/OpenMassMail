@@ -60,10 +60,12 @@ C:\Users\Stefanos\Programming\GitHub\OpenMassMail\OpenMassSender\OpenMassSenderG
 C:\Users\Stefanos\Programming\GitHub\OpenMassMail\OpenMassSender\OpenMassSenderGUI\obj\Debug\OpenMassSenderGUI.MessagePreviewForm.resources
 C:\Users\Stefanos\Programming\GitHub\OpenMassMail\OpenMassSender\OpenMassSenderGUI\obj\Debug\OpenMassSenderGUI.MessageVariablesForm.resources
 C:\Users\Stefanos\Programming\GitHub\OpenMassMail\OpenMassSender\OpenMassSenderGUI\obj\Debug\OpenMassSenderGUI.Properties.Resources.resources
-C:\Users\Stefanos\Programming\GitHub\OpenMassMail\OpenMassSender\OpenMassSenderGUI\obj\Debug\OpenMassSenderGUI.receiversWindow.resources
 C:\Users\Stefanos\Programming\GitHub\OpenMassMail\OpenMassSender\OpenMassSenderGUI\obj\Debug\OpenMassSenderGUI.Testing.resources
 C:\Users\Stefanos\Programming\GitHub\OpenMassMail\OpenMassSender\OpenMassSenderGUI\obj\Debug\OpenMassSenderGUI.ViewReceiversForm.resources
 C:\Users\Stefanos\Programming\GitHub\OpenMassMail\OpenMassSender\OpenMassSenderGUI\obj\Debug\OMSDesktop.csproj.GenerateResource.Cache
 C:\Users\Stefanos\Programming\GitHub\OpenMassMail\OpenMassSender\OpenMassSenderGUI\obj\Debug\OpenMassSenderGUI.exe
 C:\Users\Stefanos\Programming\GitHub\OpenMassMail\OpenMassSender\OpenMassSenderGUI\obj\Debug\OpenMassSenderGUI.pdb
 H:\OpenMassMail\OpenMassSender\OpenMassSenderGUI\obj\Debug\OpenMassSenderGUI.AddReceiverForm.resources
+C:\Users\Stefanos\Programming\GitHub\OpenMassMail\OpenMassSender\OpenMassSenderGUI\obj\Debug\OpenMassSenderGUI.AddReceiverForm.resources
+C:\Users\Stefanos\Programming\GitHub\OpenMassMail\OpenMassSender\OpenMassSenderGUI\obj\Debug\OpenMassSenderGUI.AddNewSender.resources
+C:\Users\Stefanos\Programming\GitHub\OpenMassMail\OpenMassSender\OpenMassSenderGUI\obj\Debug\OpenMassSenderGUI.ManageSender.resources

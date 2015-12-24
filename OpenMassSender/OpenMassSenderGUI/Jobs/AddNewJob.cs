@@ -77,10 +77,13 @@ namespace OpenMassSenderGUI
         OpenFileDialog ofd = new OpenFileDialog();
         private void button2_Click(object sender, EventArgs e)
         {
-            if (ofd.ShowDialog() == DialogResult.OK)
+            if (job != null && job.messageObject != null)
             {
-                filepathtextbox.Text = ofd.FileName;
+                MessagePreviewForm messagePreview =new MessagePreviewForm(job.messageObject);
                 
+
+                messagePreview.Show();
+                messagePreview.Focus();
             }
        }
         
@@ -101,28 +104,27 @@ namespace OpenMassSenderGUI
             this.repeatjob.SelectedIndex = 0;
 
         }
-        public string filepath
-        {
-            get { return filepathtextbox.Text; }
-            set { filepathtextbox.Text = value; }
-        }
 
         private void button3_Click(object sender, EventArgs e)
         {
-            receiversWindow frm = new receiversWindow();
+            ViewReceiversForm frm = new ViewReceiversForm((group,query)=>{
+                job.group = group;
+                job.query = query;
+                recieverstextBox.Text = "group=" + group + ";" + query;
+            }, job.group, job.query);
             frm.ShowDialog();
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
             
-            if (jobtextbox.Text == "" || filepathtextbox.Text == "" || executejob.Text == "")
+            if (jobtextbox.Text == "" || executejob.Text == "")
             {
                 MessageBox.Show("You must fill a job title,fill a subject of message and choose a date", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             else 
             {
-                this.Close();
+                JobTableAdapter.getInstance().submitRow(job);
             }
         }
 
