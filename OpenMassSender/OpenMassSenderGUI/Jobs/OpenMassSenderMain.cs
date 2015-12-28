@@ -36,8 +36,27 @@ namespace OpenMassSenderGUI
                 showLoginForm();
             }
 
-            (new Thread(() =>
-           {
+            //populate listview with data
+            //Get the table from the data set
+            DataTable dtable = OpenMassSenderDBDataSet.getInstance().Tables["Job"];
+            //Clear the ListView control
+            listViewJobs.Items.Clear();
+            foreach (OpenMassSenderCore.OpenMassSenderDBDataSet.JobRow row in JobTableAdapter.getInstance().GetData())
+            {
+                if (row.RowState != DataRowState.Deleted)
+                {
+                    // Define the list items
+                    ListViewItem lvi = new ListViewItem(row.ID.ToString());
+                    lvi.SubItems.Add(row.job_name.ToString());
+                    lvi.SubItems.Add(row.status.ToString());
+                    //lvi.SubItems.Add(row["status"].ToString());
+                    // Add the list items to the ListView
+                    listViewJobs.Items.Add(lvi);
+                }
+            }
+
+            //(new Thread(() =>
+           //{
                /*
                 while (true)
                 {
@@ -84,7 +103,7 @@ namespace OpenMassSenderGUI
                
                 }
                 */
-           })).Start();
+          // })).Start();
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
@@ -141,6 +160,45 @@ namespace OpenMassSenderGUI
         {
             LoggerForm frm = new LoggerForm();
             frm.Show();
+        }
+
+        private void listViewJobs_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            //MessageBox.Show( listViewJobs.SelectedItems[0].Text);
+            DataTable dtable = OpenMassSenderDBDataSet.getInstance().Tables["Message"];
+            listViewMessage.Items.Clear();
+            foreach (OpenMassSenderCore.OpenMassSenderDBDataSet.MessageRow row in MessageTableAdapter.getInstance().GetData())
+            {
+                if (row.RowState != DataRowState.Deleted)
+                {
+                    if(listViewJobs.SelectedItems.Count > 0) {
+                        if (row.ID.ToString().Equals(listViewJobs.SelectedItems[0].Text))
+                        {
+                            ListViewItem lvi = new ListViewItem(row.subject.ToString());
+                            lvi.SubItems.Add(row.message.ToString());
+                            listViewMessage.Items.Add(lvi);
+                        }
+                    }
+                }
+            }
+
+            DataTable dtable1 = OpenMassSenderDBDataSet.getInstance().Tables["JobSchedule"];
+            listViewStatus.Items.Clear();
+            foreach (OpenMassSenderCore.OpenMassSenderDBDataSet.JobScheduleRow row in JobScheduleTableAdapter.getInstance().GetData())
+            {
+                if (row.RowState != DataRowState.Deleted)
+                {
+                    if (listViewJobs.SelectedItems.Count > 0)
+                    {
+                        if (row.ID.ToString().Equals(listViewJobs.SelectedItems[0].Text))
+                        {
+                            ListViewItem lvi = new ListViewItem(row.repeatable.ToString());
+                            lvi.SubItems.Add(row.nextExecution.ToString());
+                            listViewStatus.Items.Add(lvi);
+                        }
+                    }
+                }
+            }
         }
     }
 }

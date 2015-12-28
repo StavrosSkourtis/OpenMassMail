@@ -52,6 +52,12 @@
             this.tabControlMainWindow = new System.Windows.Forms.TabControl();
             this.tabPageStatus = new System.Windows.Forms.TabPage();
             this.tabPageMessage = new System.Windows.Forms.TabPage();
+            this.listViewMessage = new System.Windows.Forms.ListView();
+            this.columnHeader1 = new System.Windows.Forms.ColumnHeader();
+            this.columnHeader3 = new System.Windows.Forms.ColumnHeader();
+            this.listViewStatus = new System.Windows.Forms.ListView();
+            this.columnHeader2 = new System.Windows.Forms.ColumnHeader();
+            this.columnHeader4 = new System.Windows.Forms.ColumnHeader();
             this.panel1.SuspendLayout();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -59,6 +65,8 @@
             this.toolStrip1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.tabControlMainWindow.SuspendLayout();
+            this.tabPageStatus.SuspendLayout();
+            this.tabPageMessage.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
@@ -103,6 +111,7 @@
             this.listViewJobs.TabIndex = 3;
             this.listViewJobs.UseCompatibleStateImageBehavior = false;
             this.listViewJobs.View = System.Windows.Forms.View.Details;
+            this.listViewJobs.SelectedIndexChanged += new System.EventHandler(this.listViewJobs_SelectedIndexChanged);
             // 
             // ColumnNumber
             // 
@@ -218,7 +227,7 @@
             // manageToolStripMenuItem1
             // 
             this.manageToolStripMenuItem1.Name = "manageToolStripMenuItem1";
-            this.manageToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
+            this.manageToolStripMenuItem1.Size = new System.Drawing.Size(117, 22);
             this.manageToolStripMenuItem1.Text = "Manage";
             this.manageToolStripMenuItem1.Click += new System.EventHandler(this.manageToolStripMenuItem1_Click);
             // 
@@ -235,19 +244,19 @@
             // preferencesToolStripMenuItem
             // 
             this.preferencesToolStripMenuItem.Name = "preferencesToolStripMenuItem";
-            this.preferencesToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.preferencesToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
             this.preferencesToolStripMenuItem.Text = "Preferences";
             // 
             // settingsToolStripMenuItem
             // 
             this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
-            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
             this.settingsToolStripMenuItem.Text = "Settings";
             // 
             // openLoggerToolStripMenuItem
             // 
             this.openLoggerToolStripMenuItem.Name = "openLoggerToolStripMenuItem";
-            this.openLoggerToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.openLoggerToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
             this.openLoggerToolStripMenuItem.Text = "Open Logger";
             this.openLoggerToolStripMenuItem.Click += new System.EventHandler(this.openLoggerToolStripMenuItem_Click);
             // 
@@ -264,6 +273,7 @@
             // 
             // tabPageStatus
             // 
+            this.tabPageStatus.Controls.Add(this.listViewStatus);
             this.tabPageStatus.Location = new System.Drawing.Point(4, 22);
             this.tabPageStatus.Name = "tabPageStatus";
             this.tabPageStatus.Padding = new System.Windows.Forms.Padding(3);
@@ -274,6 +284,7 @@
             // 
             // tabPageMessage
             // 
+            this.tabPageMessage.Controls.Add(this.listViewMessage);
             this.tabPageMessage.Location = new System.Drawing.Point(4, 22);
             this.tabPageMessage.Name = "tabPageMessage";
             this.tabPageMessage.Padding = new System.Windows.Forms.Padding(3);
@@ -281,6 +292,52 @@
             this.tabPageMessage.TabIndex = 1;
             this.tabPageMessage.Text = "Message";
             this.tabPageMessage.UseVisualStyleBackColor = true;
+            // 
+            // listViewMessage
+            // 
+            this.listViewMessage.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader1,
+            this.columnHeader3});
+            this.listViewMessage.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.listViewMessage.Location = new System.Drawing.Point(3, 3);
+            this.listViewMessage.Name = "listViewMessage";
+            this.listViewMessage.Size = new System.Drawing.Size(551, 82);
+            this.listViewMessage.TabIndex = 4;
+            this.listViewMessage.UseCompatibleStateImageBehavior = false;
+            this.listViewMessage.View = System.Windows.Forms.View.Details;
+            // 
+            // columnHeader1
+            // 
+            this.columnHeader1.Text = "Subject";
+            this.columnHeader1.Width = 80;
+            // 
+            // columnHeader3
+            // 
+            this.columnHeader3.Text = "Message";
+            this.columnHeader3.Width = 317;
+            // 
+            // listViewStatus
+            // 
+            this.listViewStatus.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader2,
+            this.columnHeader4});
+            this.listViewStatus.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.listViewStatus.Location = new System.Drawing.Point(3, 3);
+            this.listViewStatus.Name = "listViewStatus";
+            this.listViewStatus.Size = new System.Drawing.Size(551, 82);
+            this.listViewStatus.TabIndex = 5;
+            this.listViewStatus.UseCompatibleStateImageBehavior = false;
+            this.listViewStatus.View = System.Windows.Forms.View.Details;
+            // 
+            // columnHeader2
+            // 
+            this.columnHeader2.Text = "Repeatable";
+            this.columnHeader2.Width = 80;
+            // 
+            // columnHeader4
+            // 
+            this.columnHeader4.Text = "Next Execution";
+            this.columnHeader4.Width = 317;
             // 
             // MainForm
             // 
@@ -302,6 +359,8 @@
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.tabControlMainWindow.ResumeLayout(false);
+            this.tabPageStatus.ResumeLayout(false);
+            this.tabPageMessage.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -332,6 +391,12 @@
         private System.Windows.Forms.ToolStripMenuItem manageToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem senderAccountsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem manageToolStripMenuItem1;
+        private System.Windows.Forms.ListView listViewMessage;
+        private System.Windows.Forms.ColumnHeader columnHeader1;
+        private System.Windows.Forms.ColumnHeader columnHeader3;
+        private System.Windows.Forms.ListView listViewStatus;
+        private System.Windows.Forms.ColumnHeader columnHeader2;
+        private System.Windows.Forms.ColumnHeader columnHeader4;
     }
 }
 

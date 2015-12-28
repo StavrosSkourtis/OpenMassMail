@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>9.0.30729</ProductVersion>
+    <ProductVersion>9.0.21022</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{110CFCF2-AF89-4DD2-8606-4F367CA7B80D}</ProjectGuid>
     <OutputType>WinExe</OutputType>
@@ -106,11 +106,11 @@
     <Compile Include="SenderAccounts\ManageSender.Designer.cs">
       <DependentUpon>ManageSender.cs</DependentUpon>
     </Compile>
-    <Compile Include="Jobs\OpenMassSender-Jobs.cs">
+    <Compile Include="Jobs\OpenMassSenderMain.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Jobs\OpenMassSender-Jobs.Designer.cs">
-      <DependentUpon>OpenMassSender-Jobs.cs</DependentUpon>
+    <Compile Include="Jobs\OpenMassSenderMain.Designer.cs">
+      <DependentUpon>OpenMassSenderMain.cs</DependentUpon>
     </Compile>
     <Compile Include="JobExecutioner\JobExecutionerCommunicator.cs" />
     <Compile Include="LoginForm.cs">
@@ -161,8 +161,8 @@
     <EmbeddedResource Include="SenderAccounts\ManageSender.resx">
       <DependentUpon>ManageSender.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Jobs\OpenMassSender-Jobs.resx">
-      <DependentUpon>OpenMassSender-Jobs.cs</DependentUpon>
+    <EmbeddedResource Include="Jobs\OpenMassSenderMain.resx">
+      <DependentUpon>OpenMassSenderMain.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="LoginForm.resx">
