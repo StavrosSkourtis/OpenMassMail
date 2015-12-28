@@ -135,7 +135,15 @@ namespace OpenMassSenderGUI
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
-
+            if (listViewJobs.SelectedItems.Count > 0) {
+                int idd;
+                if( Int32.TryParse(listViewJobs.SelectedItems[0].Text, out idd) ){
+                    //MessageBox.Show(idd.ToString());
+                    //JobTableAdapter.getInstance().DeleteById(idd); //douleuei apla to kanw comment gt tha diagrapsei to mono mas job
+                }else {
+                    MessageBox.Show("String could not be parsed.");
+                }                
+            }
         }
 
         private void btnShowNotReady_Click(object sender, EventArgs e)
