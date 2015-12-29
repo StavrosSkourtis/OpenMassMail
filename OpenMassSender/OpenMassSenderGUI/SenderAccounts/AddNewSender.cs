@@ -11,59 +11,61 @@ namespace OpenMassSenderGUI
 {
     public partial class AddNewSender : Form
     {
-        private ManageSender frm = null;
-        public AddNewSender(Form mng)
+       
+        public AddNewSender()
         {
-            frm = mng as ManageSender;
+            
 
             InitializeComponent();
         }
 
-        public string email
+        private void emailTb_Validating(object sender, CancelEventArgs e)
         {
-            get { return emailtextBox.Text; }
-            set { emailtextBox.Text = value; }
-        }
-        public string fname
-        {
-            get { return firsttextBox.Text; }
-            set { firsttextBox.Text = value; }
-        }
-        public string lname
-        {
-            get { return lasttextBox.Text; }
-            set { lasttextBox.Text = value; }
-        }
-
-        public string host
-        {
-            get { return hosttextBox.Text; }
-            set { hosttextBox.Text = value; }
-        }
-
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-
-
-            if (emailtextBox.Text == "" || firsttextBox.Text == "" || lasttextBox.Text == "" || hosttextBox.Text == "")
+            emailtextBox.BackColor = Color.White;
+            //if email is empty then the user chose not to set value.
+            if (emailtextBox.Text == "")
             {
-                DialogResult result = MessageBox.Show("You must fill all fields", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                if (result == DialogResult.OK)
-                { }
-
+                return;
             }
-            else
+
+            try
             {
-                this.frm.email = email;
-                this.frm.fname = fname;
-                this.frm.lname = lname;
-                this.frm.host = host;
+                //It will cause an exception if the email is not valid
+                var addr = new System.Net.Mail.MailAddress(emailtextBox.Text);
+            }
+            catch
+            {
+                emailtextBox.BackColor = Color.FromArgb(255, 241, 115, 115);
+                MessageBox.Show("The e-mail provided is not valid!", "E-mail not Valid", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                e.Cancel = true;
+            }
+        }
+
+        private void Cancelbutton_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("Are you sure you want to cancel the creation of the sender?", "Cancel Confirmation", MessageBoxButtons.YesNo) == DialogResult.Yes)
+            {
                 this.Close();
             }
-
         }
 
+        private void Createbutton_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("Are you sure you want to create the sender?", "Creation Confirmation", MessageBoxButtons.YesNo) == DialogResult.Yes)
+            {
+                // SenderAccountTableAdapter.getInstance().Insert(emailtextBox.Text, firsttextBox.Text, lasttextBox.Text, hosttextBox.Text, 21, "", Convert.ToInt32(UserTableAdapter.getInstance().userid), "");
+                this.Close();
+            }
+        }
+
+        private void emailtextBox_Leave(object sender, EventArgs e)
+        {
+            string address = emailtextBox.Text;
+            hosttextBox.Text = address.Substring(address.IndexOf('@') + 1);
+        }
+
+
+       
        
 
         

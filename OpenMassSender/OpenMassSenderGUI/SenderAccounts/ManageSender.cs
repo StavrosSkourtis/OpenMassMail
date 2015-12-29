@@ -32,7 +32,7 @@ namespace OpenMassSenderGUI
 
         private void AddtoolStripButton_Click(object sender, EventArgs e)
         {
-            AddNewSender newsender = new AddNewSender(this);
+            AddNewSender newsender = new AddNewSender();
             newsender.Show();
             temp = 1;
 
