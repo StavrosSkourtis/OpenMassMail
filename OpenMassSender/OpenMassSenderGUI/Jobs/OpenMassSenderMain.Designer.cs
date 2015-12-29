@@ -37,7 +37,6 @@
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.btnAdd = new System.Windows.Forms.ToolStripButton();
             this.btnDelete = new System.Windows.Forms.ToolStripButton();
-            this.btnShowNotReady = new System.Windows.Forms.ToolStripButton();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.menuItemFile = new System.Windows.Forms.ToolStripMenuItem();
             this.connectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -47,17 +46,16 @@
             this.manageToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.menuItemOptions = new System.Windows.Forms.ToolStripMenuItem();
             this.preferencesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openLoggerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tabControlMainWindow = new System.Windows.Forms.TabControl();
             this.tabPageStatus = new System.Windows.Forms.TabPage();
+            this.listViewStatus = new System.Windows.Forms.ListView();
+            this.columnHeader2 = new System.Windows.Forms.ColumnHeader();
+            this.columnHeader4 = new System.Windows.Forms.ColumnHeader();
             this.tabPageMessage = new System.Windows.Forms.TabPage();
             this.listViewMessage = new System.Windows.Forms.ListView();
             this.columnHeader1 = new System.Windows.Forms.ColumnHeader();
             this.columnHeader3 = new System.Windows.Forms.ColumnHeader();
-            this.listViewStatus = new System.Windows.Forms.ListView();
-            this.columnHeader2 = new System.Windows.Forms.ColumnHeader();
-            this.columnHeader4 = new System.Windows.Forms.ColumnHeader();
             this.panel1.SuspendLayout();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -132,8 +130,7 @@
             // 
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.btnAdd,
-            this.btnDelete,
-            this.btnShowNotReady});
+            this.btnDelete});
             this.toolStrip1.Location = new System.Drawing.Point(0, 24);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(565, 25);
@@ -161,17 +158,6 @@
             this.btnDelete.Size = new System.Drawing.Size(23, 22);
             this.btnDelete.Text = "Delete";
             this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
-            // 
-            // btnShowNotReady
-            // 
-            this.btnShowNotReady.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.btnShowNotReady.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnShowNotReady.Image = global::OpenMassSenderGUI.Properties.Resources.show_not_ready_button;
-            this.btnShowNotReady.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnShowNotReady.Name = "btnShowNotReady";
-            this.btnShowNotReady.Size = new System.Drawing.Size(23, 22);
-            this.btnShowNotReady.Text = "ShowNotReady";
-            this.btnShowNotReady.Click += new System.EventHandler(this.btnShowNotReady_Click);
             // 
             // menuStrip1
             // 
@@ -235,7 +221,6 @@
             // 
             this.menuItemOptions.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.preferencesToolStripMenuItem,
-            this.settingsToolStripMenuItem,
             this.openLoggerToolStripMenuItem});
             this.menuItemOptions.Name = "menuItemOptions";
             this.menuItemOptions.Size = new System.Drawing.Size(61, 20);
@@ -246,12 +231,6 @@
             this.preferencesToolStripMenuItem.Name = "preferencesToolStripMenuItem";
             this.preferencesToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
             this.preferencesToolStripMenuItem.Text = "Preferences";
-            // 
-            // settingsToolStripMenuItem
-            // 
-            this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
-            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
-            this.settingsToolStripMenuItem.Text = "Settings";
             // 
             // openLoggerToolStripMenuItem
             // 
@@ -281,6 +260,29 @@
             this.tabPageStatus.TabIndex = 0;
             this.tabPageStatus.Text = "Status";
             this.tabPageStatus.UseVisualStyleBackColor = true;
+            // 
+            // listViewStatus
+            // 
+            this.listViewStatus.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader2,
+            this.columnHeader4});
+            this.listViewStatus.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.listViewStatus.Location = new System.Drawing.Point(3, 3);
+            this.listViewStatus.Name = "listViewStatus";
+            this.listViewStatus.Size = new System.Drawing.Size(551, 82);
+            this.listViewStatus.TabIndex = 5;
+            this.listViewStatus.UseCompatibleStateImageBehavior = false;
+            this.listViewStatus.View = System.Windows.Forms.View.Details;
+            // 
+            // columnHeader2
+            // 
+            this.columnHeader2.Text = "Repeatable";
+            this.columnHeader2.Width = 80;
+            // 
+            // columnHeader4
+            // 
+            this.columnHeader4.Text = "Next Execution";
+            this.columnHeader4.Width = 317;
             // 
             // tabPageMessage
             // 
@@ -316,29 +318,6 @@
             this.columnHeader3.Text = "Message";
             this.columnHeader3.Width = 317;
             // 
-            // listViewStatus
-            // 
-            this.listViewStatus.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.columnHeader2,
-            this.columnHeader4});
-            this.listViewStatus.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.listViewStatus.Location = new System.Drawing.Point(3, 3);
-            this.listViewStatus.Name = "listViewStatus";
-            this.listViewStatus.Size = new System.Drawing.Size(551, 82);
-            this.listViewStatus.TabIndex = 5;
-            this.listViewStatus.UseCompatibleStateImageBehavior = false;
-            this.listViewStatus.View = System.Windows.Forms.View.Details;
-            // 
-            // columnHeader2
-            // 
-            this.columnHeader2.Text = "Repeatable";
-            this.columnHeader2.Width = 80;
-            // 
-            // columnHeader4
-            // 
-            this.columnHeader4.Text = "Next Execution";
-            this.columnHeader4.Width = 317;
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -347,7 +326,7 @@
             this.Controls.Add(this.panel1);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "MainForm";
-            this.Text = "Form1";
+            this.Text = "Jobs - Open Mass Sender";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.panel1.ResumeLayout(false);
             this.splitContainer1.Panel1.ResumeLayout(false);
@@ -379,14 +358,12 @@
         private System.Windows.Forms.ToolStrip toolStrip1;
         private System.Windows.Forms.ToolStripButton btnAdd;
         private System.Windows.Forms.ToolStripButton btnDelete;
-        private System.Windows.Forms.ToolStripButton btnShowNotReady;
         private System.Windows.Forms.ListView listViewJobs;
         private System.Windows.Forms.ColumnHeader ColumnNumber;
         private System.Windows.Forms.ColumnHeader ColumnName;
         private System.Windows.Forms.ColumnHeader columnStatus;
         private System.Windows.Forms.ToolStripMenuItem connectToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem preferencesToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem settingsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem openLoggerToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem manageToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem senderAccountsToolStripMenuItem;

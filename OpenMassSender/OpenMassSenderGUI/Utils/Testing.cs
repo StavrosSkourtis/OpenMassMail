@@ -10,6 +10,8 @@ using System.Windows.Forms;
 
 using System.Data.Common;
 using OpenMassSenderCore.OpenMassSenderDBDataSetTableAdapters;
+using OpenMassSenderGUI.Utils;
+using System.Net.Mail;
 
 namespace OpenMassSenderGUI
 {
@@ -60,6 +62,28 @@ namespace OpenMassSenderGUI
         {
             OpenMassSenderCore.OpenMassSenderDBDataSet.JobRow job = JobTableAdapter.getInstance().GetDataById(1)[0];
             job.execute();
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            SmtpClient smtpClient = new SmtpClient();
+            smtpClient.Port = 587;
+            smtpClient.DeliveryMethod = SmtpDeliveryMethod.Network;
+            smtpClient.EnableSsl = true;
+            smtpClient.UseDefaultCredentials = false;
+            smtpClient.Credentials = new System.Net.NetworkCredential("stliakis@gmail.com"  , "34123515Sham!");
+            smtpClient.Host = "smtp.gmail.com";
+
+
+            System.Net.Mail.MailMessage mail = new System.Net.Mail.MailMessage("stliakis@gmail.com", "omstest7@mailinator.com");
+            mail.Subject = "ASfdsF";
+            mail.Body = "sdf" ;
+            smtpClient.Send(mail);
+        }
+
+        private void Testing_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

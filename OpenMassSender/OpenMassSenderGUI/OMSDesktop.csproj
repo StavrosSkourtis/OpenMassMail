@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>9.0.21022</ProductVersion>
+    <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{110CFCF2-AF89-4DD2-8606-4F367CA7B80D}</ProjectGuid>
     <OutputType>WinExe</OutputType>
@@ -82,6 +82,12 @@
     <Compile Include="Jobs\AddNewJob.Designer.cs">
       <DependentUpon>AddNewJob.cs</DependentUpon>
     </Compile>
+    <Compile Include="ManageS.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ManageS.Designer.cs">
+      <DependentUpon>ManageS.cs</DependentUpon>
+    </Compile>
     <Compile Include="SenderAccounts\AddNewSender.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -94,17 +100,12 @@
     <Compile Include="Receivers\AddReceiverForm.Designer.cs">
       <DependentUpon>AddReceiverForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Utils\JobListItem.cs" />
     <Compile Include="Utils\LoggerForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Utils\LoggerForm.Designer.cs">
       <DependentUpon>LoggerForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="SenderAccounts\ManageSender.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="SenderAccounts\ManageSender.Designer.cs">
-      <DependentUpon>ManageSender.cs</DependentUpon>
     </Compile>
     <Compile Include="Jobs\OpenMassSenderMain.cs">
       <SubType>Form</SubType>
@@ -147,6 +148,9 @@
       <DependentUpon>AddNewJob.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="ManageS.resx">
+      <DependentUpon>ManageS.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="SenderAccounts\AddNewSender.resx">
       <DependentUpon>AddNewSender.cs</DependentUpon>
     </EmbeddedResource>
@@ -157,9 +161,6 @@
     <EmbeddedResource Include="Utils\LoggerForm.resx">
       <DependentUpon>LoggerForm.cs</DependentUpon>
       <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="SenderAccounts\ManageSender.resx">
-      <DependentUpon>ManageSender.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Jobs\OpenMassSenderMain.resx">
       <DependentUpon>OpenMassSenderMain.cs</DependentUpon>

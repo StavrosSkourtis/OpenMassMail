@@ -23,6 +23,7 @@ namespace OpenMassSenderCore
             public bool isReadForExecution()
             {
                 JobScheduleRow schedule = JobScheduleTableAdapter.getInstance().GetDataByID(this.schedule)[0];
+                
                 return schedule.ready(this);
             }
 
@@ -55,6 +56,7 @@ namespace OpenMassSenderCore
             //and the status of the executing job will be available to the desktop program via the JobExecutionaireInterface</returns>
             public PendingJobStatus execute()
             {
+         
                 JobScheduleRow schedule = JobScheduleTableAdapter.getInstance().GetDataByID(this.schedule)[0];
                 if(massSenders.ContainsKey(this.ID))massSenders.Remove(ID);
                 massSender=new MassSender();

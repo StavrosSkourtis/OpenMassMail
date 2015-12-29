@@ -18,18 +18,19 @@ namespace OpenMassSenderCore.Senders
             smtpClient = new SmtpClient();
             smtpClient.Port = sender.port;
             smtpClient.DeliveryMethod = SmtpDeliveryMethod.Network;
+            smtpClient.EnableSsl = true;
             smtpClient.UseDefaultCredentials = false;
+            smtpClient.Credentials = new System.Net.NetworkCredential(sender.email, sender.password);
             smtpClient.Host = (string)sender.host;
         }
         public override string send(OpenMassSenderCore.OpenMassSenderDBDataSet.MessageRow message,OpenMassSenderCore.OpenMassSenderDBDataSet.ReceiverRow receiver)
         {
-            Thread.Sleep(500);
             try
             {
-          //      System.Net.Mail.MailMessage mail = new System.Net.Mail.MailMessage(sender.email, receiver.email);
-          //      mail.Subject = message.subject;
-          //      mail.Body = message.replaceWildCards(receiver);
-          //      smtpClient.Send(mail);
+                System.Net.Mail.MailMessage mail = new System.Net.Mail.MailMessage(sender.email, receiver.email);
+                mail.Subject = message.subject;
+                mail.Body = message.replaceWildCards(receiver);
+                smtpClient.Send(mail);
             }
             catch (Exception ex)
             {

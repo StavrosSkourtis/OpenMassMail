@@ -18,13 +18,9 @@ namespace OpenMassSenderGUI
             InitializeComponent();
         }
 
-        private void cbTags_Click(object sender, EventArgs e)
-        {
-            update();
-        }
+
         private void update()
         {
-            Console.WriteLine("CURENT L222OG:");
             if (cbTags.SelectedItem == null)
             {
                 cbTags.SelectedIndex =1;
@@ -32,6 +28,7 @@ namespace OpenMassSenderGUI
             string tag = cbTags.SelectedItem.ToString().ToUpper();
             foreach(LogEntry log in Logger.logs){
                 if (log.consumed || log.tag.Equals(tag) == false) continue;
+                Console.WriteLine("mm:");
                 var listViewItem = new ListViewItem(new string[] { log.date.Hour + ":" + log.date.Minute + ":" + log.date.Second, log.tag, log.text });
                 lvLogs.Items.Add(listViewItem);
                 log.consumed = true;
@@ -44,7 +41,7 @@ namespace OpenMassSenderGUI
                 while (true)
                 {
                     update();
-                    Thread.Sleep(500);
+                    Thread.Sleep(100);
                 }
             })).Start();
         }
@@ -54,6 +51,16 @@ namespace OpenMassSenderGUI
             this.Hide();
             e.Cancel = true;
             if (logThread != null) logThread.Abort();
+        }
+
+        private void cbTags_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            lvLogs.Items.Clear();
+            foreach (LogEntry log in Logger.logs)
+            {
+                log.consumed = false;
+            }
+            update();
         }
     }
 }

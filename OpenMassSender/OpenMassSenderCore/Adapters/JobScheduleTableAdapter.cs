@@ -11,6 +11,8 @@ namespace OpenMassSenderCore.OpenMassSenderDBDataSetTableAdapters
         public OpenMassSenderCore.OpenMassSenderDBDataSet.JobScheduleRow getNewRow(OpenMassSenderCore.OpenMassSenderDBDataSet.JobRow job)
         {
             OpenMassSenderCore.OpenMassSenderDBDataSet.JobScheduleRow schedule=OpenMassSenderDBDataSet.getInstance().JobSchedule.NewJobScheduleRow();
+            int? id = this.SelectLastAddedId();
+            if(id!=null)schedule.ID = Convert.ToInt32(id) + 1;
             job.schedule =schedule.ID;
             job.scheduleObject = schedule;
             schedule.repeatable = RepeatableJob.NON_REPEATABLE;
@@ -18,8 +20,12 @@ namespace OpenMassSenderCore.OpenMassSenderDBDataSetTableAdapters
         }
         public void submitRow(OpenMassSenderCore.OpenMassSenderDBDataSet.JobScheduleRow row)
         {
-            OpenMassSenderDBDataSet.getInstance().JobSchedule.Rows.Add(row);
-            Update(OpenMassSenderDBDataSet.getInstance().JobSchedule);
+            try
+            {
+                OpenMassSenderDBDataSet.getInstance().JobSchedule.Rows.Add(row);
+                Update(OpenMassSenderDBDataSet.getInstance().JobSchedule);
+            }
+            catch (Exception ex) { }
         }
 
         private static JobScheduleTableAdapter instance;

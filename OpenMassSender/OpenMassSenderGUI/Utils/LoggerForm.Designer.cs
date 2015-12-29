@@ -43,7 +43,7 @@
             this.cbTags});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(399, 25);
+            this.toolStrip1.Size = new System.Drawing.Size(502, 25);
             this.toolStrip1.TabIndex = 0;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -59,7 +59,7 @@
             "Debug"});
             this.cbTags.Name = "cbTags";
             this.cbTags.Size = new System.Drawing.Size(121, 25);
-            this.cbTags.Click += new System.EventHandler(this.cbTags_Click);
+            this.cbTags.SelectedIndexChanged += new System.EventHandler(this.cbTags_SelectedIndexChanged);
             // 
             // lvLogs
             // 
@@ -70,7 +70,7 @@
             this.lvLogs.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lvLogs.Location = new System.Drawing.Point(0, 25);
             this.lvLogs.Name = "lvLogs";
-            this.lvLogs.Size = new System.Drawing.Size(399, 400);
+            this.lvLogs.Size = new System.Drawing.Size(502, 488);
             this.lvLogs.TabIndex = 1;
             this.lvLogs.UseCompatibleStateImageBehavior = false;
             this.lvLogs.View = System.Windows.Forms.View.Details;
@@ -92,11 +92,11 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(399, 425);
+            this.ClientSize = new System.Drawing.Size(502, 513);
             this.Controls.Add(this.lvLogs);
             this.Controls.Add(this.toolStrip1);
             this.Name = "LoggerForm";
-            this.Text = "LoggerForm";
+            this.Text = "Logs";
             this.Load += new System.EventHandler(this.LoggerForm_Load);
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.LoggerForm_FormClosing);
             this.toolStrip1.ResumeLayout(false);

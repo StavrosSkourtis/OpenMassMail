@@ -11,10 +11,11 @@ namespace OpenMassSenderCore
         public static List<LogEntry> logs = new List<LogEntry>();
         private static void log(string category,string text)
         {
+            Console.WriteLine("tag:" + category + " ,  " + text);
             logs.Add(new LogEntry(category, text));
             if (category.Equals("ERROR"))
             {
-                openLogger();
+           //     openLogger();
             }
         }
         public static void log(string text)
@@ -46,6 +47,7 @@ namespace OpenMassSenderCore
         public DateTime date;
         public LogEntry(string tag, string text)
         {
+            consumed = false;
             date = System.DateTime.Now;
             this.tag = tag;
             this.text = text;

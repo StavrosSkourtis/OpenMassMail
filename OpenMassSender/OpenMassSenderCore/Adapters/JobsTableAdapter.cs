@@ -19,11 +19,15 @@ namespace OpenMassSenderCore.OpenMassSenderDBDataSetTableAdapters
         }
         public void submitRow(OpenMassSenderCore.OpenMassSenderDBDataSet.JobRow row)
         {
-            MessageTableAdapter.getInstance().submitRow(row.messageObject);
-            JobScheduleTableAdapter.getInstance().submitRow(row.scheduleObject);
+           try
+            {
+                MessageTableAdapter.getInstance().submitRow(row.messageObject);
+                JobScheduleTableAdapter.getInstance().submitRow(row.scheduleObject);
 
-            OpenMassSenderDBDataSet.getInstance().Job.Rows.Add(row);
-            Update(OpenMassSenderDBDataSet.getInstance().Job);
+                OpenMassSenderDBDataSet.getInstance().Job.Rows.Add(row);
+                Update(OpenMassSenderDBDataSet.getInstance().Job);
+            }
+            catch (Exception ex) { }
 
         }
 

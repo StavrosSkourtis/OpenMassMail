@@ -36,8 +36,8 @@ namespace OpenMassSenderGUI
                 localExecutioner=new OMSExecutionerService.JobExecutioner();
             }
 
-            Application.Run(new MainForm());
-            
+            Application.Run(MainForm.Instance);
+            //Application.Run(new Testing());
         }
         //<summary>notify the executioner for a new job</summary>
         public static void notifyTheExecutioner()

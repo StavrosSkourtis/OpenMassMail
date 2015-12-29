@@ -15,18 +15,35 @@ using System.ServiceProcess;
 using OMSExecutionerService;
 using System.Threading;
 using OpenMassSenderCore.Senders;
+using OpenMassSenderGUI.Utils;
 
 
 namespace OpenMassSenderGUI
 {
     public partial class MainForm : Form
     {
-        public MainForm()
+        private MainForm()
         {
             InitializeComponent();
             Logger.logWindow = new LoggerForm();
+            OpenMassSenderDBDataSet.getInstance();
         }
-
+        public void refreshJobs()
+        {
+            try
+            {
+                listViewJobs.Items.Clear();
+                foreach (OpenMassSenderCore.OpenMassSenderDBDataSet.JobRow row in JobTableAdapter.getInstance().GetData())
+                {
+                    if (row.RowState != DataRowState.Deleted)
+                    {
+                        JobListItem item = new JobListItem(row.ID, row.job_name, row.status);
+                        listViewJobs.Items.Add(item);
+                    }
+                }
+            }
+            catch (Exception ex) { }
+        }
         private void Form1_Load(object sender, EventArgs e)
         {
           //  Testing testing = new Testing();
@@ -45,65 +62,10 @@ namespace OpenMassSenderGUI
             {
                 if (row.RowState != DataRowState.Deleted)
                 {
-                    // Define the list items
-                    ListViewItem lvi = new ListViewItem(row.ID.ToString());
-                    lvi.SubItems.Add(row.job_name.ToString());
-                    lvi.SubItems.Add(row.status.ToString());
-                    //lvi.SubItems.Add(row["status"].ToString());
-                    // Add the list items to the ListView
-                    listViewJobs.Items.Add(lvi);
+                    JobListItem item = new JobListItem(row.ID, row.job_name, row.status);
+                    listViewJobs.Items.Add(item);
                 }
             }
-
-            //(new Thread(() =>
-           //{
-               /*
-                while (true)
-                {
-                    //populate listview with data
-                    // Get the table from the data set
-                    DataTable dtable = OpenMassSenderDBDataSet.getInstance().Tables["Job"];
-
-                    // Clear the ListView control
-                    listViewJobs.Items.Clear();
-                    // Display items in the ListView control
-                    foreach (OpenMassSenderCore.OpenMassSenderDBDataSet.JobRow row in JobTableAdapter.getInstance().GetDataByUser(Int32.Parse(UserTableAdapter.getInstance().userid)))
-                    {
-                        // Only row that have not been deleted
-                        if (row.RowState != DataRowState.Deleted)
-                        {
-                            // Define the list items
-                            ListViewItem lvi = new ListViewItem(row.ID.ToString());
-                            lvi.SubItems.Add(row.job_name.ToString());
-                            if (row.status == OpenMassSenderCore.OpenMassSenderDBDataSet.JobRow.JobStatus.SHEDULED)
-                            {
-                                lvi.SubItems.Add(row.status.ToString() + "(" + row.NextExecution + ")");
-                            }
-                            else if (row.status == OpenMassSenderCore.OpenMassSenderDBDataSet.JobRow.JobStatus.PENDING)
-                            {
-                                MassSender massSender=null;
-                                OpenMassSenderCore.OpenMassSenderDBDataSet.JobRow.massSenders.TryGetValue(row.ID, out massSender);
-                                if (massSender != null)
-                                {
-                                    lvi.SubItems.Add(row.status.ToString() + "(" + ((float)massSender.sendsTried / massSender.totalSends) * 100 + "%)");
-                                }
-                                else
-                                {
-                                    lvi.SubItems.Add(row.status.ToString());
-                                }
-                            }
-
-
-
-                            // Add the list items to the ListView
-                            listViewJobs.Items.Add(lvi);
-                        }
-                    }
-                    Thread.Sleep(1000);
-               
-                }
-                */
-          // })).Start();
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
@@ -128,6 +90,7 @@ namespace OpenMassSenderGUI
                 //project running
                 File.WriteAllText("omsloggeduser.dt", username + "|" + password + "|" + userid);
                 loginForm.Close();
+                this.Show();
             });
             loginForm.TopMost = true;
             loginForm.ShowDialog();
@@ -138,8 +101,9 @@ namespace OpenMassSenderGUI
             if (listViewJobs.SelectedItems.Count > 0) {
                 int idd;
                 if( Int32.TryParse(listViewJobs.SelectedItems[0].Text, out idd) ){
-                    //MessageBox.Show(idd.ToString());
-                    //JobTableAdapter.getInstance().DeleteById(idd); //douleuei apla to kanw comment gt tha diagrapsei to mono mas job
+                    MessageBox.Show(idd.ToString());
+                    JobTableAdapter.getInstance().DeleteById(idd); //douleuei apla to kanw comment gt tha diagrapsei to mono mas job
+                    refreshJobs();
                 }else {
                     MessageBox.Show("String could not be parsed.");
                 }                
@@ -159,7 +123,7 @@ namespace OpenMassSenderGUI
 
         private void manageToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            ManageSender frm = new ManageSender();
+            ManageS frm = new ManageS();
             frm.Show();
             
         }
@@ -172,40 +136,58 @@ namespace OpenMassSenderGUI
 
         private void listViewJobs_SelectedIndexChanged(object sender, EventArgs e)
         {
-            //MessageBox.Show( listViewJobs.SelectedItems[0].Text);
-            DataTable dtable = OpenMassSenderDBDataSet.getInstance().Tables["Message"];
-            listViewMessage.Items.Clear();
-            foreach (OpenMassSenderCore.OpenMassSenderDBDataSet.MessageRow row in MessageTableAdapter.getInstance().GetData())
+            try
             {
-                if (row.RowState != DataRowState.Deleted)
+
+                //MessageBox.Show( listViewJobs.SelectedItems[0].Text);
+                DataTable dtable = OpenMassSenderDBDataSet.getInstance().Tables["Message"];
+                listViewMessage.Items.Clear();
+                foreach (OpenMassSenderCore.OpenMassSenderDBDataSet.MessageRow row in MessageTableAdapter.getInstance().GetData())
                 {
-                    if(listViewJobs.SelectedItems.Count > 0) {
-                        if (row.ID.ToString().Equals(listViewJobs.SelectedItems[0].Text))
+                    if (row.RowState != DataRowState.Deleted)
+                    {
+                        if (listViewJobs.SelectedItems.Count > 0)
                         {
-                            ListViewItem lvi = new ListViewItem(row.subject.ToString());
-                            lvi.SubItems.Add(row.message.ToString());
-                            listViewMessage.Items.Add(lvi);
+                            if (row.ID.ToString().Equals(listViewJobs.SelectedItems[0].Text))
+                            {
+                                ListViewItem lvi = new ListViewItem(row.subject.ToString());
+                                lvi.SubItems.Add(row.message.ToString());
+                                listViewMessage.Items.Add(lvi);
+                            }
+                        }
+                    }
+                }
+
+                DataTable dtable1 = OpenMassSenderDBDataSet.getInstance().Tables["JobSchedule"];
+                listViewStatus.Items.Clear();
+                foreach (OpenMassSenderCore.OpenMassSenderDBDataSet.JobScheduleRow row in JobScheduleTableAdapter.getInstance().GetData())
+                {
+                    if (row.RowState != DataRowState.Deleted)
+                    {
+                        if (listViewJobs.SelectedItems.Count > 0)
+                        {
+                            if (row.ID.ToString().Equals(listViewJobs.SelectedItems[0].Text))
+                            {
+                                ListViewItem lvi = new ListViewItem(row.repeatable.ToString());
+                                lvi.SubItems.Add(row.nextExecution.ToString());
+                                listViewStatus.Items.Add(lvi);
+                            }
                         }
                     }
                 }
             }
-
-            DataTable dtable1 = OpenMassSenderDBDataSet.getInstance().Tables["JobSchedule"];
-            listViewStatus.Items.Clear();
-            foreach (OpenMassSenderCore.OpenMassSenderDBDataSet.JobScheduleRow row in JobScheduleTableAdapter.getInstance().GetData())
+            catch (Exception ex) { }
+        }
+        private static MainForm instance;
+        public static MainForm Instance
+        {
+            get
             {
-                if (row.RowState != DataRowState.Deleted)
+                if (instance == null)
                 {
-                    if (listViewJobs.SelectedItems.Count > 0)
-                    {
-                        if (row.ID.ToString().Equals(listViewJobs.SelectedItems[0].Text))
-                        {
-                            ListViewItem lvi = new ListViewItem(row.repeatable.ToString());
-                            lvi.SubItems.Add(row.nextExecution.ToString());
-                            listViewStatus.Items.Add(lvi);
-                        }
-                    }
+                    instance = new MainForm();
                 }
+                return instance;
             }
         }
     }

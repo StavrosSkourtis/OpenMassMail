@@ -9,6 +9,7 @@ using System.Windows.Forms;
 using System.IO;
 using OpenMassSenderCore.OpenMassSenderDBDataSetTableAdapters;
 using System.Text.RegularExpressions;
+using OpenMassSenderCore;
 
 namespace OpenMassSenderGUI
 {
@@ -37,14 +38,21 @@ namespace OpenMassSenderGUI
             }
             UserTableAdapter.getInstance().login(txtUsername.Text, txtPassword.Text, (status,userid) =>
             {
-                if (callBackListener != null && status == LOGIN_STATUS.SUCCESS) callBackListener(txtUsername.Text, txtPassword.Text, userid);
-                else lblNotice.Text = "Something went wrong during login(wrong password?)";           
+                if (callBackListener != null && status == LOGIN_STATUS.SUCCESS)
+                {
+                    Logger.log("user " + txtUsername.Text + " logged in successful");
+                    callBackListener(txtUsername.Text, txtPassword.Text, userid);
+                }
+                else
+                {
+                    Logger.log("error durring singin, wrong credentials?");
+                    lblNotice.Text = "Something went wrong during login(wrong password?)";
+                }      
             });
         }
 
         private void btnCreateAccount_Click(object sender, EventArgs e)
         {
-            
             if (txtPassword.Text.Equals("") || txtUsername.Text.Equals(""))
             {
                 lblNotice.Text = "You need to fill all the fields";
@@ -55,12 +63,21 @@ namespace OpenMassSenderGUI
                 UserTableAdapter.getInstance().createUser(txtUsername.Text, txtPassword.Text);
                 UserTableAdapter.getInstance().login(txtUsername.Text, txtPassword.Text, (status,userid) =>
                 {
-                    if (callBackListener != null && status == LOGIN_STATUS.SUCCESS) callBackListener(txtUsername.Text, txtPassword.Text, userid);
-                    else lblNotice.Text = "Something went wrong during login";
+                    if (callBackListener != null && status == LOGIN_STATUS.SUCCESS)
+                    {
+                        Logger.log("user " + txtUsername.Text + " logged in successful");
+                        callBackListener(txtUsername.Text, txtPassword.Text, userid);
+                    }
+                    else
+                    {
+                        Logger.log("error durring singin, wrong credentials?");
+                        lblNotice.Text = "Something went wrong during login";
+                    }
                 });
             }
             catch (UserExistsException ex)
             {
+                Logger.log(ex.Message);
                 lblNotice.Text = "Username already exists";
             }
         }
@@ -69,8 +86,10 @@ namespace OpenMassSenderGUI
         {
             if(lblRegister.Text.Equals ("Don't have an account?")){
                 lblRegister.Text="Already have an account?";
+                this.Name = "Register";
             }else{
                 lblRegister.Text="Don't have an account?";
+                this.Name = "Loggin";
             }
            
             btnLogin.Visible = !btnLogin.Visible;

@@ -34,8 +34,8 @@
             this.lblUsername = new System.Windows.Forms.Label();
             this.txtPassword = new System.Windows.Forms.TextBox();
             this.lblPassword = new System.Windows.Forms.Label();
-            this.lblNotice = new System.Windows.Forms.Label();
             this.btnCreateAccount = new System.Windows.Forms.Button();
+            this.lblNotice = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // btnLogin
@@ -91,14 +91,6 @@
             this.lblPassword.TabIndex = 5;
             this.lblPassword.Text = "Password:";
             // 
-            // lblNotice
-            // 
-            this.lblNotice.AutoSize = true;
-            this.lblNotice.Location = new System.Drawing.Point(19, 116);
-            this.lblNotice.Name = "lblNotice";
-            this.lblNotice.Size = new System.Drawing.Size(0, 13);
-            this.lblNotice.TabIndex = 6;
-            // 
             // btnCreateAccount
             // 
             this.btnCreateAccount.Location = new System.Drawing.Point(188, 140);
@@ -108,6 +100,14 @@
             this.btnCreateAccount.Text = "Create Account";
             this.btnCreateAccount.UseVisualStyleBackColor = true;
             this.btnCreateAccount.Click += new System.EventHandler(this.btnCreateAccount_Click);
+            // 
+            // lblNotice
+            // 
+            this.lblNotice.AutoSize = true;
+            this.lblNotice.Location = new System.Drawing.Point(19, 116);
+            this.lblNotice.Name = "lblNotice";
+            this.lblNotice.Size = new System.Drawing.Size(0, 13);
+            this.lblNotice.TabIndex = 6;
             // 
             // LoginForm
             // 
@@ -124,7 +124,7 @@
             this.Controls.Add(this.btnLogin);
             this.Name = "LoginForm";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
-            this.Text = "loginForm";
+            this.Text = "Login";
             this.Load += new System.EventHandler(this.loginForm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -139,7 +139,7 @@
         private System.Windows.Forms.Label lblUsername;
         private System.Windows.Forms.TextBox txtPassword;
         private System.Windows.Forms.Label lblPassword;
-        private System.Windows.Forms.Label lblNotice;
         private System.Windows.Forms.Button btnCreateAccount;
+        private System.Windows.Forms.Label lblNotice;
     }
 }
