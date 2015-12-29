@@ -10,7 +10,7 @@
     <Shape ID="DesignTable:JobSchedule" ZOrder="11" X="614" Y="364" Height="172" Width="217" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="102" />
     <Shape ID="DesignTable:Message" ZOrder="10" X="608" Y="70" Height="229" Width="195" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="159" />
     <Shape ID="DesignTable:Receiver" ZOrder="9" X="613" Y="604" Height="343" Width="300" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="140" />
-    <Shape ID="DesignTable:SenderAccount" ZOrder="8" X="70" Y="70" Height="267" Width="233" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="197" />
+    <Shape ID="DesignTable:SenderAccount" ZOrder="8" X="70" Y="70" Height="286" Width="233" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="197" />
     <Shape ID="DesignTable:User" ZOrder="7" X="373" Y="758" Height="153" Width="173" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="83" />
   </Shapes>
   <Connectors>
@@ -62,7 +62,7 @@
         </Point>
         <Point>
           <X>278</X>
-          <Y>337</Y>
+          <Y>356</Y>
         </Point>
       </RoutePoints>
     </Connector>
