@@ -43,7 +43,7 @@
             this.AddSendertoolStripButton});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(559, 25);
+            this.toolStrip1.Size = new System.Drawing.Size(587, 25);
             this.toolStrip1.TabIndex = 0;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -52,9 +52,9 @@
             this.AddSendertoolStripButton.Image = global::OpenMassSenderGUI.Properties.Resources.add_button;
             this.AddSendertoolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.AddSendertoolStripButton.Name = "AddSendertoolStripButton";
-            this.AddSendertoolStripButton.Size = new System.Drawing.Size(113, 22);
-            this.AddSendertoolStripButton.Text = "Add new Sender";
-            this.AddSendertoolStripButton.Click += new System.EventHandler(this.toolStripButton1_Click);
+            this.AddSendertoolStripButton.Size = new System.Drawing.Size(115, 22);
+            this.AddSendertoolStripButton.Text = "Add New Sender";
+            this.AddSendertoolStripButton.Click += new System.EventHandler(this.AddSendertoolStripButton_Click);
             // 
             // senderdataGridView
             // 
@@ -65,17 +65,16 @@
             this.senderdataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.senderdataGridView.GridColor = System.Drawing.SystemColors.ControlLight;
             this.senderdataGridView.Location = new System.Drawing.Point(0, 28);
-            this.senderdataGridView.MultiSelect = false;
             this.senderdataGridView.Name = "senderdataGridView";
-            this.senderdataGridView.Size = new System.Drawing.Size(559, 244);
+            this.senderdataGridView.Size = new System.Drawing.Size(587, 260);
             this.senderdataGridView.TabIndex = 1;
-            this.senderdataGridView.UserDeletingRow += new System.Windows.Forms.DataGridViewRowCancelEventHandler(this.dataGridView1_UserDeletingRow);
+            this.senderdataGridView.UserDeletingRow += new System.Windows.Forms.DataGridViewRowCancelEventHandler(this.senderdataGridView_UserDeletingRow);
             // 
             // OKbutton
             // 
-            this.OKbutton.Location = new System.Drawing.Point(362, 282);
+            this.OKbutton.Location = new System.Drawing.Point(364, 318);
             this.OKbutton.Name = "OKbutton";
-            this.OKbutton.Size = new System.Drawing.Size(74, 43);
+            this.OKbutton.Size = new System.Drawing.Size(81, 35);
             this.OKbutton.TabIndex = 2;
             this.OKbutton.Text = "OK";
             this.OKbutton.UseVisualStyleBackColor = true;
@@ -83,9 +82,9 @@
             // 
             // Savebutton
             // 
-            this.Savebutton.Location = new System.Drawing.Point(461, 282);
+            this.Savebutton.Location = new System.Drawing.Point(490, 318);
             this.Savebutton.Name = "Savebutton";
-            this.Savebutton.Size = new System.Drawing.Size(93, 43);
+            this.Savebutton.Size = new System.Drawing.Size(81, 35);
             this.Savebutton.TabIndex = 3;
             this.Savebutton.Text = "Save";
             this.Savebutton.UseVisualStyleBackColor = true;
@@ -94,14 +93,13 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(559, 341);
+            this.ClientSize = new System.Drawing.Size(587, 362);
             this.Controls.Add(this.Savebutton);
             this.Controls.Add(this.OKbutton);
             this.Controls.Add(this.senderdataGridView);
             this.Controls.Add(this.toolStrip1);
             this.Name = "ManageS";
             this.Text = "ManageS";
-            this.Load += new System.EventHandler(this.ManageS_Load);
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.senderdataGridView)).EndInit();

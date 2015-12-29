@@ -18,12 +18,16 @@ namespace OpenMassSenderGUI
             InitializeComponent();
         }
 
-        private void toolStripButton1_Click(object sender, EventArgs e)
+        private void OKbutton_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void AddSendertoolStripButton_Click(object sender, EventArgs e)
         {
             AddNewSender frm = new AddNewSender();
             frm.Show();
         }
-
         private void loaddata()
         {
 
@@ -66,12 +70,7 @@ namespace OpenMassSenderGUI
             loaddata();
         }
 
-        private void OKbutton_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
-
-        private void dataGridView1_UserDeletingRow(object sender, DataGridViewRowCancelEventArgs e)
+        private void senderdataGridView_UserDeletingRow(object sender, DataGridViewRowCancelEventArgs e)
         {
             if (MessageBox.Show("Are you sure you want to delete this sender?", "Deleting Sender Confirmation", MessageBoxButtons.YesNo) == DialogResult.Yes)
             {
