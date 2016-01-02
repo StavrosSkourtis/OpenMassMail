@@ -13,9 +13,12 @@ namespace OpenMassSenderGUI
 {
     public partial class ManageS : Form
     {
+        int temp = 0;
+        int id = 0;
         public ManageS()
         {
             InitializeComponent();
+
         }
 
         private void OKbutton_Click(object sender, EventArgs e)
@@ -27,18 +30,19 @@ namespace OpenMassSenderGUI
         {
             AddNewSender frm = new AddNewSender();
             frm.Show();
+            temp = 1;
         }
         private void loaddata()
         {
-
+            int numberofrows = senderdataGridView.Rows.Count + 1;
             try
             {
 
-                foreach (OpenMassSenderCore.OpenMassSenderDBDataSet.SenderAccountRow row in SenderAccountTableAdapter.getInstance().GetData())
+                foreach (OpenMassSenderCore.OpenMassSenderDBDataSet.SenderAccountRow row in SenderAccountTableAdapter.getInstance().GetDataByUserID(Int32.Parse(UserTableAdapter.getInstance().userid)))
                 {
                     if (row.RowState != DataRowState.Deleted)
                     {
-                        dt.Rows.Add(row.ID, row.email, row.first_name, row.last_name, row.host);
+                        dt.Rows.Add(numberofrows, row.email, row.first_name, row.last_name, row.host);
                         senderdataGridView.DataSource = dt;
                         DataGridViewColumn id = senderdataGridView.Columns[0];
                         id.Width = 50;
@@ -50,6 +54,8 @@ namespace OpenMassSenderGUI
                         ln.Width = 100;
                         DataGridViewColumn host = senderdataGridView.Columns[4];
                         host.Width = 85;
+                        numberofrows += 1;
+
                     }
                 }
             }
@@ -59,16 +65,8 @@ namespace OpenMassSenderGUI
             }
 
         }
-        DataTable dt = new DataTable();
-        private void ManageS_Load(object sender, EventArgs e)
-        {
-            dt.Columns.Add("ID", typeof(int));
-            dt.Columns.Add("Email", typeof(string));
-            dt.Columns.Add("First Name", typeof(string));
-            dt.Columns.Add("Last Name", typeof(string));
-            dt.Columns.Add("Host", typeof(string));
-            loaddata();
-        }
+
+
 
         private void senderdataGridView_UserDeletingRow(object sender, DataGridViewRowCancelEventArgs e)
         {
@@ -82,5 +80,30 @@ namespace OpenMassSenderGUI
                 e.Cancel = true;
             }
         }
+        DataTable dt = new DataTable();
+
+
+        private void ManageS_Activated(object sender, EventArgs e)
+        {
+            if (temp == 1)
+            {
+
+                temp = 0;
+            }
+        }
+
+        private void ManageS_Load(object sender, EventArgs e)
+        {
+            dt.Columns.Add("ID", typeof(int));
+            dt.Columns.Add("Email", typeof(string));
+            dt.Columns.Add("First Name", typeof(string));
+            dt.Columns.Add("Last Name", typeof(string));
+            dt.Columns.Add("Host", typeof(string));
+            loaddata();
+        }
+
+       
+
+
     }
 }
