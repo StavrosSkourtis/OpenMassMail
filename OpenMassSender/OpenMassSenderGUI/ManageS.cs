@@ -14,10 +14,13 @@ namespace OpenMassSenderGUI
     public partial class ManageS : Form
     {
         int temp = 0;
-        int id = 0;
+        int numberOfRow = 0;
         public ManageS()
         {
             InitializeComponent();
+             numberOfRow = Convert.ToInt32(SenderAccountTableAdapter.getInstance().ScalarQuery());
+             loaddata();
+             
 
         }
 
@@ -28,13 +31,17 @@ namespace OpenMassSenderGUI
 
         private void AddSendertoolStripButton_Click(object sender, EventArgs e)
         {
-            AddNewSender frm = new AddNewSender();
+
+            AddNewSender frm = new AddNewSender(numberOfRow);
             frm.Show();
+           
             temp = 1;
+            loaddata();
         }
         private void loaddata()
         {
-            int numberofrows = senderdataGridView.Rows.Count + 1;
+            
+
             try
             {
 
@@ -42,23 +49,32 @@ namespace OpenMassSenderGUI
                 {
                     if (row.RowState != DataRowState.Deleted)
                     {
-                        dt.Rows.Add(numberofrows, row.email, row.first_name, row.last_name, row.host);
+                        dt.Rows.Add(row.ID , row.email, row.first_name, row.last_name, row.host);
                         senderdataGridView.DataSource = dt;
-                        DataGridViewColumn id = senderdataGridView.Columns[0];
-                        id.Width = 50;
-                        DataGridViewColumn email = senderdataGridView.Columns[1];
-                        email.Width = 160;
-                        DataGridViewColumn fn = senderdataGridView.Columns[2];
-                        fn.Width = 100;
-                        DataGridViewColumn ln = senderdataGridView.Columns[3];
-                        ln.Width = 100;
-                        DataGridViewColumn host = senderdataGridView.Columns[4];
-                        host.Width = 85;
-                        numberofrows += 1;
+                        
 
                     }
                 }
+                dt.Columns.Add("ID", typeof(int));
+                dt.Columns.Add("Email", typeof(string));
+                dt.Columns.Add("First Name", typeof(string));
+                dt.Columns.Add("Last Name", typeof(string));
+                dt.Columns.Add("Host", typeof(string));
+
+                DataGridViewColumn id = senderdataGridView.Columns[0];
+                id.Width = 50;
+                DataGridViewColumn email = senderdataGridView.Columns[1];
+                email.Width = 160;
+                DataGridViewColumn fn = senderdataGridView.Columns[2];
+                fn.Width = 100;
+                DataGridViewColumn ln = senderdataGridView.Columns[3];
+                ln.Width = 100;
+                DataGridViewColumn host = senderdataGridView.Columns[4];
+                host.Width = 85;
+                       
             }
+
+
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
@@ -83,25 +99,27 @@ namespace OpenMassSenderGUI
         DataTable dt = new DataTable();
 
 
-        private void ManageS_Activated(object sender, EventArgs e)
+        
+
+        
+        private void Savebutton_Click(object sender, EventArgs e)
         {
-            if (temp == 1)
+            int id = Convert.ToInt32(senderdataGridView.Rows[senderdataGridView.CurrentCell.RowIndex].Cells[0].Value.ToString());
+            string email=senderdataGridView.Rows[senderdataGridView.CurrentCell.RowIndex].Cells[1].Value.ToString();
+            string fname=senderdataGridView.Rows[senderdataGridView.CurrentCell.RowIndex].Cells[2].Value.ToString();
+            string lname=senderdataGridView.Rows[senderdataGridView.CurrentCell.RowIndex].Cells[3].Value.ToString();
+            string host=senderdataGridView.Rows[senderdataGridView.CurrentCell.RowIndex].Cells[4].Value.ToString();
+            int user=UserTableAdapter.getInstance().userid ;
+            foreach (DataGridViewRow row in senderdataGridView.Rows )
             {
-
-                temp = 0;
+                if (row.Index == senderdataGridView.NewRowIndex) break;
+                
             }
+            //SenderAccountTableAdapter.getInstance().Update(id,)
+            MessageBox.Show("Metadata of Receiver " + " was updated successfuly!"); 
         }
 
-        private void ManageS_Load(object sender, EventArgs e)
-        {
-            dt.Columns.Add("ID", typeof(int));
-            dt.Columns.Add("Email", typeof(string));
-            dt.Columns.Add("First Name", typeof(string));
-            dt.Columns.Add("Last Name", typeof(string));
-            dt.Columns.Add("Host", typeof(string));
-            loaddata();
-        }
-
+       
        
 
 

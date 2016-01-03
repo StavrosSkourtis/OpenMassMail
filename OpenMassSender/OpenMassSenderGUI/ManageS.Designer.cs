@@ -43,7 +43,7 @@
             this.AddSendertoolStripButton});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(587, 25);
+            this.toolStrip1.Size = new System.Drawing.Size(690, 25);
             this.toolStrip1.TabIndex = 0;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -66,13 +66,13 @@
             this.senderdataGridView.GridColor = System.Drawing.SystemColors.ControlLight;
             this.senderdataGridView.Location = new System.Drawing.Point(0, 28);
             this.senderdataGridView.Name = "senderdataGridView";
-            this.senderdataGridView.Size = new System.Drawing.Size(587, 260);
+            this.senderdataGridView.Size = new System.Drawing.Size(690, 260);
             this.senderdataGridView.TabIndex = 1;
             this.senderdataGridView.UserDeletingRow += new System.Windows.Forms.DataGridViewRowCancelEventHandler(this.senderdataGridView_UserDeletingRow);
             // 
             // OKbutton
             // 
-            this.OKbutton.Location = new System.Drawing.Point(364, 318);
+            this.OKbutton.Location = new System.Drawing.Point(486, 315);
             this.OKbutton.Name = "OKbutton";
             this.OKbutton.Size = new System.Drawing.Size(81, 35);
             this.OKbutton.TabIndex = 2;
@@ -82,25 +82,27 @@
             // 
             // Savebutton
             // 
-            this.Savebutton.Location = new System.Drawing.Point(490, 318);
+            this.Savebutton.Location = new System.Drawing.Point(597, 315);
             this.Savebutton.Name = "Savebutton";
             this.Savebutton.Size = new System.Drawing.Size(81, 35);
             this.Savebutton.TabIndex = 3;
-            this.Savebutton.Text = "Save";
+            this.Savebutton.Text = "Save Changes";
             this.Savebutton.UseVisualStyleBackColor = true;
+            this.Savebutton.Click += new System.EventHandler(this.Savebutton_Click);
             // 
             // ManageS
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(587, 362);
+            this.ClientSize = new System.Drawing.Size(690, 362);
             this.Controls.Add(this.Savebutton);
             this.Controls.Add(this.OKbutton);
             this.Controls.Add(this.senderdataGridView);
             this.Controls.Add(this.toolStrip1);
             this.Name = "ManageS";
             this.Text = "ManageS";
-            this.Load += new System.EventHandler(this.ManageS_Load);
+            
+           
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.senderdataGridView)).EndInit();

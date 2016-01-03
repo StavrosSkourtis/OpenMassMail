@@ -6,17 +6,21 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using OpenMassSenderCore.OpenMassSenderDBDataSetTableAdapters;
+
 
 namespace OpenMassSenderGUI
 {
     public partial class AddNewSender : Form
     {
-       
-        public AddNewSender()
+        int rowsOfSender = 0;
+        public AddNewSender(int n)
         {
-            
 
+            
             InitializeComponent();
+            rowsOfSender = n + 1;
+           
         }
 
         private void emailTb_Validating(object sender, CancelEventArgs e)
@@ -43,6 +47,7 @@ namespace OpenMassSenderGUI
 
         private void Cancelbutton_Click(object sender, EventArgs e)
         {
+           
             if (MessageBox.Show("Are you sure you want to cancel the creation of the sender?", "Cancel Confirmation", MessageBoxButtons.YesNo) == DialogResult.Yes)
             {
                 this.Close();
@@ -53,7 +58,8 @@ namespace OpenMassSenderGUI
         {
             if (MessageBox.Show("Are you sure you want to create the sender?", "Creation Confirmation", MessageBoxButtons.YesNo) == DialogResult.Yes)
             {
-                // SenderAccountTableAdapter.getInstance().Insert(emailtextBox.Text, firsttextBox.Text, lasttextBox.Text, hosttextBox.Text, 21, "", Convert.ToInt32(UserTableAdapter.getInstance().userid), "");
+                SenderAccountTableAdapter.getInstance().Insert(rowsOfSender, emailtextBox.Text, firsttextBox.Text, lasttextBox.Text, hosttextBox.Text, null, "", Convert.ToInt32(UserTableAdapter.getInstance().userid),"","");
+
                 this.Close();
             }
         }
@@ -61,7 +67,7 @@ namespace OpenMassSenderGUI
         private void emailtextBox_Leave(object sender, EventArgs e)
         {
             string address = emailtextBox.Text;
-            hosttextBox.Text = address.Substring(address.IndexOf('@') + 1);
+            hosttextBox.Text ="smtp."+ address.Substring(address.IndexOf('@') + 1);
         }
 
 
