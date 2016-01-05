@@ -41,6 +41,9 @@
             this.label7 = new System.Windows.Forms.Label();
             this.Cancelbutton = new System.Windows.Forms.Button();
             this.Createbutton = new System.Windows.Forms.Button();
+            this.label8 = new System.Windows.Forms.Label();
+            this.typecomboBox = new System.Windows.Forms.ComboBox();
+            this.label9 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label1
@@ -56,7 +59,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(26, 72);
+            this.label2.Location = new System.Drawing.Point(26, 133);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(62, 13);
             this.label2.TabIndex = 1;
@@ -65,7 +68,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(26, 121);
+            this.label3.Location = new System.Drawing.Point(26, 179);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(80, 13);
             this.label3.TabIndex = 2;
@@ -74,7 +77,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(26, 167);
+            this.label4.Location = new System.Drawing.Point(26, 229);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(80, 13);
             this.label4.TabIndex = 3;
@@ -83,7 +86,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(26, 214);
+            this.label5.Location = new System.Drawing.Point(26, 275);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(84, 13);
             this.label5.TabIndex = 4;
@@ -91,7 +94,7 @@
             // 
             // emailtextBox
             // 
-            this.emailtextBox.Location = new System.Drawing.Point(141, 72);
+            this.emailtextBox.Location = new System.Drawing.Point(141, 133);
             this.emailtextBox.Name = "emailtextBox";
             this.emailtextBox.Size = new System.Drawing.Size(221, 20);
             this.emailtextBox.TabIndex = 5;
@@ -100,21 +103,21 @@
             // 
             // firsttextBox
             // 
-            this.firsttextBox.Location = new System.Drawing.Point(141, 121);
+            this.firsttextBox.Location = new System.Drawing.Point(141, 179);
             this.firsttextBox.Name = "firsttextBox";
             this.firsttextBox.Size = new System.Drawing.Size(221, 20);
             this.firsttextBox.TabIndex = 6;
             // 
             // lasttextBox
             // 
-            this.lasttextBox.Location = new System.Drawing.Point(141, 167);
+            this.lasttextBox.Location = new System.Drawing.Point(141, 229);
             this.lasttextBox.Name = "lasttextBox";
             this.lasttextBox.Size = new System.Drawing.Size(221, 20);
             this.lasttextBox.TabIndex = 7;
             // 
             // hosttextBox
             // 
-            this.hosttextBox.Location = new System.Drawing.Point(141, 214);
+            this.hosttextBox.Location = new System.Drawing.Point(141, 275);
             this.hosttextBox.Name = "hosttextBox";
             this.hosttextBox.Size = new System.Drawing.Size(221, 20);
             this.hosttextBox.TabIndex = 8;
@@ -132,7 +135,7 @@
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(161)));
-            this.label7.Location = new System.Drawing.Point(141, 241);
+            this.label7.Location = new System.Drawing.Point(139, 307);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(175, 12);
             this.label7.TabIndex = 11;
@@ -140,7 +143,7 @@
             // 
             // Cancelbutton
             // 
-            this.Cancelbutton.Location = new System.Drawing.Point(191, 276);
+            this.Cancelbutton.Location = new System.Drawing.Point(178, 346);
             this.Cancelbutton.Name = "Cancelbutton";
             this.Cancelbutton.Size = new System.Drawing.Size(71, 35);
             this.Cancelbutton.TabIndex = 12;
@@ -150,7 +153,7 @@
             // 
             // Createbutton
             // 
-            this.Createbutton.Location = new System.Drawing.Point(281, 276);
+            this.Createbutton.Location = new System.Drawing.Point(281, 346);
             this.Createbutton.Name = "Createbutton";
             this.Createbutton.Size = new System.Drawing.Size(81, 35);
             this.Createbutton.TabIndex = 13;
@@ -158,11 +161,44 @@
             this.Createbutton.UseVisualStyleBackColor = true;
             this.Createbutton.Click += new System.EventHandler(this.Createbutton_Click);
             // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(26, 77);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(62, 13);
+            this.label8.TabIndex = 14;
+            this.label8.Text = "You enter a";
+            // 
+            // typecomboBox
+            // 
+            this.typecomboBox.FormattingEnabled = true;
+            this.typecomboBox.Items.AddRange(new object[] {
+            "email",
+            "sms"});
+            this.typecomboBox.Location = new System.Drawing.Point(141, 77);
+            this.typecomboBox.Name = "typecomboBox";
+            this.typecomboBox.Size = new System.Drawing.Size(121, 21);
+            this.typecomboBox.TabIndex = 15;
+            this.typecomboBox.SelectedIndexChanged += new System.EventHandler(this.typecomboBox_SelectedIndexChanged);
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(278, 77);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(39, 13);
+            this.label9.TabIndex = 16;
+            this.label9.Text = "sender";
+            // 
             // AddNewSender
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(375, 329);
+            this.ClientSize = new System.Drawing.Size(375, 393);
+            this.Controls.Add(this.label9);
+            this.Controls.Add(this.typecomboBox);
+            this.Controls.Add(this.label8);
             this.Controls.Add(this.Createbutton);
             this.Controls.Add(this.Cancelbutton);
             this.Controls.Add(this.label7);
@@ -198,5 +234,8 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Button Cancelbutton;
         private System.Windows.Forms.Button Createbutton;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.ComboBox typecomboBox;
+        private System.Windows.Forms.Label label9;
     }
 }

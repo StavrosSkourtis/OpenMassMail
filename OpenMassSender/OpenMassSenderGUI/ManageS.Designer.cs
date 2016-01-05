@@ -101,8 +101,8 @@
             this.Controls.Add(this.toolStrip1);
             this.Name = "ManageS";
             this.Text = "ManageS";
-            
-           
+            this.Load += new System.EventHandler(this.ManageS_Load);
+            this.Activated += new System.EventHandler(this.ManageS_Activated);
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.senderdataGridView)).EndInit();
