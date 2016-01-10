@@ -46,8 +46,6 @@ namespace OpenMassSenderGUI
         }
         private void Form1_Load(object sender, EventArgs e)
         {
-          //  Testing testing = new Testing();
-          // testing.Show();
             if (UserTableAdapter.getInstance().userid == null || UserTableAdapter.getInstance().userid.Equals(""))
             {
                 showLoginForm();
@@ -70,8 +68,6 @@ namespace OpenMassSenderGUI
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            //----------------->thano edw<------------------------
-            //kwdikas gia to anoigma tis add form
             AddNewJob newJobForm = new AddNewJob(null);
             newJobForm.Show();
         }
@@ -101,18 +97,13 @@ namespace OpenMassSenderGUI
             if (listViewJobs.SelectedItems.Count > 0) {
                 int idd;
                 if( Int32.TryParse(listViewJobs.SelectedItems[0].Text, out idd) ){
-                    MessageBox.Show(idd.ToString());
+                    //MessageBox.Show(idd.ToString());
                     JobTableAdapter.getInstance().DeleteById(idd); //douleuei apla to kanw comment gt tha diagrapsei to mono mas job
                     refreshJobs();
                 }else {
                     MessageBox.Show("String could not be parsed.");
                 }                
             }
-        }
-
-        private void btnShowNotReady_Click(object sender, EventArgs e)
-        {
-            
         }
 
         private void manageToolStripMenuItem_Click(object sender, EventArgs e)
