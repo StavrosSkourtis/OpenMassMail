@@ -14,14 +14,6 @@ H:\OpenMassMail\OpenMassSender\OMSExecutionerService\obj\Debug\OMSExecutionerSer
 H:\OpenMassMail\OpenMassSender\OMSExecutionerService\obj\Debug\OMSExecutionerService.pdb
 C:\Users\dims\Documents\GitHub\OpenMassMail\OpenMassSender\OMSExecutionerService\bin\Debug\OpenMassSenderDB.accdb
 H:\OpenMassMail\OpenMassSender\OMSExecutionerService\bin\Debug\OpenMassSenderDB.accdb
-C:\Users\Stefanos\Programming\GitHub\OpenMassMail\OpenMassSender\OMSExecutionerService\bin\Debug\OpenMassSenderDB.accdb
-C:\Users\Stefanos\Programming\GitHub\OpenMassMail\OpenMassSender\OMSExecutionerService\bin\Debug\OMSExecutionerService.exe
-C:\Users\Stefanos\Programming\GitHub\OpenMassMail\OpenMassSender\OMSExecutionerService\bin\Debug\OMSExecutionerService.pdb
-C:\Users\Stefanos\Programming\GitHub\OpenMassMail\OpenMassSender\OMSExecutionerService\bin\Debug\OpenMassSenderCore.dll
-C:\Users\Stefanos\Programming\GitHub\OpenMassMail\OpenMassSender\OMSExecutionerService\bin\Debug\OpenMassSenderCore.pdb
-C:\Users\Stefanos\Programming\GitHub\OpenMassMail\OpenMassSender\OMSExecutionerService\obj\Debug\ResolveAssemblyReference.cache
-C:\Users\Stefanos\Programming\GitHub\OpenMassMail\OpenMassSender\OMSExecutionerService\obj\Debug\OMSExecutionerService.exe
-C:\Users\Stefanos\Programming\GitHub\OpenMassMail\OpenMassSender\OMSExecutionerService\obj\Debug\OMSExecutionerService.pdb
 C:\Users\THANOS\Desktop\OpenMassMail\OpenMassSender\OMSExecutionerService\bin\Debug\OpenMassSenderDB.accdb
 C:\Users\THANOS\Desktop\OpenMassMail\OpenMassSender\OMSExecutionerService\bin\Debug\OMSExecutionerService.exe
 C:\Users\THANOS\Desktop\OpenMassMail\OpenMassSender\OMSExecutionerService\bin\Debug\OMSExecutionerService.pdb
@@ -30,3 +22,11 @@ C:\Users\THANOS\Desktop\OpenMassMail\OpenMassSender\OMSExecutionerService\bin\De
 C:\Users\THANOS\Desktop\OpenMassMail\OpenMassSender\OMSExecutionerService\obj\Debug\ResolveAssemblyReference.cache
 C:\Users\THANOS\Desktop\OpenMassMail\OpenMassSender\OMSExecutionerService\obj\Debug\OMSExecutionerService.exe
 C:\Users\THANOS\Desktop\OpenMassMail\OpenMassSender\OMSExecutionerService\obj\Debug\OMSExecutionerService.pdb
+C:\Users\Stefanos\Programming\GitHub\OpenMassMail\OpenMassSender\OMSExecutionerService\bin\Debug\OpenMassSenderDB.mdb
+C:\Users\Stefanos\Programming\GitHub\OpenMassMail\OpenMassSender\OMSExecutionerService\bin\Debug\OMSExecutionerService.exe
+C:\Users\Stefanos\Programming\GitHub\OpenMassMail\OpenMassSender\OMSExecutionerService\bin\Debug\OMSExecutionerService.pdb
+C:\Users\Stefanos\Programming\GitHub\OpenMassMail\OpenMassSender\OMSExecutionerService\bin\Debug\OpenMassSenderCore.dll
+C:\Users\Stefanos\Programming\GitHub\OpenMassMail\OpenMassSender\OMSExecutionerService\bin\Debug\OpenMassSenderCore.pdb
+C:\Users\Stefanos\Programming\GitHub\OpenMassMail\OpenMassSender\OMSExecutionerService\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\Stefanos\Programming\GitHub\OpenMassMail\OpenMassSender\OMSExecutionerService\obj\Debug\OMSExecutionerService.exe
+C:\Users\Stefanos\Programming\GitHub\OpenMassMail\OpenMassSender\OMSExecutionerService\obj\Debug\OMSExecutionerService.pdb

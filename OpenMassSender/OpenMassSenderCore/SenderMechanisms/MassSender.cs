@@ -86,7 +86,6 @@ namespace OpenMassSenderCore.Senders
                 pendingJobStatus.pending.Remove(receiver);
                 pendingJobStatus.sent.Add(sentStatus);
                 statusCallback(sentStatus);
-             
             }
         }
     }

@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MessageVariablesForm));
             this.btnRemove = new System.Windows.Forms.Button();
             this.Add = new System.Windows.Forms.Button();
             this.lvVariables = new System.Windows.Forms.ListView();
@@ -143,6 +144,7 @@
             this.Controls.Add(this.lvVariables);
             this.Controls.Add(this.btnRemove);
             this.Controls.Add(this.Add);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "MessageVariablesForm";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.Text = "Message Variables";

@@ -80,7 +80,7 @@ namespace OpenMassSenderCore.OpenMassSenderDBDataSetTableAdapters
                     }
                     catch (Exception ex)
                     {
-                        Logger.error("error: " + ex.Message);
+                        Logger.error("error: " + ex.StackTrace);
                         onLogin(LOGIN_STATUS.FAILURE, userid);
                     }
                 })).Start();

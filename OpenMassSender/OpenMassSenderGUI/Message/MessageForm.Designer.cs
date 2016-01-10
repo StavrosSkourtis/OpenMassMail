@@ -180,10 +180,6 @@
             this.tbSubject.TabIndex = 0;
             this.tbSubject.TextChanged += new System.EventHandler(this.tbSubject_TextChanged);
             // 
-            // ofd1
-            // 
-            this.ofd1.FileName = "openFileDialog1";
-            // 
             // MessageForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -192,6 +188,7 @@
             this.ClientSize = new System.Drawing.Size(565, 510);
             this.Controls.Add(this.panel1);
             this.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "MessageForm";
             this.Text = "New Message";
             this.Load += new System.EventHandler(this.MessageForm_Load);

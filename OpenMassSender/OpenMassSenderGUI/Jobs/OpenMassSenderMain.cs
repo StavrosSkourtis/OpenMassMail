@@ -22,11 +22,14 @@ namespace OpenMassSenderGUI
 {
     public partial class MainForm : Form
     {
+        public static NotifyIcon notification;
         private MainForm()
         {
             InitializeComponent();
             Logger.logWindow = new LoggerForm();
             OpenMassSenderDBDataSet.getInstance();
+            notification = this.notifyIcon1;
+     
         }
         public void refreshJobs()
         {
@@ -46,6 +49,12 @@ namespace OpenMassSenderGUI
         }
         private void Form1_Load(object sender, EventArgs e)
         {
+            OpenMassSenderCore.OpenMassSenderDBDataSet.JobRow.jobFinished=(job)=>{
+                string text = "\"" + job.job_name + "\" finished";
+                showBalloon("Job finished", text);
+            };
+          //  Testing testing = new Testing();
+          // testing.Show();
             if (UserTableAdapter.getInstance().userid == null || UserTableAdapter.getInstance().userid.Equals(""))
             {
                 showLoginForm();
@@ -68,6 +77,8 @@ namespace OpenMassSenderGUI
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
+            //----------------->thano edw<------------------------
+            //kwdikas gia to anoigma tis add form
             AddNewJob newJobForm = new AddNewJob(null);
             newJobForm.Show();
         }
@@ -97,13 +108,18 @@ namespace OpenMassSenderGUI
             if (listViewJobs.SelectedItems.Count > 0) {
                 int idd;
                 if( Int32.TryParse(listViewJobs.SelectedItems[0].Text, out idd) ){
-                    //MessageBox.Show(idd.ToString());
+                    MessageBox.Show(idd.ToString());
                     JobTableAdapter.getInstance().DeleteById(idd); //douleuei apla to kanw comment gt tha diagrapsei to mono mas job
                     refreshJobs();
                 }else {
                     MessageBox.Show("String could not be parsed.");
                 }                
             }
+        }
+
+        private void btnShowNotReady_Click(object sender, EventArgs e)
+        {
+            
         }
 
         private void manageToolStripMenuItem_Click(object sender, EventArgs e)
@@ -180,6 +196,48 @@ namespace OpenMassSenderGUI
                 }
                 return instance;
             }
+        }
+
+        private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            e.Cancel = true;
+            this.Hide();
+        }
+
+        private void btnExit_Click(object sender, EventArgs e)
+        {
+            DialogResult result = MessageBox.Show("Do you really want to quit?",
+                     "Quit",
+                        MessageBoxButtons.YesNo);
+            if (result == DialogResult.Yes)
+            {
+                this.Close();
+                Environment.Exit(Environment.ExitCode);
+            }
+        }
+
+        private void notifyIcon1_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            this.Show();
+        }
+
+        private void showBalloon(string title, string body)
+        {
+            NotifyIcon notifyIcon = new NotifyIcon();
+            notifyIcon.Visible = true;
+            notifyIcon.Icon = this.Icon;
+            if (title != null)
+            {
+                notifyIcon.BalloonTipTitle = title;
+            }
+
+            if (body != null)
+            {
+                notifyIcon.BalloonTipText = body;
+            }
+
+            notifyIcon.BalloonTipIcon = ToolTipIcon.Info;
+            notifyIcon.ShowBalloonTip(2000);
         }
     }
 }

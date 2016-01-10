@@ -15,6 +15,7 @@ namespace OpenMassSenderGUI
 {
     public partial class LoginForm : Form
     {
+        bool loggingIn = false;
         Action<string,string,string> callBackListener;
         public LoginForm(Action<string, string, string> callBackListener)
         {
@@ -40,6 +41,7 @@ namespace OpenMassSenderGUI
             {
                 if (callBackListener != null && status == LOGIN_STATUS.SUCCESS)
                 {
+                    loggingIn = true;
                     Logger.log("user " + txtUsername.Text + " logged in successful");
                     callBackListener(txtUsername.Text, txtPassword.Text, userid);
                 }
@@ -65,6 +67,7 @@ namespace OpenMassSenderGUI
                 {
                     if (callBackListener != null && status == LOGIN_STATUS.SUCCESS)
                     {
+                        loggingIn = true;
                         Logger.log("user " + txtUsername.Text + " logged in successful");
                         callBackListener(txtUsername.Text, txtPassword.Text, userid);
                     }
@@ -106,6 +109,16 @@ namespace OpenMassSenderGUI
                 txtUsername.Text = user[0];
                 txtPassword.Text = user[1];
             }
+        }
+
+        private void LoginForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (loggingIn == false)
+            {
+                Environment.Exit(Environment.ExitCode);
+            }
+
+
         }
     }
 }

@@ -25,7 +25,7 @@ namespace OpenMassSenderCore.OpenMassSenderDBDataSetTableAdapters
                 OpenMassSenderDBDataSet.getInstance().JobSchedule.Rows.Add(row);
                 Update(OpenMassSenderDBDataSet.getInstance().JobSchedule);
             }
-            catch (Exception ex) { }
+            catch (Exception ex) { Console.WriteLine("subbbbbbbbbbbbbbbbb:" + ex.StackTrace); }
         }
 
         private static JobScheduleTableAdapter instance;

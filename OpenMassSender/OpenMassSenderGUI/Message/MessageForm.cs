@@ -52,6 +52,12 @@ namespace OpenMassSenderGUI
             {
                 tbContent.Enabled = true;
                 message.linkedFile="";
+                try
+                {
+                    message.message = File.ReadAllText(lblLinkedFile.Text);
+                    Console.WriteLine("messa:" + message.message);
+                }
+                catch (Exception ex) { }
                 lblLinkedFile.Text = "";
                 btnFileLink.Text = "Link file";
             }
@@ -64,6 +70,8 @@ namespace OpenMassSenderGUI
                     tbContent.Enabled = false;
                     lblLinkedFile.Text = ofd1.FileName;
                     message.linkedFile = ofd1.FileName;
+                    message.subject = Path.GetFileNameWithoutExtension(ofd1.FileName);
+                    tbSubject.Text = message.subject;
                     btnFileLink.Text = "Unlink file";
                 }
             }

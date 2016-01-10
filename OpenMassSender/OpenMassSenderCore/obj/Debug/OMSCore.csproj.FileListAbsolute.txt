@@ -12,13 +12,6 @@ H:\OpenMassMail\OpenMassSender\OpenMassSenderCore\bin\Debug\OpenMassSenderCore.p
 H:\OpenMassMail\OpenMassSender\OpenMassSenderCore\obj\Debug\ResolveAssemblyReference.cache
 H:\OpenMassMail\OpenMassSender\OpenMassSenderCore\obj\Debug\OpenMassSenderCore.dll
 H:\OpenMassMail\OpenMassSender\OpenMassSenderCore\obj\Debug\OpenMassSenderCore.pdb
-C:\Users\Stefanos\Programming\GitHub\OpenMassMail\OpenMassSender\OpenMassSenderCore\bin\Debug\OpenMassSenderDB.accdb
-C:\Users\Stefanos\Programming\GitHub\OpenMassMail\OpenMassSender\OpenMassSenderCore\bin\Debug\OpenMassSenderCore.dll.config
-C:\Users\Stefanos\Programming\GitHub\OpenMassMail\OpenMassSender\OpenMassSenderCore\bin\Debug\OpenMassSenderCore.dll
-C:\Users\Stefanos\Programming\GitHub\OpenMassMail\OpenMassSender\OpenMassSenderCore\bin\Debug\OpenMassSenderCore.pdb
-C:\Users\Stefanos\Programming\GitHub\OpenMassMail\OpenMassSender\OpenMassSenderCore\obj\Debug\ResolveAssemblyReference.cache
-C:\Users\Stefanos\Programming\GitHub\OpenMassMail\OpenMassSender\OpenMassSenderCore\obj\Debug\OpenMassSenderCore.dll
-C:\Users\Stefanos\Programming\GitHub\OpenMassMail\OpenMassSender\OpenMassSenderCore\obj\Debug\OpenMassSenderCore.pdb
 C:\Users\THANOS\Desktop\OpenMassMail\OpenMassSender\OpenMassSenderCore\bin\Debug\OpenMassSenderDB.accdb
 C:\Users\THANOS\Desktop\OpenMassMail\OpenMassSender\OpenMassSenderCore\bin\Debug\OpenMassSenderCore.dll.config
 C:\Users\THANOS\Desktop\OpenMassMail\OpenMassSender\OpenMassSenderCore\bin\Debug\OpenMassSenderCore.dll

@@ -48,8 +48,9 @@ namespace OpenMassSenderCore
                 }
                 if (message.Contains(Wildcards.META) && receiver!=null)
                 {
+
                     Dictionary<string, string> md = receiver.getMetadataList();
-                    foreach (Match m in datePattern.Matches(ret))
+                    foreach (Match m in medatadataPattern.Matches(ret))
                     {
                         string datepattern = m.Value.Split('(')[1].Split(')')[0];
                         string value=null;
@@ -58,8 +59,8 @@ namespace OpenMassSenderCore
                             md.TryGetValue(datepattern,out value);
                         }
                         catch (Exception ex) { }
-                        
-                        if(value!=null)ret = ret.Replace(m.Value, datepattern);
+                        Console.WriteLine("replacing:" + m.Value + "  with:" + datepattern);
+                        if (value != null) ret = ret.Replace(m.Value, value);
                     }
                 }
                 return ret;

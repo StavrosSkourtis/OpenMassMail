@@ -12,7 +12,7 @@ namespace OpenMassSenderCore
         partial class JobRow
         {
             public static Dictionary<int, MassSender> massSenders = new Dictionary<int, MassSender>();
-
+            public static Action<JobRow> jobFinished;
 
             public class JobStatus {public static string PENDING="PENDING",SHEDULED="SHEDULED",FINISHED="FINISHED"; };
             public string title;
@@ -90,13 +90,14 @@ namespace OpenMassSenderCore
                                 schedule.jobExecutionFinished();
                             }
                             Logger.log("job " + this.ID + " finished, next execution is " + schedule.nextExecution);
+                            if (jobFinished != null) jobFinished(this);
                             JobTableAdapter.getInstance().Update(this);
                             JobScheduleTableAdapter.getInstance().Update(schedule);
                         }
                     }
                     catch (Exception ex)
                     {
-                        Logger.error(ex.Message);
+                        Logger.error(ex.StackTrace);
                     }
                 });
       
