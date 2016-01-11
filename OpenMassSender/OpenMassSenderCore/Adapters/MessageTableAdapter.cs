@@ -18,7 +18,6 @@ namespace OpenMassSenderCore.OpenMassSenderDBDataSetTableAdapters
             message.type ="";
             message.message = "";
             message.linkedFile ="";
-            Console.WriteLine("aaww:" + this.SelectLastAddedId());
             message.ID = Convert.ToInt32(this.SelectLastAddedId()) + 1;
             
             

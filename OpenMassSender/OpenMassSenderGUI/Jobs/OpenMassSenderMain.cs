@@ -155,7 +155,7 @@ namespace OpenMassSenderGUI
                     {
                         if (listViewJobs.SelectedItems.Count > 0)
                         {
-                            if (row.ID.ToString().Equals(listViewJobs.SelectedItems[0].Text))
+                            if (row.job.ToString().Equals(listViewJobs.SelectedItems[0].Text))
                             {
                                 ListViewItem lvi = new ListViewItem(row.subject.ToString());
                                 lvi.SubItems.Add(row.message.ToString());
@@ -238,6 +238,21 @@ namespace OpenMassSenderGUI
 
             notifyIcon.BalloonTipIcon = ToolTipIcon.Info;
             notifyIcon.ShowBalloonTip(2000);
+        }
+
+        private void listViewJobs_DoubleClick(object sender, EventArgs e)
+        {
+            try
+            {
+                String id = listViewJobs.SelectedItems[0].Text;
+                OpenMassSenderCore.OpenMassSenderDBDataSet.JobRow job = (OpenMassSenderCore.OpenMassSenderDBDataSet.JobRow)JobTableAdapter.getInstance().GetDataById(Convert.ToInt32(id)).Rows[0];
+
+                AddNewJob newJobForm = new AddNewJob(job);
+                newJobForm.Show();
+            }
+            catch (Exception ex) { }
+
+           
         }
     }
 }

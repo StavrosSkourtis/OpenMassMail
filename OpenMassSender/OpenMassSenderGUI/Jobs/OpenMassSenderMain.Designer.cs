@@ -118,6 +118,7 @@
             this.listViewJobs.UseCompatibleStateImageBehavior = false;
             this.listViewJobs.View = System.Windows.Forms.View.Details;
             this.listViewJobs.SelectedIndexChanged += new System.EventHandler(this.listViewJobs_SelectedIndexChanged);
+            this.listViewJobs.DoubleClick += new System.EventHandler(this.listViewJobs_DoubleClick);
             // 
             // ColumnNumber
             // 

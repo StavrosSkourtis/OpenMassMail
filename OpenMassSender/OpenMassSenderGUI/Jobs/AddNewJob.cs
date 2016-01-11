@@ -7,17 +7,39 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using OpenMassSenderCore.OpenMassSenderDBDataSetTableAdapters;
+using System.Diagnostics;
 
 namespace OpenMassSenderGUI
 {
     public partial class AddNewJob : Form
     {
+        bool editingJob = false;
         OpenMassSenderCore.OpenMassSenderDBDataSet.JobRow job;
         public AddNewJob(OpenMassSenderCore.OpenMassSenderDBDataSet.JobRow job)
         {
-            if (job == null) this.job = JobTableAdapter.getInstance().getNewRow();
-            else this.job = job;
             InitializeComponent();
+            if (job == null) this.job = JobTableAdapter.getInstance().getNewRow();
+            else
+            {
+                editingJob = true;
+                job.messageObject = (OpenMassSenderCore.OpenMassSenderDBDataSet.MessageRow)MessageTableAdapter.getInstance().GetDataById(job.message).Rows[0];
+                job.scheduleObject = (OpenMassSenderCore.OpenMassSenderDBDataSet.JobScheduleRow)JobScheduleTableAdapter.getInstance().GetDataByID(job.schedule).Rows[0];
+
+                if (job.query == null)
+                {
+                    recieverstextBox.Text = "group=" + job.group + ";";
+                }
+                else recieverstextBox.Text = "group=" + job.group + ";" + job.query;
+
+                jobtextbox.Text = job.job_name;
+
+                job.messageObject.linkedFile = "";
+                this.job = job;
+
+                executejob.Text = job.scheduleObject.nextExecution.ToString(); ;
+
+                button4.Text = "Update job";
+            }
         }
 
         private void pictureBox1_Click(object sender, EventArgs e)
@@ -114,7 +136,6 @@ namespace OpenMassSenderGUI
                 }
                 cbSenderAccount.Items.Add(text);
                 senderAccountsID.Add(row.ID);
-                Console.WriteLine("aadddddddddddddddddd");
             }
             this.cbSenderAccount.SelectedIndex = 0;
         }
@@ -131,6 +152,7 @@ namespace OpenMassSenderGUI
 
         private void button4_Click(object sender, EventArgs e)
         {
+
 
             if (job.group == null || job.group.Equals(""))
             {
@@ -161,18 +183,41 @@ namespace OpenMassSenderGUI
             }
             else 
             {
-                Console.WriteLine("SEND:" + job.sender_account);
-                job.title = job.job_name = jobtextbox.Text;
-                job.scheduleObject.nextExecution =Convert.ToDateTime(executejob.Text);
-                job.status = OpenMassSenderCore.OpenMassSenderDBDataSet.JobRow.JobStatus.SHEDULED;
-                job.user = Convert.ToInt32(UserTableAdapter.getInstance().userid);
-                job.scheduleObject.repeatable = repeatjob.Text;
-                
-                JobTableAdapter.getInstance().submitRow(job);
+                if (editingJob)
+                {
+                    job.title = job.job_name = jobtextbox.Text;
+                    job.scheduleObject.nextExecution = Convert.ToDateTime(executejob.Text);
+                    job.status = OpenMassSenderCore.OpenMassSenderDBDataSet.JobRow.JobStatus.SHEDULED;
+                    job.scheduleObject.repeatable = repeatjob.Text;
+                    
+                    try
+                    {
+                        JobTableAdapter.getInstance().Update(job);
+                        JobScheduleTableAdapter.getInstance().Update(job.scheduleObject);
+                        MessageTableAdapter.getInstance().Update(job.messageObject);
+                    }
+                    catch (Exception ex) { }
+                    Stopwatch sw = new Stopwatch();
+                    sw.Start();
+                    while (true)
+                    {
+                        if (sw.ElapsedMilliseconds > 1000) break;
+                    }
+                    MainForm.Instance.refreshJobs();
+                }
+                else
+                {
+                    job.title = job.job_name = jobtextbox.Text;
+                    job.scheduleObject.nextExecution = Convert.ToDateTime(executejob.Text);
+                    job.status = OpenMassSenderCore.OpenMassSenderDBDataSet.JobRow.JobStatus.SHEDULED;
+                    job.scheduleObject.repeatable = repeatjob.Text;
+                    job.user = Convert.ToInt32(UserTableAdapter.getInstance().userid);
 
-                MainForm.Instance.refreshJobs();
 
-             
+                    JobTableAdapter.getInstance().submitRow(job);
+
+                    MainForm.Instance.refreshJobs();
+                }
                 this.Close();
             }
         }
@@ -186,6 +231,11 @@ namespace OpenMassSenderGUI
                 job.messageObject.type = s.type;
             }
             catch (Exception ex) { }
+        }
+
+        private void jobtextbox_TextChanged(object sender, EventArgs e)
+        {
+
         }
 
         
