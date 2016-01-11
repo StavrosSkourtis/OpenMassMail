@@ -47,7 +47,7 @@ namespace OpenMassSenderGUI
                 {
                     if (row.RowState != DataRowState.Deleted)
                     {
-                        dt.Rows.Add(row.ID, row.email, row.first_name, row.last_name, row.host, row.user, row.type);
+                        dt.Rows.Add(row.ID, row.email, row.first_name, row.last_name, row.host, row.userid, row.type);
                         senderdataGridView.DataSource = dt;
                         DataGridViewColumn id = senderdataGridView.Columns[0];
                         id.Width = 50;

@@ -74,7 +74,7 @@ namespace OpenMassSenderGUI
                 row.host = hosttextBox.Text;
                 row.port = 0;
                 row.sms_url = "";
-                row.user = Convert.ToInt32(UserTableAdapter.getInstance().userid);
+                row.userid = Convert.ToInt32(UserTableAdapter.getInstance().userid);
                 row.type = typecomboBox.Text;
                 row.password = "";
                 SenderAccountTableAdapter.getInstance().submitRow(row);

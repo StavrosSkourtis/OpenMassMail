@@ -12,11 +12,11 @@ namespace OpenMassSenderGUI
 {
     public partial class ViewReceiversForm : Form
     {
+
         Action<string,string> okCallback;
         public ViewReceiversForm(Action<string, string> okCallback,string group,string query)
         {
             InitializeComponent();
-
             if (query != null && group != null)
             {
                 this.tbSearch.Text = query;

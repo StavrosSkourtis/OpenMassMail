@@ -57,8 +57,10 @@ namespace OpenMassSenderGUI.Utils
                         OpenMassSenderCore.OpenMassSenderDBDataSet.JobScheduleRow schedule = (OpenMassSenderCore.OpenMassSenderDBDataSet.JobScheduleRow)
                             JobScheduleTableAdapter.getInstance().GetDataByID(job.schedule).Rows[0];
 
-
-                        lblStatus.Text = job.status + "(" + schedule.nextExecution + ")";
+                        if (schedule.nextExecution.Year == 9999)
+                        {
+                            lblStatus.Text = "FINISHED";
+                        }else lblStatus.Text = job.status + "(" + schedule.nextExecution + ")";
 
                     }
                     else if (job.status == OpenMassSenderCore.OpenMassSenderDBDataSet.JobRow.JobStatus.PENDING)
@@ -68,7 +70,7 @@ namespace OpenMassSenderGUI.Utils
 
                         if (massSender != null)
                         {
-                            string perce = ("" + ((float)massSender.sendsTried / massSender.totalSends) * 100);
+                            string perce = ("" + (int)((float)massSender.sendsTried / massSender.totalSends) * 100);
                             lblStatus.Text = job.status.ToString() + "(" + perce + "%)" + getPercentString((int)(((float)massSender.sendsTried / massSender.totalSends) * 100) / 2);
                         }
                         else
@@ -80,7 +82,11 @@ namespace OpenMassSenderGUI.Utils
                             lblStatus.Text = "Starting";
                             if (job.isReadForExecution()) job.execute();
                         }
-                       
+
+                    }
+                    else if (job.status == OpenMassSenderCore.OpenMassSenderDBDataSet.JobRow.JobStatus.FINISHED)
+                    {
+                        lblStatus.Text = "FINISHED";
                     }
                 }
             }
@@ -89,6 +95,7 @@ namespace OpenMassSenderGUI.Utils
 
         public string getPercentString(int percent)
         {
+
             string p = "[";
             for (int c = 0; c < 50; c++)
             {

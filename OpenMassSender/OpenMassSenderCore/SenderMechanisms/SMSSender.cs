@@ -16,14 +16,19 @@ namespace OpenMassSenderCore.Senders
         }
         public override string send(OpenMassSenderCore.OpenMassSenderDBDataSet.MessageRow message, OpenMassSenderCore.OpenMassSenderDBDataSet.ReceiverRow receiver)
         {
-            string url = sender.sms_url;
-            url = url.Replace("$to", receiver.phone_number.ToString());
-            url = url.Replace("$message", message.replaceWildCards(receiver));
+          
+            try
+            {
+                string url = sender.sms_url;
+                url = url.Replace("$to", receiver.phone_number.ToString());
+                url = url.Replace("$message", message.replaceWildCards(receiver));
 
-            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
-            HttpWebResponse  response = (HttpWebResponse)request.GetResponse();
-            string responseString = new StreamReader(response.GetResponseStream()).ReadToEnd();
+                HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
+                HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+                string responseString = new StreamReader(response.GetResponseStream()).ReadToEnd();
 
+            }
+            catch (Exception ex) { return OpenMassSenderCore.OpenMassSenderDBDataSet.MessageStatus.ERROR; }
             return OpenMassSenderCore.OpenMassSenderDBDataSet.MessageStatus.SUCCEED;
         }
     }

@@ -124,6 +124,10 @@ namespace OpenMassSenderGUI
         {
             this.repeatjob.SelectedIndex = 0;
             int userId=Convert.ToInt32(UserTableAdapter.getInstance().userid);
+
+
+            OpenMassSenderCore.OpenMassSenderDBDataSet.getInstance().EnforceConstraints = false;
+
             OpenMassSenderCore.OpenMassSenderDBDataSet.SenderAccountDataTable dt=SenderAccountTableAdapter.getInstance().GetDataByUserID(userId);
             senderAccountsID.Clear();
             foreach (OpenMassSenderCore.OpenMassSenderDBDataSet.SenderAccountRow row in dt.Rows)

@@ -39,12 +39,12 @@
             this.bntSearchReceiver = new System.Windows.Forms.ToolStripButton();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.dgvReceivers = new System.Windows.Forms.DataGridView();
+            this.btnOk = new System.Windows.Forms.Button();
             this.dgvDetails = new System.Windows.Forms.DataGridView();
             this.dataName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataValue = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.saveMetadataChangesButton = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
-            this.btnOk = new System.Windows.Forms.Button();
             this.toolStrip1.SuspendLayout();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -163,6 +163,16 @@
             this.dgvReceivers.UserDeletingRow += new System.Windows.Forms.DataGridViewRowCancelEventHandler(this.dgvReceivers_UserDeletingRow);
             this.dgvReceivers.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvReceivers_CellClick);
             // 
+            // btnOk
+            // 
+            this.btnOk.Location = new System.Drawing.Point(67, 498);
+            this.btnOk.Name = "btnOk";
+            this.btnOk.Size = new System.Drawing.Size(74, 43);
+            this.btnOk.TabIndex = 4;
+            this.btnOk.Text = "Ok";
+            this.btnOk.UseVisualStyleBackColor = true;
+            this.btnOk.Click += new System.EventHandler(this.btnOk_Click);
+            // 
             // dgvDetails
             // 
             this.dgvDetails.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
@@ -210,16 +220,6 @@
             this.label1.Size = new System.Drawing.Size(115, 18);
             this.label1.TabIndex = 0;
             this.label1.Text = "Receiver Details";
-            // 
-            // btnOk
-            // 
-            this.btnOk.Location = new System.Drawing.Point(67, 498);
-            this.btnOk.Name = "btnOk";
-            this.btnOk.Size = new System.Drawing.Size(74, 43);
-            this.btnOk.TabIndex = 4;
-            this.btnOk.Text = "Ok";
-            this.btnOk.UseVisualStyleBackColor = true;
-            this.btnOk.Click += new System.EventHandler(this.btnOk_Click);
             // 
             // ViewReceiversForm
             // 
